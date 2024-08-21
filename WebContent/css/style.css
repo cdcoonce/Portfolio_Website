@@ -309,6 +309,7 @@ section {
     border: rgb(53, 53, 53) 0.1rem solid;
     border-color: rgb(163, 163, 163);
     text-align: center;
+    align-content: center;
 }
 
 .section-container {
@@ -353,13 +354,10 @@ section {
     text-wrap: pretty;
 }
 
-#experience .article-container {
-    justify-content: space-around;
-}
 
 article {
     display: flex;
-    width: 13rem;
+    width: 15rem;
     justify-content: left;
     gap: 0.3rem;
 }
@@ -374,7 +372,7 @@ article .icon {
     position: relative;
 }
 
-#projects .article-container{
+#projects .article-container {
     padding-bottom: 0;
 }
 
@@ -402,7 +400,7 @@ article .icon {
 }
 
 .project-title {
-    margin: 1rem;
+    margin: .5rem;
     color: black;
 }
 
