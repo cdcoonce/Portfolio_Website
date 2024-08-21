@@ -331,6 +331,52 @@
         gap: 1rem;
     }
 
+/* === Image Slider === */
+
+    .slider-container {
+        position: relative;
+        max-width: 600px; /* Adjust as needed */
+        margin: auto;
+        overflow: hidden;
+        margin: 1rem;
+    }
+
+    .slider {
+        display: flex;
+        transition: transform 0.5s ease;
+    }
+
+    .slide {
+        min-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .slide img {
+        width: 100%;
+        height: auto;
+    }
+
+    .slider-btn {
+        position: absolute;
+        top: 50%;
+        width: 40px;
+        height: 40px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        cursor: pointer;
+        transform: translateY(-50%);
+        z-index: 1;
+    }
+
+    .prev {
+        left: 10px;
+    }
+
+    .next {
+        right: 10px;
+    }
+
 /* === About Section ==== */
 
     #about {
@@ -433,13 +479,12 @@
         border-radius: 2rem;
         border: rgb(53, 53, 53) 0.1rem solid;
         border-color: rgb(163, 163, 163);
-        text-align: center;
-        align-content: center;
     }
 
     #project_about .section-container {
         gap: 4rem;
         height: 80%;
+        justify-content: center;
     }
 
     #project_about .section__pic-container {

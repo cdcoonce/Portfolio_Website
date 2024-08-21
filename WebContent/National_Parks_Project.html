@@ -57,8 +57,8 @@
 					Repository
 				</button>
 				<button 
-					class="btn btn-color-1" 
-					onclick="location.href='./#contact'">
+					class="btn btn-color-2" 
+					onclick="location.href='./as'">
 					Data Source
 				</button>
 			</div>
@@ -127,17 +127,18 @@
 							class="icon"
 						/>
 						<h3>Highlights</h3>
-						<p>
-							Total Visitation Trend Analysis
-							<br />
-							Total Visitation by Park
-							<br />
-							Park Distance from Home City
-							<br />
-							Clustering All Western Parks
-							<br />
-							Clustering Region Parks
-						</p>
+						<div class="slider-container">
+							<div class="slider">
+								<div class="slide"><img src="./assets/National_Parks_Project_Assets/NPS_plot1.png" alt="Image 1"></div>
+								<div class="slide"><img src="./assets/National_Parks_Project_Assets/NPS_plot2.png" alt="Image 2"></div>
+								<div class="slide"><img src="./assets/National_Parks_Project_Assets/NPS_plot3.png" alt="Image 3"></div>
+								<div class="slide"><img src="./assets/National_Parks_Project_Assets/NPS_plot4.png" alt="Image 4"></div>
+								<div class="slide"><img src="./assets/National_Parks_Project_Assets/NPS_plot5.png" alt="Image 5"></div>
+								<div class="slide"><img src="./assets/National_Parks_Project_Assets/NPS_plot6.png" alt="Image 6"></div>
+							</div>
+							<button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+							<button class="next" onclick="moveSlide(1)">&#10095;</button>
+						</div>
 					</div>
 				</div>
 				<div class="btn-container">
@@ -147,7 +148,7 @@
 					</button>
 					<button 
 						class="btn btn-color-1" 
-						onclick="window.open('/assets/National_Parks_Project_Assets/National_Parks_Project_Rmarkdown_V1.pdf', '_blank')">Project V1
+						onclick="window.open('./assets/National_Parks_Project_Assets/National_Parks_Project_Rmarkdown_V1.pdf', '_blank')">Project V1
 					</button>
 				</div>
 				<div class="text-container">
