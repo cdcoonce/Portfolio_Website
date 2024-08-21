@@ -10,18 +10,24 @@
 </head>
 <body>
 	<nav id="desktop-nav">
-		<div class="logo">Charles Coonce - National Parks Project</div>
+		<div class="logo">
+			National Parks Project
+			<p class="logo_text__p2">R Programming</p>
+		</div>
 		<div>
 			<ul class="nav-links">
-				<li><a href="#about">About</a></li>
-				<li><a href="#experience">Experience</a></li>
-				<li><a href="#projects">Projects</a></li>
-				<li><a href="#contacts">Contact</a></li>
+				<li><a href="#project_about">About</a></li>
+				<li><a href="#project_experience">Experience</a></li>
+				<li><a href="#project_projects">Projects</a></li>
+				<li><a href="#project_contactscontacts">Contact</a></li>
 			</ul>
 		</div>	
 	</nav>
 	<nav id="hamburger-nav">
-		<div class="logo">Charles Coonce</div> 
+		<div class="logo">
+			National Parks Project
+			<p class="logo_text__p2">R Programming</p>
+		</div>
 		<div class="hamburger-menu">
 			<div class="hamburger-icon" onclick="toggleMenu()">
 				<span></span>
@@ -36,24 +42,24 @@
 			</div>
 		</div> 
 	</nav>
-	<section id="profile">
+	<section id="project_profile">
 		<div class="section__pic-container">
-			<img src="./assets/LinkedinProfile.jpeg" alt="Charles Coonce Profile Picture" class="profile_pic"/>
+			<img src="./assets/National_Parks_Project_Cover_Img.png" alt="National Parks Project Image" class="profile_pic"/>
 		</div>
 		<div class="section_text">
-			<p class="section_text__p1"> Hello, I'm</p>
-			<h1 class="title">Charles Coonce</h1>
-			<p class="section_text__p2">Data Scientist</p>
+			<p class="section_text__p1">Personal Projects</p>
+			<h1 class="title">National Parks</h1>
+			<p class="section_text__p2">Visitation</p>
 			<div class="btn-container">
 				<button 
 					class="btn btn-color-2" 
-					onclick="window.open('assets/CharlesCoonce_Resume.pdf')">
-					My Resume
+					onclick="window.open('https://github.com/cdcoonce/National_Parks_Project')">
+					Repository
 				</button>
 				<button 
 					class="btn btn-color-1" 
 					onclick="location.href='./#contact'">
-					Contact Me
+					Data Source
 				</button>
 			</div>
 			<div id="socials-container">
@@ -61,13 +67,13 @@
 					src="./assets/linkedin.png" 
 					alt="My LinkedIn profle" 
 					class="icon" 
-					onclick="location.href='https://www.linkedin.com/in/charlesdcoonce/'"
+					onclick="window.open('https://www.linkedin.com/in/charlesdcoonce/', '_blank')"
 				/>
 				<img 
 					src="./assets/github.png" 
 					alt="My Github profle" 
 					class="icon" 
-					onclick="location.href='https://github.com/cdcoonce'"
+					onclick="window.open('https://github.com/cdcoonce', '_blank')"
 				/>
 			</div>
 		</div>
@@ -75,12 +81,13 @@
 		src="./assets/arrow.png"
 		alt="Arrow Icon"
 		class="icon arrow"
-		onclick="location.href='./#about'"
+		onclick="location.href='./National_Parks_Project.html#project_about'"
 		/>
 	</section>
-	<section id="about">
+	<section id="project_about">
 		<p class="section_text__p1">Get to Know More</p>
-		<h1 class="title">About Me</h1>
+		<h1 class="title">National Parks Project</h1>
+		<p class="section_text__p1">R Programming</p>
 		<div class="section-container">
 			<div class="section__pic-container">
 			 <img 
@@ -96,13 +103,19 @@
 							alt="Experience Icon" 
 							class="icon"
 						/>
-						<h3>Experience</h3>
+						<h3>Skills Used</h3>
 						<p>
-							Process Improvement
+							Coordinate System Mapping
 							<br />
-							Visualizations
+							Traveling Salesman problems
 							<br />
-							Project leadership
+							Heirarchical Clustering
+							<br />
+							Open Source Routing Machine
+							<br />
+							ggplot
+							<br />
+							Tidyverse
 							<br />
 							Statistical Analysis
 						</p>
@@ -113,21 +126,33 @@
 							alt="Education Icon" 
 							class="icon"
 						/>
-						<h3>Education</h3>
+						<h3>Highlights</h3>
 						<p>
-							B.S. Data Science
+							Total Visitation Trend Analysis
 							<br />
-							B.A. Telecommunications
+							Total Visitation by Park
 							<br />
-							Google Data Analytics Professional
+							Park Distance from Home City
 							<br />
-							Human Systems Engineering
+							Clustering All Western Parks
+							<br />
+							Clustering Region Parks
 						</p>
 					</div>
 				</div>
+				<div class="btn-container">
+					<button 
+						class="btn btn-color-2" 
+						onclick="window.open('https://github.com/cdcoonce/National_Parks_Project')">Repository
+					</button>
+					<button 
+						class="btn btn-color-1" 
+						onclick="window.open('/assets/National_Parks_Project_Assets/National_Parks_Project_Rmarkdown_V1.pdf', '_blank')">Project V1
+					</button>
+				</div>
 				<div class="text-container">
 					<p>
-						As a data-driven professional, I specialize in Data Science, Business Analytics, and Data Analytics. I am passionate about leveraging data to solve complex business problems. With a B.S. in Data Science, a B.A. in Telecommunications, and certification as a Google Data Analytics Professional. My leadership skills have been honed through collaborative projects and leading cross-functional teams.
+						This parks project started as a college project for one of my classes, and has now become an personal analysis that is meant to help me practice my R programming abilities. It has iteratively become more visually appealing and complex. Feel free to check out the different versions to see how my skills have grown.
 				</div>
 			</div>
 		</div>
