@@ -16,10 +16,10 @@
 		</div>
 		<div>
 			<ul class="nav-links">
-				<li><a href="#project_about">About</a></li>
-				<li><a href="#project_experience">Experience</a></li>
-				<li><a href="#project_projects">Projects</a></li>
-				<li><a href="#project_contactscontacts">Contact</a></li>
+				<li><a href="./index.html#about">About</a></li>
+				<li><a href="./index.html#experience">Experience</a></li>
+				<li><a href="#projects">Projects</a></li>
+				<li><a href="#contact">Contact</a></li>
 			</ul>
 		</div>	
 	</nav>
@@ -52,13 +52,13 @@
 			<p class="section_text__p2">Visitation</p>
 			<div class="btn-container">
 				<button 
-					class="btn btn-color-2" 
+					class="btn btn-color-1" 
 					onclick="window.open('https://github.com/cdcoonce/National_Parks_Project')">
 					Repository
 				</button>
 				<button 
-					class="btn btn-color-2" 
-					onclick="location.href='./as'">
+					class="btn btn-color-1" 
+					onclick="location.href='./assets/National_Parks_Project_Assets/All National Parks Visitation 1904-2016.csv'">
 					Data Source
 				</button>
 			</div>
@@ -89,12 +89,6 @@
 		<h1 class="title">National Parks Project</h1>
 		<p class="section_text__p1">R Programming</p>
 		<div class="section-container">
-			<div class="section__pic-container">
-			 <img 
-			 	src="./assets/about-pic.png" 
-				alt="Profile Picture" 
-				class="about-pic"/>
-			</div>
 			<div class="about-details-container">
 				<div class="about-containers">
 					<div class="details-container">
@@ -103,7 +97,7 @@
 							alt="Experience Icon" 
 							class="icon"
 						/>
-						<h3>Skills Used</h3>
+						<h3 class="details-title">Skills Used</h3>
 						<p>
 							Coordinate System Mapping
 							<br />
@@ -126,7 +120,7 @@
 							alt="Education Icon" 
 							class="icon"
 						/>
-						<h3>Highlights</h3>
+						<h3 class="details-title">Highlights</h3>
 						<div class="slider-container">
 							<div class="slider">
 								<div class="slide"><img src="./assets/National_Parks_Project_Assets/NPS_plot1.png" alt="Image 1"></div>
@@ -136,24 +130,30 @@
 								<div class="slide"><img src="./assets/National_Parks_Project_Assets/NPS_plot5.png" alt="Image 5"></div>
 								<div class="slide"><img src="./assets/National_Parks_Project_Assets/NPS_plot6.png" alt="Image 6"></div>
 							</div>
-							<button class="prev" onclick="moveSlide(-1)">&#10094;</button>
-							<button class="next" onclick="moveSlide(1)">&#10095;</button>
+						<div class="btn-container">
+							<button class="btn btn-color-2" onclick="moveSlide(-1)">&#10094</button>
+							<button class="btn btn-color-2" onclick="moveSlide(1)">&#10095</button>
+						</div>
 						</div>
 					</div>
 				</div>
 				<div class="btn-container">
 					<button 
-						class="btn btn-color-2" 
+						class="btn btn-color-1" 
 						onclick="window.open('https://github.com/cdcoonce/National_Parks_Project')">Repository
 					</button>
 					<button 
 						class="btn btn-color-1" 
-						onclick="window.open('./assets/National_Parks_Project_Assets/National_Parks_Project_Rmarkdown_V1.pdf', '_blank')">Project V1
+						onclick="window.open('./assets/National_Parks_Project_Assets/National_Parks_Project_Rmarkdown_V1.pdf', '_blank')">Rmarkdown Nov 13, 2023
 					</button>
+					<button 
+					class="btn btn-color-1" 
+					onclick="window.open('./assets/National_Parks_Project_Assets/National_Parks_Project_Rmarkdown_V1.pdf', '_blank')">Rmarkdown Aug 20, 2024
+				</button>
 				</div>
 				<div class="text-container">
 					<p>
-						This parks project started as a college project for one of my classes, and has now become an personal analysis that is meant to help me practice my R programming abilities. It has iteratively become more visually appealing and complex. Feel free to check out the different versions to see how my skills have grown.
+						This parks project started as a college project for one of my classes, and has now become an personal analysis that is meant to help me practice my R programming abilities. It has become more visually appealing and complex through an iterative process. Feel free to check out the first version to see how my skills have grown.
 				</div>
 			</div>
 		</div>
@@ -161,16 +161,16 @@
 			src="./assets/arrow.png"
 			alt="Arrow Icon"
 			class="icon arrow"
-			onclick="location.href='./#experience'"
+			onclick="location.href='./National_Parks_Project.html#project_process'"
 		/>
 	</section>
-	<section id="experience">
+	<section id="project_process">
 		<p class="section_text__p1">Explore My</p>
-		<h1 class="title">Experience</h1>
+		<h1 class="title">Process</h1>
 		<div class="experience-details-container">
 			<div class="about-containers">
 				<div class="details-container">
-					<h2 class="experience-sub-title">Data Science</h2>
+					<h2 class="experience-sub-title">National Parks Exploration</h2>
 					<div class="article-container">
 						<article>
 							<img 
@@ -179,8 +179,7 @@
 								class="icon"
 							/>
 							<div>
-								<h3>Python</h3>
-								<p></p>
+								<h3><a href="#data_exploration" onclick="navigateIframe('data_exploration')">Data Exploration</a></h3>
 							</div>
 						</article>
 						<article>
@@ -190,7 +189,7 @@
 								class="icon"
 							/>
 							<div>
-								<h3>R</h3>
+								<h3><a href="#visitation_trends" onclick="navigateIframe('visitation_trends')">Visitor Trends</a></h3>
 								<p></p>
 							</div>
 						</article>
@@ -202,7 +201,6 @@
 							/>
 							<div>
 								<h3>Statistical Analysis</h3>
-								<p>Regression Analysis</p>
 							</div>
 						</article>
 						<article>
@@ -217,114 +215,8 @@
 							</div>
 						</article>
 					</div>
-				</div>
-				<div class="details-container">
-					<h2 class="experience-sub-title">Data Analytics</h2>
-					<div class="article-container">
-						<article>
-							<img 
-								src="./assets/checkmark.png" 
-								alt="Experience Icon"
-								class="icon"
-							/>
-							<div>
-								<h3>Tableau</h3>
-								<p></p>
-							</div>
-						</article>
-						<article>
-							<img 
-								src="./assets/checkmark.png" 
-								alt="Experience Icon"
-								class="icon"
-							/>
-							<div>
-								<h3>Google Analytics</h3>
-								<p></p>
-							</div>
-						</article>
-						<article>
-							<img 
-								src="./assets/checkmark.png" 
-								alt="Experience Icon"
-								class="icon"
-							/>
-							<div>
-								<h3>Excel</h3>
-								<p></p>
-							</div>
-						</article>
-						<article>
-							<img 
-								src="./assets/checkmark.png" 
-								alt="Experience Icon"
-								class="icon"
-							/>
-							<div>
-								<h3>SQL</h3>
-								<p></p>
-							</div>
-						</article>
-						<article>
-							<img 
-								src="./assets/checkmark.png" 
-								alt="Experience Icon"
-								class="icon"
-							/>
-							<div>
-								<h3>Exploratory Data Analysis</h3>
-								<p></p>
-							</div>
-						</article>
-					</div>
-				</div>
-				<div class="details-container">
-					<h2 class="experience-sub-title">Business Analytics</h2>
-					<div class="article-container">
-						<article>
-							<img 
-								src="./assets/checkmark.png" 
-								alt="Experience Icon"
-								class="icon"
-							/>
-							<div>
-								<h3>Requirements Gathering</h3>
-								<p></p>
-							</div>
-						</article>
-						<article>
-							<img 
-								src="./assets/checkmark.png" 
-								alt="Experience Icon"
-								class="icon"
-							/>
-							<div>
-								<h3>Process Optimization</h3>
-								<p></p>
-							</div>
-						</article>
-						<article>
-							<img 
-								src="./assets/checkmark.png" 
-								alt="Experience Icon"
-								class="icon"
-							/>
-							<div>
-								<h3>Requirements</h3>
-								<p></p>
-							</div>
-						</article>
-						<article>
-							<img 
-								src="./assets/checkmark.png" 
-								alt="Experience Icon"
-								class="icon"
-							/>
-							<div>
-								<h3>SharePoint Design</h3>
-								<p></p>
-							</div>
-						</article>
+					<div class="project-iframe"></div>
+						<iframe id="rmarkdown-iframe" src="assets/National_Parks_Project_Assets/NPS_Project_CharlesCoonce.html" width="100%" height="500px"></iframe>
 					</div>
 				</div>
 			</div>
@@ -333,11 +225,11 @@
 			src="./assets/arrow.png"
 			alt="Arrow Icon"
 			class="icon arrow"
-			onclick="location.href='./#projects'"
+			onclick="location.href='./National_Parks_Project.html#other_projects'"
 		/>
 	</section>
-	<section id="projects">
-		<p class="section_text__p1"> Browse My Recent</p>
+	<section id="other_projects">
+		<p class="section_text__p1">Browse More</p>
 		<h1 class="title">Projects</h1>
 		<div class="experience-details-container">
 			<div class="about-containers">
@@ -350,6 +242,7 @@
 						/>
 					</div>
 					<h2 class="experience-sub-title project-title">National Parks Visitation</h2>
+					<p class="section_text__p1">R Programming</p>
 					<div class="btn-container">
 						<button class="btn btn-color-2 project-btn" 
 							onclick="location.href='https://github.com/cdcoonce/National_Parks_Project'">
@@ -370,6 +263,7 @@
 						/>
 					</div>
 					<h2 class="experience-sub-title project-title">Portfolio Website</h2>
+					<p class="section_text__p1">HTML, CSS, Javascript</p>
 					<div class="btn-container">
 						<button class="btn btn-color-2 project-btn" 
 							onclick="location.href='https://github.com/cdcoonce'">

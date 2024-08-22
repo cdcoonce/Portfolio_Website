@@ -16,3 +16,5 @@ function moveSlide(step) {
     
     document.querySelector('.slider').style.transform = `translateX(${offset}%)`;
 }
+
+ç

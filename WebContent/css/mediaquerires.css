@@ -15,7 +15,7 @@
 }
 
 @media screen and (max-width: 1355px) {
-    #projects .details-container.color-container {
+    #projects .details-container .color-container {
         max-width: 325px;
     }
 
