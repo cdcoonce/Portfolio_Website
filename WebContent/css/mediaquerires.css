@@ -57,13 +57,16 @@
     .about-containers {
         margin-top: 0;
     }
+    .arrow {
+        display: none;
+    }
 
     #about {
-        height: 96vh;
+        height: fit-content;
     }
 
     #experience {
-        height: 96vh;
+        height: fit-content;
     }
 
     #projects {
