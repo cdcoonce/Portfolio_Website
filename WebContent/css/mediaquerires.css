@@ -74,19 +74,23 @@
     }
 
     #project_about {
-        height: 96vh;
+        height: fit-content;
     }
 
     #project_process {
-        height: 96vh;
+        height: fit-content;
+    }
+
+    #project_process .article-container {
+            flex-wrap: wrap;
     }
     
     #other_projects {
-        height: 96vh;
+        height: fit-content;
     }
 
     #project_contacts {
-        height: 80vh;
+        height: fit-content;
     }
 }
 
@@ -151,6 +155,10 @@
 
     .text-container {
         text-align: justify;
+    }
+
+    #project_about .about-containers {
+        flex-wrap: wrap;
     }
 
 }
