@@ -548,7 +548,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content:center;
+        justify-content:space-evenly;
         padding-top: 0;
         gap: 1rem;
         height: 85vh;
@@ -703,7 +703,16 @@
 
     #project_process {
         position: relative;
+        display: flex;
         margin-top: 4rem;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 4rem;
+        padding: 2rem 0; 
+        height: 100vh; 
+        width: 100%; 
     }
 
     #project_process .experience-sub-title {
@@ -711,35 +720,34 @@
         font-weight: 600;
         font-size: 1.5rem;
         margin-bottom: 1rem;
-        margin-top: 1rem;
     }
 
     #project_process .experience-details-container {
         display: flex;
-        justify-content: center;
         flex-direction: column;
-        margin-top: 2rem;
+        justify-content: center;
+        align-content: center;
+        flex-direction: column;
+        width: 90%;
     }
 
     #project_process .article-container {
         display: flex;
         flex-wrap: nowrap;
         flex-direction: row;
-        row-gap: 2rem;
-        column-gap: 2rem;
-        justify-content: space-around;
-        text-wrap: pretty;
+        gap: 2rem;
+        justify-content: center;
     }
 
     #project_process .details-container {
-        width: 90%;
-        height: 50%;
+        width: 0%;
+        text-align: center;
     }
-
+    
     #project_process .article {
         display: flex;
         width: 15rem;
-        justify-content: left;
+        justify-content: center;
         gap: 0.3rem;
     }
 
@@ -747,10 +755,18 @@
         padding-top: 1rem;  
     }
 
+    #rmarkdown-iframe {
+        height: 750px;
+        width: 85%;
+        max-width: 1050px;
+        margin: 0 auto;
+        display: block;
+    }
+
     #project_process .arrow {
         position: absolute;
         right: 2rem;
-        bottom: 0;
+        bottom: 1rem;
     }
 
 /* === Other Projects === */
@@ -853,37 +869,28 @@
 
 /* === Portfolio Project Profile Section === */
 
-    #project_profile {
+    #portfolio_project_profile {
         position: relative;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content:center;
-        padding-top: 0;
+        justify-content: space-evenly;
+        padding-top: 0rem;
         gap: 1rem;
         height: 85vh;
         width: 100%;
     }
 
-    #project_profile .section__pic-container {
+    #portfolio_project_profile .section__pic-container-portfolio-project {
         display: flex;
-        justify-content: center;
+        justify-content: space-evenly;
         height: auto;
         width: 100%;
         max-width: 60%;
         margin: 0 0;
     }
 
-    #project_profile .section__pic-container-portfolio-project {
-        display: flex;
-        justify-content: center;
-        height: auto;
-        width: 100%;
-        max-width: 60%;
-        margin: 0 0;
-    }
-
-    #project_profile .profile_pic {
+    #portfolio_project_profile .profile_pic {
         width: 100%; 
         height: auto; 
         max-width: 100%;
@@ -892,175 +899,35 @@
         display: block;
     }
 
-    #project_profile .section_text {
+    #portfolio_project_profile .section_text {
         align-self: center;
         text-align: center;
         padding: 0 1 rem;
     }
 
-    #project_profile .section_text p {
+    #portfolio_project_profile .section_text p {
         font-weight: 600;
     }
 
-    #project_profile .section_text__p1 {
+    #portfolio_project_profile .section_text__p1 {
         text-align: center;
     }
 
-    #project_profile .section_text__p2 {
+    #portfolio_project_profile .section_text__p2 {
         font-size: 1.75rem;
         margin-bottom: 1rem;
     }
 
-    #project_profile .title {
+    #portfolio_project_profile .title {
         font-size: 3rem;
         text-align: center;
     }
 
-    #project_profile #socials-container {
+    #portfolio_project_profile #socials-container {
         display: flex;
         justify-content: center;
         margin-top: 1rem;
         gap: 1rem;
-    }
-
-/* === Porfolio Project About Section ==== */
-
-    #project_about {
-        position: relative;
-        margin-top: 10rem;
-    }
-
-    #project_about  .details-title{
-        padding-bottom: 1rem;
-    }
-
-    #project_about .about-containers {
-        gap: 2rem;
-        margin-bottom: 2rem;
-        margin-top: 2rem;
-    }
-
-    #project_about .about-details-container {
-        justify-content: center;
-        flex-direction: column;
-    }
-
-    #project_about .about-containers {
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: center;
-    }
-    
-    #project_about .about-details-container {
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: center;
-    }
-
-    #project_about .about-pic {
-        border-radius: 2rem;
-    }
-
-    #project_about .text-container {
-        margin-top: 2rem;
-    }
-
-    #project_about .arrow {
-        position: absolute;
-        right: 2rem;
-        bottom: 1rem;
-    }
-
-    #project_about .details-container {
-        padding: 1.5rem;
-        flex:content;
-        background: white;
-        border-radius: 2rem;
-        border: rgb(53, 53, 53) 0.1rem solid;
-        border-color: rgb(163, 163, 163);
-    }
-
-    #project_about .section-container {
-        gap: 4rem;
-        height: 80%;
-        justify-content: center;
-    }
-
-    #project_about .section__pic-container {
-        height: 400px;
-        width: 400px;
-        margin: auto 0;
-    }
-
-    #project_about .slider-container {
-        max-height: 30rem;
-        max-width: 600px;
-        padding-bottom: 4rem;
-    }
-
-    #project_about .slider {
-        height: 50%;
-    }
-
-    #project_about .slide img {
-        max-height: 100%;
-        max-width: 100%;
-        object-fit: contain;
-
-    }    
-    
-/* === Portfolio Project Process === */
-
-    #project_process {
-        position: relative;
-        margin-top: 4rem;
-    }
-
-    #project_process .experience-sub-title {
-        color: rgb(85, 85, 85);
-        font-weight: 600;
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-        margin-top: 1rem;
-    }
-
-    #project_process .experience-details-container {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        margin-top: 2rem;
-    }
-
-    #project_process .article-container {
-        display: flex;
-        flex-wrap: nowrap;
-        flex-direction: row;
-        row-gap: 2rem;
-        column-gap: 2rem;
-        justify-content: space-around;
-        text-wrap: pretty;
-    }
-
-    #project_process .details-container {
-        width: 90%;
-        height: 50%;
-    }
-
-    #project_process .article {
-        display: flex;
-        width: 15rem;
-        justify-content: left;
-        gap: 0.3rem;
-    }
-
-    #project_process .project-iframe {  
-        padding-top: 1rem;  
-    }
-
-    #project_process .arrow {
-        position: absolute;
-        right: 2rem;
-        bottom: 0;
     }
 
 /* === Portfolio Other Projects === */
@@ -1137,5 +1004,3 @@
         right: 2rem;
         bottom: -1rem;
     }
-
-/* === Portfolio Project Contacts Section === */
