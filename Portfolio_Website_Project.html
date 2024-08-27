@@ -18,7 +18,8 @@
 			<ul class="nav-links">
 				<li><a href="./index.html">Home</a></li>
 				<li><a href="#project_about">About</a></li>
-				<li><a href="#project_process">Walkthrough</a></li>
+				<!-- Removed because there is not project process section right now -->
+				<!-- <li><a href="#project_process">Walkthrough</a></li> -->
 				<li><a href="#other_projects">Projects</a></li>
 				<li><a href="#project_contacts">Contact</a></li>
 			</ul>
@@ -38,7 +39,8 @@
 			<div class="menu-links">
 				<li><a href="./index.html" onclick="toggleMenu()">Home</a></li>
 				<li><a href="#project_about" onclick="toggleMenu()">About</a></li>
-				<li><a href="#project_process" onclick="toggleMenu()">Walkthrough</a></li>
+				<!-- Removed because there is not project process section right now -->
+				<!-- <li><a href="#project_process" onclick="toggleMenu()">Walkthrough</a></li> -->
 				<li><a href="#other_projects" onclick="toggleMenu()">Projects</a></li>
 				<li><a href="#project_contacts" onclick="toggleMenu()">Contact</a></li>
 			</div>
@@ -46,7 +48,7 @@
 	</nav>
 	<section id="project_profile">
 		<div class="section__pic-container-portfolio-project">
-			<img src="./WebContent/assets/Portfolio_Website_img1.png" alt="National Parks Project Image" class="profile_pic"/>
+			<img src="./WebContent/assets/Portfolio_Website_Project_Assets/Portfolio_Website_Home_Screen.png" alt="National Parks Project Image" class="profile_pic"/>
 		</div>
 		<div class="section_text">
 			<p class="section_text__p1"></p>
@@ -78,7 +80,7 @@
 		src="./WebContent/assets/arrow.png"
 		alt="Arrow Icon"
 		class="icon arrow"
-		onclick="location.href='./Portfolio_Website_Project.HTML#project_about'"
+		onclick="location.href='#project_about'"
 		/>
 	</section>
 	<section id="project_about">
@@ -106,8 +108,11 @@
 							<br />
 							GitHub Pages Deployment
 							<br />
-							Version Control
+							Figma
 							<br />
+							Media Queries
+							<br />
+							Version Control
 						</p>
 					</div>
 					<div class="details-container">
@@ -119,14 +124,10 @@
 						<h3 class="details-title">Highlights</h3>
 						<div class="slider-container">
 							<div class="slider">
-								<div class="slide"><img src="./WebContent/assets/Portfolio_Website_Project_Assets/PortfolioScreenshot1.png" alt="Total National Parks Visitation by Year"></div>
-								<div class="slide"><img src="./WebContent/assets/Portfolio_Website_Project_Assets/PortfolioScreenshot1Mobile.png" alt="Total National Parks Visitation by Year"></div>
-								<div class="slide"><img src="./WebContent/assets/Portfolio_Website_Project_Assets/PortfolioScreenshot2.png" alt="Total National Parks Visitation by Year"></div>
-								<div class="slide"><img src="./WebContent/assets/Portfolio_Website_Project_Assets/PortfolioScreenshot2Mobile.png" alt="Total National Parks Visitation by Year"></div>
-								<div class="slide"><img src="./WebContent/assets/Portfolio_Website_Project_Assets/PortfolioScreenshot3.png" alt="Total National Parks Visitation by Year"></div>
-								<div class="slide"><img src="./WebContent/assets/Portfolio_Website_Project_Assets/PortfolioScreenshot3Mobile.png" alt="Total National Parks Visitation by Year"></div>
-								<div class="slide"><img src="./WebContent/assets/Portfolio_Website_Project_Assets/PortfolioScreenshot4.png" alt="Total National Parks Visitation by Year"></div>
-								<div class="slide"><img src="./WebContent/assets/Portfolio_Website_Project_Assets/PortfolioScreenshot4Mobile.png" alt="Total National Parks Visitation by Year"></div>
+								<div class="slide"><img src="./WebContent/assets/Portfolio_Website_Project_Assets/Responsive Example 1.png" alt="Responsive Example of My Profile Page"></div>
+								<div class="slide"><img src="./WebContent/assets/Portfolio_Website_Project_Assets/Responsive Example 2.png" alt="Responsive Example of My About Page"></div>
+								<div class="slide"><img src="./WebContent/assets/Portfolio_Website_Project_Assets/Responsive Example 3.png" alt="Responsive Example of My Experience Page"></div>
+								<div class="slide"><img src="./WebContent/assets/Portfolio_Website_Project_Assets/Responsive Example 4.png" alt="Responsive Example of My Projects Page"></div>
 							</div>
 						<div class="btn-container">
 							<button class="btn btn-color-2" onclick="moveSlide(-1)">&#10094</button>
@@ -140,18 +141,11 @@
 						class="btn btn-color-1" 
 						onclick="window.open('https://github.com/cdcoonce/National_Parks_Project')">Repository
 					</button>
-					<button 
-						class="btn btn-color-1" 
-						onclick="window.open('./WebContent/assets/National_Parks_Project_Assets/National_Parks_Project_Rmarkdown_V1.pdf', '_blank')">Version 1 PDF Nov 13, 2023
-					</button>
-					<button 
-					class="btn btn-color-1" 
-					onclick="window.open('./WebContent/assets/National_Parks_Project_Assets/National_Parks_Project_Rmarkdown_V2.pdf', '_blank')">Version 2 PDF Aug 20, 2024
-				</button>
 				</div>
 				<div class="text-container">
 					<p>
-						This parks project started as a college project for one of my classes, and has now become an personal analysis that is meant to help me practice my R programming abilities. It has become more visually appealing and complex through an iterative process. Feel free to check out the first version to see how my skills have grown.
+						I designed this portfolio to showcase the projects I have been working on and learning. This website was an oppourtunity to learn how to create a responsive website that can scale as I produce more projects.
+					</p>
 				</div>
 			</div>
 		</div>
@@ -159,10 +153,11 @@
 			src="./WebContent/assets/arrow.png"
 			alt="Arrow Icon"
 			class="icon arrow"
-			onclick="location.href='./National_Parks_Project.html#project_process'"
+			onclick="location.href='#other_projects'"
 		/>
 	</section>
-	<section id="project_process">
+	<!-- Must adjust the arrow links, Hamburger Nav, desktop Nav, and Contacts Nav if placing this section back in! project_about arrow is linked to project contacts. -->
+	<!-- <section id="project_process">
 		<p class="section_text__p1">Explore My</p>
 		<h1 class="title">Process</h1>
 		<div class="experience-details-container">
@@ -223,9 +218,9 @@
 			src="./WebContent/assets/arrow.png"
 			alt="Arrow Icon"
 			class="icon arrow"
-			onclick="location.href='./National_Parks_Project.html#other_projects'"
+			onclick="location.href='#other_projects'"
 		/>
-	</section>
+	</section> -->
 	<section id="other_projects">
 		<p class="section_text__p1">Browse More</p>
 		<h1 class="title">Projects</h1>
@@ -234,21 +229,20 @@
 				<div class="details-container color-container">
 					<div class="article-container">
 						<img 
-							src="./WebContent/assets/Portfolio_Website_img1.png" 
-							alt="Project 2" 
-							class="project2-img"
+							src="./WebContent/assets/National_Parks_Project_Assets/NPS_plot5.png" 
+							alt="Project 1" 
+							class="project1-img"
 						/>
 					</div>
-					<h2 class="experience-sub-title project-title">Portfolio Website</h2>
-					<p class="section_text__p1">HTML, CSS, Javascript</p>
+					<h2 class="experience-sub-title project-title">National Parks Visitation</h2>
 					<div class="btn-container">
 						<button class="btn btn-color-2 project-btn" 
-							onclick="location.href='https://github.com/cdcoonce'">
+							onclick="location.href='https://github.com/cdcoonce/National_Parks_Project'">
 								Github
 						</button>
 						<button class="btn btn-color-2 project-btn" 
-							onclick="location.href='https://github.com/cdcoonce'">
-								Live Demo
+							onclick="location.href='./National_Parks_Project.html'">
+								Overview
 						</button>
 					</div>
 				</div>
@@ -288,8 +282,10 @@
 			<div class="nav-links">
 				<ul class="nav-links">
 					<li><a href="./index.html">Home</a></li>
+					<li><a href="./Portfolio_Website_Project.html">Project Home</a></li>
 					<li><a href="#project_about">About</a></li>
-					<li><a href="#project_process">Walkthrough</a></li>
+					<!-- Removed because there is not project process section right now -->
+					<!-- <li><a href="#project_process">Walkthrough</a></li> -->
 					<li><a href="#other_projects">Projects</a></li>
 				</ul>
 			</div>
