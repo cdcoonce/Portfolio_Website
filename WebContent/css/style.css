@@ -773,13 +773,34 @@
 
     #other_projects {
         position: relative;
-        justify-content: center;
+        display: flex; /* Add flexbox */
+        justify-content: center; /* Center content horizontally */
+        align-items: center; /* Center content vertically */
+        flex-direction: column; /* Ensure content is stacked vertically */
+        width: 100%; /* Ensure the section takes up the full width */
+        padding-bottom: 2rem; /* Adjust padding for spacing */
     }
 
     #other_projects .article-container {
-        padding-bottom: 0;
-        height: 80%;
+        display: flex;
+        justify-content: center; 
+        align-items: center; 
+        flex-wrap: wrap; 
+        width: 100%; 
+        max-width: 1050px;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    #other_projects .project1-img,
+    #other_projects .project2-img,
+    #other_projects .project3-img {
+        border-radius: 2rem;
+        max-width: 100%;
         width: auto;
+        height: auto; 
+        margin: 2rem; 
+        display: block;
     }
 
     #other_projects .color-container {
@@ -817,6 +838,8 @@
     }
 
     #other_projects .section_text__p1{
+        display: flex;
+        justify-content: center;
         margin-bottom: 1rem;
     }
 
