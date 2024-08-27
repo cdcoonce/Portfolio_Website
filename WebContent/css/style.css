@@ -1065,56 +1065,74 @@
 
 /* === Portfolio Other Projects === */
 
-    #other_projects {
+    #portfolio_other_projects {
         position: relative;
+        display: flex;
         justify-content: center;
+        align-items: center;
+        flex-direction: column;
     }
 
-    #other_projects .article-container {
+    #portfolio_other_projects .article-container {
+        display: flex;
+        justify-content: center;
+        align-items: center; 
+        width: 100%;
+        max-width: 60%;
+        margin: 0 auto;
+    }
+
+    #portfolio_other_projects .article-container img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+    }
+
+    #portfolio_other_projects .about-container {
         padding-bottom: 0;
         height: 80%;
         width: auto;
     }
 
-    #other_projects .color-container {
+    #portfolio_other_projects .color-container {
         border-color: rgb(163, 163, 163);
         background: rgb(250, 250, 250);
     }
 
-    #other_projects .project1-img {
+    #portfolio_other_projects .project1-img {
         border-radius: 2rem;
         width: 90%;
         height: 90%;
     }
 
-    #other_projects .project2-img {
+    #portfolio_other_projects .project2-img {
         border-radius: 2rem;
         width: auto;
         height: 90%;
 
     }
 
-    #other_projects .project3-img {
+    #portfolio_other_projects .project3-img {
         border-radius: 2rem;
         width: 90%;
         height: 90%;
     }
 
-    #other_projects .project-title {
+    #portfolio_other_projects .project-title {
         margin: .5rem;
         color: black;
     }
 
-    #other_projects .project-btn {
+    #portfolio_other_projects .project-btn {
         color: black;
         border-color: rgb(163, 163, 163);
     }
 
-    #other_projects .section_text__p1{
+    #portfolio_other_projects .section_text__p1{
         margin-bottom: 1rem;
     }
 
-    #other_projects .arrow {
+    #portfolio_other_projects .arrow {
         position: absolute;
         right: 2rem;
         bottom: -1rem;
