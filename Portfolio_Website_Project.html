@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv= "X-US-Compatible" content="IE-edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>My Portfolio Website Project</title>
+	<link rel="stylesheet" href="./WebContent/css/style.css" />
+	<link rel="stylesheet" href="./WebContent/css/mediaquerires.css" />
+</head>
+<body>
+	<nav id="desktop-nav">
+		<div class="logo">
+			Portfolio Website
+			<p class="logo_text__p2">HTML, CSS, Javascript</p>
+		</div>
+		<div>
+			<ul class="nav-links">
+				<li><a href="./index.html">Home</a></li>
+				<li><a href="#project_about">About</a></li>
+				<li><a href="#project_process">Walkthrough</a></li>
+				<li><a href="#other_projects">Projects</a></li>
+				<li><a href="#project_contacts">Contact</a></li>
+			</ul>
+		</div>	
+	</nav>
+	<nav id="hamburger-nav">
+		<div class="logo">
+			Portfolio Website
+			<p class="logo_text__p2">HTML, CSS, Javascript</p>
+		</div>
+		<div class="hamburger-menu">
+			<div class="hamburger-icon" onclick="toggleMenu()">
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+			<div class="menu-links">
+				<li><a href="./index.html" onclick="toggleMenu()">Home</a></li>
+				<li><a href="#project_about" onclick="toggleMenu()">About</a></li>
+				<li><a href="#project_process" onclick="toggleMenu()">Walkthrough</a></li>
+				<li><a href="#other_projects" onclick="toggleMenu()">Projects</a></li>
+				<li><a href="#project_contacts" onclick="toggleMenu()">Contact</a></li>
+			</div>
+		</div> 
+	</nav>
+	<section id="project_profile">
+		<div class="section__pic-container-portfolio-project">
+			<img src="./WebContent/assets/Portfolio_Website_img1.png" alt="National Parks Project Image" class="profile_pic"/>
+		</div>
+		<div class="section_text">
+			<p class="section_text__p1"></p>
+			<h1 class="title">Portfolio Website</h1>
+			<p class="section_text__p2"></p>
+			<div class="btn-container">
+				<button 
+					class="btn btn-color-1" 
+					onclick="window.open('https://github.com/cdcoonce/Portfolio_Website')">
+					Repository
+				</button>
+			</div>
+			<div id="socials-container">
+				<img 
+					src="./WebContent/assets/linkedin.png" 
+					alt="My LinkedIn profle" 
+					class="icon" 
+					onclick="window.open('https://www.linkedin.com/in/charlesdcoonce/', '_blank')"
+				/>
+				<img 
+					src="./WebContent/assets/github.png" 
+					alt="My Github profle" 
+					class="icon" 
+					onclick="window.open('https://github.com/cdcoonce', '_blank')"
+				/>
+			</div>
+		</div>
+		<img 
+		src="./WebContent/assets/arrow.png"
+		alt="Arrow Icon"
+		class="icon arrow"
+		onclick="location.href='./Portfolio_Website_Project.HTML#project_about'"
+		/>
+	</section>
+	<section id="project_about">
+		<p class="section_text__p1">Get to Know More</p>
+		<h1 class="title">Portfolio Website</h1>
+		<p class="section_text__p1"></p>
+		<div class="section-container">
+			<div class="about-details-container">
+				<div class="about-containers">
+					<div class="details-container">
+						<img 
+							src="./WebContent/assets/experience.png" 
+							alt="Experience Icon" 
+							class="icon"
+						/>
+						<h3 class="details-title">Skills Used</h3>
+						<p>
+							HTML
+							<br />
+							CSS
+							<br />
+							Javascript
+							<br />
+							Responsive Design
+							<br />
+							GitHub Pages Deployment
+							<br />
+							Version Control
+							<br />
+						</p>
+					</div>
+					<div class="details-container">
+						<img 
+							src="./WebContent/assets/education.png" 
+							alt="Education Icon" 
+							class="icon"
+						/>
+						<h3 class="details-title">Highlights</h3>
+						<div class="slider-container">
+							<div class="slider">
+								<div class="slide"><img src="./WebContent/assets/Portfolio_Website_Project_Assets/PortfolioScreenshot1.png" alt="Total National Parks Visitation by Year"></div>
+								<div class="slide"><img src="./WebContent/assets/Portfolio_Website_Project_Assets/PortfolioScreenshot1Mobile.png" alt="Total National Parks Visitation by Year"></div>
+								<div class="slide"><img src="./WebContent/assets/Portfolio_Website_Project_Assets/PortfolioScreenshot2.png" alt="Total National Parks Visitation by Year"></div>
+								<div class="slide"><img src="./WebContent/assets/Portfolio_Website_Project_Assets/PortfolioScreenshot2Mobile.png" alt="Total National Parks Visitation by Year"></div>
+								<div class="slide"><img src="./WebContent/assets/Portfolio_Website_Project_Assets/PortfolioScreenshot3.png" alt="Total National Parks Visitation by Year"></div>
+								<div class="slide"><img src="./WebContent/assets/Portfolio_Website_Project_Assets/PortfolioScreenshot3Mobile.png" alt="Total National Parks Visitation by Year"></div>
+								<div class="slide"><img src="./WebContent/assets/Portfolio_Website_Project_Assets/PortfolioScreenshot4.png" alt="Total National Parks Visitation by Year"></div>
+								<div class="slide"><img src="./WebContent/assets/Portfolio_Website_Project_Assets/PortfolioScreenshot4Mobile.png" alt="Total National Parks Visitation by Year"></div>
+							</div>
+						<div class="btn-container">
+							<button class="btn btn-color-2" onclick="moveSlide(-1)">&#10094</button>
+							<button class="btn btn-color-2" onclick="moveSlide(1)">&#10095</button>
+						</div>
+						</div>
+					</div>
+				</div>
+				<div class="btn-container">
+					<button 
+						class="btn btn-color-1" 
+						onclick="window.open('https://github.com/cdcoonce/National_Parks_Project')">Repository
+					</button>
+					<button 
+						class="btn btn-color-1" 
+						onclick="window.open('./WebContent/assets/National_Parks_Project_Assets/National_Parks_Project_Rmarkdown_V1.pdf', '_blank')">Version 1 PDF Nov 13, 2023
+					</button>
+					<button 
+					class="btn btn-color-1" 
+					onclick="window.open('./WebContent/assets/National_Parks_Project_Assets/National_Parks_Project_Rmarkdown_V2.pdf', '_blank')">Version 2 PDF Aug 20, 2024
+				</button>
+				</div>
+				<div class="text-container">
+					<p>
+						This parks project started as a college project for one of my classes, and has now become an personal analysis that is meant to help me practice my R programming abilities. It has become more visually appealing and complex through an iterative process. Feel free to check out the first version to see how my skills have grown.
+				</div>
+			</div>
+		</div>
+		<img 
+			src="./WebContent/assets/arrow.png"
+			alt="Arrow Icon"
+			class="icon arrow"
+			onclick="location.href='./National_Parks_Project.html#project_process'"
+		/>
+	</section>
+	<section id="project_process">
+		<p class="section_text__p1">Explore My</p>
+		<h1 class="title">Process</h1>
+		<div class="experience-details-container">
+			<div class="about-containers">
+				<div class="details-container">
+					<h2 class="experience-sub-title">National Parks Exploration</h2>
+					<div class="article-container">
+						<article>
+							<img 
+								src="./WebContent/assets/checkmark.png" 
+								alt="Experience Icon"
+								class="icon"
+							/>
+							<div>
+								<h3><a href="#data_exploration" onclick="navigateIframe('data_exploration')">Data Exploration</a></h3>
+							</div>
+						</article>
+						<article>
+							<img 
+								src="./WebContent/assets/checkmark.png" 
+								alt="Experience Icon"
+								class="icon"
+							/>
+							<div>
+								<h3><a href="#visitation_trends" onclick="navigateIframe('visitation_trends')">Visitor Trends</a></h3>
+								<p></p>
+							</div>
+						</article>
+						<article>
+							<img 
+								src="./WebContent/assets/checkmark.png" 
+								alt="Experience Icon"
+								class="icon"
+							/>
+							<div>
+								<h3>Statistical Analysis</h3>
+							</div>
+						</article>
+						<article>
+							<img 
+								src="./WebContent/assets/checkmark.png" 
+								alt="Experience Icon"
+								class="icon"
+							/>
+							<div>
+								<h3>Data Cleaning</h3>
+								<p></p>
+							</div>
+						</article>
+					</div>
+					<div class="project-iframe"></div>
+						<iframe id="rmarkdown-iframe" src="WebContent/assets/National_Parks_Project_Assets/NPS_Project_CharlesCoonce.html" width="100%" height="800px"></iframe>
+					</div>
+				</div>
+			</div>
+		</div>
+		<img 
+			src="./WebContent/assets/arrow.png"
+			alt="Arrow Icon"
+			class="icon arrow"
+			onclick="location.href='./National_Parks_Project.html#other_projects'"
+		/>
+	</section>
+	<section id="other_projects">
+		<p class="section_text__p1">Browse More</p>
+		<h1 class="title">Projects</h1>
+		<div class="experience-details-container">
+			<div class="about-containers">
+				<div class="details-container color-container">
+					<div class="article-container">
+						<img 
+							src="./WebContent/assets/Portfolio_Website_img1.png" 
+							alt="Project 2" 
+							class="project2-img"
+						/>
+					</div>
+					<h2 class="experience-sub-title project-title">Portfolio Website</h2>
+					<p class="section_text__p1">HTML, CSS, Javascript</p>
+					<div class="btn-container">
+						<button class="btn btn-color-2 project-btn" 
+							onclick="location.href='https://github.com/cdcoonce'">
+								Github
+						</button>
+						<button class="btn btn-color-2 project-btn" 
+							onclick="location.href='https://github.com/cdcoonce'">
+								Live Demo
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<img 
+			src="./WebContent/assets/arrow.png"
+			alt="Arrow Icon"
+			class="icon arrow"
+			onclick="location.href='#project_contacts'"
+		/>
+	</section>
+	<section id="project_contacts">
+		<p class="section_text__p1">Get in Touch</p>
+		<h1 class="title">Contact Me</h1>
+		<div class="contact-info-upper-container">
+			<div class="contact-info-container">
+				<img 
+					src="./WebContent/assets/email.png"
+					alt="Email Icon"
+					Class="icon contact-icon email-icon"
+				/>
+				<p><a href="mailto:CharlesCoonce@Gmail.com">CharlesCoonce@Gmail.com</a></p>
+			</div>
+			<div class="contact-info-container">
+				<img 
+					src="./WebContent/assets/linkedin.png"
+					alt="LinkedIn Icon"
+					Class="icon contact-icon"
+				/>
+				<p><a href="https://www.linkedin.com/in/charlesdcoonce/">LinkedIn</a></p>
+			</div>
+		</div>
+	</section>
+	<footer>
+		<nav>
+			<div class="nav-links">
+				<ul class="nav-links">
+					<li><a href="./index.html">Home</a></li>
+					<li><a href="#project_about">About</a></li>
+					<li><a href="#project_process">Walkthrough</a></li>
+					<li><a href="#other_projects">Projects</a></li>
+				</ul>
+			</div>
+		</nav>
+		<p>Copyright &#169; 2024 Charles Coonce. All Rights Reserved.</p>
+	</footer>
+	<script src="./WebContent/js/script.js"></script>
+</body>
+</html>
