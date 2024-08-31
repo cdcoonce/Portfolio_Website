@@ -1121,3 +1121,87 @@
         right: 2rem;
         bottom: -1rem;
     }
+
+/* === Portfolio Project About Section ==== */
+
+    #ga_project_about {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        max-width: 1700px;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    #ga_project_about .section-container {
+        gap: 4rem;
+        display: flex;
+        flex-direction: row;
+        height: 80%;
+    }
+
+    #ga_project_about .about-containers {
+        gap: 2rem;
+        margin-bottom: 2rem;
+        margin-top: 2rem;
+    }
+
+    #ga_project_about .about-details-container {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+
+    #ga_project_about .details-container {
+        padding: 1.5rem;
+        background: white;
+        border-radius: 2rem;
+        border: rgb(53, 53, 53) 0.1rem solid;
+        border-color: rgb(163, 163, 163);
+    }
+
+    #ga_project_about .about-pic {
+        border-radius: 2rem;
+    }
+
+    #ga_project_about .text-container {
+        margin-top: 2rem;
+    }
+
+    #ga_project_about .arrow {
+        position: absolute;
+        right: 2rem;
+        bottom: 1rem;
+    }
+
+    #ga_project_about .details-container {
+        padding: 1.5rem;
+        background: white;
+        border-radius: 2rem;
+        border: rgb(53, 53, 53) 0.1rem solid;
+        border-color: rgb(163, 163, 163);
+    }
+
+    #ga_project_about .section__pic-container {
+        height: 400px;
+        width: 400px;
+        margin: auto 0;
+    }
+
+    #ga_project_about .slider-container {
+        max-height: 30rem;
+        max-width: 600px;
+        padding-bottom: 6rem;
+    }
+
+    #ga_project_about .slider {
+        height: 50%;
+    }
+
+    #ga_project_about .slide img {
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+    }  
