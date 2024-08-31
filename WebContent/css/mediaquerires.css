@@ -1,3 +1,4 @@
+
 @media screen and (max-width: 1400px) {
     #profile {
         height: 83vh;
@@ -10,7 +11,9 @@
 
     .menu-links {
         z-index: 1;
-        background-color: rgba(255, 255, 255, 0.5);
+        background-color: rgba(255, 255, 255, .98);
+        border: rgba(53, 53, 53, .03) 0.1rem solid;
+        border-radius: 1rem;
     }
 }
 
@@ -45,7 +48,7 @@
     }
 
     section {
-        margin: 0 5%;
+        padding: 0 2rem;
     }
 
     .section__pic-container {
@@ -57,13 +60,16 @@
     .about-containers {
         margin-top: 0;
     }
+    .arrow {
+        display: none;
+    }
 
     #about {
-        height: 96vh;
+        height: fit-content;
     }
 
     #experience {
-        height: 96vh;
+        height: fit-content;
     }
 
     #projects {
@@ -71,19 +77,23 @@
     }
 
     #project_about {
-        height: 96vh;
+        height: fit-content;
     }
 
     #project_process {
-        height: 96vh;
+        height: fit-content;
+    }
+
+    #project_process .article-container {
+            flex-wrap: wrap;
     }
     
     #other_projects {
-        height: 96vh;
+        height: fit-content;
     }
 
     #project_contacts {
-        height: 80vh;
+        height: fit-content;
     }
 }
 
@@ -148,6 +158,10 @@
 
     .text-container {
         text-align: justify;
+    }
+
+    #project_about .about-containers {
+        flex-wrap: wrap;
     }
 
 }
