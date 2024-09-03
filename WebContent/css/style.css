@@ -212,6 +212,36 @@
         font-size: 1.25rem;
     }
 
+    /* Desktop Dropdown */
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            padding: 10px 0;
+            list-style: none;
+        }
+
+        .nav-links .dropdown-content li {
+            padding: 8px 16px;
+        }
+
+        .nav-links .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
 /* Hamburger Menu */
 
     #hamburger-nav {
