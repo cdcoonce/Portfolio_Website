@@ -217,10 +217,19 @@
             list-style: none;
             display: flex;
             gap: 15px;
+            margin: 0;
+            padding: 0;
         }
 
         .nav-links li {
             position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: black;
+            padding: 8px 16px;
+            display: block;
         }
 
         .nav-links .dropdown-content {
@@ -230,17 +239,22 @@
             left: 0;
             background-color: white;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            padding: 10px 0;
+            margin: 0;
+            padding: 0;
             list-style: none;
+            width: 200px; /* Adjust width as needed */
+            z-index: 1000; /* Ensures the dropdown appears above other content */
         }
 
         .nav-links .dropdown-content li {
             padding: 8px 16px;
         }
 
-        .nav-links .dropdown:hover .dropdown-content {
+        .nav-links .dropdown:hover .dropdown-content,
+        .nav-links .dropdown-content:hover {
             display: block;
         }
+
 
 /* Hamburger Menu */
 
