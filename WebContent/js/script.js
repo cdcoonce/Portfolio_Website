@@ -5,6 +5,13 @@ function toggleMenu() {
     icon.classList.toggle("open")
 }
 
+function desktopToggleMenu() {
+    const menu = document.querySelector(".desktop-menu-links");
+    const icon = document.querySelector(".desktop-icon");
+    menu.classList.toggle("open")
+    icon.classList.toggle("open")
+}
+
 let currentIndex = 0;
 
 function moveSlide(step) {
