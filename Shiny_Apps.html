@@ -14,17 +14,24 @@
 			Shiny Apps
 			<p class="logo_text__p2">R Programming</p>
 		</div>
-		<div>
+		<div class="dropdow">
 			<ul class="nav-links">
 				<li><a href="./index.html">Home</a></li>
 				<li><a href="#project_about">About</a></li>
-				<li class="dropdown">
-					<a href="#Shiny_Apps">Shiny Apps</a>
-					<ul class="dropdown-content">
-						<li><a href="#project1">National Parks Project</a></li>
-						<li><a href="#project2">World Happiness Report</a></li>
-					</ul>
-				</li>
+					<div class="desktop-menu">
+						<div class="label">
+							<div class="desktop-icon" onclick="toggleMenu()">
+								<span></span>
+								<span></span>
+								<span></span>
+							</div>
+							<div class="text" onclick="toggleMenu()"><p>Shiny Apps</p></div>
+						</div>
+						<div class="menu-links">
+							<li><a href="#project_process" onclick="toggleMenu()">National Parks</a></li>
+							<li><a href="#project_process" onclick="toggleMenu()">World Happiness Report</a></li>
+						</div>
+					</div> 
 				<li><a href="#other_projects">Other Projects</a></li>
 				<li><a href="#project_contacts">Contact</a></li>
 			</ul>

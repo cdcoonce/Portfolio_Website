@@ -213,33 +213,70 @@
     }
 
     /* Desktop Dropdown */
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 15px;
-        }
 
-        .nav-links li {
+        .label{
             position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            flex-direction: row;
+            justify-content: center;
+            align-content: center;
         }
 
-        .nav-links .dropdown-content {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: white;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            padding: 10px 0;
-            list-style: none;
+        .text{
+            position: relative;
+            display: flex;
+            gap: 1rem;
+            flex-direction: row;
         }
 
-        .nav-links .dropdown-content li {
-            padding: 8px 16px;
+        .desktop-icon {
+            display: flex;
+            flex-direction: column;
+            justify-content:  space-between;
+            height: 24px;
+            width: 30px;
+            cursor: pointer;
+            margin-top: 5px;
         }
 
-        .nav-links .dropdown:hover .dropdown-content {
-            display: block;
+        .desktop-icon span {
+            width: 100%;
+            height: 2px;
+            background-color: black;
+            transition: all 0.3 ease-in-out;
+        }
+
+        .desktop-icon.open span:first-child {
+            transform: rotate(45deg) translate(10px, 5px);
+        }
+    
+        .desktop-icon.open span:nth-child(2) {
+            opacity: 0;
+        }
+    
+        .desktop-icon.open span:last-child {
+            transform: rotate(-45deg) translate(10px, -5px);
+        }
+    
+        .desktop-icon span:first-child {
+            transform: none;
+        }
+    
+        .desktop-icon span:first-child {
+            opacity: 1;
+        }
+    
+        .desktop-icon span:first-child {
+            transform: none;
+        }
+
+        .desktop-menu {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: flex-end;
         }
 
 /* Hamburger Menu */
@@ -250,7 +287,7 @@
 
     .hamburger-menu {
         position: relative;
-        display: inline-block
+        display: inline-block;
     }
 
     .hamburger-icon {
