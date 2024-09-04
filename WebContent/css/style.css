@@ -238,7 +238,7 @@
             height: 24px;
             width: 30px;
             cursor: pointer;
-            margin-top: 5px;
+            margin-top: 12px;
         }
 
         .desktop-icon span {
@@ -277,6 +277,36 @@
             display: flex;
             flex-wrap: wrap;
             align-content: flex-end;
+        }
+
+        .desktop-menu-links {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            width: fit-content;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3 ease-in-out;
+    
+        }
+    
+        .desktop-menu-links a {
+            display: block;
+            padding: 10px;
+            text-align: center;
+            font-size: 1.5rem;
+            color: black;
+            text-decoration: none;
+            transition: all 0.3 ease-in-out;    
+        }
+    
+        .desktop-menu-links li {
+            list-style: none;
+        }
+    
+        .desktop-menu-links.open {
+            max-height: 300px;
         }
 
 /* Hamburger Menu */
@@ -359,6 +389,184 @@
     .hamburger-icon span:first-child {
         transform: none;
     }
+
+    /* === Shiny Logo === */
+
+        .shiny-label{
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            flex-direction: row;
+            justify-content: center;
+            align-content: center;
+        }
+
+        .shiny-text{
+            position: relative;
+            display: flex;
+            gap: 1rem;
+            flex-direction: row;
+        }
+
+        .shiny-icon {
+            display: flex;
+            flex-direction: column;
+            justify-content:  space-between;
+            height: 24px;
+            width: 30px;
+            cursor: pointer;
+            margin-top: 12px;
+        }
+
+        .shiny-icon span {
+            width: 100%;
+            height: 2px;
+            background-color: black;
+            transition: all 0.3 ease-in-out;
+        }
+
+        .shiny-icon.open span:first-child {
+            transform: rotate(45deg) translate(10px, 5px);
+        }
+
+        .shiny-icon.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .shiny-icon.open span:last-child {
+            transform: rotate(-45deg) translate(10px, -5px);
+        }
+
+        .shiny-icon span:first-child {
+            transform: none;
+        }
+
+        .shiny-icon span:first-child {
+            opacity: 1;
+        }
+
+        .shiny-icon span:first-child {
+            transform: none;
+        }
+
+        .shiny-menu {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: flex-end;
+        }
+
+        .shiny-menu-links {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            width: fit-content;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3 ease-in-out;
+
+        }
+
+        .shiny-menu-links a {
+            display: block;
+            padding: 10px;
+            text-align: center;
+            font-size: 1.5rem;
+            color: black;
+            text-decoration: none;
+            transition: all 0.3 ease-in-out;    
+        }
+
+        .shiny-menu-links li {
+            list-style: none;
+        }
+
+        .shiny-menu-links.open {
+            max-height: 300px;
+        }
+
+    /* === Shiny Hamburger Menu === */
+
+        #shiny-hamburger-nav {
+            display: none;
+        }
+
+        .shiny-hamburger-menu {
+            position: relative;
+            display: inline-block;
+        }
+
+        .shiny-hamburger-icon {
+            display: flex;
+            flex-direction: column;
+            justify-content:  space-between;
+            height: 24px;
+            width: 30px;
+            cursor: pointer;
+        }
+
+        .shiny-hamburger-icon span {
+            width: 100%;
+            height: 2px;
+            background-color: black;
+            transition: all 0.3 ease-in-out;
+        }
+
+        .shiny-hamburger-menu-links {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            width: fit-content;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3 ease-in-out;
+
+        }
+
+        .shiny-hamburger-menu-links a {
+            display: block;
+            padding: 10px;
+            text-align: center;
+            font-size: 1.5rem;
+            color: black;
+            text-decoration: none;
+            transition: all 0.3 ease-in-out;    
+        }
+
+        .shiny-hamburger-menu-links li {
+            list-style: none;
+        }
+
+        .shiny-hamburger-menu-links.open {
+            max-height: 300px;
+        }
+
+        .shiny-hamburger-icon.open span:first-child {
+            transform: rotate(45deg) translate(10px, 5px);
+        }
+
+        .shiny-hamburger-icon.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .shiny-hamburger-icon.open span:last-child {
+            transform: rotate(-45deg) translate(10px, -5px);
+        }
+
+        .shiny-hamburger-icon span:first-child {
+            transform: none;
+        }
+
+        .shiny-hamburger-icon span:first-child {
+            opacity: 1;
+        }
+
+        .shiny-hamburger-icon span:first-child {
+            transform: none;
+        }
 
 /* === Profile Section === */
 
@@ -1272,3 +1480,167 @@
         max-width: 100%;
         object-fit: contain;
     }  
+
+/* === Shiny Project About Section ==== */
+
+    #shiny_project_about {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        max-width: 1700px;
+        width: 100%;
+        margin: 0 auto;
+        height: 96vh;
+    }
+
+    #shiny_project_about .section-container {
+        gap: 4rem;
+        display: flex;
+        flex-direction: row;
+        height: 80%;
+    }
+
+    #shiny_project_about .about-containers {
+        gap: 2rem;
+        margin-bottom: 2rem;
+        margin-top: 2rem;
+    }
+
+    #shiny_project_about .about-details-container {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+
+    #shiny_project_about .details-container {
+        padding: 1.5rem;
+        background: white;
+        border-radius: 2rem;
+        border: rgb(53, 53, 53) 0.1rem solid;
+        border-color: rgb(163, 163, 163);
+    }
+
+    #shiny_project_about .about-pic {
+        border-radius: 2rem;
+    }
+
+    #shiny_project_about .text-container {
+        margin-top: 2rem;
+    }
+
+    #shiny_project_about .arrow {
+        position: absolute;
+        right: 2rem;
+        bottom: 1rem;
+    }
+
+    #shiny_project_about .section__pic-container {
+        height: 400px;
+        width: 400px;
+        margin: auto 0;
+    }
+
+    #shiny_project_about .slider-container {
+        max-height: 30rem;
+        max-width: 600px;
+        padding-bottom: 4rem;
+        padding-top: 2rem;
+    }
+
+    #shiny_project_about .slider {
+        height: 50%;
+    }
+
+    #shiny_project_about .slide1 img {
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+    }  
+
+
+/* === Shiny Project Process === */
+
+    #shiny_project_process1,
+    #shiny_project_process2  {
+        position: relative;
+        display: flex;
+        margin-top: 4rem;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 4rem;
+        padding: 2rem 0; 
+        height: 100vh; 
+        width: 100%; 
+    }
+
+    #shiny_project_process1 .experience-sub-title,
+    #shiny_project_process2  .experience-sub-title {
+        color: rgb(85, 85, 85);
+        font-weight: 600;
+        font-size: 1.5rem;
+        margin-bottom: .5rem;
+    }
+
+    #shiny_project_process1 .about-containers,
+    #shiny_project_process2 s .about-containers {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    #shiny_project_process1 .experience-details-container,
+    #shiny_project_process2  .experience-details-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        flex-direction: column;
+        width: 90%;
+    }
+
+    #shiny_project_process1 .article-container,
+    #shiny_project_process2  .article-container {
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        gap: 2rem;
+        justify-content: center;
+    }
+
+    #shiny_project_process1 .details-container,
+    #shiny_project_process2  .details-container {
+        width: 0%;
+        text-align: center;
+        padding: .5rem;
+    }
+
+    #shiny_project_process1 .article,
+    #shiny_project_process2  .article {
+        display: flex;
+        width: 15rem;
+        justify-content: center;
+        gap: 0.3rem;
+    }
+
+    #shiny_project_process1 .project-iframe,
+    #shiny_project_process2  .project-iframe {  
+        padding-top: 0rem;  
+    }
+
+    #shiny-iframe {
+        height: 78vh;
+        width: 90%;
+        max-width: 1050px;
+        margin: 0 auto;
+        display: block;
+    }
+
+    #shiny_project_process1 .arrow,
+    #shiny_project_process2 .arrow {
+        position: absolute;
+        right: 2rem;
+        bottom: 1rem;
+    }

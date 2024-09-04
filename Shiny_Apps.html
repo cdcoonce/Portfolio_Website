@@ -11,71 +11,83 @@
 <body>
 	<nav id="desktop-nav">
 		<div class="logo">
-			Shiny Apps
+			<div class="desktop-menu">
+				<div class="label">
+					<div class="desktop-icon" onclick="desktopToggleMenu()">
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+					<div class="text" onclick="desktopToggleMenu()">
+						<p>Shiny Apps</p>
+					</div>
+				</div>
+				<div class="desktop-menu-links">
+					<li><a href="#project_process" onclick="desktopTggleMenu()">National Parks</a></li>
+					<li><a href="#project_process" onclick="desktopToggleMenu()">World Happiness Report</a></li>
+				</div>
+			</div> 
 			<p class="logo_text__p2">R Programming</p>
 		</div>
-		<div class="dropdow">
 			<ul class="nav-links">
 				<li><a href="./index.html">Home</a></li>
 				<li><a href="#project_about">About</a></li>
-					<div class="desktop-menu">
-						<div class="label">
-							<div class="desktop-icon" onclick="toggleMenu()">
-								<span></span>
-								<span></span>
-								<span></span>
-							</div>
-							<div class="text" onclick="toggleMenu()"><p>Shiny Apps</p></div>
-						</div>
-						<div class="menu-links">
-							<li><a href="#project_process" onclick="toggleMenu()">National Parks</a></li>
-							<li><a href="#project_process" onclick="toggleMenu()">World Happiness Report</a></li>
-						</div>
-					</div> 
-				<li><a href="#other_projects">Other Projects</a></li>
+				<li><a href="#other_projects">Projects</a></li>
 				<li><a href="#project_contacts">Contact</a></li>
 			</ul>
-		</div>	
 	</nav>
-	<nav id="hamburger-nav">
+	<nav id="shiny-hamburger-nav">
 		<div class="logo">
-			Shiny Apps
+			<div class="shiny-menu">
+				<div class="shiny-label">
+					<div class="shiny-icon" onclick="shinyToggleMenu()">
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+					<div class="shiny-text" onclick="shinyToggleMenu()">
+						<p>Shiny Apps</p>
+					</div>
+				</div>
+				<div class="shiny-menu-links">
+					<li><a href="#project_process" onclick="shinyToggleMenu()">National Parks</a></li>
+					<li><a href="#project_process" onclick="shinyToggleMenu()">World Happiness Report</a></li>
+				</div>
+			</div> 
 			<p class="logo_text__p2">R Programming</p>
 		</div>
-		<div class="hamburger-menu">
-			<div class="hamburger-icon" onclick="toggleMenu()">
+		<div class="shiny-hamburger-menu">
+			<div class="shiny-hamburger-icon" onclick="shinyHamtoggleMenu()">
 				<span></span>
 				<span></span>
 				<span></span>
 			</div>
-			<div class="menu-links">
-				<li><a href="./index.html" onclick="toggleMenu()">Home</a></li>
-				<li><a href="#project_about" onclick="toggleMenu()">About</a></li>
-				<li><a href="#project_process" onclick="toggleMenu()">National Parks</a></li>
-                <li><a href="#project_process" onclick="toggleMenu()">World Happiness Report</a></li>
-				<li><a href="#other_projects" onclick="toggleMenu()">Projects</a></li>
-				<li><a href="#project_contacts" onclick="toggleMenu()">Contact</a></li>
+			<div class="shiny-hamburger-menu-links">
+				<li><a href="./index.html" onclick="shinyHamtoggleMenu()">Home</a></li>
+				<li><a href="#project_about" onclick="shinyHamtoggleMenu()">About</a></li>
+				<li><a href="#other_projects" onclick="shinyHamtoggleMenu()">Projects</a></li>
+				<li><a href="#project_contacts" onclick="shinyHamtoggleMenu()">Contact</a></li>
 			</div>
 		</div> 
 	</nav>
 	<section id="project_profile">
 		<div class="section__pic-container">
-			<img src="./WebContent/assets/National_Parks_Project_Assets/National_Parks_Project_Cover_Img.png" alt="National Parks Project Image" class="profile_pic"/>
+			<img src="/Visitation/assets/ShinyAppsDashboard.png" alt="National Parks Project Image" class="profile_pic"/>
 		</div>
 		<div class="section_text">
 			<p class="section_text__p1">Personal Projects</p>
-			<h1 class="title">National Parks</h1>
-			<p class="section_text__p2">Visitation</p>
+			<h1 class="title">Shiny Dashboard Applications</h1>
+			<p class="section_text__p2">In R</p>
 			<div class="btn-container">
 				<button 
 					class="btn btn-color-1" 
-					onclick="window.open('https://github.com/cdcoonce/National_Parks_Project')">
-					Repository
+					onclick="window.open('https://github.com/cdcoonce/Visitation')">
+					Visitation Repository
 				</button>
 				<button 
 					class="btn btn-color-1" 
-					onclick="location.href='./assets/National_Parks_Project_Assets/All National Parks Visitation 1904-2016.csv'">
-					Data Source
+					onclick="location.href='https://github.com/cdcoonce/WorldHappinessReport'">
+					Happinness Repository
 				</button>
 			</div>
 			<div id="socials-container">
@@ -100,9 +112,9 @@
 		onclick="location.href='./National_Parks_Project.html#project_about'"
 		/>
 	</section>
-	<section id="project_about">
+	<section id="shiny_project_about">
 		<p class="section_text__p1">Get to Know More</p>
-		<h1 class="title">National Parks Project</h1>
+		<h1 class="title">Shiny Applications</h1>
 		<p class="section_text__p1">R Programming</p>
 		<div class="section-container">
 			<div class="about-details-container">
@@ -115,19 +127,19 @@
 						/>
 						<h3 class="details-title">Skills Used</h3>
 						<p>
-							Coordinate System Mapping
+							Dynamic UI Design
 							<br />
-							Traveling Salesman problems
+							Data Visualization
 							<br />
-							Heirarchical Clustering
+							User Input Handling
 							<br />
-							Open Source Routing Machine
+							Server-Side Logic
 							<br />
-							ggplot
+							Reactive Programming
 							<br />
-							Tidyverse
+							Application Deployment
 							<br />
-							Statistical Analysis
+							Interactive Dashboards
 						</p>
 					</div>
 					<div class="details-container">
@@ -139,14 +151,12 @@
 						<h3 class="details-title">Highlights</h3>
 						<div class="slider-container">
 							<div class="slider">
-								<div class="slide"><img src="./WebContent/assets/National_Parks_Project_Assets/NPS_plot1.png" alt="Total National Parks Visitation by Year"></div>
-								<div class="slide"><img src="./WebContent/assets/National_Parks_Project_Assets/NPS_plot2.png" alt="Regional National Parks Visitation by Year"></div>
-								<div class="slide"><img src="./WebContent/assets/National_Parks_Project_Assets/NPS_plot3.png" alt="Heat map of National Parks Visitation by Western State"></div>
-								<div class="slide"><img src="./WebContent/assets/National_Parks_Project_Assets/NPS_plot4.png" alt="Bubble Plot of Western National Park All Time Visitation"></div>
-								<div class="slide"><img src="./WebContent/assets/National_Parks_Project_Assets/NPS_plot5.png" alt="Routes from Helena, Montana to National Parks"></div>
-								<div class="slide"><img src="./WebContent/assets/National_Parks_Project_Assets/NPS_plot6.png" alt="Cluster Analysis of National Parks in Western States"></div>
-								<div class="slide"><img src="./WebContent/assets/National_Parks_Project_Assets/NPS_plot7.png" alt="Traveling Salesman Route Optomization by Cluster"></div>
-								<div class="slide"><img src="./WebContent/assets/National_Parks_Project_Assets/NPS_plot8.png" alt="Reclustered Traveling Salesman Routes"></div>
+								<div class="slide"><img src="/Visitation/assets/VisitationGraphic.png" alt="Total National Parks Visitation by Year"></div>
+								<div class="slide"><img src="/Visitation/assets/VisitationGraphic1.png" alt="Total National Parks Visitation by Year"></div>
+								<div class="slide"><img src="/Visitation/assets/VisitationGraphic2.png" alt="Total National Parks Visitation by Year"></div>
+								<div class="slide"><img src="/Visitation/assets/WorldHappinessGraphic.png" alt="World Happiness Report Parameters"></div>
+								<div class="slide"><img src="/Visitation/assets/WorldHappinessGraphic1.png" alt="World Happiness Report Options"></div>
+								<div class="slide"><img src="/Visitation/assets/WorldHappinessGraphic2.png" alt="World Happiness Report Graph"></div>
 							</div>
 						<div class="btn-container">
 							<button class="btn btn-color-2" onclick="moveSlide(-1)">&#10094</button>
@@ -155,24 +165,9 @@
 						</div>
 					</div>
 				</div>
-				<div class="btn-container">
-					<button 
-						class="btn btn-color-1" 
-						onclick="window.open('https://github.com/cdcoonce/National_Parks_Project')">Repository
-					</button>
-					<button 
-						class="btn btn-color-1" 
-						onclick="window.open('./WebContent/assets/National_Parks_Project_Assets/National_Parks_Project_Rmarkdown_V1.pdf', '_blank')">Version 1 PDF Nov 13, 2023
-					</button>
-					<!-- <button 
-					class="btn btn-color-1" 
-					onclick="window.open('./WebContent/assets/National_Parks_Project_Assets/National_Parks_Project_Rmarkdown_V2.pdf', '_blank')">Version 2 PDF Aug 20, 2024
-					</button> -->
-				</div>
 				<div class="text-container">
 					<p>
-						This parks project started as a college project for one of my classes, and has now become an personal analysis that is meant to help me practice my R programming abilities. It has become more visually appealing and complex through an iterative process. Feel free to check out the first version to see how my skills have grown.
-				</div>
+						I enjoy creating interactive web applications using R Shiny that make data exploration fun and easy. My apps turn complex data into simple visualizations and dashboards, helping users discover insights in a dynamic way. I focus on building clean, user-friendly interfaces and use tools like reactive programming to make the apps responsive and engaging. From integrating different data sources to deploying apps online, I love bringing data stories to life with Shiny.
 			</div>
 		</div>
 		<img 
@@ -182,59 +177,35 @@
 			onclick="location.href='./National_Parks_Project.html#project_process'"
 		/>
 	</section>
-	<section id="project_process">
+	<section id="shiny_project_process1">
 		<p class="section_text__p1">Explore My</p>
-		<h1 class="title">Process</h1>
+		<h1 class="title">National Parks Visitation Dashboard</h1>
 		<div class="experience-details-container">
 			<div class="about-containers">
 				<div class="details-container">
-					<h2 class="experience-sub-title">National Parks Exploration</h2>
-					<div class="article-container">
-						<article>
-							<img 
-								src="./WebContent/assets/checkmark.png" 
-								alt="Experience Icon"
-								class="icon"
-							/>
-							<div>
-								<h3><a href="#data_exploration" onclick="navigateIframe('data_exploration')">Data Exploration</a></h3>
-							</div>
-						</article>
-						<article>
-							<img 
-								src="./WebContent/assets/checkmark.png" 
-								alt="Experience Icon"
-								class="icon"
-							/>
-							<div>
-								<h3><a href="#visitation_trends" onclick="navigateIframe('visitation_trends')">Visitor Trends</a></h3>
-								<p></p>
-							</div>
-						</article>
-						<article>
-							<img 
-								src="./WebContent/assets/checkmark.png" 
-								alt="Experience Icon"
-								class="icon"
-							/>
-							<div>
-								<h3>Statistical Analysis</h3>
-							</div>
-						</article>
-						<article>
-							<img 
-								src="./WebContent/assets/checkmark.png" 
-								alt="Experience Icon"
-								class="icon"
-							/>
-							<div>
-								<h3>Data Cleaning</h3>
-								<p></p>
-							</div>
-						</article>
-					</div>
+					<h2 class="experience-sub-title">Shiny Application</h2>
 					<div class="project-iframe"></div>
-						<iframe id="rmarkdown-iframe" src="WebContent/assets/National_Parks_Project_Assets/NPS_Project_CharlesCoonce.html"></iframe>
+						<iframe id="shiny-iframe" src="https://iuq9gs-charles-coonce.shinyapps.io/visitation/"></iframe>
+					</div>
+				</div>
+			</div>
+		</div>
+		<img 
+			src="./WebContent/assets/arrow.png"
+			alt="Arrow Icon"
+			class="icon arrow"
+			onclick="location.href='./National_Parks_Project.html#other_projects'"
+		/>
+	</section>
+	<section id="shiny_project_process2">
+		<p class="section_text__p1">Explore My</p>
+		<h1 class="title">World Happiness Trends Dashboard</h1>
+		<div class="experience-details-container">
+			<div class="about-containers">
+				<div class="details-container">
+					<h2 class="experience-sub-title">Shiny Application</h2>
+					<div class="project-iframe"></div>
+						<iframe id="shiny-iframe" src="https://iuq9gs-charles-coonce.shinyapps.io/whrcharlescoonce/"></iframe>
 					</div>
 				</div>
 			</div>
@@ -272,8 +243,29 @@
 						</button>
 					</div>
 				</div>
+				<div class="details-container color-container">
+					<div class="article-container">
+						<img 
+							src="./WebContent/assets/National_Parks_Project_Assets/NPS_plot5.png" 
+							alt="Project 1" 
+							class="project1-img"
+						/>
+					</div>
+					<h2 class="experience-sub-title project-title">National Parks Visitation</h2>
+					<div class="btn-container">
+						<button class="btn btn-color-2 project-btn" 
+							onclick="location.href='https://github.com/cdcoonce/National_Parks_Project'">
+								Github
+						</button>
+						<button class="btn btn-color-2 project-btn" 
+							onclick="location.href='./National_Parks_Project.html'">
+								Overview
+						</button>
+					</div>
+				</div>
 			</div>
 		</div>
+	
 		<img 
 			src="./WebContent/assets/arrow.png"
 			alt="Arrow Icon"
