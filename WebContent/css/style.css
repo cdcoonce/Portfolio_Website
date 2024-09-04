@@ -213,16 +213,6 @@
     }
 
     /* Desktop Dropdown */
-<<<<<<< HEAD
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 15px;
-            margin: 0;
-            padding: 0;
-        }
-=======
->>>>>>> afa36d2097ec3af225590532311f63da10e6a0b9
 
         .label{
             position: relative;
@@ -233,18 +223,9 @@
             justify-content: center;
             align-content: center;
         }
-
-<<<<<<< HEAD
-        .nav-links a {
-            text-decoration: none;
-            color: black;
-            padding: 8px 16px;
-            display: block;
-        }
-
-        .nav-links .dropdown-content {
-            display: none;
 =======
+>>>>>>> afa36d2097ec3af225590532311f63da10e6a0b9
+
         .text{
             position: relative;
             display: flex;
@@ -301,16 +282,10 @@
         }
 
         .desktop-menu-links {
->>>>>>> afa36d2097ec3af225590532311f63da10e6a0b9
             position: absolute;
             top: 100%;
             right: 0;
             background-color: white;
-<<<<<<< HEAD
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            margin: 0;
-            padding: 0;
-=======
             width: fit-content;
             max-height: 0;
             overflow: hidden;
@@ -329,25 +304,11 @@
         }
     
         .desktop-menu-links li {
->>>>>>> afa36d2097ec3af225590532311f63da10e6a0b9
             list-style: none;
-            width: 200px; /* Adjust width as needed */
-            z-index: 1000; /* Ensures the dropdown appears above other content */
         }
-<<<<<<< HEAD
-
-        .nav-links .dropdown-content li {
-            padding: 8px 16px;
-        }
-
-        .nav-links .dropdown:hover .dropdown-content,
-        .nav-links .dropdown-content:hover {
-            display: block;
-=======
     
         .desktop-menu-links.open {
             max-height: 300px;
->>>>>>> afa36d2097ec3af225590532311f63da10e6a0b9
         }
 
 
