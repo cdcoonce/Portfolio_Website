@@ -33,6 +33,10 @@
         display: flex;
     }
 
+    #shiny-hamburger-nav {
+        display: flex;
+    }
+
     #experience, .experience-details-container {
         margin-top: 2rem;
     }
@@ -162,6 +166,10 @@
 
     #project_about .about-containers {
         flex-wrap: wrap;
+    }
+
+    .desktop-icon {
+        margin-top: 5px;
     }
 
 }

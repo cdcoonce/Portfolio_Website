@@ -5,6 +5,27 @@ function toggleMenu() {
     icon.classList.toggle("open")
 }
 
+function desktopToggleMenu() {
+    const menu = document.querySelector(".desktop-menu-links");
+    const icon = document.querySelector(".desktop-icon");
+    menu.classList.toggle("open")
+    icon.classList.toggle("open")
+}
+
+function shinyToggleMenu() {
+    const menu = document.querySelector(".shiny-menu-links");
+    const icon = document.querySelector(".shiny-icon");
+    menu.classList.toggle("open")
+    icon.classList.toggle("open")
+}
+
+function shinyHamtoggleMenu() {
+    const menu = document.querySelector(".shiny-hamburger-menu-links");
+    const icon = document.querySelector(".shiny-hamburger-icon");
+    menu.classList.toggle("open")
+    icon.classList.toggle("open")
+}
+
 let currentIndex = 0;
 
 function moveSlide(step) {
