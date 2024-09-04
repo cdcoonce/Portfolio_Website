@@ -622,10 +622,6 @@
         gap: 1rem;
     }
 
-
-
-
-
 /* === About Section ==== */
 
     #about {
@@ -877,7 +873,7 @@
     }
 
     #project_profile .section_text {
-        align-self: center;
+        align-content: center;
         text-align: center;
         padding: 0 1 rem;
     }
@@ -905,6 +901,13 @@
         justify-content: center;
         margin-top: 1rem;
         gap: 1rem;
+    }
+
+    #project_profile .text-container {
+        padding-bottom: 1rem;
+        width: 60%;
+        text-align: center;
+        margin: 0 auto;
     }
 
 /* === Project About Section ==== */
@@ -1528,7 +1531,10 @@
     }
 
     #shiny_project_about .text-container {
-        margin-top: 2rem;
+        margin-top: 1rem;
+        width: 70%;
+        margin: 0 auto;
+        text-align: center;
     }
 
     #shiny_project_about .arrow {
