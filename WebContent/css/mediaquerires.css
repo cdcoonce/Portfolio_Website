@@ -64,20 +64,28 @@
     .about-containers {
         margin-top: 0;
     }
+
     .arrow {
         display: none;
     }
 
+    #profile {
+        height: fit-content;
+        margin-bottom: 39vh;
+    }
+
     #about {
         height: fit-content;
+        margin-bottom: 30vh;
     }
 
     #experience {
         height: fit-content;
+        margin-bottom: 50vh;
     }
 
     #projects {
-        height: 96vh;
+        height: fit-content;
     }
 
     #project_about {
@@ -108,8 +116,18 @@
     }
 
     #profile {
-        height: 83vh;
-        margin-bottom: 0;
+        height: fit-content;
+        margin-bottom: 39vh;
+    }
+
+    #about {
+        height: fit-content;
+        margin-bottom: 30vh;
+    }
+
+    #experience {
+        height: fit-content;
+        margin-bottom: 30vh;
     }
 
     article {
