@@ -310,7 +310,7 @@
         }
 
 
-/* Hamburger Menu */
+/* === Hamburger Menu ===*/
 
     #hamburger-nav {
         display: none;
@@ -672,6 +672,8 @@
         border-color: rgb(163, 163, 163);
         text-align: center;
         align-content: center;
+        max-height: fit-content;
+        max-width: fit-content;
     }
 
     .section-container {
@@ -769,6 +771,8 @@
         border-radius: 2rem;
         width: 90%;
         height: 90%;
+        max-height: 450px;
+        max-width:min-content
     }
 
     .project-title {
