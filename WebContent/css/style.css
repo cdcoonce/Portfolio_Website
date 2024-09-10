@@ -829,7 +829,7 @@
         height: 2.5rem;
     }
 
-/*  === Footer Section === */
+/* === Footer Section === */
 
     footer {
         height: 26vh;
@@ -882,18 +882,7 @@
         padding: 0 1rem;
     }
        
-    #project_profile .section_text p {
-        font-weight: 600;
-    }
 
-    #project_profile .section_text__p1 {
-        text-align: center;
-    }
-
-    #project_profile .section_text__p2 {
-        font-size: 1.75rem;
-        margin-bottom: 1rem;
-    }
 
     #project_profile .title {
         font-size: 3rem;
@@ -1597,19 +1586,20 @@
     }
 
     #shiny_project_process1 .about-containers,
-    #shiny_project_process2 s .about-containers {
+    #shiny_project_process2 .about-containers {
         margin-top: 1rem;
         margin-bottom: 1rem;
+        width: 100%;
     }
 
     #shiny_project_process1 .experience-details-container,
-    #shiny_project_process2  .experience-details-container {
+    #shiny_project_process2 .experience-details-container {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-content: center;
         flex-direction: column;
-        width: 90%;
+        width: 100%;
     }
 
     #shiny_project_process1 .article-container,
@@ -1623,9 +1613,11 @@
 
     #shiny_project_process1 .details-container,
     #shiny_project_process2  .details-container {
-        width: 0%;
         text-align: center;
         padding: .5rem;
+        width: 100%;
+        margin: 0 auto;
+        max-width: 90%;
     }
 
     #shiny_project_process1 .article,
@@ -1637,8 +1629,12 @@
     }
 
     #shiny_project_process1 .project-iframe,
-    #shiny_project_process2  .project-iframe {  
-        padding-top: 0rem;  
+    #shiny_project_process2 .project-iframe {
+        width: 100%;
+        padding-top: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     #shiny-iframe {

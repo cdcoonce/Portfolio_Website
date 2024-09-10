@@ -1,2 +1,5 @@
 09-09-2024
 - Re-evaluating where I am in this project.
+- Shiny needs some more work. The main image isn't sizing responsively in the way that I would like.
+
+
