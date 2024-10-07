@@ -37,7 +37,6 @@
 
     .btn-container {
         display: flex;
-        flex-wrap: wrap;
         justify-content: center;
         gap: 1rem;
     }
@@ -320,7 +319,6 @@
     .hamburger-menu {
         position: relative;
         display: inline-block;
-        z-index: 10;
     }
 
     .hamburger-icon {
@@ -367,8 +365,6 @@
 
     .menu-links.open {
         max-height: 300px;
-        border-radius: 1rem;
-        border: 1px solid rgba(96, 93, 93, 0.112);
     }
 
     .hamburger-icon.open span:first-child {
@@ -587,8 +583,8 @@
 
     .section__pic-container {
         display: flex;
-        max-height: 400px;
-        max-width: 400px;
+        height: 400px;
+        width: 400px;
         margin: auto 0;
     }
 
@@ -639,22 +635,19 @@
         margin: 0 auto;
     }
 
-    #about .text-container {
-        max-width: 700px;
-    }
-
-
-    .about-details-container {
-        flex-direction: column;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
     .about-containers {
         gap: 2rem;
         margin-bottom: 2rem;
         margin-top: 2rem;
+    }
+
+    .about-details-container {
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .about-containers,
+    .about-details-container {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
@@ -750,12 +743,12 @@
         justify-content: center;
         max-width: 1700px;
         margin: 0 auto;
+
     }
 
     #projects .article-container {
         padding-bottom: 0;
     }
-
 
     .color-container {
         border-color: rgb(163, 163, 163);
@@ -778,6 +771,8 @@
         border-radius: 2rem;
         width: 90%;
         height: 90%;
+        max-height: 450px;
+        max-width:min-content
     }
 
     .project-title {
@@ -850,22 +845,32 @@
     #project_profile {
         position: relative;
         display: flex;
+        flex-direction: column;
+        align-items: center;
         justify-content: center;
-        max-width: 1700px;
         margin: 0 auto;
-        gap: 5rem;
-        height: 80vh;
+        padding-top: 0;
+        gap: 1rem;
+        max-width: 1700px;
+        width: auto;
+        height: 85vh;
     }
 
     #project_profile .section__pic-container {
         display: flex;
-        height: 400px;
-        width: 400px;
-        margin: auto 0;
+        justify-content: center;
+        height: auto;
+        width: 100%;
+        max-width: 1500px;
+        margin: 0;
     }
 
     #project_profile .profile_pic {
-        width: 40rem;
+        display: block;
+        width: auto; 
+        height: auto; 
+        max-width: 500px;
+        max-height: 500px;
         border-radius: 3rem;
         border: rgb(53, 53, 53) 0.1rem solid;
         transform: scale(auto);
@@ -876,7 +881,9 @@
         text-align: center;
         padding: 0 1rem;
     }
-    
+       
+
+
     #project_profile .title {
         font-size: 3rem;
         text-align: center;
@@ -899,9 +906,9 @@
 /* === Project About Section ==== */
 
     #project_about {
+        position: relative;
         display: flex;
         flex-direction: column;
-        position: relative;
         justify-content: center;
         align-items: center;
         max-width: 1700px;
@@ -942,8 +949,6 @@
 
     #project_about .text-container {
         margin-top: 2rem;
-        margin-bottom: 2rem;
-        width: 20rem;
     }
 
     #project_about .arrow {
@@ -974,7 +979,7 @@
         object-fit: contain;
 
     }    
-
+    
 /* === Project Process === */
 
     #project_process {
@@ -1019,7 +1024,7 @@
         width: 0%;
         text-align: center;
     }
-
+    
     #project_process .article {
         display: flex;
         width: 15rem;
@@ -1171,25 +1176,32 @@
     #portfolio_project_profile {
         position: relative;
         display: flex;
+        flex-direction: column;
         justify-content: center;
+        align-items: center;
+        padding: 0 2rem;
         max-width: 1700px;
         margin: 0 auto;
-        gap: 5rem;
         height: 85vh;
+        box-sizing: border-box;
     }
 
-    #portfolio_project_profile .section__pic-container {
+    .portfolio-project-pic-container {
         display: flex;
-        height: 20rem;
-        width: 20rem;
-        margin: auto 0;
-        padding-right: 5rem;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
     }
 
-    #portfolio_project_profile .profile_pic {
+    .portfolio_project_profile_pic {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
         border-radius: 3rem;
         border: rgb(53, 53, 53) 0.1rem solid;
-        transform: scale(auto);
     }
 
     #portfolio_project_profile .section_text {
@@ -1269,8 +1281,6 @@
 
     #portfolio_project_about .text-container {
         margin-top: 2rem;
-        margin-bottom: 2rem;
-        width: 20rem;
     }
 
     #portfolio_project_about .arrow {
@@ -1466,58 +1476,7 @@
         max-height: 100%;
         max-width: 100%;
         object-fit: contain;
-    }
-
-/* === Shiny Project Profile Section === */
-
-    #shiny_project_profile {
-        position: relative;
-        display: flex;
-        justify-content: center;
-        max-width: 1700px;
-        margin: 0 auto;
-        gap: 5rem;
-        height: 80vh;
-    }
-
-    #shiny_project_profile .section__pic-container {
-        display: flex;
-        height: 400px;
-        width: 400px;
-        margin: auto 0;
-    }
-
-    #shiny_project_profile .profile_pic {
-        width: 40rem;
-        border-radius: 3rem;
-        border: rgb(53, 53, 53) 0.1rem solid;
-        transform: scale(auto);
-    }
-
-    #shiny_project_profile .section_text {
-        align-content: center;
-        text-align: center;
-        padding: 0 1rem;
-    }
-    
-    #shiny_project_profile .title {
-        font-size: 3rem;
-        text-align: center;
-    }
-
-    #shiny_project_profile #socials-container {
-        display: flex;
-        justify-content: center;
-        margin-top: 1rem;
-        gap: 1rem;
-    }
-
-    #project_profile .text-container {
-        padding-bottom: 1rem;
-        width: 60%;
-        text-align: center;
-        margin: 0 auto;
-    }
+    }  
 
 /* === Shiny Project About Section ==== */
 
@@ -1743,7 +1702,7 @@
         text-align: center;
         padding: 0 1rem;
     }
-
+    
     #ga_project_profile .section_text p {
         font-weight: 600;
     }
@@ -1776,7 +1735,7 @@
         margin: 0 auto;
     }
 
-/* === Google Analytics Project About Section ==== */
+/* === Google AnalyticsProject About Section ==== */
 
     #ga_project_about {
         position: relative;

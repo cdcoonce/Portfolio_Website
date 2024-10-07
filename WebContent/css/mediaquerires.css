@@ -1,30 +1,6 @@
-
-@media screen and (max-width: 1400px) {
-    #profile {
-        height: 83vh;
-        margin-bottom: 6rem;
-    }
-
-    .about-containers {
-        flex-wrap: wrap;
-    }
-
-    .menu-links {
-        z-index: 1;
-        background-color: rgba(255, 255, 255, .98);
-        border: rgba(53, 53, 53, .03) 0.1rem solid;
-        border-radius: 1rem;
-    }
-}
-
-@media screen and (max-width: 1355px) {
-    #projects .details-container .color-container {
-        max-width: 325px;
-    }
-
-}
-
 @media screen and (max-width: 1200px) {
+/* === Home Page Nav and Globals === */
+
     #desktop-nav {
         display: none;
     }
@@ -33,17 +9,10 @@
         display: flex;
     }
 
-    #shiny-hamburger-nav {
-        display: flex;
-    }
-
-    #experience, .experience-details-container {
-        margin-top: 2rem;
-    }
-
-    #profile, 
-    .section-container {
-        display: block;
+    .about-containers {
+        flex-direction: row;
+        align-items: center;
+        margin-top: 0;
     }
 
     section, 
@@ -61,55 +30,115 @@
         margin: 0 auto 2rem;
     }
 
-    .about-containers {
-        margin-top: 0;
+    .project__pic-container {
+        width: 22.25rem;
+        height: 20rem;
+        margin: 0 auto 2rem;
     }
 
     .arrow {
-        display: none;
+        right: 2rem;
+        bottom: 5rem;
     }
+
+/* === Profile === */
 
     #profile {
         height: fit-content;
-        margin-bottom: 39vh;
+        margin-bottom: 60vw;
     }
+
+    #profile,   
+    .section-container {
+        display: block;
+    }
+
+/* === About === */
 
     #about {
         height: fit-content;
-        margin-bottom: 30vh;
+        padding-top: 10vw;
+        margin-bottom: 60vw;
     }
+
+/* === Experience === */
 
     #experience {
         height: fit-content;
         margin-bottom: 50vh;
+        align-items: center;
+        padding-top: 10vw;
     }
+
+    #experience .experience-details-container {
+        padding-top: 2vw;
+        max-width: 575px;
+    }
+
+/* === Projects === */
 
     #projects {
-        height: fit-content;
+        padding-top: 5vw;
+        align-items: center;
+    }
+    #projects .experience-details-container {
+        padding-top: 2vw;
+        flex-direction: row;
+        flex-wrap: wrap;
     }
 
-    #project_about {
-        height: fit-content;
+    #projects .about-containers {
+        max-width: 40vw;
     }
 
-    #project_process {
-        height: fit-content;
+    #projects .arrow {
+        bottom: 5rem;
     }
 
-    #project_process .article-container {
-            flex-wrap: wrap;
-    }
-    
-    #other_projects {
-        height: fit-content;
+/* === Portfolio Project Page === */
+    #portfolio_project_about {
+        padding-top: 2rem;
+        height: 100vh;
     }
 
-    #project_contacts {
-        height: fit-content;
+    #portfolio_other_projects {
+        padding-top: 2rem;
+        height: 95vh;
+    }
+
+    #portfolio_other_projects .arrow {
+        bottom: 6rem;
+    }
+
+/* === Shiny App Page === */
+    #shiny-hamburger-nav {
+        display: flex;
+        position: relative;
+        z-index: 10;
+    }
+
+    #shiny-hamburger-nav .shiny-hamburger-menu-links.open {
+        border: 1px solid rgba(84, 82, 82, 0.153);
+        border-radius: 1rem;
+    }
+
+    #shiny_project_profile {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #shiny_project_profile .section__pic-container{
+        align-content: center;
+        justify-content: center;
+    }
+
+    #shiny_project_profile .text-container{
+        padding-bottom: 1rem;
     }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
+/* === Home Page Nav and Globals === */    
     #contact,
     footer{
         height: 40vh;
@@ -139,7 +168,6 @@
         margin-bottom: 2rem;
     }
 
-    .about-containers,
     .contact-info-upper-container,
     .contact-info-container {
         flex-wrap: wrap;
@@ -170,7 +198,7 @@
 
     .section__pic-container {
         width: auto;
-        height: 46vw;
+        height: auto;
         justify-content: center;
     }
 
@@ -182,12 +210,63 @@
         text-align: justify;
     }
 
-    #project_about .about-containers {
-        flex-wrap: wrap;
-    }
-
     .desktop-icon {
         margin-top: 5px;
     }
+
+    .about-containers {
+        flex-direction: row;
+        align-items: center;
+        margin-top: 0;
+    }
+
+    .about-pic {
+        max-width: 100%;
+    }
+
+/* === National Parks Project Page === */
+
+    #project_process .article-container {
+        flex-wrap: wrap;
+    }
+
+/* === Portfolio Project Page === */
+    #portfolio_project_profile {
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+        padding-bottom: 50%;
+    }
+
+    #portfolio_project_profile .section__pic-container{
+        align-content: center;
+        margin-bottom: 0;
+        padding-right: 0;
+    }
+
+    #portfolio_project_profile .section__pic-container img{
+        max-width: 100%;
+        margin: auto;
+        align-content: center;
+    }
+
+    #portfolio_project_about {
+       height: auto;
+    }
+
+    #portfolio_project_about .about-containers {
+        flex-direction: column;
+    }
+
+    #portfolio_project_about .details-container {
+        width: auto;
+    }
+
+/* === Shiny App page === */
+    #shiny-hamburger-nav {
+        display: flex;
+        z-index: 10;
+    }
+
 
 }
