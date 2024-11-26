@@ -834,6 +834,44 @@
         height: 2.5rem;
     }
 
+    .testimonials-container {
+        position: relative;
+        width: 80%;
+        max-width: 600px;
+        margin: auto;
+        overflow: hidden;
+        text-align: center;
+        font-family: Arial, sans-serif;
+    }
+      
+    .testimonials {
+        display: flex;
+        flex-direction: column;
+        opacity: 0;
+        animation: fadeIn 1s forwards;
+        padding-bottom: 5rem;
+    }
+      
+    .testimonial {
+        min-height: 100px;
+        display: none;
+        font-size: 1.5rem;
+        margin: 20px;
+    }
+      
+    .testimonial.active {
+        display: flex;
+    }    
+      
+    @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+    }
+
 /* === Footer Section === */
 
     footer {

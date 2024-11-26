@@ -37,3 +37,40 @@ function moveSlide(step) {
     
     document.querySelector('.slider').style.transform = `translateX(${offset}%)`;
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const testimonials = document.querySelectorAll(".testimonial");
+    const prevButton = document.getElementById("prev");
+    const nextButton = document.getElementById("next");
+    let currentIndex = 0;
+  
+    function showTestimonial(index) {
+      testimonials.forEach((testimonial, i) => {
+        testimonial.classList.remove("active");
+        testimonial.style.opacity = 0;
+        if (i === index) {
+          testimonial.classList.add("active");
+          testimonial.style.opacity = 1;
+        }
+      });
+    }
+  
+    function nextTestimonial() {
+      currentIndex = (currentIndex + 1) % testimonials.length;
+      showTestimonial(currentIndex);
+    }
+  
+    function prevTestimonial() {
+      currentIndex = (currentIndex - 1 + testimonials.length) % testimonials.length;
+      showTestimonial(currentIndex);
+    }
+  
+    nextButton.addEventListener("click", nextTestimonial);
+    prevButton.addEventListener("click", prevTestimonial);
+  
+    // Automatically scroll every 10 seconds
+    setInterval(nextTestimonial, 10000);
+  
+    // Initialize the first testimonial
+    showTestimonial(currentIndex);
+  });
