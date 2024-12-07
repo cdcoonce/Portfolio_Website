@@ -223,6 +223,11 @@
         text-align: left;
     }
 
+    .icon-container {
+        display: flex;
+        gap: 1rem;
+    }
+
     .icon {
         display: flex;
         justify-content: center;
