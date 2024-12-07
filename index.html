@@ -9,310 +9,44 @@
 	<link rel="stylesheet" href="./WebContent/css/mediaquerires.css" />
 </head>
 <body>
-	<nav id="desktop-nav">
-		<div class="logo">Charles Coonce</div>
-		<div>
-			<ul class="nav-links">
-				<li><a href="#about">About</a></li>
-				<li><a href="#experience">Experience</a></li>
-				<li><a href="#projects">Projects</a></li>
-				<li><a href="#contacts">Contact</a></li>
-			</ul>
-		</div>	
-	</nav>
-	<nav id="hamburger-nav">
-		<div class="logo">Charles Coonce</div> 
-		<div class="hamburger-menu">
-			<div class="hamburger-icon" onclick="toggleMenu()">
-				<span></span>
-				<span></span>
-				<span></span>
-			</div>
-			<div class="menu-links">
-				<li><a href="#about" onclick="toggleMenu()">About</a></li>
-				<li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
-				<li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
-				<li><a href="#contacts" onclick="toggleMenu()">Contact</a></li>
-			</div>
-		</div> 
-	</nav>
 	<section id="profile">
+		<div class="logo">Charles Coonce</div>
 		<div class="section__pic-container">
 			<img src="./WebContent/assets/LinkedinProfile.jpeg" alt="Charles Coonce Profile Picture" class="profile_pic"/>
 		</div>
 		<div class="section_text">
 			<p class="section_text__p1"> Hello, I'm</p>
 			<h1 class="title">Charles Coonce</h1>
-			<p class="section_text__p2">Data Scientist</p>
+			<p class="section_text__p2">I am a Senior at Arizona State University pursuing a BS in Data Science. I am passionate about leveraging data to solve complex business problems.
+				<br><br>In addition to statistical analysis and visualizations, I have experience managing, leading projects, and teaching.</p>
 			<div class="btn-container">
 				<button 
-					class="btn btn-color-2" 
-					onclick="window.open('./WebContent/assets/CharlesCoonce_Resume.pdf')">
-					My Resume
+					class="btn btn-color-1" 
+					onclick="location.href='https://github.com/cdcoonce'">
+					GitHub
 				</button>
 				<button 
-					class="btn btn-color-1" 
-					onclick="location.href='./#contact'">
-					Contact Me
+				class="btn btn-color-1" 
+				onclick="window.open('./WebContent/assets/CharlesCoonce_Resume.pdf')">
+				Resume
 				</button>
-			</div>
-			<div id="socials-container">
-				<img 
-					src="./WebContent/assets/linkedin.png" 
+				<a class="icon" href="mailto:CharlesCoonce@Gmail.com">
+					<img
+					src="./WebContent/assets/mailicon.png" 
+					alt="My Github profle" 
+					/>
+				</a>
+				<img class="icon"
+					src="./WebContent/assets/linkedinicon.png" 
 					alt="My LinkedIn profle" 
 					class="icon" 
 					onclick="window.open('https://www.linkedin.com/in/charlesdcoonce/', '_blank')"
 				/>
-				<img 
-					src="./WebContent/assets/github.png" 
-					alt="My Github profle" 
-					class="icon" 
-					onclick="window.open('https://github.com/cdcoonce', '_blank')"
-				/>
 			</div>
 		</div>
-		<img 
-		src="./WebContent/assets/arrow.png"
-		alt="Arrow Icon"
-		class="icon arrow"
-		onclick="location.href='./#about'"
-		/>
-	</section>
-	<section id="about">
-		<p class="section_text__p1">Get to Know More</p>
-		<h1 class="title">About Me</h1>
-		<div class="section-container">
-			<div class="section__pic-container">
-			 <img 
-			 	src="./WebContent/assets/about-pic.png" 
-				alt="Profile Picture" 
-				class="about-pic"/>
-			</div>
-			<div class="about-details-container">
-				<div class="about-containers">
-					<div class="details-container">
-						<img 
-							src="./WebContent/assets/experience.png" 
-							alt="Experience Icon" 
-							class="icon"
-						/>
-						<h3>Experience</h3>
-						<p>
-							Process Improvement
-							<br />
-							Visualizations
-							<br />
-							Project leadership
-							<br />
-							Statistical Analysis
-						</p>
-					</div>
-					<div class="details-container">
-						<img 
-							src="./WebContent/assets/education.png" 
-							alt="Education Icon" 
-							class="icon"
-						/>
-						<h3>Education</h3>
-						<p>
-							B.S. Data Science (In Progress)
-							<br />
-							B.A. Telecommunications
-							<br />
-							Google Data Analytics Professional
-							<br />
-							Human Systems Engineering (In Progress)
-						</p>
-					</div>
-				</div>
-				<div class="text-container">
-					<p>
-						As a data-driven professional, I specialize in Data Science, Business Analytics, and Data Analytics. I am passionate about leveraging data to solve complex business problems. With a B.S. in Data Science, a B.A. in Telecommunications, and certification as a Google Data Analytics Professional. My leadership skills have been honed through collaborative projects and leading cross-functional teams.
-				</div>
-			</div>
-		</div>
-		<img 
-			src="./WebContent/assets/arrow.png"
-			alt="Arrow Icon"
-			class="icon arrow"
-			onclick="location.href='./#experience'"
-		/>
-	</section>
-	<section id="experience">
-		<p class="section_text__p1">Explore My</p>
-		<h1 class="title">Experience</h1>
-		<div class="experience-details-container">
-			<div class="about-containers">
-				<div class="details-container">
-					<h2 class="experience-sub-title">Data Science</h2>
-					<div class="article-container">
-						<article>
-							<img 
-								src="./WebContent/assets/checkmark.png" 
-								alt="Experience Icon"
-								class="icon"
-							/>
-							<div>
-								<h3>Python</h3>
-								<p></p>
-							</div>
-						</article>
-						<article>
-							<img 
-								src="./WebContent/assets/checkmark.png" 
-								alt="Experience Icon"
-								class="icon"
-							/>
-							<div>
-								<h3>R</h3>
-								<p></p>
-							</div>
-						</article>
-						<article>
-							<img 
-								src="./WebContent/assets/checkmark.png" 
-								alt="Experience Icon"
-								class="icon"
-							/>
-							<div>
-								<h3>Statistical Analysis</h3>
-								<p>Regression Analysis</p>
-							</div>
-						</article>
-						<article>
-							<img 
-								src="./WebContent/assets/checkmark.png" 
-								alt="Experience Icon"
-								class="icon"
-							/>
-							<div>
-								<h3>Data Cleaning</h3>
-								<p></p>
-							</div>
-						</article>
-					</div>
-				</div>
-				<div class="details-container">
-					<h2 class="experience-sub-title">Data Analytics</h2>
-					<div class="article-container">
-						<article>
-							<img 
-								src="./WebContent/assets/checkmark.png" 
-								alt="Experience Icon"
-								class="icon"
-							/>
-							<div>
-								<h3>Tableau</h3>
-								<p></p>
-							</div>
-						</article>
-						<article>
-							<img 
-								src="./WebContent/assets/checkmark.png" 
-								alt="Experience Icon"
-								class="icon"
-							/>
-							<div>
-								<h3>Google Analytics</h3>
-								<p></p>
-							</div>
-						</article>
-						<article>
-							<img 
-								src="./WebContent/assets/checkmark.png" 
-								alt="Experience Icon"
-								class="icon"
-							/>
-							<div>
-								<h3>Excel</h3>
-								<p></p>
-							</div>
-						</article>
-						<article>
-							<img 
-								src="./WebContent/assets/checkmark.png" 
-								alt="Experience Icon"
-								class="icon"
-							/>
-							<div>
-								<h3>SQL</h3>
-								<p></p>
-							</div>
-						</article>
-						<article>
-							<img 
-								src="./WebContent/assets/checkmark.png" 
-								alt="Experience Icon"
-								class="icon"
-							/>
-							<div>
-								<h3>Exploratory Data Analysis</h3>
-								<p></p>
-							</div>
-						</article>
-					</div>
-				</div>
-				<div class="details-container">
-					<h2 class="experience-sub-title">Business Analytics</h2>
-					<div class="article-container">
-						<article>
-							<img 
-								src="./WebContent/assets/checkmark.png" 
-								alt="Experience Icon"
-								class="icon"
-							/>
-							<div>
-								<h3>Requirements Gathering</h3>
-								<p></p>
-							</div>
-						</article>
-						<article>
-							<img 
-								src="./WebContent/assets/checkmark.png" 
-								alt="Experience Icon"
-								class="icon"
-							/>
-							<div>
-								<h3>Process Optimization</h3>
-								<p></p>
-							</div>
-						</article>
-						<article>
-							<img 
-								src="./WebContent/assets/checkmark.png" 
-								alt="Experience Icon"
-								class="icon"
-							/>
-							<div>
-								<h3>Requirements</h3>
-								<p></p>
-							</div>
-						</article>
-						<article>
-							<img 
-								src="./WebContent/assets/checkmark.png" 
-								alt="Experience Icon"
-								class="icon"
-							/>
-							<div>
-								<h3>SharePoint Design</h3>
-								<p></p>
-							</div>
-						</article>
-					</div>
-				</div>
-			</div>
-		</div>
-		<img 
-			src="./WebContent/assets/arrow.png"
-			alt="Arrow Icon"
-			class="icon arrow"
-			onclick="location.href='./#projects'"
-		/>
 	</section>
 	<section id="projects">
-		<p class="section_text__p1"> Browse My Recent</p>
-		<h1 class="title">Projects</h1>
+		<p class="section_text__p1"> My work</p>
 		<div class="experience-details-container">
 			<div class="about-containers">
 				<div class="details-container color-container">
@@ -324,36 +58,18 @@
 						/>
 					</div>
 					<h2 class="experience-sub-title project-title">National Parks Visitation</h2>
-					<div class="btn-container">
-						<button class="btn btn-color-2 project-btn" 
-							onclick="location.href='https://github.com/cdcoonce/National_Parks_Project'">
-								Github
-						</button>
-						<button class="btn btn-color-2 project-btn" 
-							onclick="location.href='./National_Parks_Project.html'">
-								Overview
-						</button>
-					</div>
+					<p>Analysis, Visualization</p>
 				</div>
 				<div class="details-container color-container">
 					<div class="article-container">
 						<img 
-							src="./WebContent/assets/Portfolio_Website_img1.png" 
+							src="./WebContent/assets/Portfolio_Website_Project_Assets/PortfolioCode.png" 
 							alt="Project 2" 
 							class="project2-img"
 						/>
 					</div>
 					<h2 class="experience-sub-title project-title">Portfolio Website</h2>
-					<div class="btn-container">
-						<button class="btn btn-color-2 project-btn" 
-							onclick="location.href='https://github.com/cdcoonce/Portfolio_Website'">
-								Github
-						</button>
-						<button class="btn btn-color-2 project-btn" 
-							onclick="location.href='Portfolio_Website_Project.html'">
-								Overview
-						</button>
-					</div>
+					<p>HTML, CSS, Javascript</p>
 				</div>
 				<div class="details-container color-container">
 					<div class="article-container">
@@ -364,93 +80,73 @@
 						/>
 					</div>
 					<h2 class="experience-sub-title project-title">Shiny Applications</h2>
-					<div class="btn-container">
-						<button class="btn btn-color-2 project-btn" 
-							onclick="window.open('https://github.com/cdcoonce/Visitation', '_blank')">
-								Visitation GitHub
-						</button>
-						<button class="btn btn-color-2 project-btn" 
-							onclick="window.open('https://github.com/cdcoonce/WorldHappinessReport', '_blank')">
-							World Happiness GitHub
-						</button>
-						<button class="btn btn-color-2 project-btn" onclick="location.href='./Shiny_Apps.html'">
-								Overview
-						</button>
-					</div>
+					<p>Dashboards</p>
 				</div>
-				<!-- <div class="details-container color-container">
+				<div class="details-container color-container">
 					<div class="article-container">
 						<img 
 							src="./WebContent/assets/Google Analytics Assets/Script_Image.png" 
 							alt="Project 2" 
-							class="project2-img"
+							class="project4-img"
 						/>
 					</div>
 					<h2 class="experience-sub-title project-title">Data Archive</h2>
-					<div class="btn-container">
-						<button class="btn btn-color-2 project-btn" 
-							onclick="location.href='https://github.com/cdcoonce/Google_Analytics'">
-								Github
-						</button>
-						<button class="btn btn-color-2 project-btn" 
-							onclick="location.href='Google_Analytics.html'">
-								Overview
-						</button>
-					</div>
-				</div> -->
+					<p> Data Retention, Data Validation</p>
+				</div>
 			</div>
 		</div>
-		<img 
-			src="./WebContent/assets/arrow.png"
-			alt="Arrow Icon"
-			class="icon arrow"
-			onclick="location.href='./#contacts'"
-		/>
 	</section>
 	<section id="contacts">
-		<p class="section_text__p1">Get in Touch</p>
-		<h1 class="title">Contact Me</h1>
-		<div class="contact-info-upper-container">
-			<div class="contact-info-container">
-				<img 
-					src="./WebContent/assets/email.png"
-					alt="Email Icon"
-					Class="icon contact-icon email-icon"
-				/>
-				<p><a href="mailto:CharlesCoonce@Gmail.com">CharlesCoonce@Gmail.com</a></p>
-			</div>
-			<div class="contact-info-container">
-				<img 
-					src="./WebContent/assets/linkedin.png"
-					alt="LinkedIn Icon"
-					Class="icon contact-icon"
-				/>
-				<p><a href="https://www.linkedin.com/in/charlesdcoonce/">LinkedIn</a></p>
-			</div>
-		</div>
+		<p class="section_text__p1">Recommendations</p>
 		<div class="testimonials-container">
-			<div class="testimonials">
-			  <div class="testimonial">"During his time as an IT intern at OneAmerica Financial, he demonstrated exceptional people skills, a strong work ethic and a genuine passion for technology." <br></br> – Arron Wallen, Director of Business Analysis</div>
-			  <div class="testimonial">"Charles' approach was thorough, well planned, and inclusive of his team. His demeanor while leading some difficult project meetings was positive and encouraging despite the challenges presented by others and showed both polish and empathy." <br> <br> – Kevin Brennan, IT Business Planning Consultant</div>
-			  <div class="testimonial">"He collaborated and communicated well, focused on what his stakeholders wanted, and demonstrated interpersonal savviness and adaptability." <br></br> – Katie Marks, Business Relationship Management Director</div>
-			</div>
 			<div class="btn-container">
 				<button id="prev" class="btn btn-color-2" onclick="prevTestimonial()">&#10094</button>
+			</div>
+			<div class="testimonials">
+			  <div class="testimonial">
+				<p class="rec">"During his time as an IT intern at OneAmerica Financial, he demonstrated <strong>exceptional people skills</strong>, a <strong>strong work ethic</strong>, and a <strong>genuine passion for technology</strong>."</p>
+				<p class="author">Aaron Wallen</p>
+				<p class="job">Director of Business Analysis</p>
+				<p class="company">One America Financial</p>
+			  </div>
+			  <div class="testimonial">
+				<p class="rec">"Charles' approach was <strong>thorough, well planned, and inclusive</strong> of his team. His demeanor while leading some difficult project meetings was <strong>positive and encouraging</strong>, despite the challenges presented by others, and showed both <strong>polish and empathy</strong>."</p>
+				<p class="author">Kevin Brennan</p>
+				<p class="job">IT Business Planning Consultant</p>
+				<p class="company">One America Financial</p>
+			  </div>
+			  <div class="testimonial">
+				<p class="rec">He <strong>collaborated and communicated</strong> well, focused on what his stakeholders wanted, and demonstrated <strong>interpersonal savviness and adaptability</strong>." </p>
+				<p class="author">Katie Marks</p>
+				<p class="job">Business Relationship Management Director</p>
+				<p class="company">One America Financial</p>
+			  </div>
+			  <div class="testimonial">
+				<p class="rec">He consistently <strong>sought out new challenges</strong> and opportunities to learn, which is a testament to his <strong>passion</strong>.</p>
+				<p class="author">Chris McGowan</p>
+				<p class="job">Training Director</p>
+				<p class="company">Montana Electrical Training Center</p>
+			  </div>
+			  <div class="testimonial">
+				<p class="rec">He <strong>flourished</strong>, working his way up to senior level instructor and assistant director, where he has learned<strong>all aspects</strong>of the training center.</p>
+				<p class="author">Troy Brandt</p>
+				<p class="job">Owner</p>
+				<p class="company">Eagle Electric</p>
+			  </div>
+			  <div class="testimonial">
+				<p class="rec">His <strong>leadership qualities, passion, and work ethic</strong> show in the many hats Charles wears every day to help better Montana’s apprentices, the Local, and the IBEW.</p>
+				<p class="author">Jackie McBroom</p>
+				<p class="job">Business Manager</p>
+				<p class="company">Local Union 233</p>
+			  </div>
+			</div>
+			<div class="btn-container">
 				<button id="next" class="btn btn-color-2" onclick="nextTestimonial()">&#10095</button>
 			</div>
-		</div>
+		  </div>
+		  <div class="dots-container"></div>
 	</section>
 	<footer>
-		<nav>
-			<div class="nav-links">
-				<ul class="nav-links">
-					<li><a href="#about">About</a></li>
-					<li><a href="#experience">Experience</a></li>
-					<li><a href="#projects">Projects</a></li>
-					<li><a href="#contact">Contact</a></li>
-				</ul>
-			</div>
-		</nav>
 		<p>Copyright &#169; 2024 Charles Coonce. All Rights Reserved.</p>
 	</footer>
 	<script src="./WebContent/js/script.js"></script>
