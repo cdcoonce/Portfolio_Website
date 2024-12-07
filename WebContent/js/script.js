@@ -1,30 +1,3 @@
-function toggleMenu() {
-    const menu = document.querySelector(".menu-links");
-    const icon = document.querySelector(".hamburger-icon");
-    menu.classList.toggle("open")
-    icon.classList.toggle("open")
-}
-
-function desktopToggleMenu() {
-    const menu = document.querySelector(".desktop-menu-links");
-    const icon = document.querySelector(".desktop-icon");
-    menu.classList.toggle("open")
-    icon.classList.toggle("open")
-}
-
-function shinyToggleMenu() {
-    const menu = document.querySelector(".shiny-menu-links");
-    const icon = document.querySelector(".shiny-icon");
-    menu.classList.toggle("open")
-    icon.classList.toggle("open")
-}
-
-function shinyHamtoggleMenu() {
-    const menu = document.querySelector(".shiny-hamburger-menu-links");
-    const icon = document.querySelector(".shiny-hamburger-icon");
-    menu.classList.toggle("open")
-    icon.classList.toggle("open")
-}
 
 let currentIndex = 0;
 
@@ -42,35 +15,96 @@ document.addEventListener("DOMContentLoaded", () => {
     const testimonials = document.querySelectorAll(".testimonial");
     const prevButton = document.getElementById("prev");
     const nextButton = document.getElementById("next");
+    const dotsContainer = document.querySelector(".dots-container");
     let currentIndex = 0;
-  
-    function showTestimonial(index) {
-      testimonials.forEach((testimonial, i) => {
-        testimonial.classList.remove("active");
-        testimonial.style.opacity = 0;
-        if (i === index) {
-          testimonial.classList.add("active");
-          testimonial.style.opacity = 1;
-        }
+
+    const testimonialsToShow = 2; // Number of testimonials to show at once
+
+    function createDots() {
+      testimonials.forEach((_, index) => {
+          const dot = document.createElement("div");
+          if (index % 2 == 0)
+          dot.classList.add("dot");
+          if (index == 0) 
+            dot.classList.add("active"); // Make the first dot active initially
+            dotsContainer.appendChild(dot);
       });
     }
-  
+
+    function updateDot() {
+      const dots = document.querySelectorAll(".dot");
+      dots.forEach((dot, index) => {
+          if (index == currentIndex / 2) {
+              dot.classList.add("active");
+          } else {
+              dot.classList.remove("active");
+          }
+      });
+    }
+
+    function showTestimonial(index) {
+        testimonials.forEach((testimonial, i) => {
+            testimonial.classList.remove("active");
+            testimonial.style.opacity = 0;
+
+            // Activate the current testimonial
+            if (i == testimonials.length - 1) {
+              testimonial.classList.add("active");
+              testimonial.style.opacity = 1;
+            }
+        });
+        updateDot();
+    }
+
+    function showTestimonials(index) {
+      testimonials.forEach((testimonial, i) => {
+          testimonial.classList.remove("active");
+          testimonial.style.opacity = 0;
+
+          // Activate the current and the next testimonial
+          if (i >= index && i < index + testimonialsToShow) {
+            testimonial.classList.add("active");
+            testimonial.style.opacity = 1;
+          }
+      });
+      updateDot();
+  }
+
     function nextTestimonial() {
-      currentIndex = (currentIndex + 1) % testimonials.length;
-      showTestimonial(currentIndex);
+        // Ensure the next index is within bounds
+        if (currentIndex + testimonialsToShow < testimonials.length) {
+          currentIndex++;
+          currentIndex++;
+        } else {
+          currentIndex = 0; // Reset to the start if at the end
+        }
+        showTestimonials(currentIndex);
     }
-  
+
     function prevTestimonial() {
-      currentIndex = (currentIndex - 1 + testimonials.length) % testimonials.length;
-      showTestimonial(currentIndex);
+        // Ensure the previous index is within bounds
+        if (currentIndex > 0) {
+            currentIndex--;
+        } else {
+            currentIndex = Math.max(0, testimonials.length - testimonialsToShow); // Move to the last visible pair
+        }
+        showTestimonials(currentIndex);
     }
-  
+
     nextButton.addEventListener("click", nextTestimonial);
     prevButton.addEventListener("click", prevTestimonial);
-  
+
     // Automatically scroll every 10 seconds
-    setInterval(nextTestimonial, 10000);
-  
+    setInterval(() => {
+        if (currentIndex + testimonialsToShow < testimonials.length) {
+            nextTestimonial();
+        } else {
+            currentIndex = 0; // Reset to the first set
+            showTestimonials(currentIndex);
+        }
+    }, 20000);
+
     // Initialize the first testimonial
-    showTestimonial(currentIndex);
-  });
+    showTestimonials(currentIndex);
+    createDots();
+});
