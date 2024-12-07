@@ -17,28 +17,54 @@ document.addEventListener("DOMContentLoaded", () => {
     const nextButton = document.getElementById("next");
     const dotsContainer = document.querySelector(".dots-container");
     let currentIndex = 0;
+    let testimonialsToShow = getTestimonialsToShow();
 
-    const testimonialsToShow = 2; // Number of testimonials to show at once
+    function getTestimonialsToShow() {
+        return window.innerWidth >= 1200 ? 2 : 1; // Show 2 on large screens, 1 on small screens
+    }
+    
+    window.addEventListener("resize", () => {
+        testimonialsToShow = getTestimonialsToShow();
+        showTestimonial(currentIndex); // Re-render testimonials
+        createDots();
+    });
 
     function createDots() {
+      dotsContainer.innerHTML = "";
+
       testimonials.forEach((_, index) => {
           const dot = document.createElement("div");
-          if (index % 2 == 0)
-          dot.classList.add("dot");
-          if (index == 0) 
-            dot.classList.add("active"); // Make the first dot active initially
-            dotsContainer.appendChild(dot);
+          if (window.innerWidth > 1200) {
+            if (index % 2 == 0)
+            dot.classList.add("dot");
+            if (index == 0) 
+                dot.classList.add("active"); // Make the first dot active initially
+                dotsContainer.appendChild(dot);
+          } else {
+                dot.classList.add("dot");
+            if (index == 0) 
+                dot.classList.add("active"); // Make the first dot active initially
+                dotsContainer.appendChild(dot);
+          }
       });
     }
 
-    function updateDot() {
+    function updateDots() {
       const dots = document.querySelectorAll(".dot");
       dots.forEach((dot, index) => {
-          if (index == currentIndex / 2) {
-              dot.classList.add("active");
-          } else {
-              dot.classList.remove("active");
-          }
+        if (window.innerWidth > 1200) {
+            if (index == currentIndex / 2) {
+                dot.classList.add("active");
+            } else {
+                dot.classList.remove("active");
+            }
+        } else {
+            if (index == currentIndex) {
+                dot.classList.add("active");
+            } else {
+                dot.classList.remove("active");
+            }
+        }
       });
     }
 
@@ -46,14 +72,21 @@ document.addEventListener("DOMContentLoaded", () => {
         testimonials.forEach((testimonial, i) => {
             testimonial.classList.remove("active");
             testimonial.style.opacity = 0;
-
+        
             // Activate the current testimonial
-            if (i == testimonials.length - 1) {
-              testimonial.classList.add("active");
-              testimonial.style.opacity = 1;
+            if (window.innerWidth > 1200) {
+              if (i == testimonials.length - 1) {
+                testimonial.classList.add("active");
+                testimonial.style.opacity = 1;
+                }
+            } else {
+                if (i == currentIndex) {
+                    testimonial.classList.add("active");
+                    testimonial.style.opacity = 1;
+                }
             }
         });
-        updateDot();
+        updateDots();
     }
 
     function showTestimonials(index) {
@@ -67,28 +100,47 @@ document.addEventListener("DOMContentLoaded", () => {
             testimonial.style.opacity = 1;
           }
       });
-      updateDot();
+      updateDots();
   }
 
     function nextTestimonial() {
         // Ensure the next index is within bounds
-        if (currentIndex + testimonialsToShow < testimonials.length) {
-          currentIndex++;
-          currentIndex++;
+        if (window.innerWidth > 1200) {
+            if (currentIndex + testimonialsToShow < testimonials.length) {
+            currentIndex++;
+            currentIndex++;
+            } else {
+            currentIndex = 0; // Reset to the start if at the end
+            }
+            showTestimonials(currentIndex);
         } else {
-          currentIndex = 0; // Reset to the start if at the end
+            if (currentIndex + testimonialsToShow < testimonials.length) {
+                currentIndex++;
+            } else {
+            currentIndex = 0; // Reset to the start if at the end
+            }
+            showTestimonial(currentIndex);
         }
-        showTestimonials(currentIndex);
     }
 
     function prevTestimonial() {
         // Ensure the previous index is within bounds
-        if (currentIndex > 0) {
-            currentIndex--;
+        if (window.innerWidth > 1200) {
+            if (currentIndex > 0) {
+                currentIndex--;
+                currentIndex--;
+            } else {
+                currentIndex = Math.max(0, testimonials.length - testimonialsToShow); // Move to the last visible pair
+            }
+            showTestimonials(currentIndex);
         } else {
-            currentIndex = Math.max(0, testimonials.length - testimonialsToShow); // Move to the last visible pair
+            if (currentIndex > 0) {
+                currentIndex--;
+            } else {
+                currentIndex = Math.max(0, testimonials.length - testimonialsToShow); // Move to the last visible pair
+            }
+            showTestimonial(currentIndex);
         }
-        showTestimonials(currentIndex);
     }
 
     nextButton.addEventListener("click", nextTestimonial);
