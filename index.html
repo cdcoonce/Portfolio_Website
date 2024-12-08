@@ -22,7 +22,7 @@
 			<div class="btn-container">
 				<button 
 					class="btn btn-color-1" 
-					onclick="location.href='https://github.com/cdcoonce'">
+					onclick="window.open('https://github.com/cdcoonce')">
 					GitHub
 				</button>
 				<button 
@@ -50,59 +50,63 @@
 	<section id="projects">
 		<p class="section_text__p1"> My work</p>
 		<div class="experience-details-container">
-			<div class="about-containers">
-				<div class="details-container color-container">
-					<div class="article-container">
-						<!-- <img 
+			<div class="carousel-container">
+				<button class="carousel-arrow left" id="prev">&#10094;</button>
+				<div class="carousel">
+					<div class="carousel-item">
+						<div class="article-container">
+							<!-- <img 
+								src="./WebContent/assets/National_Parks_Project_Assets/NPS_plot5.png"
+								alt="Project 1" 
+								class="project1-img"
+								onclick="location.href='https://charleslikesdata.com/National_Parks_Project.html'"
+							/> -->
+							<img 
 							src="./WebContent/assets/National_Parks_Project_Assets/NPS_plot5.png"
 							alt="Project 1" 
 							class="project1-img"
-							onclick="location.href='https://charleslikesdata.com/National_Parks_Project.html'"
-						/> -->
-						<img 
-						src="./WebContent/assets/National_Parks_Project_Assets/NPS_plot5.png"
-						alt="Project 1" 
-						class="project1-img"
-						/>
-					</div>
-					<h2 class="experience-sub-title project-title">National Parks Visitation</h2>
-					<p>Analysis, Visualization</p>
-				</div>
-				<div class="details-container color-container">
-					<div class="article-container">
-						<a href="https://charleslikesdata.com">
-							<img 
-								src="./WebContent/assets/Portfolio_Website_Project_Assets/PortfolioCode.png" 
-								alt="Project 2" 
-								class="project2-img"
 							/>
-						</a>
+						</div>
+						<h2 class="experience-sub-title project-title">National Parks Visitation</h2>
+						<p>Analysis, Visualization</p>
 					</div>
-					<h2 class="experience-sub-title project-title">Portfolio Website</h2>
-					<p>HTML, CSS, Javascript</p>
-				</div>
-				<div class="details-container color-container">
-					<div class="article-container">
-						<img 
-							src="./WebContent/assets/Shiny_Apps_Assets/ShinyAppsDashboard.png" 
-							alt="Project 3" 
-							class="project3-img"
-						/>
+					<div class="carousel-item">
+						<div class="article-container">
+							<a href="https://charleslikesdata.com">
+								<img 
+									src="./WebContent/assets/Portfolio_Website_Project_Assets/PortfolioCode.png" 
+									alt="Project 2" 
+									class="project2-img"
+								/>
+							</a>
+						</div>
+						<h2 class="experience-sub-title project-title">Portfolio Website</h2>
+						<p>HTML, CSS, Javascript</p>
 					</div>
-					<h2 class="experience-sub-title project-title">Shiny Applications</h2>
-					<p>Dashboards</p>
-				</div>
-				<div class="details-container color-container">
-					<div class="article-container">
-						<img 
-							src="./WebContent/assets/Google Analytics Assets/Script_Image.png" 
-							alt="Project 2" 
-							class="project4-img"
-						/>
+					<div class="carousel-item">
+						<div class="article-container">
+							<img 
+								src="./WebContent/assets/Shiny_Apps_Assets/ShinyAppsDashboard.png" 
+								alt="Project 3" 
+								class="project3-img"
+							/>
+						</div>
+						<h2 class="experience-sub-title project-title">Shiny Applications</h2>
+						<p>Dashboards</p>
 					</div>
-					<h2 class="experience-sub-title project-title">Data Archive</h2>
-					<p> Data Retention, Data Validation</p>
+					<div class="carousel-item">
+						<div class="article-container">
+							<img 
+								src="./WebContent/assets/Google Analytics Assets/Script_Image.png" 
+								alt="Project 2" 
+								class="project4-img"
+							/>
+						</div>
+						<h2 class="experience-sub-title project-title">Data Archive</h2>
+						<p> Data Retention, Data Validation</p>
+					</div>
 				</div>
+				<button class="carousel-arrow right" id="next">&#10095;</button>
 			</div>
 		</div>
 	</section>
