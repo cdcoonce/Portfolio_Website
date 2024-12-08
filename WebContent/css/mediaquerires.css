@@ -65,10 +65,11 @@
 
     #projects {
         padding-top: 5vw;
-        align-items: center;
+        
     }
     #projects .experience-details-container {
         padding-top: 2vw;
+        align-items: center;
     }
 
     #projects .about-containers {
@@ -78,8 +79,7 @@
 
     #projects .arrow {
         bottom: 5rem;
-    }
-    
+    }    
 
 /* === Contacts === */
     .testimonials-container {
