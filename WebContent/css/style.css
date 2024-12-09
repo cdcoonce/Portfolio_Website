@@ -389,7 +389,7 @@
         justify-content: center;
         max-width: 1700px;
         margin: 0 auto;
-        height: 40vh;
+        height: 50vh;
         margin-top: 2rem;
     }
 
@@ -437,6 +437,7 @@
       
     .testimonials {
         display: flex;
+        flex-direction: row;
         transition: transform 0.5s ease-in-out;
         align-items: center;
         width: 75%;
