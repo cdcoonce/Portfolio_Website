@@ -161,6 +161,7 @@
         box-sizing: border-box;
         min-height: fit-content;
         max-width: 100%;
+        width: 100%;
         margin: 0 auto;
     }
 
@@ -177,7 +178,7 @@
         max-width: 1700px;
         margin: 0 auto;
         gap: .5rem;
-        height: 70vh;
+        height: fit-content;
     }
 
     .logo {
@@ -236,16 +237,6 @@
         scale: 1.4;
     }
 
-    #profile .btn-container {
-        justify-content: left;
-    }
-
-    .arrow {
-        position: absolute;
-        right: 2rem;
-        bottom: 5rem;
-    }
-
 /* === Projects Section === */
 
     #projects {
@@ -256,7 +247,7 @@
         justify-content: center;
         max-width: 100%;
         margin: 0 auto;
-        height: 70vh;
+        height: 55vh;
     }
 
     #projects .article-container {
@@ -319,7 +310,7 @@
         width: 100%;
         height: 100%;
         overflow: hidden;
-        padding: 20px 0;
+        padding: 24px 0;
     }
       
     .carousel {
@@ -329,7 +320,7 @@
       
     .carousel-item {
         flex: 0 0 34%;
-        width: 300px;
+        width: 200px;
         margin: 0 auto;
         text-align: center;
         opacity: 0.8;
@@ -369,6 +360,25 @@
         right: 10px;
     }
 
+    .project-indicators {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 10px;
+    }
+    
+    .project-indicator {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: #ddd;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    .project-indicator.active {
+        background-color: #555; /* Highlight the active project indicator */
+    }
 
 
 /* === Contacts Section === */
@@ -379,7 +389,7 @@
         justify-content: center;
         max-width: 1700px;
         margin: 0 auto;
-        height: 50vh;
+        height: 40vh;
         margin-top: 2rem;
     }
 
@@ -522,7 +532,7 @@
 /* === Footer Section === */
 
     footer {
-        height: 26vh;
+        height: 4vh;
         margin: 1rem 1rem;
     }
 
@@ -540,8 +550,8 @@
         justify-content: center;
         max-width: 1700px;
         margin: 0 auto;
-        gap: 5rem;
-        height: 80vh;
+        gap: .5rem;
+        height: fit-content;
     }
 
     #project_profile .section__pic-container {
@@ -551,116 +561,89 @@
         margin: auto 0;
     }
 
-    #project_profile .profile_pic {
+    #project_profile .project_pic {
         width: 40rem;
         border-radius: 3rem;
         border: rgb(53, 53, 53) 0.1rem solid;
         transform: scale(auto);
-    }
-
-    #project_profile .section_text {
-        align-content: center;
-        text-align: center;
-        padding: 0 1rem;
-    }
-    
-    #project_profile .title {
-        font-size: 3rem;
-        text-align: center;
-    }
-
-    #project_profile #socials-container {
-        display: flex;
-        justify-content: center;
-        margin-top: 1rem;
-        gap: 1rem;
-    }
-
-    #project_profile .text-container {
-        padding-bottom: 1rem;
-        width: 60%;
-        text-align: center;
-        margin: 0 auto;
+        scale: .7;
     }
 
 /* === Project About Section ==== */
 
     #project_about {
-        display: flex;
-        flex-direction: column;
         position: relative;
-        justify-content: center;
-        align-items: center;
-        max-width: 1700px;
-        width: 100%;
-        margin: 0 auto;
-    }
-
-    #project_about .section-container {
-        gap: 4rem;
-        display: flex;
-        flex-direction: row;
-        height: 80%;
-    }
-
-    #project_about .about-containers {
-        gap: 2rem;
-        margin-bottom: 2rem;
-        margin-top: 2rem;
-    }
-
-    #project_about .about-details-container {
+        background-color: #EBF1F866;
         display: flex;
         flex-direction: column;
-        flex-wrap: nowrap;
-    }
-
-    #project_about .details-container {
-        padding: 1.5rem;
-        background: white;
-        border-radius: 2rem;
-        border: rgb(53, 53, 53) 0.1rem solid;
-        border-color: rgb(163, 163, 163);
-    }
-
-    #project_about .about-pic {
-        border-radius: 2rem;
-    }
-
-    #project_about .text-container {
-        margin-top: 2rem;
-        margin-bottom: 2rem;
-        width: 20rem;
-    }
-
-    #project_about .arrow {
-        position: absolute;
-        right: 2rem;
-        bottom: 1rem;
-    }
-
-    #project_about .section__pic-container {
-        height: 400px;
-        width: 400px;
-        margin: auto 0;
-    }
-
-    #project_about .slider-container {
-        max-height: 30rem;
-        max-width: 600px;
-        padding-bottom: 4rem;
-    }
-
-    #project_about .slider {
-        height: 50%;
-    }
-
-    #project_about .slide img {
-        max-height: 100%;
+        justify-content: center;
         max-width: 100%;
-        object-fit: contain;
+        margin: 0 auto;
+        height: 70vh;
+    }
 
-    }    
+    #project_about .experience-details-container {
+        max-width: 100%;
+        width: 1200px; 
+    }
+
+    #project_about .carousel-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        padding: 20px 0;
+    }
+      
+    #project_about .carousel {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+    }
+      
+    #project_about .carousel-item {
+        flex: 0 0 34%;
+        width: 300px;
+        margin: 0 auto;
+        text-align: center;
+        opacity: 0.8;
+        transform: scale(0.5);
+        transition: transform 0.5s ease, opacity 0.5s ease;
+    }
+      
+    #project_about .carousel-item img {
+        width: 100%;
+        max-width: 250px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+      
+    #project_about .carousel-item.active {
+        opacity: 1;
+        transform: scale(1);
+    }
+      
+    #project_about .carousel-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 3rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        z-index: 10;
+        padding: 10px;
+    }
+      
+    #project_about .carousel-arrow.left {
+        left: 10px;
+    }
+      
+    #project_about .carousel-arrow.right {
+        right: 10px;
+    }
 
 /* === Project Process === */
 
