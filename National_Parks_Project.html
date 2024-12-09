@@ -10,132 +10,56 @@
 </head>
 <body>
 	<section id="project_profile">
-		<div class="logo">
-			National Parks Project
-			<p class="logo_text__p2">R Programming</p>
-		</div>
-		<div class="section__pic-container project__pic-container">
-			<img src="./WebContent/assets/National_Parks_Project_Assets/National_Parks_Project_Cover_Img.png" alt="National Parks Project Image" class="profile_pic"/>
+		<div class="logo">Charles Coonce</div>
+		<div class="section__pic-container">
+			<img src="./WebContent/assets/National_Parks_Project_Assets/National_Parks_Project_Cover_Img.png" alt="National Parks Project Image" class="project_pic"/>
 		</div>
 		<div class="section_text">
-			<p class="section_text__p1">Personal Projects</p>
+			<!-- <p class="section_text__p1">Visitation</p> -->
 			<h1 class="title">National Parks</h1>
-			<p class="section_text__p2">Visitation</p>
+			<p class="section_text__p2">yada yada yada. This is what this project is about.</p>
 			<div class="btn-container">
 				<button 
 					class="btn btn-color-1" 
 					onclick="window.open('https://github.com/cdcoonce/National_Parks_Project')">
 					Repository
 				</button>
-				<button 
-					class="btn btn-color-1" 
-					onclick="location.href='./assets/National_Parks_Project_Assets/All National Parks Visitation 1904-2016.csv'">
-					Data Source
-				</button>
-			</div>
-			<div id="socials-container">
-				<img 
-					src="./WebContent/assets/linkedin.png" 
-					alt="My LinkedIn profle" 
-					class="icon" 
-					onclick="window.open('https://www.linkedin.com/in/charlesdcoonce/', '_blank')"
-				/>
-				<img 
-					src="./WebContent/assets/github.png" 
-					alt="My Github profle" 
-					class="icon" 
-					onclick="window.open('https://github.com/cdcoonce', '_blank')"
-				/>
+				<div class="icon-container">
+					<a class="icon" href="mailto:CharlesCoonce@Gmail.com">
+						<img
+						src="./WebContent/assets/mailicon.png" 
+						alt="My Github profle" 
+						/>
+					</a>
+					<img class="icon"
+						src="./WebContent/assets/linkedinicon.png" 
+						alt="My LinkedIn profle" 
+						class="icon" 
+						onclick="window.open('https://www.linkedin.com/in/charlesdcoonce/', '_blank')"
+					/>
+				</div>
 			</div>
 		</div>
-		<img 
-		src="./WebContent/assets/arrow.png"
-		alt="Arrow Icon"
-		class="icon arrow"
-		onclick="location.href='./National_Parks_Project.html#project_about'"
-		/>
 	</section>
 	<section id="project_about">
 		<p class="section_text__p1">Get to Know More</p>
 		<h1 class="title">National Parks Project</h1>
-		<p class="section_text__p1">R Programming</p>
-		<div class="section-container">
-			<div class="about-details-container">
-				<div class="about-containers">
-					<div class="details-container">
-						<div class="text-container">
-							<p>
-								This parks project started as a college project for one of my classes, and has now become an personal analysis that is meant to help me practice my R programming abilities. It has become more visually appealing and complex through an iterative process. Feel free to check out the first version to see how my skills have grown.
-						</div>
-						<img 
-							src="./WebContent/assets/experience.png" 
-							alt="Experience Icon" 
-							class="icon"
-						/>
-						<h3 class="details-title">Skills Used</h3>
-						<p>
-							Coordinate System Mapping
-							<br />
-							Traveling Salesman problems
-							<br />
-							Heirarchical Clustering
-							<br />
-							Open Source Routing Machine
-							<br />
-							ggplot
-							<br />
-							Tidyverse
-							<br />
-							Statistical Analysis
-						</p>
-					</div>
-					<div class="details-container">
-						<img 
-							src="./WebContent/assets/education.png" 
-							alt="Education Icon" 
-							class="icon"
-						/>
-						<h3 class="details-title">Highlights</h3>
-						<div class="slider-container">
-							<div class="slider">
-								<div class="slide"><img src="./WebContent/assets/National_Parks_Project_Assets/NPS_plot1.png" alt="Total National Parks Visitation by Year"></div>
-								<div class="slide"><img src="./WebContent/assets/National_Parks_Project_Assets/NPS_plot2.png" alt="Regional National Parks Visitation by Year"></div>
-								<div class="slide"><img src="./WebContent/assets/National_Parks_Project_Assets/NPS_plot3.png" alt="Heat map of National Parks Visitation by Western State"></div>
-								<div class="slide"><img src="./WebContent/assets/National_Parks_Project_Assets/NPS_plot4.png" alt="Bubble Plot of Western National Park All Time Visitation"></div>
-								<div class="slide"><img src="./WebContent/assets/National_Parks_Project_Assets/NPS_plot5.png" alt="Routes from Helena, Montana to National Parks"></div>
-								<div class="slide"><img src="./WebContent/assets/National_Parks_Project_Assets/NPS_plot6.png" alt="Cluster Analysis of National Parks in Western States"></div>
-								<div class="slide"><img src="./WebContent/assets/National_Parks_Project_Assets/NPS_plot7.png" alt="Traveling Salesman Route Optomization by Cluster"></div>
-								<div class="slide"><img src="./WebContent/assets/National_Parks_Project_Assets/NPS_plot8.png" alt="Reclustered Traveling Salesman Routes"></div>
-							</div>
-						<div class="btn-container">
-							<button class="btn btn-color-2" onclick="moveSlide(-1)">&#10094</button>
-							<button class="btn btn-color-2" onclick="moveSlide(1)">&#10095</button>
-						</div>
-						</div>
-					</div>
+		<div class="experience-details-container">
+			<div class="carousel-container">
+				<button class="carousel-arrow left" id="prev">&#10094;</button>
+				<div class="carousel">
+					<div class="carousel-item"><img src="./WebContent/assets/National_Parks_Project_Assets/NPS_plot1.png" alt="Total National Parks Visitation by Year"></div>
+					<div class="carousel-item"><img src="./WebContent/assets/National_Parks_Project_Assets/NPS_plot2.png" alt="Regional National Parks Visitation by Year"></div>
+					<div class="carousel-item"><img src="./WebContent/assets/National_Parks_Project_Assets/NPS_plot3.png" alt="Heat map of National Parks Visitation by Western State"></div>
+					<div class="carousel-item"><img src="./WebContent/assets/National_Parks_Project_Assets/NPS_plot4.png" alt="Bubble Plot of Western National Park All Time Visitation"></div>
+					<div class="carousel-item"><img src="./WebContent/assets/National_Parks_Project_Assets/NPS_plot5.png" alt="Routes from Helena, Montana to National Parks"></div>
+					<div class="carousel-item"><img src="./WebContent/assets/National_Parks_Project_Assets/NPS_plot6.png" alt="Cluster Analysis of National Parks in Western States"></div>
+					<div class="carousel-item"><img src="./WebContent/assets/National_Parks_Project_Assets/NPS_plot7.png" alt="Traveling Salesman Route Optomization by Cluster"></div>
+					<div class="carousel-item"><img src="./WebContent/assets/National_Parks_Project_Assets/NPS_plot8.png" alt="Reclustered Traveling Salesman Routes"></div>
 				</div>
-				<div class="btn-container">
-					<button 
-						class="btn btn-color-1" 
-						onclick="window.open('https://github.com/cdcoonce/National_Parks_Project')">Repository
-					</button>
-					<button 
-						class="btn btn-color-1" 
-						onclick="window.open('./WebContent/assets/National_Parks_Project_Assets/National_Parks_Project_Rmarkdown_V1.pdf', '_blank')">Version 1 PDF Nov 13, 2023
-					</button>
-					<!-- <button 
-					class="btn btn-color-1" 
-					onclick="window.open('./WebContent/assets/National_Parks_Project_Assets/National_Parks_Project_Rmarkdown_V2.pdf', '_blank')">Version 2 PDF Aug 20, 2024
-					</button> -->
-				</div>
+				<button class="carousel-arrow right" id="next">&#10095;</button>
 			</div>
 		</div>
-		<img 
-			src="./WebContent/assets/arrow.png"
-			alt="Arrow Icon"
-			class="icon arrow"
-			onclick="location.href='./National_Parks_Project.html#project_process'"
-		/>
 	</section>
 	<section id="project_process">
 		<p class="section_text__p1">Explore My</p>
