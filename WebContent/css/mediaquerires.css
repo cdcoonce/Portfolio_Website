@@ -70,7 +70,7 @@
     
     .testimonials {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         transition: transform 0.5s ease-in-out;
         justify-content: center;
         width: 100%;
@@ -114,7 +114,6 @@
         opacity: 1;
         transform: scale(1);
     }
-}
 
 /* === Contacts === */
     .testimonials-container {
