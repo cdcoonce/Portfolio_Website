@@ -28,12 +28,19 @@ Welcome to the repository for my personal portfolio website! This website showca
 ## 📂 Repository Structure
 
 📁 portfolio-website
+
 ├── 📁 projects
+
 ├── 📁 Webcontent
+
 │    ├── 📁 assets
+
 │    ├── 📁 css
+
 │    └── 📁 js
+
 ├── index.html
+
 └── README.md
 
 - **assets/**: Contains images, stylesheets, and JavaScript files.
