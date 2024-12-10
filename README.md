@@ -29,9 +29,9 @@ Welcome to the repository for my personal portfolio website! This website showca
 
 📁 portfolio-website
 
-├── 📁 projects
+├ ── 📁 projects
 
-├── 📁 Webcontent
+├─ ─ 📁 Webcontent
 
 │    ├── 📁 assets
 
@@ -39,9 +39,9 @@ Welcome to the repository for my personal portfolio website! This website showca
 
 │    └── 📁 js
 
-├── index.html
+├─ ─ index.html
 
-└── README.md
+└─ ─ README.md
 
 - **assets/**: Contains images, stylesheets, and JavaScript files.
 - **projects/**: Holds data or assets for individual project pages.
