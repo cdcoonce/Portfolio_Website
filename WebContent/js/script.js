@@ -205,18 +205,30 @@ function moveSlide(step) {
 
             if (window.innerWidth < 900) {
                 item.classList.remove("active");
-                item.style.transform = "scale(0.8)";
-                item.style.opacity = "0.5";
-                item.style.maxWidth = "500px";
+                item.style.transform = "scale(0.2)";
+                item.style.opacity = "0.2";
+                item.style.marginLeft = "8px";
+                item.style.marginRight = "8px";
+                item.style.maxWidth = "100px";
 
-                if (index === currentIndex) {
+                if (distance === 0) {
                     item.classList.add("active");
-                    item.style.display = "block"; // Show the active item
-                    item.style.opacity = "1"; // Fully visible
                     item.style.transform = "scale(1)";
-                    item.style.width = "375px";
-                } else {
-                    item.style.display = "none"; // Hide non-active items
+                    item.style.opacity = "1";
+                    item.style.marginLeft = "40px";
+                    item.style.marginRight = "40px";
+                    item.style.maxWidth = "500px";
+                } else if (distance <= maxDistance) {
+                    const scaleFactor = 1.20 - (distance * 0.4);
+                    const opacityFactor = 1 - (distance * 0.3);
+                    const gapFactor = 20 - (distance * 4);
+                    const maxWidthFactor = 500 - (distance * 50);
+
+                    item.style.transform = `scale(${Math.min(1, scaleFactor)})`;
+                    item.style.opacity = Math.max(0.5, opacityFactor).toString();
+                    item.style.marginLeft = `${Math.min(0, -gapFactor)}px`;
+                    item.style.marginRight = `${Math.min(0, -gapFactor)}px`;
+                    item.style.maxWidth = `${Math.max(100, maxWidthFactor)}px`;
                 }
             } else {
                 item.classList.remove("active");
@@ -228,7 +240,7 @@ function moveSlide(step) {
 
                 if (distance === 0) {
                     item.classList.add("active");
-                    item.style.transform = "scale(1.20)";
+                    item.style.transform = "scale(1.15)";
                     item.style.opacity = "1";
                     item.style.marginLeft = "40px";
                     item.style.marginRight = "40px";

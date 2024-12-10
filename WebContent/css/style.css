@@ -254,22 +254,19 @@
         padding-bottom: 0;
     }
 
-    .about-container {
-        margin-bottom: 2rem;
-        margin-top: 2rem;
-        display: flex;
-        justify-self: center;
-        width: 80vw;
-        align-items: center;
-        gap: 1rem;
-        
+    .experience-details-container {
+        max-width: 90%;
+        align-self: center;
+        width: 90%;
+    }
+
+    .project-container {
+        align-self: center;
     }
 
     .details-container {
         flex: 1;
         background-color: none;
-        text-align: center;
-        align-content: center;
     }
 
     .project1-img {
@@ -304,7 +301,7 @@
 
     .carousel-container {
         display: flex;
-        align-items: center;
+        align-self: center;
         justify-content: center;
         position: relative;
         width: 100%;
@@ -358,14 +355,17 @@
         cursor: pointer;
         z-index: 10;
         padding: 10px;
+        overflow: hidden;
     }
       
     .carousel-arrow.left {
         left: 10px;
+        margin-left: 50px;
     }
       
     .carousel-arrow.right {
         right: 10px;
+        margin-right: 50px;
     }
 
     .project-indicators {

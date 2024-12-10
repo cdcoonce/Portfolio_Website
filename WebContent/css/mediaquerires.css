@@ -1,12 +1,6 @@
 @media screen and (max-width: 1200px) {
 /* === Globals === */
 
-    .about-containers {
-        flex-direction: row;
-        align-items: center;
-        margin-top: 0;
-    }
-
     section, 
     .section-container {
         height: fit-content;
@@ -24,6 +18,16 @@
     .project__pic-container {
         width: 22.25rem;
         height: 20rem;
+    }
+
+    .carousel-arrow.left {
+        left: 10px;
+        margin-left: 10px;
+    }
+      
+    .carousel-arrow.right {
+        right: 10px;
+        margin-right: 10px;
     }
 
 /* === Profile === */
