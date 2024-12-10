@@ -3,11 +3,13 @@
 Welcome to the repository for my personal portfolio website! This website showcases my skills, projects, and experience as a data scientist and business analyst. It's designed to highlight my work and serve as a platform for potential employers, collaborators, and fellow developers.
 
 ## 🌐 Live Website
+
 [Visit My Portfolio](https://charleslikesdata.com/)
 
 ---
 
 ## 🚀 Features
+
 - **Responsive Design**: Optimized for all devices, from desktops to smartphones.
 - **Profile Section**: Contains links for my Github, LinkedIn, resume, and e-mail address.
 - **Projects Section**: Highlights key projects using a carousel style interface I designed, and links to source code or live demos.
@@ -16,6 +18,7 @@ Welcome to the repository for my personal portfolio website! This website showca
 ---
 
 ## 🛠️ Technologies Used
+
 - **Frontend**: HTML, CSS, JavaScript
 - **Styling**: Custom CSS with a focus on clean and minimalist design
 - **Version Control**: Git and GitHub
@@ -23,12 +26,13 @@ Welcome to the repository for my personal portfolio website! This website showca
 ---
 
 ## 📂 Repository Structure
+
 📁 portfolio-website
-├── 📁 Webcontent
-│   ├── 📁 assets
-│   ├── 📁 css
-│   └── 📁 js
 ├── 📁 projects
+├── 📁 Webcontent
+│    ├── 📁 assets
+│    ├── 📁 css
+│    └── 📁 js
 ├── index.html
 └── README.md
 
@@ -41,13 +45,14 @@ Welcome to the repository for my personal portfolio website! This website showca
 ## 📸 Screenshots
 
 ### Home Page
-![Home Page](./assets/portfolio_profile_homepage.png)
+
+![Home Page](./WebContent/assets/portfolio_profile_homepage.png)
 
 ### Projects Section
-![Projects Section](./assets/portfolio_projects_homepage.png)
+![Projects Section](./WebContent/assets/portfolio_projects_homepage.png)
 
 ### Recommendations Section
-![recommendations Section](./assets/portfolio_recommendations_homepage.png)
+![recommendations Section](./WebContent/assets/portfolio_recommendations_homepage.png)
 
 ---
 
