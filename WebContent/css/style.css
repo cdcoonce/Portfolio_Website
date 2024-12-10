@@ -441,6 +441,7 @@
         margin: auto;
         font-family: Arial, sans-serif;
         overflow: hidden;
+        justify-content: space-evenly;
     }
       
     .testimonials {
