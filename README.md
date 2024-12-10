@@ -34,7 +34,7 @@ Welcome to the repository for my personal portfolio website! This website showca
 &nbsp;|  &nbsp;&nbsp;  ├── 📁 css  
 &nbsp;│  &nbsp;&nbsp;  └── 📁 js  
 &nbsp;| ── index.html  
-└ ── README.md  
+└── README.md  
 
 - **assets/**: Contains images, stylesheets, and JavaScript files.
 - **projects/**: Holds data or assets for individual project pages.
