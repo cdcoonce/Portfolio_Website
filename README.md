@@ -33,11 +33,11 @@ Welcome to the repository for my personal portfolio website! This website showca
 
 | ── 📁 Webcontent
 
-|    ├── 📁 assets
+|  &nbsp;  ├── 📁 assets
 
-|    ├── 📁 css
+|  &nbsp;  ├── 📁 css
 
-│    └── 📁 js
+│  &nbsp;  └── 📁 js
 
 | ── index.html
 
