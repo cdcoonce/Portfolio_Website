@@ -28,7 +28,7 @@ Welcome to the repository for my personal portfolio website! This website showca
 ## 📂 Repository Structure
 
 📁 portfolio-website  
-&nbsp;| 📁 projects  
+&nbsp;| ── 📁 projects  
 &nbsp;| ── 📁 Webcontent  
 &nbsp;|  &nbsp;&nbsp;  ├── 📁 assets  
 &nbsp;|  &nbsp;&nbsp;  ├── 📁 css  
