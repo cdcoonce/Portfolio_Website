@@ -30,8 +30,8 @@ Welcome to the repository for my personal portfolio website! This website showca
 📁 portfolio-website  
 &nbsp;| ── 📁 projects  
 &nbsp;| ── 📁 Webcontent  
-&nbsp;|  &nbsp;&nbsp;  ├── 📁 assets  
-&nbsp;|  &nbsp;&nbsp;  ├── 📁 css  
+&nbsp;|  &nbsp;&nbsp;&nbsp;  ├── 📁 assets  
+&nbsp;|  &nbsp;&nbsp;&nbsp;  ├── 📁 css  
 &nbsp;│  &nbsp;&nbsp;  └── 📁 js  
 &nbsp;| ── index.html  
 └── README.md  
