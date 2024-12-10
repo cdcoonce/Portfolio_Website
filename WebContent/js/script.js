@@ -244,6 +244,7 @@ function moveSlide(step) {
                     item.style.opacity = "1";
                     item.style.marginLeft = "40px";
                     item.style.marginRight = "40px";
+                    item.style.marginTop = "10px";
                     item.style.maxWidth = "500px";
                 } else if (distance <= maxDistance) {
                     const scaleFactor = 1.20 - (distance * 0.4);
