@@ -1,4 +1,4 @@
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1250px) {
 /* === Globals === */
 
     section, 
@@ -18,16 +18,6 @@
     .project__pic-container {
         width: 22.25rem;
         height: 20rem;
-    }
-
-    .carousel-arrow.left {
-        left: 10px;
-        margin-left: 10px;
-    }
-      
-    .carousel-arrow.right {
-        right: 10px;
-        margin-right: 10px;
     }
 
 /* === Profile === */
@@ -56,6 +46,23 @@
     }
 
     #profile .btn-container {
+        justify-content: center;
+    }
+
+/* === Projects === */
+
+    .projects-filter {
+        gap: 0.5rem;  /* Reduce gap if needed */
+      }
+      
+    .projects-filter .filter {
+        flex: 1 1 100px;
+        font-size: 0.9rem;
+        text-align: center;
+    }
+
+    .projects-grid {
+        grid-template-columns: repeat(2, 300px);
         justify-content: center;
     }
 
@@ -96,28 +103,12 @@
 
 }
 
-@media (max-width: 900px) {
-    .carousel {
-        display: block;
-        justify-content: center;
-        overflow: hidden;
-        transition: transform 0.5s ease-in-out;
-    }
+@media (max-width: 700px) {
+/* === Projects === */
+    .projects-grid {
+        grid-template-columns: 1fr;
+    } 
 
-    .carousel-item {
-        flex: 0 0 100%; 
-        display: none;
-        opacity: 0;
-        transform: scale(1);
-        transition: opacity 0.5s ease, transform 0.5s ease;
-        justify-self: center;
-    }
-
-    .carousel-item.active {
-        display: block;
-        opacity: 1;
-        transform: scale(1);
-    }
 
 /* === Contacts === */
     .testimonials-container {
