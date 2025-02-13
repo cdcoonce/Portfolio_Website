@@ -169,122 +169,106 @@
 /* === Projects Section === */
 
     #projects {
-        position: relative;
-        background-color: #EBF1F866;
+        padding: 2rem;
+        background-color: #f9f9f9;
+    }
+
+/* Filter Keywords */
+    .projects-filter {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .projects-filter .filter {
+        cursor: pointer;
+        padding: 0.5rem 1rem;
+        border: 1px solid #ddd;
+        border-radius: 20px;
+        background-color: #fff;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .projects-filter .filter:hover,
+    .projects-filter .filter.active {
+        background-color: #353535;
+        color: #fff;
+    }
+
+/* Projects Grid Layout */
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 300px));
+        justify-content: center;
+        gap: 1.5rem;
+    }
+  
+  /* Project Card */
+    .project-card {
+        position: relative; /* Make the whole card the positioning context */
+        background-color: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        max-width: 100%;
-        margin: 0 auto;
-        height: 55vh;
+        height: 400px; /* Fixed card height */
+        width: 300px; /* Fixed card width */
     }
-
-    #projects .article-container {
-        padding-bottom: 0;
+  
+    .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 12px rgba(0,0,0,0.15);
     }
-
-    .experience-details-container {
-        max-width: 90%;
-        align-self: center;
-        width: 90%;
-    }
-
-    .project-container {
-        align-self: center;
-    }
-
-    .project-title {
-        margin: .5rem;
-        color: black;
-    }
-
-    .carousel-container {
-        display: flex;
-        align-self: center;
-        justify-content: center;
-        position: relative;
+    
+    .project-card img {
         width: 100%;
-        height: 100%;
-        overflow: hidden;
-        padding: 24px 0;
+        height: 200px; /* Fixed image height */
+        object-fit: contain; /* Ensure full image is visible */
+        background-color: #f0f0f0; /* Fallback background */
     }
-      
-    .carousel {
+  
+  /* Card Content */
+    .card-content {
+        padding: 1rem;
+        flex: 1;
         display: flex;
-        transition: transform 0.5s ease-in-out;
+        flex-direction: column;
     }
-      
-    .carousel-item {
-        flex: 0 0 34%;
-        width: 200px;
-        margin: 0 auto;
-        text-align: center;
-        opacity: 0.8;
-        transform: scale(0.5);
-        transition: transform 0.5s ease, opacity 0.5s ease;
+    
+    .card-content h3 {
+        margin-bottom: 0.5rem;
+        font-size: 1.5rem;
     }
-
-    #projects .article-container:hover {
-        cursor: pointer;
+    
+    .card-content p {
+        margin-bottom: 0.5rem;
+        color: #555;
+        flex-grow: 1;
     }
-
-    #projects .carousel-item img:hover {
-        box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6); 
-    }
-      
-    .carousel-item img {
-        width: 100%;
-        max-width: 250px;
-        border-radius: 10px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    }
-      
-    .carousel-item.active {
-        opacity: 1;
-        transform: scale(1);
-    }
-      
-    .carousel-arrow {
+  
+  /* Button positioned relative to the card */
+    .project-card .btn {
         position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 3rem;
-        background: none;
-        border: none;
-        cursor: pointer;
-        z-index: 10;
-        padding: 10px;
-        overflow: hidden;
-    }
-      
-    .carousel-arrow.left {
-        left: 10px;
-        margin-left: 50px;
-    }
-      
-    .carousel-arrow.right {
-        right: 10px;
-        margin-right: 50px;
-    }
-
-    .project-indicators {
+        bottom: 1rem;
+        left: 1rem;
+        text-decoration: none;
+        color: #353535;
         display: flex;
+        align-items: center;
         justify-content: center;
-        gap: 10px;
-        margin-top: 10px;
+        padding: 0.5rem 1rem;
+        border: 1px solid #353535;
+        border-radius: 20px;
+        transition: background-color 0.3s, color 0.3s;
     }
     
-    .project-indicator {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background-color: #ddd;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-    
-    .project-indicator.active {
-        background-color: #555; /* Highlight the active project indicator */
+    .project-card .btn:hover {
+        background-color: #353535;
+        color: #fff;
     }
 
 

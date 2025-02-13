@@ -48,107 +48,88 @@
 		</div>
 	</section>
 	<section id="projects">
-		<p class="section_text__p1"> My work</p>
-		<div class="experience-details-container">
-			<div class="project-container">
-				<button class="carousel-arrow left" id="prev">&#10094;</button>
-				<div class="carousel-container">
-					<div class="carousel">
-						<div class="carousel-item">
-							<div class="article-container">
-								<img 
-									src="./WebContent/assets/Shiny_Apps_Assets/VisitationGraphic.png" 
-									alt="Project 3" 
-									class="project3-img"
-									onclick="window.open('https://iuq9gs-charles-coonce.shinyapps.io/visitation/')"
-								/>
-							</div>
-							<h2 class="experience-sub-title project-title">National Parks Dashboard</h2>
-							<p>Dashboards, Shiny Apps</p>
-						</div>
-						<div class="carousel-item">
-							<div class="article-container">
-								<img 
-									src="./WebContent/assets/White_Wine_Model.png" 
-									alt="Project 2" 
-									class="project4-img"
-									onclick="window.open('https://github.com/cdcoonce/Wine-Quality')"
-								/>
-							</div>
-							<h2 class="experience-sub-title project-title">Wine Quality</h2>
-							<p> Regression, Visualization</p>
-						</div>
-						<div class="carousel-item">
-							<div class="article-container">
-								<img 
-									src="./WebContent/assets/stacked_area.png" 
-									alt="Project 2" 
-									class="project4-img"
-									onclick="window.open('https://github.com/cdcoonce/Electricity_Consumption_Analysis')"
-								/>
-							</div>
-							<h2 class="experience-sub-title project-title">Electricity Consumption</h2>
-							<p> Data Preparation, Visualization</p>
-						</div>
-						<div class="carousel-item">
-							<div class="article-container">
-								<img 
-									src="./WebContent/assets/National_Parks_Project_Assets/NPS_plot5.png"
-									alt="Project 1" 
-									class="project1-img"
-									onclick="window.open('https://github.com/cdcoonce/National_Parks_Project/wiki')"
-								/>
-							</div>
-							<h2 class="experience-sub-title project-title">National Parks Visitation</h2>
-							<p>Analysis, Visualization</p>
-						</div>
-						<div class="carousel-item">
-							<div class="article-container">
-								<a href="https://charleslikesdata.com">
-									<img 
-										src="./WebContent/assets/Portfolio_Website_Project_Assets/PortfolioCode.png" 
-										alt="Project 2" 
-										class="project2-img"
-										onclick="window.open('https://github.com/cdcoonce/Portfolio_Website')"
-									/>
-								</a>
-							</div>
-							<h2 class="experience-sub-title project-title">Portfolio Website</h2>
-							<p>HTML, CSS, Javascript</p>
-						</div>
-						<div class="carousel-item">
-							<div class="article-container">
-								<img 
-									src="./WebContent/assets/Shiny_Apps_Assets/WorldHappinessGraphic.png" 
-									alt="Project 3" 
-									class="project3-img"
-									onclick="window.open('https://iuq9gs-charles-coonce.shinyapps.io/whrcharlescoonce/')"
-								/>
-							</div>
-							<h2 class="experience-sub-title project-title">World Happiness Dashboard</h2>
-							<p>Dashboards, Shiny Apps</p>
-						</div>
-						<div class="carousel-item">
-							<div class="article-container">
-								<img 
-									src="./WebContent/assets/DetValidationReport.png" 
-									alt="Project 2" 
-									class="project4-img"
-									onclick="window.open('https://github.com/cdcoonce/Google_Analytics_Data_Archive')"
-								/>
-							</div>
-							<h2 class="experience-sub-title project-title">Data Archive</h2>
-							<p> Data Retention, Data Validation</p>
-						</div>
-					</div>
-				</div>
-				<button class="carousel-arrow right" id="next">&#10095;</button>
+	<!-- Filter Keywords -->
+		<div class="projects-filter">
+			<span class="filter active" data-filter="all">All</span>
+			<span class="filter" data-filter="dashboard">Dashboard</span>
+			<span class="filter" data-filter="visualization">Visualization</span>
+			<span class="filter" data-filter="regression">Regression</span>
+			<span class="filter" data-filter="analysis">Analysis</span>
+			<span class="filter" data-filter="data-preparation">Data Prep</span>
+			<span class="filter" data-filter="web">Web</span>
+			<span class="filter" data-filter="data-validation">Data Validation</span>
+			<span class="filter" data-filter="shiny">Shiny</span>
+			<span class="filter" data-filter="api">API</span>
+		  </div>
+	  
+	<!-- Projects Grid -->
+		<div class="projects-grid">
+		<!-- Project 1: National Parks Dashboard -->
+			<div class="project-card" data-tags="dashboard,shiny,visualization">
+			  <img src="./WebContent/assets/Shiny_Apps_Assets/VisitationGraphic.png" alt="National Parks Dashboard">
+			  <div class="card-content">
+				<h3>National Parks Dashboard</h3>
+			  </div>
+			  <a href="https://iuq9gs-charles-coonce.shinyapps.io/visitation/" target="_blank" class="btn">Learn More</a>
 			</div>
-			<div class="project-indicators"></div>
-		</div>
+		
+		<!-- Project 2: Wine Quality -->
+			<div class="project-card" data-tags="regression,visualization">
+			  <img src="./WebContent/assets/White_Wine_Model.png" alt="Wine Quality">
+			  <div class="card-content">
+				<h3>Wine Quality Analysis</h3>
+			  </div>
+			  <a href="https://github.com/cdcoonce/Wine-Quality" target="_blank" class="btn">Learn More</a>
+			</div>
+		
+		<!-- Project 3: Electricity Consumption -->
+			<div class="project-card" data-tags="data-preparation,visualization">
+			  <img src="./WebContent/assets/stacked_area.png" alt="Electricity Consumption">
+			  <div class="card-content">
+				<h3>Electricity Consumption</h3>
+			  </div>
+			  <a href="https://github.com/cdcoonce/Electricity_Consumption_Analysis" target="_blank" class="btn">Learn More</a>
+			</div>
+		
+		<!-- Project 4: National Parks Visitation -->
+			<div class="project-card" data-tags="analysis,visualization">
+			  <img src="./WebContent/assets/National_Parks_Project_Assets/NPS_plot5.png" alt="National Parks Visitation">
+			  <div class="card-content">
+				<h3>National Parks Analysis</h3>
+			  </div>
+			  <a href="https://github.com/cdcoonce/National_Parks_Project/wiki" target="_blank" class="btn">Learn More</a>
+			</div>
+		
+		<!-- Project 5: Portfolio Website -->
+			<div class="project-card" data-tags="html,css,javascript,web">
+			  <img src="./WebContent/assets/Portfolio_Website_Project_Assets/PortfolioCode.png" alt="Portfolio Website">
+			  <div class="card-content">
+				<h3>Portfolio Website</h3>
+			  </div>
+			  <a href="https://github.com/cdcoonce/Portfolio_Website" target="_blank" class="btn">Learn More</a>
+			</div>
+		
+		<!-- Project 6: World Happiness Dashboard -->
+			<div class="project-card" data-tags="dashboard,shiny,visualization">
+			  <img src="./WebContent/assets/Shiny_Apps_Assets/WorldHappinessGraphic.png" alt="World Happiness Dashboard">
+			  <div class="card-content">
+				<h3>World Happiness Dashboard</h3>
+			  </div>
+			  <a href="https://iuq9gs-charles-coonce.shinyapps.io/whrcharlescoonce/" target="_blank" class="btn">Learn More</a>
+			</div>
+		
+		<!-- Project 7: Data Archive -->
+			<div class="project-card" data-tags="api, data-validation">
+			  <img src="./WebContent/assets/DetValidationReport.png" alt="Data Archive">
+			  <div class="card-content">
+				<h3>Data Archive</h3>
+			  </div>
+			  <a href="https://github.com/cdcoonce/Google_Analytics_Data_Archive" target="_blank" class="btn">Learn More</a>
+			</div>
+		  </div>
 	</section>
 	<section id="contacts">
-		<p class="section_text__p1">Recommendations</p>
+		<p class="section_text__p1">Testimonials</p>
 		<div class="testimonials-container">
 			<div class="btn-container">
 				<button id="prevRec" class="btn btn-color-2" onclick="prevTestimonial()">&#10094</button>
