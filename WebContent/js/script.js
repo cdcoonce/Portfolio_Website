@@ -1,30 +1,53 @@
+/* === Multi-Selectable Projects Keyword Filter with "All" Logic === */
 
-/* === Projects Keyword Filter === */
+document.addEventListener("DOMContentLoaded", () => {
+    const filters = document.querySelectorAll(".projects-filter .filter");
+    const cards = document.querySelectorAll(".project-card");
+    const activeFilters = new Set();
 
-    document.addEventListener("DOMContentLoaded", () => {
-        const filters = document.querySelectorAll(".projects-filter .filter");
-        const cards = document.querySelectorAll(".project-card");
-    
-        filters.forEach(filter => {
+    filters.forEach(filter => {
         filter.addEventListener("click", () => {
-            // Update active filter style
-            filters.forEach(f => f.classList.remove("active"));
-            filter.classList.add("active");
-    
             const filterValue = filter.getAttribute("data-filter");
-    
-            cards.forEach(card => {
-            const tags = card.getAttribute("data-tags");
-            // Show all cards if filter is 'all', else check if tag is included
-            if (filterValue === "all" || tags.includes(filterValue)) {
-                card.style.display = "block";
+
+            if (filterValue === "all") {
+                // Clear all other filters and activate "All"
+                activeFilters.clear();
+                filters.forEach(f => f.classList.remove("active"));
+                filter.classList.add("active");
+
+                // Show all project cards
+                cards.forEach(card => card.style.display = "block");
             } else {
-                card.style.display = "none";
+                const allFilter = document.querySelector('[data-filter="all"]');
+                allFilter.classList.remove("active");
+
+                // Toggle active state
+                if (filter.classList.contains("active")) {
+                    filter.classList.remove("active");
+                    activeFilters.delete(filterValue);
+                } else {
+                    filter.classList.add("active");
+                    activeFilters.add(filterValue);
+                }
+
+                // If no filters left, reactivate "All"
+                if (activeFilters.size === 0) {
+                    allFilter.classList.add("active");
+                    cards.forEach(card => card.style.display = "block");
+                } else {
+                    // Show cards matching any of the selected filters
+                    cards.forEach(card => {
+                        const tags = card.getAttribute("data-tags") || "";
+                        const matches = Array.from(activeFilters).some(filter =>
+                            tags.includes(filter)
+                        );
+                        card.style.display = matches ? "block" : "none";
+                    });
+                }
             }
-            });
-        });
         });
     });
+});
 
 /* === Testimonials Slider === */
 
