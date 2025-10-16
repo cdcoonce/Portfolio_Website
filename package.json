@@ -1,0 +1,25 @@
+{
+  "name": "portfoliowebsite",
+  "version": "1.0.0",
+  "description": "Welcome to the repository for my personal portfolio site: [**charleslikesdata.com**](https://charleslikesdata.com)",
+  "main": "index.js",
+  "scripts": {
+    "format": "prettier --write \"**/*.{html,css,js,md,json}\"",
+    "format:check": "prettier --check \"**/*.{html,css,js,md,json}\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cdcoonce/Portfolio_Website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/cdcoonce/Portfolio_Website/issues"
+  },
+  "homepage": "https://github.com/cdcoonce/Portfolio_Website#readme",
+  "devDependencies": {
+    "prettier": "^3.6.2"
+  }
+}

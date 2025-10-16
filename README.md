@@ -1,66 +1,120 @@
-# Portfolio Website
+# 🌐 Charles Coonce — Portfolio Website
 
-Welcome to the repository for my personal portfolio website! This website showcases my skills, projects, and experience as a data scientist and business analyst. It's designed to highlight my work and serve as a platform for potential employers, collaborators, and fellow developers.
+Welcome to the repository for my personal portfolio site: [**charleslikesdata.com**](https://charleslikesdata.com)
 
-## 🌐 Live Website
-
-[Visit My Portfolio](https://charleslikesdata.com/)
+This site showcases my work in **data science**, **analytics engineering**, and **software development** — including case studies, technical projects, and professional experience.
 
 ---
 
-## 🚀 Features
+## 🚀 Live Site
 
-- **Responsive Design**: Optimized for all devices, from desktops to smartphones.
-- **Profile Section**: Contains links for my Github, LinkedIn, resume, and e-mail address.
-- **Projects Section**: Highlights key projects using a carousel style interface I designed, and links to source code or live demos.
-- **Recommendations Section**: Includes a number of proffesional reccomendations with a card deck style design.
+👉 [https://charleslikesdata.com](https://charleslikesdata.com)
 
 ---
 
-## 🛠️ Technologies Used
+## 🧰 Tech Stack
 
-- **Frontend**: HTML, CSS, JavaScript
-- **Styling**: Custom CSS with a focus on clean and minimalist design
-- **Version Control**: Git and GitHub
-
----
-
-## 📂 Repository Structure
-
-📁 portfolio-website  
-&nbsp;| ── 📁 projects  
-&nbsp;| ── 📁 Webcontent  
-&nbsp;|  &nbsp;&nbsp;&nbsp;  ├── 📁 assets  
-&nbsp;|  &nbsp;&nbsp;&nbsp;  ├── 📁 css  
-&nbsp;│  &nbsp;&nbsp;  └── 📁 js  
-&nbsp;| ── index.html  
-└── README.md  
-
-- **assets/**: Contains images, stylesheets, and JavaScript files.
-- **projects/**: Holds data or assets for individual project pages.
-- **index.html**: The main entry point for the portfolio.
+| Area          | Tools / Technologies           |
+| ------------- | ------------------------------ |
+| Structure     | HTML5                          |
+| Styling       | CSS3                           |
+| Interactivity | JavaScript                     |
+| Hosting       | GitHub Pages                   |
+| Domain        | Custom domain via `CNAME` file |
+| Development   | Visual Studio Code             |
 
 ---
 
-## 📸 Screenshots
+## 🗂️ Repository Structure
 
-### Home Page
+```
+.
+├─ WebContent/
+│  ├─ assets/          # Images, icons, and other media
+│  ├─ css/             # Stylesheets
+│  └─ js/              # Scripts
+├─ index.html          # Homepage entry point
+├─ CNAME               # Custom domain reference
+├─ .gitignore          # Ignored files for cleanliness
+└─ README.md           # This documentation file
+```
 
-![Home Page](./WebContent/assets/portfolio_profile_homepage.png)
+---
 
-### Projects Section
-![Projects Section](./WebContent/assets/portfolio_projects_homepage.png)
+## ⚙️ Local Development
 
-### Recommendations Section
-![recommendations Section](./WebContent/assets/portfolio_recommendations_homepage.png)
+If you’d like to view or edit the site locally:
+
+1. Clone the repository
+
+   ```bash
+   git clone https://github.com/cdcoonce/Portfolio_Website.git
+   cd Portfolio_Website
+   ```
+
+2. Open `index.html` directly in your browser  
+   or serve it locally with Python:
+
+   ```bash
+   python -m http.server 8000
+   ```
+
+3. Visit [http://localhost:8000](http://localhost:8000)
+
+---
+
+## 🧹 Code Standards
+
+This repo uses consistent formatting via `.editorconfig` and `.prettierrc`.
+
+Example `.editorconfig`:
+
+```ini
+[*]
+indent_style = space
+indent_size = 2
+end_of_line = lf
+charset = utf-8
+insert_final_newline = true
+```
+
+Example `.prettierrc`:
+
+```json
+{
+  "printWidth": 100,
+  "tabWidth": 2,
+  "semi": true,
+  "singleQuote": true
+}
+```
+
+---
+
+## 🧠 Features
+
+- Clean, minimalist portfolio design
+- Responsive layout for desktop and mobile
+- Project gallery linking to GitHub repos and demos
+- Testimonials and personal highlights
+- Contact links (GitHub, LinkedIn, Email)
+
+---
+
+## 🧾 License
+
+This repository is for my personal website.  
+All rights reserved © 2025 [Charles Coonce](https://charleslikesdata.com)
 
 ---
 
 ## 📬 Contact
 
-Feel free to reach out if you'd like to collaborate or learn more about my work:
-
-- **Email**: [charlescoonce@gmail.com](mailto:charlescoonce@gmail.com)
-- **LinkedIn**: [My LinkedIn Profile](https://www.linkedin.com/in/your-profile)
+**Charles Coonce**  
+📧 [charles.coonce@gmail.com](mailto:charles.coonce@gmail.com)  
+💼 [LinkedIn](https://www.linkedin.com/in/charlescoonce/)  
+💻 [GitHub](https://github.com/cdcoonce)
 
 ---
+
+> _“Data should tell a story — I build the bridge between people, data, and decisions.”_
