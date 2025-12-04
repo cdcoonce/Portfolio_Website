@@ -1,10 +1,11 @@
-/* === General ==== */
+/* === General === */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box; /* Ensure consistent box model */
 }
 
 body {
@@ -58,8 +59,7 @@ img,
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 600;
-  transform: all 300ms ease;
+  transition: all 300ms ease; /* Fixed typo: transform → transition */
   padding: 1rem;
   width: 8rem;
   height: 51px;
@@ -98,7 +98,6 @@ img,
 
 section {
   padding-top: 2vh;
-  height: 60vh;
   padding: 0 2rem;
   box-sizing: border-box;
   min-height: fit-content;
@@ -209,7 +208,7 @@ section {
 
 /* Project Card */
 .project-card {
-  position: relative; /* Make the whole card the positioning context */
+  position: relative; /* Positioning context for absolutely-positioned button */
   background-color: #fff;
   border-radius: 10px;
   overflow: hidden;
@@ -254,7 +253,7 @@ section {
   flex-grow: 1;
 }
 
-/* Button positioned relative to the card */
+/* Button positioned absolutely within card */
 .project-card .btn {
   position: absolute;
   bottom: 1rem;
@@ -316,7 +315,7 @@ section {
   max-width: 100%;
   padding: 20px;
   text-align: left;
-  background-color: #ebf1f866;
+  background-color: rgba(235, 241, 248, 0.4); /* Semi-transparent background */
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   margin: 0 10px;
