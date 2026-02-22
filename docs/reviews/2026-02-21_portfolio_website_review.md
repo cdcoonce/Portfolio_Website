@@ -33,7 +33,7 @@ The `<img>` tag has `class="icon"` declared **twice** (lines 49 and 52). Per the
 
 ---
 
-### 2. Inline `onclick` handlers call functions scoped inside `DOMContentLoaded` (`index.html:233,280` / `script.js:156,171`)
+### 2. ~~Inline `onclick` handlers call functions scoped inside `DOMContentLoaded` (`index.html:233,280` / `script.js:156,171`)~~ RESOLVED (Plan 4)
 
 ```html
 <button id="prevRec" class="btn btn-color-2" onclick="prevTestimonial()">&#10094</button>
@@ -113,7 +113,7 @@ The LinkedIn icon is an `<img>` with an inline `onclick` to open a URL. Unlike t
 
 ---
 
-### 7. `padding-top` overridden immediately by `padding` shorthand (`style.css:100-101`)
+### 7. ~~`padding-top` overridden immediately by `padding` shorthand (`style.css:100-101`)~~ RESOLVED (Plan 3)
 
 ```css
 section {
@@ -129,7 +129,7 @@ The `padding` shorthand on line 101 resets all four sides, overwriting the `padd
 
 ---
 
-### 8. `box-sizing: border-box` declared on `section` but already set globally (`style.css:5-9, 103`)
+### 8. ~~`box-sizing: border-box` declared on `section` but already set globally (`style.css:5-9, 103`)~~ RESOLVED (Plan 3)
 
 The universal selector `*` already sets `box-sizing: border-box`. The redundant declaration on `section` is harmless but unnecessary.
 
@@ -139,7 +139,7 @@ The universal selector `*` already sets `box-sizing: border-box`. The redundant 
 
 ## Medium-Priority Issues
 
-### 9. Testimonial section uses `id="contacts"` (`index.html:229`)
+### 9. ~~Testimonial section uses `id="contacts"` (`index.html:229`)~~ RESOLVED (Plan 5)
 
 The testimonials section has `id="contacts"` but contains no contact information — it only has testimonials. The CSS targets `#contacts` accordingly. This is a semantic naming issue that makes the code harder to understand.
 
@@ -175,7 +175,7 @@ The file is named `mediaquerires.css` (extra "r" — should be `mediaqueries.css
 
 ---
 
-### 13. Copyright year is hardcoded to 2024 (`index.html:286`)
+### 13. ~~Copyright year is hardcoded to 2024 (`index.html:286`)~~ RESOLVED (Plan 5)
 
 ```html
 <p>Copyright &#169; 2024 Charles Coonce. All Rights Reserved.</p>
@@ -215,7 +215,7 @@ The site has no `<link rel="icon">` in the `<head>`. Browsers will request `/fav
 
 ---
 
-### 16. Font family inconsistency in testimonials section (`style.css:299`)
+### 16. ~~Font family inconsistency in testimonials section (`style.css:299`)~~ RESOLVED (Plan 3)
 
 The `.testimonials-container` explicitly sets `font-family: Arial, sans-serif`, overriding the global `Poppins` font from the `body` rule. This also appears in the media queries (`mediaquerires.css:78, 119`). The testimonials section will render in a different font than the rest of the page.
 
@@ -223,7 +223,7 @@ The `.testimonials-container` explicitly sets `font-family: Arial, sans-serif`, 
 
 ---
 
-### 17. Auto-scroll `setInterval` never clears on page visibility change (`script.js:188-195`)
+### 17. ~~Auto-scroll `setInterval` never clears on page visibility change (`script.js:188-195`)~~ RESOLVED (Plan 4)
 
 The testimonial carousel auto-scrolls every 20 seconds via `setInterval`. This timer runs indefinitely even when the tab is in the background, which:
 
@@ -234,7 +234,7 @@ The testimonial carousel auto-scrolls every 20 seconds via `setInterval`. This t
 
 ---
 
-### 18. Filter matching uses `String.includes()` which can produce false positives (`script.js:50`)
+### 18. ~~Filter matching uses `String.includes()` which can produce false positives (`script.js:50`)~~ RESOLVED (Plan 4)
 
 ```js
 const matches = Array.from(activeFilters).some((filter) => tags.includes(filter));
@@ -273,7 +273,7 @@ The HTML file mixes tabs and spaces for indentation, and nesting levels are inco
 
 ---
 
-### 21. Unused CSS animation `fadeIn` (`style.css:389-396`)
+### 21. ~~Unused CSS animation `fadeIn` (`style.css:389-396`)~~ RESOLVED (Plan 3)
 
 The `@keyframes fadeIn` animation is defined but never referenced anywhere in the stylesheets.
 
@@ -281,7 +281,7 @@ The `@keyframes fadeIn` animation is defined but never referenced anywhere in th
 
 ---
 
-### 22. Unused CSS class `.p` (`style.css:324-326`)
+### 22. ~~Unused CSS class `.p` (`style.css:324-326`)~~ RESOLVED (Plan 3)
 
 ```css
 .p {
@@ -295,7 +295,7 @@ This class is never used in the HTML.
 
 ---
 
-### 23. Redundant CSS in media queries
+### 23. ~~Redundant CSS in media queries~~ RESOLVED (Plan 3)
 
 The `@media (max-width: 1250px)` and `@media (max-width: 700px)` blocks in `mediaquerires.css` redeclare many properties that are identical to the base styles (e.g., `.testimonial` has the same `display: none`, `padding: 20px`, etc.). Only override what actually changes at each breakpoint.
 
@@ -337,7 +337,7 @@ A more specific title like `"Charles Coonce | Data Analytics Portfolio"` would b
 
 ---
 
-### 27. `transition: all 300ms ease` is overly broad (`style.css:26-29`)
+### 27. ~~`transition: all 300ms ease` is overly broad (`style.css:26-29`)~~ RESOLVED (Plan 3)
 
 Applying `transition: all` to `a`, `img`, and `.btn` globally means every CSS property change (including layout properties) will animate. This can cause unexpected visual glitches and minor performance overhead.
 
@@ -345,7 +345,7 @@ Applying `transition: all` to `a`, `img`, and `.btn` globally means every CSS pr
 
 ---
 
-### 28. `justify-content: right` is non-standard (`style.css:339,348,357`)
+### 28. ~~`justify-content: right` is non-standard (`style.css:339,348,357`)~~ RESOLVED (Plan 3)
 
 ```css
 .author {
@@ -379,7 +379,7 @@ The `mailto:` link exposes the email address to scrapers. Consider obfuscating i
 
 ## Performance Notes
 
-### 31. ~~No image optimization strategy~~ PARTIALLY RESOLVED (Plan 2 — added `loading="lazy"` to all project images)
+### 31. ~~No image optimization strategy~~ RESOLVED (added `loading="lazy"` and `width`/`height` attributes to all project images)
 
 Project card images are served as full-resolution PNGs/JPEGs without:
 
@@ -390,7 +390,7 @@ Project card images are served as full-resolution PNGs/JPEGs without:
 
 **Fix:** At minimum, add `loading="lazy"` to all project images and explicit `width`/`height` attributes.
 
-### 32. Google Fonts loaded via `@import` in CSS (`style.css:3`)
+### 32. ~~Google Fonts loaded via `@import` in CSS (`style.css:3`)~~ RESOLVED (Plan 5)
 
 Using `@import` in CSS is render-blocking — the browser must download the CSS, parse it, discover the `@import`, then fetch the font. Moving the Google Fonts `<link>` to the HTML `<head>` (with `rel="preconnect"`) would load faster.
 
@@ -416,7 +416,7 @@ All 17 project cards are hardcoded in `index.html`. Adding or reordering project
 - A JSON data file with project metadata rendered by JS
 - A static site generator (e.g., 11ty, Hugo)
 
-### 34. No error page (404)
+### 34. ~~No error page (404)~~ RESOLVED (created custom `404.html`)
 
 GitHub Pages serves a default 404 page. A custom `404.html` would maintain branding if visitors hit a broken link.
 

@@ -1,5 +1,6 @@
-# Plan 4: JavaScript Behavior Fixes
+# Plan 4: JavaScript Behavior Fixes — COMPLETED
 
+**Status:** Implemented 2026-02-21
 **Priority:** Medium — do after Plans 2 and 3
 **Complexity:** Medium
 **Files touched:** `WebContent/js/script.js`, `index.html` (2 lines only)

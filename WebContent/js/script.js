@@ -47,7 +47,13 @@ document.addEventListener('DOMContentLoaded', () => {
           // Show only cards matching at least one active filter (OR logic)
           cards.forEach((card) => {
             const tags = card.getAttribute('data-tags') || '';
-            const matches = Array.from(activeFilters).some((filter) => tags.includes(filter));
+            const tagSet = new Set(
+              tags
+                .split(',')
+                .map((t) => t.trim())
+                .filter(Boolean)
+            );
+            const matches = Array.from(activeFilters).some((f) => tagSet.has(f));
             card.style.display = matches ? 'block' : 'none';
           });
         }
@@ -184,15 +190,25 @@ document.addEventListener('DOMContentLoaded', () => {
   nextButtonTestimonial.addEventListener('click', nextTestimonial);
   prevButtonTestimonial.addEventListener('click', prevTestimonial);
 
-  // Auto-scroll carousel at configured interval
-  setInterval(() => {
+  // Auto-scroll carousel, pausing when tab is not visible
+  let autoScrollTimer = setInterval(autoScroll, CAROUSEL_CONFIG.AUTO_SCROLL_INTERVAL_MS);
+
+  function autoScroll() {
     if (carouselIndex + testimonialsToShow < testimonials.length) {
       nextTestimonial();
     } else {
       carouselIndex = 0;
       showTestimonials(carouselIndex);
     }
-  }, CAROUSEL_CONFIG.AUTO_SCROLL_INTERVAL_MS);
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      clearInterval(autoScrollTimer);
+    } else {
+      autoScrollTimer = setInterval(autoScroll, CAROUSEL_CONFIG.AUTO_SCROLL_INTERVAL_MS);
+    }
+  });
 
   // Initialize carousel display
   showTestimonials(carouselIndex);
