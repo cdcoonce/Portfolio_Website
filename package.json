@@ -2,7 +2,7 @@
   "name": "portfoliowebsite",
   "version": "1.0.0",
   "description": "Welcome to the repository for my personal portfolio site: [**charleslikesdata.com**](https://charleslikesdata.com)",
-  "main": "index.js",
+  "main": "index.html",
   "scripts": {
     "format": "prettier --write \"**/*.{html,css,js,md,json}\"",
     "format:check": "prettier --check \"**/*.{html,css,js,md,json}\""
