@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-03-01
+
+### Added
+
+- 1–2 sentence descriptions on all 17 project cards, highlighting key technique or insight
+- Featured badge (dark top border) on 4 highlight projects: National Parks Dashboard, Wine Quality Analysis, Manufacturing Downtime Analysis, and Housing Affordability & Commute Tradeoffs
+- E2E gallery filter tests (implemented stubs from Phase 3 plan): filter-by-tag, reset-to-all, featured-card filterability
+- New validation tests: all cards have descriptions, featured cards exist
+- `.img--contain` utility class for screenshot/dashboard thumbnails that should not be cropped
+
+### Changed
+
+- `.project-card` height from fixed `400px` to `min-height: 430px` to accommodate descriptions
+- Project card image `object-fit` from `contain` to `cover` for uniform thumbnail appearance
+- Fixed pre-existing CSS lint error: added blank line before `50%` keyframe in `@keyframes bounce`
+
 ## [1.2.0] - 2026-03-01
 
 ### Added
