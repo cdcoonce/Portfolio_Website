@@ -21,7 +21,7 @@ Add a large typographic opening quote mark using a CSS `::before` pseudo-element
 
 ```css
 .testimonial::before {
-  content: "\201C"; /* Left double quotation mark */
+  content: '\201C'; /* Left double quotation mark */
   font-size: 3rem;
   color: rgba(53, 53, 53, 0.2);
   font-family: Georgia, serif;
@@ -38,6 +38,7 @@ Add a large typographic opening quote mark using a CSS `::before` pseudo-element
 **Current:** 10px dots with low-contrast colors (`#b0b4b9ac` inactive, `#272829c1` active).
 
 **Proposed:**
+
 ```css
 .dot {
   width: 12px;
@@ -70,6 +71,7 @@ dot.addEventListener('click', () => {
 **File:** `WebContent/css/style.css:281-290`
 
 **Current:**
+
 ```css
 #testimonials {
   height: 50vh;
@@ -78,6 +80,7 @@ dot.addEventListener('click', () => {
 ```
 
 **Proposed:**
+
 ```css
 #testimonials {
   min-height: 40vh;
@@ -95,11 +98,13 @@ Replace `height` with `min-height` so longer testimonials (like Chris Allard's, 
 Add a small "3 / 7" style counter below the dots to indicate position.
 
 **HTML (added dynamically via JS):**
+
 ```html
 <p class="testimonial-counter">1 / 7</p>
 ```
 
 **JS update in `showTestimonials()`:**
+
 ```javascript
 const counter = document.querySelector('.testimonial-counter');
 if (counter) {
@@ -116,19 +121,33 @@ if (counter) {
 Insert a new section between `#testimonials` and `<footer>` with contact links. This mirrors the hero section's contact icons but is always accessible at the bottom of the page.
 
 **HTML:**
+
 ```html
 <section id="contact">
   <h2>Get in Touch</h2>
   <p>Interested in working together or have a question? Reach out below.</p>
   <div class="contact-links">
     <a href="mailto:CharlesCoonce@Gmail.com" class="btn btn-color-1">Email Me</a>
-    <a href="https://www.linkedin.com/in/charlesdcoonce/" target="_blank" rel="noopener noreferrer" class="btn btn-color-2">LinkedIn</a>
-    <a href="https://github.com/cdcoonce" target="_blank" rel="noopener noreferrer" class="btn btn-color-2">GitHub</a>
+    <a
+      href="https://www.linkedin.com/in/charlesdcoonce/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="btn btn-color-2"
+      >LinkedIn</a
+    >
+    <a
+      href="https://github.com/cdcoonce"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="btn btn-color-2"
+      >GitHub</a
+    >
   </div>
 </section>
 ```
 
 **CSS:**
+
 ```css
 #contact {
   text-align: center;
