@@ -94,65 +94,47 @@
       </div>
     </section>
     <section id="skills">
-      <h2>Skills &amp; Tools</h2>
+      <div class="skills-header">
+        <h2>Skills &amp; Tools</h2>
+        <button class="skill-filter-reset active" data-filter="all">All Projects</button>
+      </div>
       <div class="skills-grid">
         <div class="skill-category">
           <h3>Languages</h3>
           <div class="skill-tags">
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">SQL</span>
-            <span class="skill-tag">R</span>
+            <button class="skill-tag" data-filter="python">Python</button>
+            <button class="skill-tag" data-filter="sql">SQL</button>
+            <button class="skill-tag" data-filter="r">R</button>
           </div>
         </div>
         <div class="skill-category">
           <h3>Techniques</h3>
           <div class="skill-tags">
-            <span class="skill-tag">ETL/ELT</span>
-            <span class="skill-tag">Machine Learning</span>
-            <span class="skill-tag">Statistical Analysis</span>
+            <button class="skill-tag" data-filter="etl">ETL/ELT</button>
+            <button class="skill-tag" data-filter="machine-learning">Machine Learning</button>
+            <button class="skill-tag" data-filter="statistical-analysis">Statistical Analysis</button>
           </div>
         </div>
         <div class="skill-category">
           <h3>Tools &amp; Platforms</h3>
           <div class="skill-tags">
-            <span class="skill-tag">Tableau</span>
-            <span class="skill-tag">Excel</span>
-            <span class="skill-tag">Shiny</span>
+            <button class="skill-tag" data-filter="tableau">Tableau</button>
+            <button class="skill-tag" data-filter="excel">Excel</button>
+            <button class="skill-tag" data-filter="shiny">Shiny</button>
           </div>
         </div>
         <div class="skill-category">
           <h3>Focus Areas</h3>
           <div class="skill-tags">
-            <span class="skill-tag">Data Visualization</span>
-            <span class="skill-tag">Analytics Dashboards</span>
-            <span class="skill-tag">Data Pipelines</span>
-            <span class="skill-tag">Business Intelligence</span>
+            <button class="skill-tag" data-filter="visualization">Data Visualization</button>
+            <button class="skill-tag" data-filter="analytics-dashboard">Analytics Dashboards</button>
+            <button class="skill-tag" data-filter="data-pipelines">Data Pipelines</button>
+            <button class="skill-tag" data-filter="business-intelligence">Business Intelligence</button>
           </div>
         </div>
       </div>
     </section>
     <section id="projects">
-      <!-- Filter Keywords: Core Skills | Tools & Platforms | Domains -->
-      <div class="projects-filter">
-        <span class="filter active" data-filter="all">All</span>
-        <!-- Core Technical Skills -->
-        <span class="filter" data-filter="python">Python</span>
-        <span class="filter" data-filter="sql">SQL</span>
-        <span class="filter" data-filter="r">R</span>
-        <span class="filter" data-filter="etl">ETL/ELT</span>
-        <span class="filter" data-filter="machine-learning">Machine Learning</span>
-        <span class="filter" data-filter="statistical-analysis">Statistical Analysis</span>
-        <!-- Tools & Platforms -->
-        <span class="filter" data-filter="tableau">Tableau</span>
-        <span class="filter" data-filter="excel">Excel</span>
-        <span class="filter" data-filter="shiny">Shiny</span>
-        <!-- Domain/Application -->
-        <span class="filter" data-filter="visualization">Data Visualization</span>
-        <span class="filter" data-filter="analytics-dashboard">Analytics Dashboard</span>
-        <span class="filter" data-filter="data-pipelines">Data Pipelines</span>
-        <span class="filter" data-filter="business-intelligence">Business Intelligence</span>
-      </div>
-
       <!-- Projects Grid -->
       <div class="projects-grid">
         <!-- Project 1: National Parks Dashboard -->

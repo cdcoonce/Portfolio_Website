@@ -62,9 +62,33 @@ class TestHeroStructure:
         """Profile picture should use width/height, not CSS scale transform."""
         profile_pic = soup.find('img', class_='profile_pic')
         assert profile_pic is not None, 'Missing profile picture'
-        # Inline style with scale would be a red flag (also caught by no_inline_styles test)
         inline_style = profile_pic.get('style', '')
         assert 'scale' not in inline_style, 'Profile pic should not use inline scale transform'
+
+    def test_skill_tags_are_buttons(self, soup):
+        """Skill tags must be <button> elements for keyboard/click interactivity."""
+        tags = soup.find_all('button', class_='skill-tag')
+        assert len(tags) > 0, 'No <button class="skill-tag"> found — skill tags must be buttons'
+
+    def test_all_skill_tags_have_data_filter(self, soup):
+        """Every skill-tag button must carry a data-filter attribute."""
+        tags = soup.find_all('button', class_='skill-tag')
+        for tag in tags:
+            assert tag.get('data-filter'), f'skill-tag button missing data-filter: {tag}'
+
+    def test_all_projects_button_exists_in_skills(self, soup):
+        """Skills section must include an All Projects reset button."""
+        section = soup.find('section', id='skills')
+        assert section is not None
+        reset = section.find('button', attrs={'data-filter': 'all'})
+        assert reset is not None, 'Missing All Projects reset button in #skills'
+
+    def test_no_standalone_projects_filter_div(self, soup):
+        """The old .projects-filter bar should be removed from the projects section."""
+        projects = soup.find('section', id='projects')
+        assert projects is not None
+        filter_div = projects.find('div', class_='projects-filter')
+        assert filter_div is None, '.projects-filter div should be removed from #projects'
 
 
 @pytest.mark.e2e
@@ -100,3 +124,27 @@ class TestHeroE2E:
         page.wait_for_timeout(300)
         count = page.locator('.skill-category:visible').count()
         assert count == 4, f'All 4 categories should still be visible on mobile, got {count}'
+
+    def test_skill_tag_click_filters_projects(self, page):
+        """Clicking a skill tag should hide non-matching project cards."""
+        page.set_viewport_size({'width': 1440, 'height': 900})
+        page.reload()
+        page.wait_for_timeout(300)
+        total = page.locator('.project-card').count()
+        page.click('button.skill-tag[data-filter="python"]')
+        page.wait_for_timeout(300)
+        visible = page.locator('.project-card:visible').count()
+        assert visible < total, 'Clicking Python filter should hide some project cards'
+
+    def test_all_projects_button_resets_filter(self, page):
+        """Clicking the All Projects button should show all project cards."""
+        page.set_viewport_size({'width': 1440, 'height': 900})
+        page.reload()
+        page.wait_for_timeout(300)
+        total = page.locator('.project-card').count()
+        page.click('button.skill-tag[data-filter="python"]')
+        page.wait_for_timeout(200)
+        page.click('button[data-filter="all"]')
+        page.wait_for_timeout(300)
+        visible = page.locator('.project-card:visible').count()
+        assert visible == total, f'All Projects should show all {total} cards, got {visible}'
