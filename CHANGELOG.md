@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.4.0] - 2026-03-01
+
+### Added
+
+- Decorative opening quotation mark on each testimonial card via CSS `::before` pseudo-element
+- Testimonial position counter ("1 / 7") rendered dynamically below the dots
+- Click-to-navigate on carousel dot indicators
+- Contact section between testimonials and footer with Email, LinkedIn, and GitHub buttons
+- "Contact" link in the sticky navigation bar
+- E2E carousel tests: next navigation, wraparound, counter display, counter update, dot click
+
+### Changed
+
+- Testimonial section height from fixed `50vh` to `min-height: 40vh` with `padding: 2rem 0` to prevent clipping of longer testimonials
+- Dot indicators: slightly larger (12px), full-opacity colors, `cursor: pointer` affordance
+
 ## [1.3.0] - 2026-03-01
 
 ### Added
