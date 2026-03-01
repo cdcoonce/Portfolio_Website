@@ -58,7 +58,7 @@ class TestNavStructure:
         assert btn.get('aria-label'), 'Back-to-top button missing aria-label'
 
     def test_logo_not_standalone_in_profile(self, soup):
-        """Logo div should have moved to nav; profile section should not have a bare .logo div."""
+        """Logo <div> should have moved to nav; profile section should not contain <div class="logo">."""
         profile = soup.find('section', id='profile')
         assert profile is not None
         standalone_logo = profile.find('div', class_='logo')

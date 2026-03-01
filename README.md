@@ -23,6 +23,7 @@ Personal portfolio site showcasing data science, analytics engineering, and soft
     - [Branch naming](#branch-naming)
     - [Commit messages (Conventional Commits)](#commit-messages-conventional-commits)
     - [Deploying](#deploying)
+  - [CI / CD Pipeline](#ci--cd-pipeline)
   - [Featured Projects](#featured-projects)
   - [Contact](#contact)
   - [License](#license)
@@ -44,14 +45,14 @@ The site includes:
 
 ## Tech Stack
 
-| Area          | Technology                     |
-| ------------- | ------------------------------ |
-| Markup        | HTML5 (semantic elements)      |
-| Styling       | CSS3 (custom properties, BEM)  |
-| Interactivity | Vanilla JavaScript (ES6+)      |
-| Formatting    | Prettier                       |
-| Hosting       | GitHub Pages                   |
-| Domain        | Custom domain via `CNAME`      |
+| Area          | Technology                    |
+| ------------- | ----------------------------- |
+| Markup        | HTML5 (semantic elements)     |
+| Styling       | CSS3 (custom properties, BEM) |
+| Interactivity | Vanilla JavaScript (ES6+)     |
+| Formatting    | Prettier                      |
+| Hosting       | GitHub Pages                  |
+| Domain        | Custom domain via `CNAME`     |
 
 ---
 
@@ -111,11 +112,11 @@ Portfolio_Website/
 
 ## Available Scripts
 
-| Command              | Description                                        |
-| -------------------- | -------------------------------------------------- |
-| `npm run serve`      | Start local dev server at `http://localhost:8000`  |
-| `npm run format`     | Auto-format all HTML, CSS, JS, MD, and JSON files  |
-| `npm run format:check` | Check formatting without writing changes         |
+| Command                | Description                                       |
+| ---------------------- | ------------------------------------------------- |
+| `npm run serve`        | Start local dev server at `http://localhost:8000` |
+| `npm run format`       | Auto-format all HTML, CSS, JS, MD, and JSON files |
+| `npm run format:check` | Check formatting without writing changes          |
 
 ---
 
@@ -156,10 +157,10 @@ Formatting is enforced via `.editorconfig` and `.prettierrc`:
 
 This project uses a two-branch model:
 
-| Branch     | Purpose                                               |
-| ---------- | ----------------------------------------------------- |
-| `master`   | Development — all feature branches merge here         |
-| `gh-pages` | Production — merging `master` here triggers a deploy  |
+| Branch     | Purpose                                              |
+| ---------- | ---------------------------------------------------- |
+| `master`   | Development — all feature branches merge here        |
+| `gh-pages` | Production — merging `master` here triggers a deploy |
 
 ### Branch naming
 
@@ -180,29 +181,55 @@ docs(readme): update local development instructions
 
 ### Deploying
 
-```bash
-git checkout gh-pages
-git merge master
-git push origin gh-pages
-git checkout master
-```
+Deployment is **automated via GitHub Actions** (see [CI / CD Pipeline](#ci--cd-pipeline) below).
+
+Every merge into `master` automatically triggers a merge from `master` → `gh-pages`,
+which GitHub Pages then serves as the live site. No manual steps are needed.
+
+---
+
+## CI / CD Pipeline
+
+A single GitHub Actions workflow (`.github/workflows/ci-cd.yml`) handles both
+continuous integration and deployment.
+
+| Trigger                         | Jobs that run                  |
+| ------------------------------- | ------------------------------ |
+| Pull request targeting `master` | `lint` — Prettier format check |
+| Push to `master` (merged PR)    | `lint` → `deploy`              |
+
+**`lint` job** — runs on every PR and every push to `master`:
+
+- Installs Node.js 20 and project dependencies (`npm ci`)
+- Runs `npm run format:check` (Prettier) across all HTML, CSS, JS, MD, and JSON files
+- Fails the workflow if any file is not correctly formatted
+
+**`deploy` job** — runs only on push to `master`, and only after `lint` passes:
+
+- Checks out the full Git history
+- Checks out `gh-pages` locally
+- Merges `origin/master` into `gh-pages`
+- Pushes the updated `gh-pages` branch to GitHub, triggering the live site update
+
+The pipeline uses the built-in `GITHUB_TOKEN` with `contents: write` permission —
+no external secrets or personal access tokens are required.
 
 ---
 
 ## Featured Projects
 
-| Project | Tools |
-| ------- | ----- |
-| National Parks Dashboard | Tableau, Python |
-| Wine Quality Analysis | Python, Pandas, Matplotlib |
-| Manufacturing Downtime Analysis | SQL, Power BI |
-| NYC Collision Analysis | Python, Folium |
-| Global CO2 Emissions | Tableau |
-| Spaceship Titanic Classification | Python, scikit-learn |
-| Housing Affordability & Commute Tradeoffs | Python, GeoPandas |
-| AirBnB Listing Analysis | SQL, Python |
-| World Happiness Dashboard | Tableau |
-| Sleep Deprivation Analysis | R, ggplot2 |
+| Project                                   | Tools                      |
+| ----------------------------------------- | -------------------------- |
+| National Parks Dashboard                  | Tableau, Python            |
+| Wine Quality Analysis                     | Python, Pandas, Matplotlib |
+| Manufacturing Downtime Analysis           | SQL, Power BI              |
+| NYC Collision Analysis                    | Python, Folium             |
+| Global CO2 Emissions                      | Tableau                    |
+| Spaceship Titanic Classification          | Python, scikit-learn       |
+| Housing Affordability & Commute Tradeoffs | Python, GeoPandas          |
+| AirBnB Listing Analysis                   | SQL, Python                |
+| World Happiness Dashboard                 | Tableau                    |
+| Sleep Deprivation Analysis                | R, ggplot2                 |
 
 Full project details, descriptions, and links are on the [live site](https://charleslikesdata.com).
 
@@ -211,6 +238,7 @@ Full project details, descriptions, and links are on the [live site](https://cha
 ## Contact
 
 **Charles Coonce**
+
 - Email: [charles.coonce@gmail.com](mailto:charles.coonce@gmail.com)
 - LinkedIn: [linkedin.com/in/charlescoonce](https://www.linkedin.com/in/charlescoonce/)
 - GitHub: [github.com/cdcoonce](https://github.com/cdcoonce)

@@ -1,0 +1,9 @@
+node_modules
+.venv
+package-lock.json
+uv.lock
+# Ignore project asset files (notebook exports, generated HTML, etc.)
+WebContent/assets/
+
+# Ignore node_modules (prettier already ignores these by default, but explicit is clearer)
+node_modules/
