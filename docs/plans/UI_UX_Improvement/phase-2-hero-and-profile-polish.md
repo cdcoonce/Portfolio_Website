@@ -20,6 +20,7 @@ The hero section is the first thing visitors see. This phase fixes layout quirks
 The `.section_text__p1` "Hello, I'm" text has `padding-left: 10rem`, creating a fragile offset.
 
 **Current:**
+
 ```css
 .section_text__p1 {
   text-align: left;
@@ -44,6 +45,7 @@ The `.section_text__p1` "Hello, I'm" text has `padding-left: 10rem`, creating a 
 The `.profile_pic` uses `scale: 0.7` to shrink a large image via CSS transform. This wastes bandwidth and creates dead space around the image.
 
 **Current:**
+
 ```css
 .profile_pic {
   border-radius: 40rem;
@@ -214,7 +216,8 @@ Open the browser console on any page and run:
 
 ```javascript
 const canvas = document.createElement('canvas');
-canvas.width = 64; canvas.height = 64;
+canvas.width = 64;
+canvas.height = 64;
 const ctx = canvas.getContext('2d');
 ctx.fillStyle = '#353535';
 ctx.font = 'bold 28px Helvetica, Arial, sans-serif';
