@@ -287,12 +287,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let autoScrollTimer = setInterval(autoScroll, CAROUSEL_CONFIG.AUTO_SCROLL_INTERVAL_MS);
 
   function autoScroll() {
-    if (carouselIndex + testimonialsToShow < testimonials.length) {
-      nextTestimonial();
-    } else {
-      carouselIndex = 0;
-      showTestimonials(carouselIndex);
-    }
+    nextTestimonial();
   }
 
   document.addEventListener('visibilitychange', () => {
@@ -303,15 +298,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Initialize carousel display
-  showTestimonials(carouselIndex);
-  createDots();
-
   // Create and insert position counter after dots
   const counter = document.createElement('p');
   counter.classList.add('testimonial-counter');
   dotsContainer.insertAdjacentElement('afterend', counter);
 
-  // Populate counter with initial values
+  // Initialize carousel display (single call — counter already exists)
+  createDots();
   showTestimonials(carouselIndex);
 });

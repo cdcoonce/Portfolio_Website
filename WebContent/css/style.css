@@ -440,6 +440,7 @@ section {
   margin: auto;
   overflow: hidden;
   justify-content: space-evenly;
+  min-height: 16rem; /* Prevent layout shifts during carousel transitions */
 }
 
 .testimonials {
