@@ -1,0 +1,23 @@
+[project]
+name = "portfolio-website-tests"
+version = "0.1.0"
+requires-python = ">=3.11"
+
+[dependency-groups]
+dev = [
+  "pytest",
+  "pytest-playwright",
+  "axe-playwright-python",
+  "requests",
+  "beautifulsoup4",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "slow: visual regression tests",
+    "a11y: accessibility tests",
+    "e2e: end-to-end browser tests",
+    "validation: HTML/CSS validation tests",
+]
+addopts = "-v --tb=short"
