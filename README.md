@@ -1,120 +1,224 @@
-# 🌐 Charles Coonce — Portfolio Website
+# Charles Coonce — Data Analytics Portfolio
 
-Welcome to the repository for my personal portfolio site: [**charleslikesdata.com**](https://charleslikesdata.com)
+Personal portfolio site showcasing data science, analytics engineering, and software development projects.
 
-This site showcases my work in **data science**, **analytics engineering**, and **software development** — including case studies, technical projects, and professional experience.
-
----
-
-## 🚀 Live Site
-
-👉 [https://charleslikesdata.com](https://charleslikesdata.com)
+**Live site:** [charleslikesdata.com](https://charleslikesdata.com)
 
 ---
 
-## 🧰 Tech Stack
+## Table of Contents
 
-| Area          | Tools / Technologies           |
+- [Charles Coonce — Data Analytics Portfolio](#charles-coonce--data-analytics-portfolio)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Tech Stack](#tech-stack)
+  - [Project Structure](#project-structure)
+  - [Local Development](#local-development)
+  - [Available Scripts](#available-scripts)
+  - [Code Standards](#code-standards)
+    - [HTML](#html)
+    - [CSS](#css)
+    - [JavaScript](#javascript)
+  - [Branching \& Deployment](#branching--deployment)
+    - [Branch naming](#branch-naming)
+    - [Commit messages (Conventional Commits)](#commit-messages-conventional-commits)
+    - [Deploying](#deploying)
+  - [Featured Projects](#featured-projects)
+  - [Contact](#contact)
+  - [License](#license)
+
+---
+
+## Overview
+
+A single-page static site built with vanilla HTML5, CSS3, and JavaScript — no frameworks, no build tools. Hosted on GitHub Pages with a custom domain.
+
+The site includes:
+
+- Filterable project gallery with category tags
+- Testimonials carousel
+- Responsive layout across mobile, tablet, and desktop
+- Contact links (GitHub, LinkedIn, Email)
+
+---
+
+## Tech Stack
+
+| Area          | Technology                     |
 | ------------- | ------------------------------ |
-| Structure     | HTML5                          |
-| Styling       | CSS3                           |
-| Interactivity | JavaScript                     |
+| Markup        | HTML5 (semantic elements)      |
+| Styling       | CSS3 (custom properties, BEM)  |
+| Interactivity | Vanilla JavaScript (ES6+)      |
+| Formatting    | Prettier                       |
 | Hosting       | GitHub Pages                   |
-| Domain        | Custom domain via `CNAME` file |
-| Development   | Visual Studio Code             |
+| Domain        | Custom domain via `CNAME`      |
 
 ---
 
-## 🗂️ Repository Structure
+## Project Structure
 
 ```
-.
-├─ WebContent/
-│  ├─ assets/          # Images, icons, and other media
-│  ├─ css/             # Stylesheets
-│  └─ js/              # Scripts
-├─ index.html          # Homepage entry point
-├─ CNAME               # Custom domain reference
-├─ .gitignore          # Ignored files for cleanliness
-└─ README.md           # This documentation file
+Portfolio_Website/
+├── index.html              # Single-page site (nav, profile, gallery, testimonials, footer)
+├── 404.html                # Custom 404 page
+├── CNAME                   # GitHub Pages custom domain
+├── package.json            # Metadata and npm scripts
+├── package-lock.json
+├── .editorconfig           # Editor formatting rules
+├── .prettierrc             # Prettier configuration
+├── WebContent/
+│   ├── assets/             # Images and icons (per-project subfolders)
+│   ├── css/
+│   │   ├── style.css       # Global styles and CSS custom properties
+│   │   └── mediaqueries.css # Responsive breakpoints
+│   └── js/
+│       └── script.js       # Gallery filtering and carousel logic
+├── docs/                   # Planning documents and site reviews
+└── README.md
 ```
 
 ---
 
-## ⚙️ Local Development
+## Local Development
 
-If you’d like to view or edit the site locally:
+**Prerequisites:** Git, a modern browser, and Python 3 (for the dev server).
 
-1. Clone the repository
+1. Clone the repository:
 
    ```bash
    git clone https://github.com/cdcoonce/Portfolio_Website.git
    cd Portfolio_Website
    ```
 
-2. Open `index.html` directly in your browser  
-   or serve it locally with Python:
+2. Install dev dependencies (Prettier):
 
    ```bash
-   python -m http.server 8000
+   npm install
    ```
 
-3. Visit [http://localhost:8000](http://localhost:8000)
+3. Start a local dev server:
+
+   ```bash
+   npm run serve
+   # or directly: python3 -m http.server 8000
+   ```
+
+4. Open [http://localhost:8000](http://localhost:8000) in your browser.
+
+> The site is a static file — you can also open `index.html` directly in a browser without a server.
 
 ---
 
-## 🧹 Code Standards
+## Available Scripts
 
-This repo uses consistent formatting via `.editorconfig` and `.prettierrc`.
+| Command              | Description                                        |
+| -------------------- | -------------------------------------------------- |
+| `npm run serve`      | Start local dev server at `http://localhost:8000`  |
+| `npm run format`     | Auto-format all HTML, CSS, JS, MD, and JSON files  |
+| `npm run format:check` | Check formatting without writing changes         |
 
-Example `.editorconfig`:
+---
 
-```ini
-[*]
-indent_style = space
-indent_size = 2
-end_of_line = lf
-charset = utf-8
-insert_final_newline = true
+## Code Standards
+
+Formatting is enforced via `.editorconfig` and `.prettierrc`:
+
+- **Indentation:** 2 spaces
+- **Line width:** 100 characters
+- **Quotes:** Single quotes (JS)
+- **Semicolons:** Required
+- **Line endings:** LF
+- **Encoding:** UTF-8
+- **Final newline:** Required
+
+### HTML
+
+- Semantic elements throughout (`<header>`, `<nav>`, `<main>`, `<section>`, `<footer>`)
+- Descriptive `alt` text on all images
+- `<button>` for interactive controls — not styled `<div>`s
+- No inline styles or inline JavaScript
+
+### CSS
+
+- BEM naming convention (`.block__element--modifier`)
+- CSS custom properties in `:root` for colors, fonts, and spacing
+- Mobile-first approach — base styles for mobile, `min-width` media queries for larger screens
+
+### JavaScript
+
+- `'use strict';` at the top of every file
+- `const` by default, `let` when reassignment is needed, never `var`
+- Pure logic separated from DOM manipulation for readability and testability
+
+---
+
+## Branching & Deployment
+
+This project uses a two-branch model:
+
+| Branch     | Purpose                                               |
+| ---------- | ----------------------------------------------------- |
+| `master`   | Development — all feature branches merge here         |
+| `gh-pages` | Production — merging `master` here triggers a deploy  |
+
+### Branch naming
+
+```
+feature/add-tableau-project
+fix/broken-resume-link
+chore/update-dependencies
+docs/update-readme
 ```
 
-Example `.prettierrc`:
+### Commit messages (Conventional Commits)
 
-```json
-{
-  "printWidth": 100,
-  "tabWidth": 2,
-  "semi": true,
-  "singleQuote": true
-}
+```
+feat(gallery): add Manufacturing Downtime Analysis project card
+fix(carousel): correct wraparound past last testimonial
+docs(readme): update local development instructions
+```
+
+### Deploying
+
+```bash
+git checkout gh-pages
+git merge master
+git push origin gh-pages
+git checkout master
 ```
 
 ---
 
-## 🧠 Features
+## Featured Projects
 
-- Clean, minimalist portfolio design
-- Responsive layout for desktop and mobile
-- Project gallery linking to GitHub repos and demos
-- Testimonials and personal highlights
-- Contact links (GitHub, LinkedIn, Email)
+| Project | Tools |
+| ------- | ----- |
+| National Parks Dashboard | Tableau, Python |
+| Wine Quality Analysis | Python, Pandas, Matplotlib |
+| Manufacturing Downtime Analysis | SQL, Power BI |
+| NYC Collision Analysis | Python, Folium |
+| Global CO2 Emissions | Tableau |
+| Spaceship Titanic Classification | Python, scikit-learn |
+| Housing Affordability & Commute Tradeoffs | Python, GeoPandas |
+| AirBnB Listing Analysis | SQL, Python |
+| World Happiness Dashboard | Tableau |
+| Sleep Deprivation Analysis | R, ggplot2 |
 
----
-
-## 🧾 License
-
-This repository is for my personal website.  
-All rights reserved © 2025 [Charles Coonce](https://charleslikesdata.com)
-
----
-
-## 📬 Contact
-
-**Charles Coonce**  
-📧 [charles.coonce@gmail.com](mailto:charles.coonce@gmail.com)  
-💼 [LinkedIn](https://www.linkedin.com/in/charlescoonce/)  
-💻 [GitHub](https://github.com/cdcoonce)
+Full project details, descriptions, and links are on the [live site](https://charleslikesdata.com).
 
 ---
 
-> _“Data should tell a story — I build the bridge between people, data, and decisions.”_
+## Contact
+
+**Charles Coonce**
+- Email: [charles.coonce@gmail.com](mailto:charles.coonce@gmail.com)
+- LinkedIn: [linkedin.com/in/charlescoonce](https://www.linkedin.com/in/charlescoonce/)
+- GitHub: [github.com/cdcoonce](https://github.com/cdcoonce)
+
+---
+
+## License
+
+All rights reserved. © 2026 Charles Coonce.
+
+This repository is for a personal portfolio site. The code may be referenced for learning purposes, but may not be copied or repurposed for commercial use without permission.
