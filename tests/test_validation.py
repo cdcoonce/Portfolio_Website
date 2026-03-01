@@ -83,3 +83,30 @@ class TestHTMLValidation:
         assert contact is not None, 'Missing <section id="contact">'
         github = contact.find('a', href=lambda h: h and 'github.com' in h)
         assert github is not None, 'Contact section missing GitHub link'
+
+    def test_testimonials_section_has_h2_heading(self, soup):
+        section = soup.find('section', id='testimonials')
+        assert section is not None, 'Missing <section id="testimonials">'
+        h2 = section.find('h2')
+        assert h2 is not None, 'Testimonials section missing <h2> heading'
+
+    def test_projects_section_has_heading(self, soup):
+        section = soup.find('section', id='projects')
+        assert section is not None, 'Missing <section id="projects">'
+        h2 = section.find('h2')
+        assert h2 is not None, 'Projects section missing <h2> heading'
+
+    def test_carousel_prev_button_has_aria_label(self, soup):
+        btn = soup.find('button', id='prevRec')
+        assert btn is not None, 'Missing #prevRec button'
+        assert btn.get('aria-label'), '#prevRec button missing aria-label'
+
+    def test_carousel_next_button_has_aria_label(self, soup):
+        btn = soup.find('button', id='nextRec')
+        assert btn is not None, 'Missing #nextRec button'
+        assert btn.get('aria-label'), '#nextRec button missing aria-label'
+
+    def test_testimonials_container_has_aria_live(self, soup):
+        container = soup.find('div', class_='testimonials')
+        assert container is not None, 'Missing .testimonials div'
+        assert container.get('aria-live'), '.testimonials div missing aria-live attribute'
