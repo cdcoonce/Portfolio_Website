@@ -68,9 +68,13 @@ Also consider creating a properly-sized version of `LinkedinProfile.jpeg` (400x4
 
 ### 2.3 Add a Skills/About section
 
-**Files:** `index.html`, `WebContent/css/style.css`
+**Files:** `index.html`, `WebContent/css/style.css`, `WebContent/css/mediaqueries.css`
 
 Insert a new section between `#profile` and `#projects` that gives visitors an immediate overview of the tech stack without needing to scroll to the project filters.
+
+> **Note:** Base grid styles go in `style.css`. The responsive column collapse (4 columns → 2 → 1) goes in `mediaqueries.css`.
+
+The 4 categories below align exactly with the 13 existing filter tags used in the projects section:
 
 **HTML structure:**
 
@@ -102,20 +106,86 @@ Insert a new section between `#profile` and `#projects` that gives visitors an i
         <span class="skill-tag">Shiny</span>
       </div>
     </div>
+    <div class="skill-category">
+      <h3>Focus Areas</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Data Visualization</span>
+        <span class="skill-tag">Analytics Dashboards</span>
+        <span class="skill-tag">Data Pipelines</span>
+        <span class="skill-tag">Business Intelligence</span>
+      </div>
+    </div>
   </div>
 </section>
 ```
 
-**CSS styling:**
+**CSS styling in `style.css`:**
 
-- Use a grid or flexbox layout with 3 columns on desktop, stacking on mobile
-- Reuse the existing pill/tag styling from `.projects-filter .filter` for visual consistency
-- Light background (same `#f9f9f9` as projects or white) to create section contrast
-- Keep it compact — this should be a quick scan, not a deep dive
+```css
+#skills {
+  padding: 2rem;
+  background-color: #f9f9f9;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.skill-category h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: #353535;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skill-tag {
+  /* Reuse existing filter pill styling for visual consistency */
+  padding: 0.4rem 0.8rem;
+  border: 1px solid #353535;
+  border-radius: 2rem;
+  font-size: 0.85rem;
+  color: #353535;
+  background-color: #fff;
+}
+```
+
+**Responsive overrides in `mediaqueries.css`:**
+
+```css
+/* At 1250px: 2 columns */
+@media screen and (max-width: 1250px) {
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* At 700px: single column */
+@media (max-width: 700px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+}
+```
+
+Also add a "Skills" link to the nav from Phase 1:
+
+```html
+<li><a href="#skills">Skills</a></li>
+```
 
 ### 2.4 Replace the JPEG favicon
 
-**File:** `index.html:17`
+**Files:** `index.html:17`, `WebContent/assets/favicon.png` (new)
 
 **Current:**
 
@@ -123,11 +193,46 @@ Insert a new section between `#profile` and `#projects` that gives visitors an i
 <link rel="icon" type="image/jpeg" href="./WebContent/assets/Headshots/LinkedinProfile.jpeg" />
 ```
 
-**Proposed:**
+**Design decision:** Use a "CC" monogram — dark grey (`#353535`) initials on a transparent background. This reads clearly at 32x32px and works at all sizes.
 
-- Create a proper 32x32 and 64x64 `.png` favicon from the profile image (or a simple "CC" monogram)
-- Save as `WebContent/assets/favicon.png`
-- Update the link tag:
+**Creating the favicon with ImageMagick:**
+
+```bash
+# Install ImageMagick if not present: brew install imagemagick
+convert -size 64x64 xc:transparent \
+  -font Helvetica-Bold -pointsize 32 \
+  -fill '#353535' \
+  -gravity Center -annotate 0 'CC' \
+  WebContent/assets/favicon-64.png
+
+convert WebContent/assets/favicon-64.png \
+  -resize 32x32 \
+  WebContent/assets/favicon.png
+```
+
+**Alternative — create via browser canvas (no CLI tools required):**
+
+Open the browser console on any page and run:
+
+```javascript
+const canvas = document.createElement('canvas');
+canvas.width = 64;
+canvas.height = 64;
+const ctx = canvas.getContext('2d');
+ctx.fillStyle = '#353535';
+ctx.font = 'bold 28px Helvetica, Arial, sans-serif';
+ctx.textAlign = 'center';
+ctx.textBaseline = 'middle';
+ctx.fillText('CC', 32, 34);
+const a = document.createElement('a');
+a.href = canvas.toDataURL('image/png');
+a.download = 'favicon.png';
+a.click();
+```
+
+Save the downloaded file to `WebContent/assets/favicon.png`.
+
+**Update the link tag in `index.html`:**
 
 ```html
 <link rel="icon" type="image/png" href="./WebContent/assets/favicon.png" />
@@ -141,7 +246,7 @@ Insert a new section between `#profile` and `#projects` that gives visitors an i
 - [ ] Profile picture displays at correct size without dead space or overflow
 - [ ] Profile picture remains circular and responsive across breakpoints
 - [ ] Skills section displays between hero and projects
-- [ ] Skills section is responsive (3 columns → stacked on mobile)
+- [ ] Skills section is responsive (4 columns → 2 columns → stacked on mobile)
 - [ ] Skill tags are visually consistent with the project filter tags
 - [ ] Favicon displays correctly in browser tab and bookmarks
 - [ ] Nav from Phase 1 still works (no layout conflicts with new section)
@@ -150,5 +255,5 @@ Insert a new section between `#profile` and `#projects` that gives visitors an i
 
 ## Dependencies
 
-- Phase 1 should be completed first (nav may need a "Skills" anchor link added)
-- Favicon creation requires an image editing tool or CLI tool (e.g., ImageMagick)
+- Phase 1 must be completed first (the "Skills" nav link is added in task 2.3)
+- Favicon creation: use either ImageMagick (`brew install imagemagick`) or the browser canvas method — no other tools required

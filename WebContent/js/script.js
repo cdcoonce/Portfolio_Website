@@ -44,68 +44,76 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-/* === Multi-Selectable Projects Keyword Filter with "All" Logic === */
+/* === Skills-as-Filter: Multi-Selectable Project Filter === */
 
 /**
- * Initializes project filter UI allowing multi-select tag filtering.
- * Selecting "All" clears other filters; selecting none reverts to "All".
- * Cards are shown/hidden based on whether their data-tags match any active filter.
+ * Wires the Skills & Tools section buttons as multi-select project filters.
+ * Clicking a skill tag toggles that filter; "All Projects" resets to show all.
+ * If all tags are deselected, reverts to showing all cards.
  */
 document.addEventListener('DOMContentLoaded', () => {
-  const filters = document.querySelectorAll('.projects-filter .filter');
+  const skillTags = document.querySelectorAll('button.skill-tag[data-filter]');
+  const resetButton = document.querySelector('button.skill-filter-reset');
   const cards = document.querySelectorAll('.project-card');
   const activeFilters = new Set();
 
-  // Guard: Ensure DOM elements exist before proceeding
-  if (!filters.length || !cards.length) {
-    console.warn('Project filters or cards not found in DOM');
+  if (!skillTags.length || !cards.length) {
+    console.warn('Skill filter buttons or project cards not found in DOM');
     return;
   }
 
-  filters.forEach((filter) => {
-    filter.addEventListener('click', () => {
-      const filterValue = filter.getAttribute('data-filter');
+  /**
+   * Shows all project cards and marks the reset button as active.
+   */
+  function showAllCards() {
+    activeFilters.clear();
+    skillTags.forEach((t) => t.classList.remove('active'));
+    if (resetButton) resetButton.classList.add('active');
+    cards.forEach((card) => (card.style.display = 'block'));
+  }
 
-      if (filterValue === 'all') {
-        // "All" selected: clear other filters and show all cards
-        activeFilters.clear();
-        filters.forEach((f) => f.classList.remove('active'));
-        filter.classList.add('active');
-        cards.forEach((card) => (card.style.display = 'block'));
+  /**
+   * Filters project cards to those matching any active skill tag.
+   */
+  function applyFilters() {
+    cards.forEach((card) => {
+      const tags = card.getAttribute('data-tags') || '';
+      const tagSet = new Set(
+        tags
+          .split(',')
+          .map((t) => t.trim())
+          .filter(Boolean)
+      );
+      const matches = Array.from(activeFilters).some((f) => tagSet.has(f));
+      card.style.display = matches ? 'block' : 'none';
+    });
+  }
+
+  skillTags.forEach((tag) => {
+    tag.addEventListener('click', () => {
+      const filterValue = tag.getAttribute('data-filter');
+
+      if (resetButton) resetButton.classList.remove('active');
+
+      if (tag.classList.contains('active')) {
+        tag.classList.remove('active');
+        activeFilters.delete(filterValue);
       } else {
-        const allFilter = document.querySelector('[data-filter="all"]');
-        if (allFilter) allFilter.classList.remove('active');
+        tag.classList.add('active');
+        activeFilters.add(filterValue);
+      }
 
-        // Toggle the clicked filter's active state
-        if (filter.classList.contains('active')) {
-          filter.classList.remove('active');
-          activeFilters.delete(filterValue);
-        } else {
-          filter.classList.add('active');
-          activeFilters.add(filterValue);
-        }
-
-        // If no filters remain active, revert to showing all
-        if (activeFilters.size === 0) {
-          if (allFilter) allFilter.classList.add('active');
-          cards.forEach((card) => (card.style.display = 'block'));
-        } else {
-          // Show only cards matching at least one active filter (OR logic)
-          cards.forEach((card) => {
-            const tags = card.getAttribute('data-tags') || '';
-            const tagSet = new Set(
-              tags
-                .split(',')
-                .map((t) => t.trim())
-                .filter(Boolean)
-            );
-            const matches = Array.from(activeFilters).some((f) => tagSet.has(f));
-            card.style.display = matches ? 'block' : 'none';
-          });
-        }
+      if (activeFilters.size === 0) {
+        showAllCards();
+      } else {
+        applyFilters();
       }
     });
   });
+
+  if (resetButton) {
+    resetButton.addEventListener('click', showAllCards);
+  }
 });
 
 /* === Testimonials Slider === */
