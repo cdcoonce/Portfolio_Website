@@ -84,7 +84,23 @@ def page(browser, server):
 
 ### pytest Configuration (pyproject.toml)
 
+Python dependencies are managed with **uv**. The `pyproject.toml` serves as both the uv project manifest and the pytest config.
+
 ```toml
+[project]
+name = "portfolio-website-tests"
+version = "0.1.0"
+requires-python = ">=3.11"
+
+[dependency-groups]
+dev = [
+  "pytest",
+  "pytest-playwright",
+  "axe-playwright-python",
+  "requests",
+  "beautifulsoup4",
+]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 markers = [
@@ -94,6 +110,13 @@ markers = [
     "validation: HTML/CSS validation tests",
 ]
 addopts = "-v --tb=short"
+```
+
+Install Python dependencies with:
+
+```bash
+uv sync
+uv run playwright install chromium
 ```
 
 ### TDD Workflow
@@ -231,16 +254,16 @@ test-js:
 	npm test
 
 test-py:
-	pytest -m "not slow"
+	uv run pytest -m "not slow"
 
 test-a11y:
-	pytest -m a11y
+	uv run pytest -m a11y
 
 test-e2e:
-	pytest -m e2e
+	uv run pytest -m e2e
 
 test-visual:
-	pytest -m slow
+	uv run pytest -m slow
 
 lint:
 	npm run lint

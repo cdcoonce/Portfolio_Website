@@ -19,7 +19,7 @@ Portfolio_Website/
 ├── CNAME                   # GitHub Pages custom domain
 ├── package.json            # Metadata, npm scripts
 ├── Makefile                # Unified test/lint runner
-├── requirements-test.txt   # Python test dependencies
+├── pyproject.toml          # Python deps and pytest config (managed by uv)
 ├── .editorconfig           # Editor formatting
 ├── .prettierrc             # Prettier config
 ├── WebContent/
@@ -35,12 +35,12 @@ Portfolio_Website/
 ## Quick Commands
 
 ```bash
-npm test                # JS unit tests (Jest)
-pytest                  # Python tests (validation, a11y, e2e)
-pytest -m a11y          # Accessibility only
-pytest -m e2e           # Browser integration only
-make check              # Full suite: lint + JS tests + Python tests
-npm run serve           # Local dev server at localhost:8000
+npm test                    # JS unit tests (Jest)
+uv run pytest               # Python tests (validation, a11y, e2e)
+uv run pytest -m a11y       # Accessibility only
+uv run pytest -m e2e        # Browser integration only
+make check                  # Full suite: lint + JS tests + Python tests
+npm run serve               # Local dev server at localhost:8000
 ```
 
 ## Formatting
