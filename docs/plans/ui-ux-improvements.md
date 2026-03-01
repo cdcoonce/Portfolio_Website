@@ -83,18 +83,18 @@ There are no visible focus styles for the filter buttons or carousel nav. Add a 
 
 ## Summary Priority Table
 
-| Priority | Change | Impact |
-|----------|--------|--------|
-| 1 | Sticky navigation | High — improves navigation on a long page |
-| 2 | Project card descriptions | High — gives context before external clicks |
-| 3 | Skills/About section | High — immediate tech stack visibility |
-| 4 | Contact section at bottom | High — persistent CTA for recruiters |
-| 5 | Fix hero `padding-left: 10rem` | Medium — cleaner layout |
-| 6 | `object-fit: cover` on project images | Medium — visual consistency |
-| 7 | Testimonial carousel improvements | Medium — better usability and readability |
-| 8 | Feature top projects | Medium — reduces choice paralysis |
-| 9 | Profile picture sizing | Low — performance and layout fix |
-| 10 | Logo link/branding | Low — minor UX polish |
-| 11 | Back to top button | Low — convenience feature |
-| 12 | Proper favicon format | Low — cross-browser reliability |
-| 13 | Focus/accessibility styles | Low — keyboard navigation support |
+| Priority | Change                                | Impact                                      |
+| -------- | ------------------------------------- | ------------------------------------------- |
+| 1        | Sticky navigation                     | High — improves navigation on a long page   |
+| 2        | Project card descriptions             | High — gives context before external clicks |
+| 3        | Skills/About section                  | High — immediate tech stack visibility      |
+| 4        | Contact section at bottom             | High — persistent CTA for recruiters        |
+| 5        | Fix hero `padding-left: 10rem`        | Medium — cleaner layout                     |
+| 6        | `object-fit: cover` on project images | Medium — visual consistency                 |
+| 7        | Testimonial carousel improvements     | Medium — better usability and readability   |
+| 8        | Feature top projects                  | Medium — reduces choice paralysis           |
+| 9        | Profile picture sizing                | Low — performance and layout fix            |
+| 10       | Logo link/branding                    | Low — minor UX polish                       |
+| 11       | Back to top button                    | Low — convenience feature                   |
+| 12       | Proper favicon format                 | Low — cross-browser reliability             |
+| 13       | Focus/accessibility styles            | Low — keyboard navigation support           |

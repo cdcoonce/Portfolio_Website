@@ -16,15 +16,15 @@ All feature work and bug fixes follow **Red → Green → Refactor**.
 
 ### Testing Stack
 
-| Layer | Tool | Language | Purpose |
-|---|---|---|---|
-| JS Unit | **Jest + jsdom** | JS | Pure JS logic: filtering, carousel state, utilities |
-| HTML Validation | **pytest + BeautifulSoup** | Python | Semantic markup, alt text, no inline styles |
-| Accessibility | **pytest + axe-playwright** | Python | WCAG 2.1 AA compliance |
-| Link Checking | **pytest + requests** | Python | Verify all hrefs/srcs resolve |
-| Integration / E2E | **pytest + playwright** | Python | Browser tests: filtering, carousel, nav |
-| Visual Regression | **pytest + playwright** | Python | Screenshot comparison at breakpoints |
-| CSS Linting | **Stylelint** (npm) | JS | CSS rule validation |
+| Layer             | Tool                        | Language | Purpose                                             |
+| ----------------- | --------------------------- | -------- | --------------------------------------------------- |
+| JS Unit           | **Jest + jsdom**            | JS       | Pure JS logic: filtering, carousel state, utilities |
+| HTML Validation   | **pytest + BeautifulSoup**  | Python   | Semantic markup, alt text, no inline styles         |
+| Accessibility     | **pytest + axe-playwright** | Python   | WCAG 2.1 AA compliance                              |
+| Link Checking     | **pytest + requests**       | Python   | Verify all hrefs/srcs resolve                       |
+| Integration / E2E | **pytest + playwright**     | Python   | Browser tests: filtering, carousel, nav             |
+| Visual Regression | **pytest + playwright**     | Python   | Screenshot comparison at breakpoints                |
+| CSS Linting       | **Stylelint** (npm)         | JS       | CSS rule validation                                 |
 
 ### Test File Layout
 
@@ -131,21 +131,22 @@ uv run playwright install chromium
 
 ### What to Test
 
-| Area | Tool | Examples |
-|---|---|---|
-| Filter logic | Jest | Correct output per category; "All" resets; multi-tag cards |
-| Carousel state | Jest | Next/prev index; wraparound; initial state |
-| HTML validity | pytest | Semantic elements; no inline styles/JS; alt text on images |
-| Accessibility | pytest | WCAG AA; focus order; color contrast |
-| Links | pytest | External links resolve; mailto/social well-formed |
-| Gallery E2E | pytest | Filter buttons toggle card visibility in real browser |
-| Carousel E2E | pytest | Nav clicks advance slides; wraparound works |
-| Responsive | pytest | Screenshots at 320px, 768px, 1024px, 1440px |
-| SEO | pytest | Meta description; Open Graph tags; title tag |
+| Area           | Tool   | Examples                                                   |
+| -------------- | ------ | ---------------------------------------------------------- |
+| Filter logic   | Jest   | Correct output per category; "All" resets; multi-tag cards |
+| Carousel state | Jest   | Next/prev index; wraparound; initial state                 |
+| HTML validity  | pytest | Semantic elements; no inline styles/JS; alt text on images |
+| Accessibility  | pytest | WCAG AA; focus order; color contrast                       |
+| Links          | pytest | External links resolve; mailto/social well-formed          |
+| Gallery E2E    | pytest | Filter buttons toggle card visibility in real browser      |
+| Carousel E2E   | pytest | Nav clicks advance slides; wraparound works                |
+| Responsive     | pytest | Screenshots at 320px, 768px, 1024px, 1440px                |
+| SEO            | pytest | Meta description; Open Graph tags; title tag               |
 
 ### Example Tests
 
 **HTML validation (test_validation.py)**:
+
 ```python
 from bs4 import BeautifulSoup
 from pathlib import Path
@@ -172,6 +173,7 @@ def test_no_inline_styles():
 ```
 
 **Accessibility (test_accessibility.py)**:
+
 ```python
 import pytest
 from axe_playwright_python.sync_playwright import Axe
@@ -189,6 +191,7 @@ def test_wcag_compliance(page):
 ```
 
 **E2E gallery (test_gallery.py)**:
+
 ```python
 import pytest
 
@@ -209,6 +212,7 @@ def test_all_filter_shows_every_card(page):
 ```
 
 **Link checking (test_links.py)**:
+
 ```python
 import pytest
 import requests
@@ -230,6 +234,7 @@ def test_external_link_resolves(url):
 ### Runner Scripts
 
 **package.json**:
+
 ```json
 {
   "scripts": {
@@ -245,6 +250,7 @@ def test_external_link_resolves(url):
 ```
 
 **Makefile**:
+
 ```makefile
 .PHONY: test test-js test-py test-a11y test-e2e test-visual lint check
 
@@ -305,12 +311,11 @@ Enforced via `.editorconfig` and `.prettierrc`:
 - Descriptive names — no abbreviations
 - Single responsibility functions; extract helpers aggressively
 - Separate pure logic from DOM manipulation:
+
   ```js
   // Pure (testable)
   const getFilteredProjects = (projects, category) =>
-    category === 'all'
-      ? projects
-      : projects.filter(p => p.tags.includes(category));
+    category === 'all' ? projects : projects.filter((p) => p.tags.includes(category));
 
   // DOM (thin wrapper)
   const renderFilteredProjects = (category) => {
@@ -318,6 +323,7 @@ Enforced via `.editorconfig` and `.prettierrc`:
     updateCardVisibility(filtered);
   };
   ```
+
 - JSDoc on all public functions
 - No magic numbers or strings — use named constants
 
@@ -360,11 +366,11 @@ WebContent/css/
 
 `MAJOR.MINOR.PATCH` tracked in `package.json`:
 
-| Bump | When | Examples |
-|---|---|---|
-| MAJOR | Breaking redesign, restructured sections | Full site overhaul |
-| MINOR | New feature/section (backward-compatible) | New project card, new filter category |
-| PATCH | Bug fix, typo, style tweak, content update | Fix broken link, adjust spacing |
+| Bump  | When                                       | Examples                              |
+| ----- | ------------------------------------------ | ------------------------------------- |
+| MAJOR | Breaking redesign, restructured sections   | Full site overhaul                    |
+| MINOR | New feature/section (backward-compatible)  | New project card, new filter category |
+| PATCH | Bug fix, typo, style tweak, content update | Fix broken link, adjust spacing       |
 
 ### Branching (GitHub Flow)
 
@@ -395,6 +401,7 @@ master (development — all feature branches merge here)
 Rules: imperative mood, ≤72 char subject, no trailing period, reference issues in footer.
 
 **Examples**:
+
 ```
 feat(gallery): add Manufacturing Downtime Analysis project card
 fix(carousel): correct wraparound past last testimonial
@@ -434,14 +441,19 @@ chore(deps): add pytest-playwright to test dependencies
 ## [Unreleased]
 
 ## [1.1.0] - 2026-02-28
+
 ### Added
+
 - Manufacturing Downtime Analysis project card
 
 ### Fixed
+
 - Carousel wraparound bug
 
 ## [1.0.0] - 2025-01-15
+
 ### Added
+
 - Initial launch
 ```
 

@@ -111,7 +111,9 @@ At `max-width: 700px`, the nav links collapse behind a hamburger toggle button.
   height: 3px;
   background-color: #353535;
   border-radius: 2px;
-  transition: transform 300ms ease, opacity 300ms ease;
+  transition:
+    transform 300ms ease,
+    opacity 300ms ease;
 }
 
 .nav-links {

@@ -20,6 +20,7 @@ This final phase addresses accessibility gaps and applies finishing touches. The
 Currently, there are no visible focus indicators for interactive elements. Keyboard users cannot tell which element is focused.
 
 **Add global focus styles:**
+
 ```css
 a:focus-visible,
 button:focus-visible,
@@ -38,11 +39,13 @@ This uses `:focus-visible` (not `:focus`) so the outline only appears during key
 The filter `<span>` elements are not keyboard-focusable by default. Add `tabindex="0"` and `role="button"` to each filter span, and handle `keydown` events for Enter/Space activation.
 
 **HTML change (each filter span):**
+
 ```html
 <span class="filter active" data-filter="all" tabindex="0" role="button">All</span>
 ```
 
 **JS addition in the filter logic:**
+
 ```javascript
 filter.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' || e.key === ' ') {
@@ -59,12 +62,14 @@ filter.addEventListener('keydown', (e) => {
 The prev/next buttons use HTML entities (`&#10094;`, `&#10095;`) which aren't descriptive for screen readers.
 
 **Current:**
+
 ```html
 <button id="prevRec" class="btn btn-color-2">&#10094;</button>
 <button id="nextRec" class="btn btn-color-2">&#10095;</button>
 ```
 
 **Proposed:**
+
 ```html
 <button id="prevRec" class="btn btn-color-2" aria-label="Previous testimonial">&#10094;</button>
 <button id="nextRec" class="btn btn-color-2" aria-label="Next testimonial">&#10095;</button>
@@ -73,7 +78,7 @@ The prev/next buttons use HTML entities (`&#10094;`, `&#10095;`) which aren't de
 Also add `aria-live="polite"` to the testimonials container so screen readers announce when content changes:
 
 ```html
-<div class="testimonials" aria-live="polite">
+<div class="testimonials" aria-live="polite"></div>
 ```
 
 ### 5.4 Verify color contrast ratios
@@ -82,12 +87,12 @@ Also add `aria-live="polite"` to the testimonials container so screen readers an
 
 Review these color combinations against WCAG AA standards (minimum 4.5:1 for normal text):
 
-| Element | Foreground | Background | Ratio | Status |
-|---------|-----------|------------|-------|--------|
-| Body text (`p`) | `rgb(85,85,85)` | `#fff` | ~5.9:1 | Pass |
-| Inactive dots | `#b0b4b9` | `#fff` | ~2.8:1 | Fail (decorative, acceptable) |
-| Filter tags (inactive) | inherit | `#fff` | Check | Verify |
-| `.btn-color-2` text | `#353535` border on white | `#fff` | ~10:1 | Pass |
+| Element                | Foreground                | Background | Ratio  | Status                        |
+| ---------------------- | ------------------------- | ---------- | ------ | ----------------------------- |
+| Body text (`p`)        | `rgb(85,85,85)`           | `#fff`     | ~5.9:1 | Pass                          |
+| Inactive dots          | `#b0b4b9`                 | `#fff`     | ~2.8:1 | Fail (decorative, acceptable) |
+| Filter tags (inactive) | inherit                   | `#fff`     | Check  | Verify                        |
+| `.btn-color-2` text    | `#353535` border on white | `#fff`     | ~10:1  | Pass                          |
 
 If any interactive element fails contrast, adjust colors accordingly.
 
@@ -106,6 +111,7 @@ All images currently have `alt` attributes (good). Audit them for descriptivenes
 **File:** `index.html`
 
 Minor semantic improvements:
+
 - The testimonials `<p class="section_text__p1">Testimonials</p>` should be an `<h2>` for proper heading hierarchy
 - The projects section is missing a heading — add a visually hidden `<h2>` or a visible one for screen readers
 
@@ -121,6 +127,7 @@ Minor semantic improvements:
 ```
 
 If using a visually hidden heading:
+
 ```css
 .sr-only {
   position: absolute;
