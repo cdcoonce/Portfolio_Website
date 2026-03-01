@@ -68,12 +68,49 @@ p {
   cursor: pointer;
   font-size: 1.2rem;
   opacity: 0;
+  pointer-events: none;
   transition: opacity 300ms ease;
   z-index: 99;
 }
 
 .back-to-top.visible {
   opacity: 1;
+  pointer-events: auto;
+}
+
+/* === Scroll Down === */
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+.scroll-down {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #353535;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  opacity: 1;
+  transition: opacity 300ms ease;
+  animation: bounce 1.6s ease-in-out infinite;
+  z-index: 99;
+}
+
+.scroll-down.hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* === Transition === */
@@ -174,11 +211,12 @@ section {
 #profile {
   position: relative;
   display: flex;
+  align-items: center;
   justify-content: center;
   max-width: 1700px;
   margin: 0 auto;
-  gap: 0.5rem;
-  height: fit-content;
+  gap: 3rem;
+  min-height: calc(100vh - 4rem);
 }
 
 .logo {
@@ -190,8 +228,8 @@ section {
 
 .section__pic-container {
   display: flex;
-  max-height: 400px;
-  max-width: 400px;
+  max-height: 300px;
+  max-width: 300px;
   margin: auto 0;
 }
 
