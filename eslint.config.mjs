@@ -19,7 +19,7 @@ export default [
       'no-undef': 'error',
       'no-var': 'error',
       'prefer-const': 'warn',
-      'eqeqeq': 'error',
+      eqeqeq: 'error',
     },
   },
 ];
