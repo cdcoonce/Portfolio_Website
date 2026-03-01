@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
     activeFilters.clear();
     skillTags.forEach((t) => t.classList.remove('active'));
     if (resetButton) resetButton.classList.add('active');
-    cards.forEach((card) => (card.style.display = 'block'));
+    cards.forEach((card) => (card.style.display = 'flex'));
   }
 
   /**
@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
           .filter(Boolean)
       );
       const matches = Array.from(activeFilters).some((f) => tagSet.has(f));
-      card.style.display = matches ? 'block' : 'none';
+      card.style.display = matches ? 'flex' : 'none';
     });
   }
 
