@@ -20,14 +20,19 @@ The projects section is the centerpiece of the portfolio but currently lacks con
 Add a `<p>` element inside each `.card-content` div with a 1-2 sentence description. The existing CSS already styles `.card-content p` with `color: #555` and `flex-grow: 1`.
 
 **Example (Project 1):**
+
 ```html
 <div class="card-content">
   <h3>National Parks Dashboard</h3>
-  <p>Interactive Shiny dashboard exploring NPS visitation trends across parks, states, and time periods.</p>
+  <p>
+    Interactive Shiny dashboard exploring NPS visitation trends across parks, states, and time
+    periods.
+  </p>
 </div>
 ```
 
 **Descriptions needed for all 17 projects.** Each description should:
+
 - Be 1-2 sentences max
 - Highlight the key technique or insight, not just the topic
 - Use active language ("Analyzes...", "Explores...", "Predicts...")
@@ -39,6 +44,7 @@ Add a `<p>` element inside each `.card-content` div with a 1-2 sentence descript
 The current fixed height of `400px` may need adjustment to accommodate descriptions without overflow.
 
 **Current:**
+
 ```css
 .project-card {
   height: 400px;
@@ -53,6 +59,7 @@ The current fixed height of `400px` may need adjustment to accommodate descripti
 **File:** `WebContent/css/style.css:231-236`
 
 **Current:**
+
 ```css
 .project-card img {
   width: 100%;
@@ -63,6 +70,7 @@ The current fixed height of `400px` may need adjustment to accommodate descripti
 ```
 
 **Proposed:**
+
 ```css
 .project-card img {
   width: 100%;
@@ -73,6 +81,7 @@ The current fixed height of `400px` may need adjustment to accommodate descripti
 ```
 
 **Consideration:** `object-fit: cover` will crop some images. Review each project thumbnail to verify important content isn't clipped. For images that are charts or code screenshots, cropping may cut off key details. Options:
+
 - Use `object-position` to control which part of the image is visible
 - Create standardized 300x200 thumbnails for each project (ideal long-term)
 - Use `cover` for most but override with `contain` on specific cards via a utility class

@@ -20,6 +20,7 @@ The hero section is the first thing visitors see. This phase fixes layout quirks
 The `.section_text__p1` "Hello, I'm" text has `padding-left: 10rem`, creating a fragile offset.
 
 **Current:**
+
 ```css
 .section_text__p1 {
   text-align: left;
@@ -44,6 +45,7 @@ The `.section_text__p1` "Hello, I'm" text has `padding-left: 10rem`, creating a 
 The `.profile_pic` uses `scale: 0.7` to shrink a large image via CSS transform. This wastes bandwidth and creates dead space around the image.
 
 **Current:**
+
 ```css
 .profile_pic {
   border-radius: 40rem;
@@ -71,6 +73,7 @@ Also consider creating a properly-sized version of `LinkedinProfile.jpeg` (400x4
 Insert a new section between `#profile` and `#projects` that gives visitors an immediate overview of the tech stack without needing to scroll to the project filters.
 
 **HTML structure:**
+
 ```html
 <section id="skills">
   <h2>Skills & Tools</h2>
@@ -104,6 +107,7 @@ Insert a new section between `#profile` and `#projects` that gives visitors an i
 ```
 
 **CSS styling:**
+
 - Use a grid or flexbox layout with 3 columns on desktop, stacking on mobile
 - Reuse the existing pill/tag styling from `.projects-filter .filter` for visual consistency
 - Light background (same `#f9f9f9` as projects or white) to create section contrast
@@ -114,11 +118,13 @@ Insert a new section between `#profile` and `#projects` that gives visitors an i
 **File:** `index.html:17`
 
 **Current:**
+
 ```html
 <link rel="icon" type="image/jpeg" href="./WebContent/assets/Headshots/LinkedinProfile.jpeg" />
 ```
 
 **Proposed:**
+
 - Create a proper 32x32 and 64x64 `.png` favicon from the profile image (or a simple "CC" monogram)
 - Save as `WebContent/assets/favicon.png`
 - Update the link tag:

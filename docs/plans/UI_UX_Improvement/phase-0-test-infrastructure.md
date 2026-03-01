@@ -24,6 +24,7 @@ npm install --save-dev jest jest-environment-jsdom stylelint stylelint-config-st
 ```
 
 **Updated scripts in `package.json`:**
+
 ```json
 {
   "scripts": {
@@ -47,6 +48,7 @@ npm install --save-dev jest jest-environment-jsdom stylelint stylelint-config-st
 Create stub test files that will be fleshed out as features are built:
 
 **`__tests__/filter.test.js`:**
+
 ```javascript
 'use strict';
 
@@ -59,6 +61,7 @@ describe('Gallery Filter Logic', () => {
 ```
 
 **`__tests__/carousel.test.js`:**
+
 ```javascript
 'use strict';
 
@@ -72,6 +75,7 @@ describe('Testimonial Carousel', () => {
 ```
 
 **`__tests__/utils.test.js`:**
+
 ```javascript
 'use strict';
 
@@ -85,6 +89,7 @@ describe('Utility Functions', () => {
 **Directory:** `tests/`
 
 **`tests/conftest.py`:**
+
 ```python
 import pytest
 import subprocess
@@ -189,7 +194,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ## [1.0.0] - 2025-01-15
+
 ### Added
+
 - Initial portfolio site launch
 - Project gallery with filter system (17 project cards)
 - Testimonial carousel with 7 testimonials
