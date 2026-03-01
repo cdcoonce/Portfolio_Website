@@ -28,18 +28,44 @@ document.addEventListener('DOMContentLoaded', () => {
 /* === Back to Top Button === */
 
 /**
- * Shows the back-to-top button after scrolling 400px and scrolls to top on click.
+ * Shows the back-to-top button once the testimonials section scrolls into view.
  */
 document.addEventListener('DOMContentLoaded', () => {
   const backToTop = document.querySelector('.back-to-top');
+  const testimonials = document.querySelector('#testimonials');
 
   if (backToTop) {
     window.addEventListener('scroll', () => {
-      backToTop.classList.toggle('visible', window.scrollY > 400);
+      const testimonialsTop = testimonials ? testimonials.getBoundingClientRect().top : Infinity;
+      backToTop.classList.toggle('visible', testimonialsTop <= window.innerHeight);
     });
 
     backToTop.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+});
+
+/* === Scroll Down Button === */
+
+/**
+ * Hides the scroll-down arrow once the user has scrolled past the profile section.
+ */
+document.addEventListener('DOMContentLoaded', () => {
+  const scrollDown = document.querySelector('.scroll-down');
+  const profileSection = document.querySelector('#profile');
+
+  if (scrollDown && profileSection) {
+    window.addEventListener('scroll', () => {
+      const profileBottom = profileSection.getBoundingClientRect().bottom;
+      scrollDown.classList.toggle('hidden', profileBottom < 0);
+    });
+
+    scrollDown.addEventListener('click', () => {
+      const skills = document.querySelector('#skills');
+      const nav = document.querySelector('#main-nav');
+      const navHeight = nav ? nav.offsetHeight : 0;
+      window.scrollTo({ top: skills.offsetTop - navHeight, behavior: 'smooth' });
     });
   }
 });

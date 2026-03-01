@@ -30,6 +30,7 @@
 
   #profile {
     height: fit-content;
+    min-height: auto;
     padding-bottom: 2vw;
   }
 
