@@ -1,18 +1,26 @@
 """HTML validation tests — structure, alt text, no inline styles."""
 
 import pytest
+from bs4 import BeautifulSoup
+from pathlib import Path
+
+
+@pytest.fixture(scope='module')
+def soup():
+    html = Path('index.html').read_text()
+    return BeautifulSoup(html, 'html.parser')
 
 
 @pytest.mark.validation
 class TestHTMLValidation:
-    @pytest.mark.skip(reason='Stub — implement in Phase 1+')
-    def test_all_images_have_alt_text(self):
-        pass
+    def test_all_images_have_alt_text(self, soup):
+        for img in soup.find_all('img'):
+            assert img.get('alt'), f'Missing alt text: {img}'
 
-    @pytest.mark.skip(reason='Stub — implement in Phase 1+')
-    def test_semantic_structure(self):
-        pass
+    def test_semantic_structure(self, soup):
+        assert soup.find('nav'), 'Missing <nav>'
+        assert soup.find('footer'), 'Missing <footer>'
 
-    @pytest.mark.skip(reason='Stub — implement in Phase 1+')
-    def test_no_inline_styles(self):
-        pass
+    def test_no_inline_styles(self, soup):
+        styled = soup.find_all(style=True)
+        assert len(styled) == 0, f'{len(styled)} elements with inline styles'
