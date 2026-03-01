@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.5.0] - 2026-03-01
+
+### Added
+
+- `:focus-visible` outline styles on all `<a>` and `<button>` elements for keyboard navigation
+- `.sr-only` utility class (visually hidden but screen-reader accessible) using `clip-path`
+- Visually hidden `<h2 class="sr-only">Projects</h2>` in projects section for screen-reader heading hierarchy
+- `aria-label="Previous testimonial"` and `aria-label="Next testimonial"` on carousel nav buttons
+- `aria-live="polite"` on the `.testimonials` container so screen readers announce slide changes
+- WCAG 2.1 AA automated compliance test (`test_wcag_compliance`) using axe-playwright
+- E2E accessibility tests: focus navigation, carousel ARIA labels, `aria-live` region
+- Validation tests: testimonials h2 heading, projects h2 heading, carousel ARIA labels, aria-live attribute
+
+### Changed
+
+- `<p class="section_text__p1">Testimonials</p>` promoted to `<h2>` for correct heading hierarchy
+- `.testimonial-counter` color darkened from `#777` to `#666` (contrast ratio: 4.47 → 5.74:1) to pass WCAG AA
+
 ## [1.4.0] - 2026-03-01
 
 ### Added
