@@ -55,3 +55,31 @@ class TestHTMLValidation:
             title = card.find('h3')
             title_text = title.get_text(strip=True) if title else 'unknown'
             assert btn is None, f'Unexpected .btn found in card: {title_text}'
+
+    def test_contact_section_exists(self, soup):
+        contact = soup.find('section', id='contact')
+        assert contact is not None, 'Missing <section id="contact">'
+
+    def test_contact_section_has_heading(self, soup):
+        contact = soup.find('section', id='contact')
+        assert contact is not None, 'Missing <section id="contact">'
+        h2 = contact.find('h2')
+        assert h2 is not None, 'Contact section missing <h2>'
+
+    def test_contact_section_has_email_link(self, soup):
+        contact = soup.find('section', id='contact')
+        assert contact is not None, 'Missing <section id="contact">'
+        email_link = contact.find('a', href=lambda h: h and h.startswith('mailto:'))
+        assert email_link is not None, 'Contact section missing email link'
+
+    def test_contact_section_has_linkedin_link(self, soup):
+        contact = soup.find('section', id='contact')
+        assert contact is not None, 'Missing <section id="contact">'
+        linkedin = contact.find('a', href=lambda h: h and 'linkedin.com' in h)
+        assert linkedin is not None, 'Contact section missing LinkedIn link'
+
+    def test_contact_section_has_github_link(self, soup):
+        contact = soup.find('section', id='contact')
+        assert contact is not None, 'Missing <section id="contact">'
+        github = contact.find('a', href=lambda h: h and 'github.com' in h)
+        assert github is not None, 'Contact section missing GitHub link'

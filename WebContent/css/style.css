@@ -425,7 +425,8 @@ section {
   justify-content: center;
   max-width: 1700px;
   margin: 0 auto;
-  height: 50vh;
+  min-height: 40vh;
+  padding: 2rem 0;
   margin-top: 2rem;
 }
 
@@ -439,15 +440,16 @@ section {
   margin: auto;
   overflow: hidden;
   justify-content: space-evenly;
+  min-height: 16rem; /* Prevent layout shifts during carousel transitions */
 }
 
 .testimonials {
   display: flex;
   flex-direction: row;
   transition: transform 0.5s ease-in-out;
-  align-items: center;
+  align-items: stretch;
   width: 75%;
-  height: 250px;
+  min-height: 200px;
 }
 
 .testimonial {
@@ -459,6 +461,16 @@ section {
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   margin: 0 10px;
+}
+
+.testimonial::before {
+  content: '\201C'; /* Left double quotation mark */
+  font-size: 3rem;
+  color: rgba(53, 53, 53, 0.2);
+  font-family: Georgia, serif;
+  line-height: 1;
+  display: block;
+  margin-bottom: -0.5rem;
 }
 
 .rec {
@@ -497,8 +509,8 @@ section {
   display: flex;
   flex-direction: column;
   width: 400px;
-  justify-content: center;
-  height: 175px;
+  justify-content: flex-start;
+  height: auto;
 }
 
 .dots-container {
@@ -508,18 +520,49 @@ section {
 }
 
 .dot {
-  display: flex;
-  flex-direction: row;
-  width: 10px;
-  height: 10px;
-  margin: 0 5px;
-  background-color: #b0b4b9ac;
+  width: 12px;
+  height: 12px;
+  margin: 0 6px;
+  background-color: #ccc;
   border-radius: 50%;
+  cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .dot.active {
-  background-color: #272829c1;
+  background-color: #353535;
+}
+
+.testimonial-counter {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #777;
+  margin-top: 0.5rem;
+}
+
+/* === Contact Section === */
+
+#contact {
+  text-align: center;
+  padding: 3rem 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#contact h2 {
+  margin-bottom: 0.5rem;
+  font-size: 1.75rem;
+}
+
+#contact p {
+  margin-bottom: 1.5rem;
+}
+
+.contact-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 /* === Footer Section === */
