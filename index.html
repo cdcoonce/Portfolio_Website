@@ -19,7 +19,7 @@
       content="Charles Coonce — Data analyst portfolio showcasing projects in Python, SQL, R, Tableau, and more."
     />
     <title>Charles Coonce | Data Analytics Portfolio</title>
-    <link rel="icon" type="image/jpeg" href="./WebContent/assets/Headshots/LinkedinProfile.jpeg" />
+    <link rel="icon" type="image/svg+xml" href="./WebContent/assets/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -39,6 +39,7 @@
       </button>
       <ul class="nav-links">
         <li><a href="#profile">Home</a></li>
+        <li><a href="#skills">Skills</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#testimonials">Testimonials</a></li>
       </ul>
@@ -92,28 +93,48 @@
         </div>
       </div>
     </section>
-    <section id="projects">
-      <!-- Filter Keywords: Core Skills | Tools & Platforms | Domains -->
-      <div class="projects-filter">
-        <span class="filter active" data-filter="all">All</span>
-        <!-- Core Technical Skills -->
-        <span class="filter" data-filter="python">Python</span>
-        <span class="filter" data-filter="sql">SQL</span>
-        <span class="filter" data-filter="r">R</span>
-        <span class="filter" data-filter="etl">ETL/ELT</span>
-        <span class="filter" data-filter="machine-learning">Machine Learning</span>
-        <span class="filter" data-filter="statistical-analysis">Statistical Analysis</span>
-        <!-- Tools & Platforms -->
-        <span class="filter" data-filter="tableau">Tableau</span>
-        <span class="filter" data-filter="excel">Excel</span>
-        <span class="filter" data-filter="shiny">Shiny</span>
-        <!-- Domain/Application -->
-        <span class="filter" data-filter="visualization">Data Visualization</span>
-        <span class="filter" data-filter="analytics-dashboard">Analytics Dashboard</span>
-        <span class="filter" data-filter="data-pipelines">Data Pipelines</span>
-        <span class="filter" data-filter="business-intelligence">Business Intelligence</span>
+    <section id="skills">
+      <div class="skills-header">
+        <h2>Skills &amp; Tools</h2>
+        <button class="skill-filter-reset active" data-filter="all">All Projects</button>
       </div>
-
+      <div class="skills-grid">
+        <div class="skill-category">
+          <h3>Languages</h3>
+          <div class="skill-tags">
+            <button class="skill-tag" data-filter="python">Python</button>
+            <button class="skill-tag" data-filter="sql">SQL</button>
+            <button class="skill-tag" data-filter="r">R</button>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h3>Techniques</h3>
+          <div class="skill-tags">
+            <button class="skill-tag" data-filter="etl">ETL/ELT</button>
+            <button class="skill-tag" data-filter="machine-learning">Machine Learning</button>
+            <button class="skill-tag" data-filter="statistical-analysis">Statistical Analysis</button>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h3>Tools &amp; Platforms</h3>
+          <div class="skill-tags">
+            <button class="skill-tag" data-filter="tableau">Tableau</button>
+            <button class="skill-tag" data-filter="excel">Excel</button>
+            <button class="skill-tag" data-filter="shiny">Shiny</button>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h3>Focus Areas</h3>
+          <div class="skill-tags">
+            <button class="skill-tag" data-filter="visualization">Data Visualization</button>
+            <button class="skill-tag" data-filter="analytics-dashboard">Analytics Dashboards</button>
+            <button class="skill-tag" data-filter="data-pipelines">Data Pipelines</button>
+            <button class="skill-tag" data-filter="business-intelligence">Business Intelligence</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="projects">
       <!-- Projects Grid -->
       <div class="projects-grid">
         <!-- Project 1: National Parks Dashboard -->
