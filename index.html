@@ -22,8 +22,20 @@
 	<link rel="stylesheet" href="./WebContent/css/mediaqueries.css" />
 </head>
 <body>
+	<nav id="main-nav">
+		<a href="#profile" class="logo">Charles Coonce</a>
+		<button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+			<span class="nav-toggle__bar"></span>
+			<span class="nav-toggle__bar"></span>
+			<span class="nav-toggle__bar"></span>
+		</button>
+		<ul class="nav-links">
+			<li><a href="#profile">Home</a></li>
+			<li><a href="#projects">Projects</a></li>
+			<li><a href="#testimonials">Testimonials</a></li>
+		</ul>
+	</nav>
 	<section id="profile">
-		<div class="logo">Charles Coonce</div>
 		<div class="section__pic-container">
 			<img src="./WebContent/assets/Headshots/LinkedinProfile.jpeg" alt="Charles Coonce Profile Picture" class="profile_pic"/>
 		</div>
@@ -286,6 +298,7 @@
 	<footer>
 		<p>Copyright &#169; <script>document.write(new Date().getFullYear());</script> Charles Coonce. All Rights Reserved.</p>
 	</footer>
+	<button class="back-to-top" aria-label="Back to top">&#8593;</button>
 	<script src="./WebContent/js/script.js"></script>
 </body>
 </html>

@@ -1,3 +1,49 @@
+'use strict';
+
+/* === Navigation — Hamburger Toggle === */
+
+/**
+ * Toggles mobile nav menu open/closed and syncs aria-expanded on the button.
+ * Closes the menu when any nav link is clicked.
+ */
+document.addEventListener('DOMContentLoaded', () => {
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    navLinks.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+});
+
+/* === Back to Top Button === */
+
+/**
+ * Shows the back-to-top button after scrolling 400px and scrolls to top on click.
+ */
+document.addEventListener('DOMContentLoaded', () => {
+  const backToTop = document.querySelector('.back-to-top');
+
+  if (backToTop) {
+    window.addEventListener('scroll', () => {
+      backToTop.classList.toggle('visible', window.scrollY > 400);
+    });
+
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+});
+
 /* === Multi-Selectable Projects Keyword Filter with "All" Logic === */
 
 /**
