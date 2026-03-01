@@ -196,8 +196,10 @@ section {
 }
 
 .profile_pic {
-  border-radius: 40rem;
-  scale: 0.7;
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .section_text {
@@ -213,7 +215,6 @@ section {
 .section_text__p1 {
   text-align: left;
   font-size: 1.75rem;
-  padding-left: 10rem;
 }
 
 .section_text__p2 {
@@ -224,6 +225,50 @@ section {
 .title {
   font-size: 3rem;
   text-align: left;
+}
+
+/* === Skills Section === */
+
+#skills {
+  padding: 2rem;
+  background-color: #f9f9f9;
+}
+
+#skills h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #353535;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.skill-category h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: #353535;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skill-tag {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid #353535;
+  border-radius: 2rem;
+  font-size: 0.85rem;
+  color: #353535;
+  background-color: #fff;
 }
 
 /* === Projects Section === */

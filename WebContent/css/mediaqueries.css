@@ -55,6 +55,12 @@
     justify-content: center;
   }
 
+  /* === Skills === */
+
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   /* === Projects === */
 
   .projects-filter {
@@ -91,6 +97,12 @@
 }
 
 @media (max-width: 700px) {
+  /* === Skills === */
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
   /* === Navigation === */
 
   .logo {

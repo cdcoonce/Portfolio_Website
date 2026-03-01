@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-03-01
+
+### Added
+
+- Skills & Tools section between hero and projects (4 categories, responsive grid)
+- Skills nav link in the sticky nav bar
+
+### Changed
+
+- Profile picture: replaced `scale: 0.7` with `width/height: 100%; object-fit: cover`
+- Hero spacing: removed fragile `padding-left: 10rem` from "Hello, I'm" text
+
+### Fixed
+
+- Favicon: replaced JPEG profile photo with SVG "CC" monogram
+
 ## [1.1.0] - 2026-03-01
 
 ### Added
