@@ -1,3 +1,7 @@
+node_modules
+.venv
+package-lock.json
+uv.lock
 # Ignore project asset files (notebook exports, generated HTML, etc.)
 WebContent/assets/
 
