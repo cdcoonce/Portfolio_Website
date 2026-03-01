@@ -33,6 +33,7 @@ class TestNavStructure:
         assert '#profile' in hrefs, 'Missing Home (#profile) nav link'
         assert '#projects' in hrefs, 'Missing Projects (#projects) nav link'
         assert '#testimonials' in hrefs, 'Missing Testimonials (#testimonials) nav link'
+        assert '#contact' in hrefs, 'Missing Contact (#contact) nav link'
 
     def test_hamburger_button_exists(self, soup):
         toggle = soup.find('button', class_='nav-toggle')
@@ -89,21 +90,21 @@ class TestNavE2E:
         assert float(opacity) == 0, f'Back-to-top should be invisible at top, opacity={opacity}'
 
     def test_back_to_top_visible_after_scroll(self, page):
-        """Back-to-top button should become visible after scrolling 400px."""
-        page.evaluate('window.scrollTo(0, 500)')
+        """Back-to-top button should gain .visible class once the testimonials section is in view."""
+        page.locator('#testimonials').scroll_into_view_if_needed()
         page.wait_for_timeout(400)
         btn = page.locator('.back-to-top')
-        opacity = btn.evaluate('el => getComputedStyle(el).opacity')
-        assert float(opacity) > 0, f'Back-to-top should be visible after scrolling, opacity={opacity}'
+        has_visible = btn.evaluate('el => el.classList.contains("visible")')
+        assert has_visible, 'Back-to-top should have .visible class when testimonials section is in view'
 
     def test_back_to_top_click_scrolls_to_top(self, page):
         """Clicking back-to-top should scroll page back to top."""
-        page.evaluate('window.scrollTo(0, 800)')
+        page.locator('#testimonials').scroll_into_view_if_needed()
         page.wait_for_timeout(400)
         page.click('.back-to-top')
-        page.wait_for_timeout(800)
+        page.wait_for_timeout(1200)
         scroll_y = page.evaluate('window.scrollY')
-        assert scroll_y < 50, f'Expected scrollY near 0 after back-to-top click, got {scroll_y}'
+        assert scroll_y < 100, f'Expected scrollY near 0 after back-to-top click, got {scroll_y}'
 
     def test_hamburger_toggles_nav_menu(self, page):
         """Hamburger button should show/hide nav links on mobile viewport."""

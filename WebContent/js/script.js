@@ -192,6 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /**
    * Creates pagination dots representing carousel pages.
    * Desktop (2 per page): 1 dot per pair; Mobile: 1 dot per testimonial.
+   * Each dot is clickable and navigates to the corresponding slide.
    */
   function createDots() {
     dotsContainer.innerHTML = '';
@@ -204,6 +205,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const dot = document.createElement('div');
       dot.classList.add('dot');
       if (index === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => {
+        carouselIndex = index;
+        showTestimonials(carouselIndex);
+      });
       dotsContainer.appendChild(dot);
     });
   }
@@ -224,6 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /**
    * Displays testimonials starting from the given index.
    * Activates opacity and 'active' class for visible testimonials only.
+   * Updates the dot indicators and position counter.
    * @param {number} startIndex - Starting index in testimonials array
    */
   function showTestimonials(startIndex) {
@@ -233,6 +239,13 @@ document.addEventListener('DOMContentLoaded', () => {
       testimonial.style.opacity = isVisible ? '1' : '0';
     });
     updateDots();
+
+    const counter = document.querySelector('.testimonial-counter');
+    if (counter) {
+      const current = Math.floor(startIndex / testimonialsToShow) + 1;
+      const total = Math.ceil(testimonials.length / testimonialsToShow);
+      counter.textContent = `${current} / ${total}`;
+    }
   }
 
   /**
@@ -274,12 +287,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let autoScrollTimer = setInterval(autoScroll, CAROUSEL_CONFIG.AUTO_SCROLL_INTERVAL_MS);
 
   function autoScroll() {
-    if (carouselIndex + testimonialsToShow < testimonials.length) {
-      nextTestimonial();
-    } else {
-      carouselIndex = 0;
-      showTestimonials(carouselIndex);
-    }
+    nextTestimonial();
   }
 
   document.addEventListener('visibilitychange', () => {
@@ -290,7 +298,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Initialize carousel display
-  showTestimonials(carouselIndex);
+  // Create and insert position counter after dots
+  const counter = document.createElement('p');
+  counter.classList.add('testimonial-counter');
+  dotsContainer.insertAdjacentElement('afterend', counter);
+
+  // Initialize carousel display (single call — counter already exists)
   createDots();
+  showTestimonials(carouselIndex);
 });
