@@ -141,6 +141,7 @@ At `max-width: 700px`, the nav links collapse behind a hamburger toggle button.
 ```
 
 **JS toggle logic (in `script.js`):**
+
 ```javascript
 const navToggle = document.querySelector('.nav-toggle');
 const navLinks = document.querySelector('.nav-links');
@@ -154,6 +155,7 @@ if (navToggle && navLinks) {
 ```
 
 **Additional responsive concerns:**
+
 - Logo font size may need reduction on small screens (`font-size: 1rem` at 700px)
 - Close the menu when a nav link is clicked (add click listeners on `.nav-links a`)
 
