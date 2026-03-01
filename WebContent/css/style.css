@@ -363,7 +363,6 @@ section {
 
 /* Project Card */
 .project-card {
-  position: relative; /* Positioning context for absolutely-positioned button */
   background-color: #fff;
   border-radius: 10px;
   overflow: hidden;
@@ -375,6 +374,8 @@ section {
   flex-direction: column;
   min-height: 430px; /* Flexible height to accommodate descriptions */
   width: 300px; /* Fixed card width */
+  text-decoration: none;
+  color: inherit;
 }
 
 .project-card:hover {
@@ -414,29 +415,6 @@ section {
   margin-bottom: 0.5rem;
   color: #555;
   flex-grow: 1;
-}
-
-/* Button positioned absolutely within card */
-.project-card .btn {
-  position: absolute;
-  bottom: 1rem;
-  left: 1rem;
-  text-decoration: none;
-  color: #353535;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem 1rem;
-  border: 1px solid #353535;
-  border-radius: 20px;
-  transition:
-    background-color 0.3s,
-    color 0.3s;
-}
-
-.project-card .btn:hover {
-  background-color: #353535;
-  color: #fff;
 }
 
 /* === Testimonials Section === */
