@@ -9,12 +9,12 @@
 
 ## Issues Addressed
 
-| #   | Issue                                             | Severity |
-| --- | ------------------------------------------------- | -------- |
-| 2   | Pure logic not separated from DOM — untestable    | High     |
-| 4   | Carousel breakpoint `>=` vs `>` inconsistency     | High     |
-| 16  | `autoScroll` is a trivial wrapper                 | Low      |
-| 17  | Multiple `DOMContentLoaded` listeners             | Low      |
+| #   | Issue                                          | Severity |
+| --- | ---------------------------------------------- | -------- |
+| 2   | Pure logic not separated from DOM — untestable | High     |
+| 4   | Carousel breakpoint `>=` vs `>` inconsistency  | High     |
+| 16  | `autoScroll` is a trivial wrapper              | Low      |
+| 17  | Multiple `DOMContentLoaded` listeners          | Low      |
 
 ---
 
@@ -31,6 +31,7 @@ WebContent/js/
 ```
 
 Each module exports:
+
 - **Pure functions** — no DOM access, fully testable by Jest
 - **An `init()` function** — wires pure logic to the DOM, called by `main.js`
 
@@ -357,6 +358,7 @@ export function initCarousel() {
 ```
 
 **Key fixes:**
+
 - Issue #4: All breakpoint checks now use `isDesktop()` from `utils.js` which consistently uses `>=`
 - Issue #16: `autoScroll` wrapper removed — `nextTestimonial` passed directly to `setInterval`
 

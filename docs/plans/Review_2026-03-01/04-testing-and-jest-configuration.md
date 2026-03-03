@@ -9,11 +9,11 @@
 
 ## Issues Addressed
 
-| #   | Issue                                             | Severity |
-| --- | ------------------------------------------------- | -------- |
-| 2   | All Jest unit tests are stubs — zero JS coverage  | High     |
-| 10  | Missing Jest configuration for jsdom environment  | Medium   |
-| 18  | SEO & link tests are stubs                        | Low      |
+| #   | Issue                                            | Severity |
+| --- | ------------------------------------------------ | -------- |
+| 2   | All Jest unit tests are stubs — zero JS coverage | High     |
+| 10  | Missing Jest configuration for jsdom environment | Medium   |
+| 18  | SEO & link tests are stubs                       | Low      |
 
 ---
 
