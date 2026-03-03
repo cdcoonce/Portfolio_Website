@@ -7,6 +7,10 @@
  * Closes the menu when any nav link is clicked.
  */
 document.addEventListener('DOMContentLoaded', () => {
+  /* Copyright year */
+  const yearSpan = document.getElementById('copyright-year');
+  if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+
   const navToggle = document.querySelector('.nav-toggle');
   const navLinks = document.querySelector('.nav-links');
 
