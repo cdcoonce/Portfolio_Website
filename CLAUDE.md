@@ -1,58 +1,58 @@
-# Portfolio Website — charleslikesdata.com
+# Development Standards
 
-## Project
+This file is auto-loaded every conversation. It defines how Claude should work in this repo.
 
-Personal data analytics portfolio for Charles Coonce. Static site hosted on GitHub Pages.
+## Methodology
 
-- **Live**: https://charleslikesdata.com
-- **Repo**: https://github.com/cdcoonce/Portfolio_Website
-- **Dev branch**: `master` (all feature work merges here)
-- **Deploy branch**: `gh-pages` (merge `master` → `gh-pages` to deploy)
-- **Stack**: Vanilla HTML5 + CSS3 + JavaScript — no frameworks, no build tools
+### TDD — Test-Driven Development
+Write the test first. Watch it fail. Write minimal code to pass. No production code without a failing test.
+Full process: [.claude/docs/tdd.md](.claude/docs/tdd.md)
 
-## Structure
+### Root Cause Tracing
+Never fix at the symptom. Trace backward through the call chain to the original trigger, then fix at the source.
+Full process: [.claude/docs/root-cause-tracing.md](.claude/docs/root-cause-tracing.md)
 
-```
-Portfolio_Website/
-├── index.html              # Single-page site (nav, hero, gallery, testimonials, footer)
-├── 404.html                # Custom 404
-├── CNAME                   # GitHub Pages custom domain
-├── package.json            # Metadata, npm scripts
-├── Makefile                # Unified test/lint runner
-├── pyproject.toml          # Python deps and pytest config (managed by uv)
-├── .editorconfig           # Editor formatting
-├── .prettierrc             # Prettier config
-├── WebContent/
-│   ├── assets/             # Images and icons (per-project subfolders)
-│   ├── css/                # Stylesheets
-│   └── js/                 # Scripts
-├── __tests__/              # Jest (JS unit tests)
-├── tests/                  # pytest (validation, a11y, e2e, visual)
-└── .claude/
-    └── skills/             # Claude Code skills
-```
+### Subagent-Driven Development
+When executing a plan with multiple independent tasks, dispatch a fresh subagent per task with code review between each.
+Full process: [.claude/docs/subagent-development.md](.claude/docs/subagent-development.md)
 
-## Quick Commands
+### Parallel Agent Dispatch
+When 3+ unrelated failures need investigation, dispatch one agent per independent problem domain concurrently.
+Full process: [.claude/docs/parallel-agents.md](.claude/docs/parallel-agents.md)
 
-```bash
-npm test                    # JS unit tests (Jest)
-uv run pytest               # Python tests (validation, a11y, e2e)
-uv run pytest -m a11y       # Accessibility only
-uv run pytest -m e2e        # Browser integration only
-make check                  # Full suite: lint + JS tests + Python tests
-npm run serve               # Local dev server at localhost:8000
-```
+## Planning
 
-## Formatting
+Write implementation plans to `docs/plans/{file_name}.md` before starting non-trivial work. Once a plan has been fully implemented, move it to `docs/plans/archive/`.
 
-- 2 spaces, 100 char width, single quotes, semicolons, LF, UTF-8
+## Code Style
+
+- Descriptive variable names (`private_key_bytes` not `pkb`)
+- SOLID, DRY, YAGNI — simplicity over complexity
+- Type hints on all function signatures
+- Numpy-style docstrings for public functions
+
+## Testing
+
+- Run tests: `uv run pytest`
+- Run with coverage: `uv run pytest --cov=src --cov-report=term-missing`
+- Prefer real code over mocks
+- Test fixtures in `tests/fixtures/`
 
 ## Skills
 
-Before writing any code, creating branches, making commits, or running tests on this project,
-read the relevant skill in `.claude/skills/`:
+Skills live in `.claude/skills/`. Each `SKILL.md` defines an invocable skill with trigger conditions.
 
-- **`.claude/skills/portfolio-website/SKILL.md`** — Read this before any development work.
-  Covers the TDD workflow (what to test, how to structure tests, which tool for which layer),
-  coding standards (HTML, CSS, JS, and Python conventions), and versioning rules (branching,
-  commit messages, release process). Do not skip this step.
+### `/code-review`
+**Trigger when:** user asks for a "code review", "quality check", pre-commit review, or wants code analyzed for issues.
+**Output:** Save markdown report to `docs/code_reviews/{YYYY-MM-DD}_{file_name}.md`.
+
+### `/gitlab-cli`
+**Trigger when:** user needs to interact with GitLab — issues, merge requests, MR reviews, CI/CD pipelines, or pushing changes.
+
+### `/readme-generator`
+**Trigger when:** user asks to create, generate, update, or improve a README, or says "document this project".
+**References:** [.claude/skills/readme-generator/references/](.claude/skills/readme-generator/references/) — analysis methodology, mermaid guidelines, badge reference.
+
+## Project Context
+
+See [.claude/docs/project.md](.claude/docs/project.md) for project-specific details (tech stack, architecture, test markers).
