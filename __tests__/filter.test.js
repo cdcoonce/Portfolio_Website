@@ -73,12 +73,7 @@ describe('applyMaxVisible', () => {
 
 describe('getFeaturedVisibility', () => {
   test('returns true only for featured flags', () => {
-    expect(getFeaturedVisibility([true, false, true, false])).toEqual([
-      true,
-      false,
-      true,
-      false,
-    ]);
+    expect(getFeaturedVisibility([true, false, true, false])).toEqual([true, false, true, false]);
   });
 
   test('returns all false when no featured cards', () => {

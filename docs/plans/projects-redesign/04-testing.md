@@ -44,13 +44,11 @@ describe('applyMaxVisible', () => {
 ```javascript
 describe('getFeaturedVisibility', () => {
   test('returns true only for featured flags', () => {
-    expect(getFeaturedVisibility([true, false, true, false]))
-      .toEqual([true, false, true, false]);
+    expect(getFeaturedVisibility([true, false, true, false])).toEqual([true, false, true, false]);
   });
 
   test('returns all false when no featured cards', () => {
-    expect(getFeaturedVisibility([false, false, false]))
-      .toEqual([false, false, false]);
+    expect(getFeaturedVisibility([false, false, false])).toEqual([false, false, false]);
   });
 });
 ```
@@ -237,16 +235,16 @@ def projects_page(browser, server):
 
 Tests are written **before** the corresponding implementation code. The order follows the dependency chain:
 
-| Step | Test first | Then implement |
-|------|-----------|----------------|
-| 1 | `applyMaxVisible` unit tests | `applyMaxVisible` function |
-| 2 | `getFeaturedVisibility` unit tests | `getFeaturedVisibility` function |
-| 3 | `getFilterFromURL` unit tests | `getFilterFromURL` function |
-| 4 | — | Refactor `initFilter` (existing tests validate backward compat) |
-| 5 | `index.html` validation tests | Update `index.html` |
-| 6 | `projects.html` validation tests | Create `projects.html` |
-| 7 | E2E tests for home page | Wire everything together |
-| 8 | E2E tests for projects page | Final integration |
+| Step | Test first                         | Then implement                                                  |
+| ---- | ---------------------------------- | --------------------------------------------------------------- |
+| 1    | `applyMaxVisible` unit tests       | `applyMaxVisible` function                                      |
+| 2    | `getFeaturedVisibility` unit tests | `getFeaturedVisibility` function                                |
+| 3    | `getFilterFromURL` unit tests      | `getFilterFromURL` function                                     |
+| 4    | —                                  | Refactor `initFilter` (existing tests validate backward compat) |
+| 5    | `index.html` validation tests      | Update `index.html`                                             |
+| 6    | `projects.html` validation tests   | Create `projects.html`                                          |
+| 7    | E2E tests for home page            | Wire everything together                                        |
+| 8    | E2E tests for projects page        | Final integration                                               |
 
 ## 4.5 Running Tests
 

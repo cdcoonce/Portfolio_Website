@@ -7,7 +7,7 @@
 ### Add `data-page` attribute to `<body>`
 
 ```html
-<body data-page="home">
+<body data-page="home"></body>
 ```
 
 This allows `main.js` to determine which page config to use for `initFilter`.
@@ -15,11 +15,13 @@ This allows `main.js` to determine which page config to use for `initFilter`.
 ### Change reset button text
 
 Current (line ~126 area):
+
 ```html
 <button class="skill-filter-reset active" data-filter="all">All Projects</button>
 ```
 
 New:
+
 ```html
 <button class="skill-filter-reset active" data-filter="featured">Featured</button>
 ```
@@ -73,13 +75,13 @@ projects.html
 
 On `projects.html`, the nav links need slight changes:
 
-| Link | `index.html` value | `projects.html` value |
-|------|--------------------|-----------------------|
-| Home | `#profile` | `./index.html` |
-| Skills | `#skills` | `#skills` (same page section) |
-| Projects | `#projects` | `#projects` (same page section) |
-| Testimonials | `#testimonials` | `./index.html#testimonials` |
-| Contact | `#contact` | `./index.html#contact` |
+| Link         | `index.html` value | `projects.html` value           |
+| ------------ | ------------------ | ------------------------------- |
+| Home         | `#profile`         | `./index.html`                  |
+| Skills       | `#skills`          | `#skills` (same page section)   |
+| Projects     | `#projects`        | `#projects` (same page section) |
+| Testimonials | `#testimonials`    | `./index.html#testimonials`     |
+| Contact      | `#contact`         | `./index.html#contact`          |
 
 ### "Featured" as a filter tag
 

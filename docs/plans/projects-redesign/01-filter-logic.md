@@ -33,6 +33,7 @@ export const applyMaxVisible = (visibility, max) => {
 ```
 
 **Behavior:**
+
 - `max === null` → returns input unchanged (unlimited mode, used on `projects.html`)
 - `max === 4` → returns at most 4 `true` values, preserving original order
 - `max === 0` → all cards hidden
@@ -147,6 +148,7 @@ if (initialFilter) {
 ### Backward Compatibility
 
 Calling `initFilter()` with no arguments produces:
+
 - `maxVisible: null` → all cards visible (no cap)
 - `defaultFilter: 'all'` → reset shows everything
 - `initialFilter: null` → no pre-selected filter

@@ -16,18 +16,19 @@ Redesign the projects section into two tiers:
 
 ## Current Architecture
 
-| Component | File | Description |
-|-----------|------|-------------|
-| HTML structure | `index.html` | Single-page site, 17 `<a class="project-card">` elements with `data-tags` attributes |
-| Filter logic | `WebContent/js/filter.js` | Pure function `getFilteredVisibility()` + DOM-wiring `initFilter()` |
-| Entry point | `WebContent/js/main.js` | Imports and initializes filter + carousel modules |
-| Styles | `WebContent/css/style.css` | `.projects-grid` (CSS Grid), `.project-card`, `.skill-tag` |
-| Responsive | `WebContent/css/mediaqueries.css` | Breakpoints at 1250px and 700px |
-| Unit tests | `__tests__/filter.test.js` | Jest tests for `getFilteredVisibility` |
-| E2E tests | `tests/test_gallery.py` | Playwright tests for filter UI behavior |
-| Validation | `tests/test_validation.py` | HTML structure assertions (card count, featured count) |
+| Component      | File                              | Description                                                                          |
+| -------------- | --------------------------------- | ------------------------------------------------------------------------------------ |
+| HTML structure | `index.html`                      | Single-page site, 17 `<a class="project-card">` elements with `data-tags` attributes |
+| Filter logic   | `WebContent/js/filter.js`         | Pure function `getFilteredVisibility()` + DOM-wiring `initFilter()`                  |
+| Entry point    | `WebContent/js/main.js`           | Imports and initializes filter + carousel modules                                    |
+| Styles         | `WebContent/css/style.css`        | `.projects-grid` (CSS Grid), `.project-card`, `.skill-tag`                           |
+| Responsive     | `WebContent/css/mediaqueries.css` | Breakpoints at 1250px and 700px                                                      |
+| Unit tests     | `__tests__/filter.test.js`        | Jest tests for `getFilteredVisibility`                                               |
+| E2E tests      | `tests/test_gallery.py`           | Playwright tests for filter UI behavior                                              |
+| Validation     | `tests/test_validation.py`        | HTML structure assertions (card count, featured count)                               |
 
 **Key details:**
+
 - 4 cards already have the `featured` class (lines 157, 181, 230, 551 of `index.html`)
 - Filter uses OR logic: if any active filter matches any card tag, the card is visible
 - Cards are shown/hidden via `display: flex | none` — no DOM insertion/removal
@@ -35,26 +36,26 @@ Redesign the projects section into two tiers:
 
 ## Phase Breakdown
 
-| Phase | Document | Summary |
-|-------|----------|---------|
+| Phase   | Document                                 | Summary                                                                   |
+| ------- | ---------------------------------------- | ------------------------------------------------------------------------- |
 | Phase 1 | [01-filter-logic.md](01-filter-logic.md) | Extend `filter.js` with new pure functions and config-driven `initFilter` |
-| Phase 2 | [02-html-changes.md](02-html-changes.md) | Update `index.html` and create `projects.html` |
-| Phase 3 | [03-css-changes.md](03-css-changes.md) | Add styles for projects footer and all-projects page |
-| Phase 4 | [04-testing.md](04-testing.md) | Unit tests, validation tests, and E2E tests (TDD) |
+| Phase 2 | [02-html-changes.md](02-html-changes.md) | Update `index.html` and create `projects.html`                            |
+| Phase 3 | [03-css-changes.md](03-css-changes.md)   | Add styles for projects footer and all-projects page                      |
+| Phase 4 | [04-testing.md](04-testing.md)           | Unit tests, validation tests, and E2E tests (TDD)                         |
 
 ## Files to Modify
 
-| File | Action | Phase |
-|------|--------|-------|
-| `WebContent/js/filter.js` | Extend | 1 |
-| `WebContent/js/main.js` | Modify | 1 |
-| `index.html` | Modify | 2 |
-| `projects.html` | **Create** | 2 |
-| `WebContent/css/style.css` | Extend | 3 |
-| `__tests__/filter.test.js` | Extend | 4 |
-| `tests/test_validation.py` | Extend | 4 |
-| `tests/test_gallery.py` | Modify + extend | 4 |
-| `tests/conftest.py` | Extend | 4 |
+| File                       | Action          | Phase |
+| -------------------------- | --------------- | ----- |
+| `WebContent/js/filter.js`  | Extend          | 1     |
+| `WebContent/js/main.js`    | Modify          | 1     |
+| `index.html`               | Modify          | 2     |
+| `projects.html`            | **Create**      | 2     |
+| `WebContent/css/style.css` | Extend          | 3     |
+| `__tests__/filter.test.js` | Extend          | 4     |
+| `tests/test_validation.py` | Extend          | 4     |
+| `tests/test_gallery.py`    | Modify + extend | 4     |
+| `tests/conftest.py`        | Extend          | 4     |
 
 ## Verification Checklist
 
