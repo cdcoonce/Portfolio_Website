@@ -1,4 +1,4 @@
-@media screen and (max-width: 1250px) {
+@media (max-width: 1250px) {
   /* === Navigation === */
 
   #main-nav {
@@ -21,11 +21,6 @@
     height: 275px;
   }
 
-  .project__pic-container {
-    width: 22.25rem;
-    height: 20rem;
-  }
-
   /* === Profile === */
 
   #profile {
@@ -45,7 +40,7 @@
   }
 
   .section_text__p1 {
-    padding-left: 0rem;
+    padding-left: 0;
   }
 
   .title {
@@ -63,16 +58,6 @@
   }
 
   /* === Projects === */
-
-  .projects-filter {
-    gap: 0.5rem; /* Reduce gap if needed */
-  }
-
-  .projects-filter .filter {
-    flex: 1 1 100px;
-    font-size: 0.9rem;
-    text-align: center;
-  }
 
   .projects-grid {
     grid-template-columns: repeat(2, 300px);
@@ -93,7 +78,7 @@
   }
 
   .testimonial {
-    background-color: #ebf1f866;
+    background-color: var(--color-bg-card-highlight);
   }
 }
 
@@ -124,7 +109,7 @@
     display: block;
     width: 24px;
     height: 3px;
-    background-color: #353535;
+    background-color: var(--color-text-primary);
     border-radius: 2px;
     transition:
       transform 300ms ease,
@@ -138,8 +123,8 @@
     top: 100%;
     left: 0;
     right: 0;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: var(--color-bg-white);
+    box-shadow: 0 4px 8px var(--color-shadow);
     padding: 1rem 2rem;
     gap: 1rem;
   }
