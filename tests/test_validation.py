@@ -112,3 +112,11 @@ class TestHTMLValidation:
         container = soup.find('div', class_='testimonials')
         assert container is not None, 'Missing .testimonials div'
         assert container.get('aria-live'), '.testimonials div missing aria-live attribute'
+
+    def test_no_inline_scripts_in_body(self, soup):
+        """Ensure no inline <script> tags exist in the body (external src scripts are allowed)."""
+        body = soup.find('body')
+        inline_scripts = [s for s in body.find_all('script') if not s.get('src')]
+        assert len(inline_scripts) == 0, (
+            f'{len(inline_scripts)} inline script(s) found in body'
+        )
