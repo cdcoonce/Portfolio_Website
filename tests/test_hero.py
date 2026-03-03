@@ -77,11 +77,11 @@ class TestHeroStructure:
             assert tag.get('data-filter'), f'skill-tag button missing data-filter: {tag}'
 
     def test_all_projects_button_exists_in_skills(self, soup):
-        """Skills section must include an All Projects reset button."""
+        """Skills section must include a Featured reset button."""
         section = soup.find('section', id='skills')
         assert section is not None
-        reset = section.find('button', attrs={'data-filter': 'all'})
-        assert reset is not None, 'Missing All Projects reset button in #skills'
+        reset = section.find('button', class_='skill-filter-reset')
+        assert reset is not None, 'Missing Featured reset button in #skills'
 
     def test_no_standalone_projects_filter_div(self, soup):
         """The old .projects-filter bar should be removed from the projects section."""
@@ -137,14 +137,15 @@ class TestHeroE2E:
         assert visible < total, 'Clicking Python filter should hide some project cards'
 
     def test_all_projects_button_resets_filter(self, page):
-        """Clicking the All Projects button should show all project cards."""
+        """Clicking the Featured reset button should show 4 featured cards."""
         page.set_viewport_size({'width': 1440, 'height': 900})
         page.reload()
-        page.wait_for_timeout(300)
-        total = page.locator('.project-card').count()
+        page.wait_for_function(
+            'document.querySelectorAll(".project-card[style*=\\"none\\"]").length > 0'
+        )
         page.click('button.skill-tag[data-filter="python"]')
         page.wait_for_timeout(200)
-        page.click('button[data-filter="all"]')
+        page.click('button.skill-filter-reset')
         page.wait_for_timeout(300)
         visible = page.locator('.project-card:visible').count()
-        assert visible == total, f'All Projects should show all {total} cards, got {visible}'
+        assert visible == 4, f'Featured reset should show 4 cards, got {visible}'
