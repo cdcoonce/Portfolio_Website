@@ -9,11 +9,11 @@
 
 ## Issues Addressed
 
-| #   | Issue                                               | Severity |
-| --- | --------------------------------------------------- | -------- |
-| 3   | CI does not run tests — broken code won't block deploy | High  |
-| 11  | CI missing Stylelint and ESLint lint steps           | Medium   |
-| 13  | 404 page favicon mismatch (covered in Phase 1 Step 6) | Low   |
+| #   | Issue                                                  | Severity |
+| --- | ------------------------------------------------------ | -------- |
+| 3   | CI does not run tests — broken code won't block deploy | High     |
+| 11  | CI missing Stylelint and ESLint lint steps             | Medium   |
+| 13  | 404 page favicon mismatch (covered in Phase 1 Step 6)  | Low      |
 
 **Note:** Issue #13 is already handled in Phase 1 Step 6. It is listed here for traceability only.
 
@@ -150,6 +150,7 @@ jobs:
 ```
 
 **Key changes:**
+
 - Renamed `lint` → `check` to reflect broader scope
 - Added `uv` + Python + Playwright setup steps
 - Added Stylelint and ESLint steps (Issue #11)

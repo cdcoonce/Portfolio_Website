@@ -48,22 +48,22 @@ Extract all repeated color values into custom properties. This creates a single 
 
 Then replace all hard-coded color values with the corresponding custom property. Key replacements:
 
-| Hard-coded value                 | Replace with                    | Occurrences |
-| -------------------------------- | ------------------------------- | ----------- |
-| `#353535`                        | `var(--color-text-primary)`     | ~12         |
-| `rgb(85, 85, 85)`               | `var(--color-text-secondary)`   | 1           |
-| `#fff` / `white`                 | `var(--color-bg-white)`         | ~8          |
-| `#f9f9f9`                        | `var(--color-bg-light)`         | 2           |
-| `rgb(53, 53, 53)`               | `var(--color-accent-dark)`      | ~6          |
-| `rgb(0, 0, 0)`                  | `var(--color-accent-black)`     | 2           |
-| `rgba(0, 0, 0, 0.1)`            | `var(--color-shadow)`           | 2           |
-| `rgba(0, 0, 0, 0.08)`           | Keep as-is (unique, nav only)   | 1           |
-| `rgba(0, 0, 0, 0.15)`           | Keep as-is (unique, hover only) | 1           |
-| `rgba(235, 241, 248, 0.4)`      | `var(--color-bg-card-highlight)`| 1           |
-| `rgba(53, 53, 53, 0.2)`         | `var(--color-quote)`            | 1           |
-| `#ccc`                           | `var(--color-dot-inactive)`     | 1           |
-| `#666`                           | `var(--color-counter)`          | 1           |
-| `#555`                           | `var(--color-text-secondary)`   | 3           |
+| Hard-coded value           | Replace with                     | Occurrences |
+| -------------------------- | -------------------------------- | ----------- |
+| `#353535`                  | `var(--color-text-primary)`      | ~12         |
+| `rgb(85, 85, 85)`          | `var(--color-text-secondary)`    | 1           |
+| `#fff` / `white`           | `var(--color-bg-white)`          | ~8          |
+| `#f9f9f9`                  | `var(--color-bg-light)`          | 2           |
+| `rgb(53, 53, 53)`          | `var(--color-accent-dark)`       | ~6          |
+| `rgb(0, 0, 0)`             | `var(--color-accent-black)`      | 2           |
+| `rgba(0, 0, 0, 0.1)`       | `var(--color-shadow)`            | 2           |
+| `rgba(0, 0, 0, 0.08)`      | Keep as-is (unique, nav only)    | 1           |
+| `rgba(0, 0, 0, 0.15)`      | Keep as-is (unique, hover only)  | 1           |
+| `rgba(235, 241, 248, 0.4)` | `var(--color-bg-card-highlight)` | 1           |
+| `rgba(53, 53, 53, 0.2)`    | `var(--color-quote)`             | 1           |
+| `#ccc`                     | `var(--color-dot-inactive)`      | 1           |
+| `#666`                     | `var(--color-counter)`           | 1           |
+| `#555`                     | `var(--color-text-secondary)`    | 3           |
 
 **Note:** `#555` and `rgb(85, 85, 85)` are the same color. Consolidate to `var(--color-text-secondary)`.
 

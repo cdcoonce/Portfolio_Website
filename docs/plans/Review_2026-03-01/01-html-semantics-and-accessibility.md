@@ -9,11 +9,11 @@
 
 ## Issues Addressed
 
-| #   | Issue                                       | Severity |
-| --- | ------------------------------------------- | -------- |
-| 1   | Missing `<main>` and `<header>` landmarks   | High     |
-| 8   | Inline `document.write()` in footer         | Medium   |
-| 9   | `<meta charset>` not first in `<head>`      | Medium   |
+| #   | Issue                                     | Severity |
+| --- | ----------------------------------------- | -------- |
+| 1   | Missing `<main>` and `<header>` landmarks | High     |
+| 8   | Inline `document.write()` in footer       | Medium   |
+| 9   | `<meta charset>` not first in `<head>`    | Medium   |
 
 ---
 
@@ -40,6 +40,7 @@ The HTML spec requires `<meta charset>` to appear within the first 1024 bytes of
     gtag('config', 'G-C3MKQC8F23');
   </script>
   <meta charset="UTF-8" />
+</head>
 ```
 
 **After:**
@@ -57,6 +58,7 @@ The HTML spec requires `<meta charset>` to appear within the first 1024 bytes of
     gtag('js', new Date());
     gtag('config', 'G-C3MKQC8F23');
   </script>
+</head>
 ```
 
 ---
@@ -71,10 +73,9 @@ Wrap the existing `<nav id="main-nav">` element in a `<header>` element. This pr
 
 ```html
 <body>
-  <nav id="main-nav">
-    ...
-  </nav>
-  <section id="profile">
+  <nav id="main-nav">...</nav>
+  <section id="profile"></section>
+</body>
 ```
 
 **After:**
@@ -82,12 +83,12 @@ Wrap the existing `<nav id="main-nav">` element in a `<header>` element. This pr
 ```html
 <body>
   <header>
-    <nav id="main-nav">
-      ...
-    </nav>
+    <nav id="main-nav">...</nav>
   </header>
   <main>
-    <section id="profile">
+    <section id="profile"></section>
+  </main>
+</body>
 ```
 
 ---
@@ -139,9 +140,7 @@ Remove the inline `<script>` tag and replace it with a `<span>` that JavaScript 
 
 ```html
 <footer>
-  <p>
-    Copyright &#169; <span id="copyright-year"></span> Charles Coonce. All Rights Reserved.
-  </p>
+  <p>Copyright &#169; <span id="copyright-year"></span> Charles Coonce. All Rights Reserved.</p>
 </footer>
 ```
 
