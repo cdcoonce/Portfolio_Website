@@ -33,3 +33,12 @@ def page(browser, server):
     page.goto(server)
     yield page
     page.close()
+
+
+@pytest.fixture
+def projects_page(browser, server):
+    """Provide a fresh page loaded with the projects page."""
+    page = browser.new_page()
+    page.goto(f'{server}/projects.html')
+    yield page
+    page.close()

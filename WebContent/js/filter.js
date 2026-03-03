@@ -22,9 +22,51 @@ export const getFilteredVisibility = (cardTagSets, activeFilters) => {
 };
 
 /**
- * Wires filter buttons and reset button to project card visibility.
+ * Caps visible cards to a maximum count.
+ * @param {boolean[]} visibility - Array of visibility flags
+ * @param {number|null} max - Maximum visible cards, or null for unlimited
+ * @returns {boolean[]} New array with at most max true values
  */
-export function initFilter() {
+export const applyMaxVisible = (visibility, max) => {
+  if (max === null || max === undefined) return visibility;
+  let count = 0;
+  return visibility.map((v) => {
+    if (v && count < max) {
+      count++;
+      return true;
+    }
+    return false;
+  });
+};
+
+/**
+ * Returns visibility based on featured status.
+ * @param {boolean[]} featuredFlags - Array of booleans (true if card has featured class)
+ * @returns {boolean[]}
+ */
+export const getFeaturedVisibility = (featuredFlags) => {
+  return featuredFlags.map((f) => f);
+};
+
+/**
+ * Reads the filter query parameter from the current URL.
+ * @returns {string|null} The filter value, or null if not present
+ */
+export const getFilterFromURL = () => {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('filter') || null;
+};
+
+/**
+ * Wires filter buttons and reset button to project card visibility.
+ * @param {Object} [config]
+ * @param {number|null} [config.maxVisible=null] - Max cards to show (null = unlimited)
+ * @param {string} [config.defaultFilter='all'] - Default filter: 'all' or 'featured'
+ * @param {string|null} [config.initialFilter=null] - Pre-selected filter from URL param
+ */
+export function initFilter(config = {}) {
+  const { maxVisible = null, defaultFilter = 'all', initialFilter = null } = config;
+
   const skillTags = document.querySelectorAll('button.skill-tag[data-filter]');
   const resetButton = document.querySelector('button.skill-filter-reset');
   const cards = document.querySelectorAll('.project-card');
@@ -35,16 +77,43 @@ export function initFilter() {
     return;
   }
 
-  const cardTagSets = Array.from(cards).map((c) => c.getAttribute('data-tags') || '');
+  const cardTagSets = Array.from(cards).map((c) => {
+    let tags = c.getAttribute('data-tags') || '';
+    if (c.classList.contains('featured')) {
+      tags = tags ? `${tags},featured` : 'featured';
+    }
+    return tags;
+  });
+  const featuredFlags = Array.from(cards).map((c) => c.classList.contains('featured'));
+
+  function updateViewAllLink() {
+    const viewAllLink = document.querySelector('.view-all-link');
+    if (!viewAllLink) return;
+    if (activeFilters.size === 1) {
+      const filter = Array.from(activeFilters)[0];
+      viewAllLink.href = `./projects.html?filter=${encodeURIComponent(filter)}`;
+    } else {
+      viewAllLink.href = './projects.html';
+    }
+  }
 
   function render() {
-    const visibility = getFilteredVisibility(cardTagSets, activeFilters);
+    let visibility;
+    if (activeFilters.size === 0 && defaultFilter === 'featured') {
+      visibility = getFeaturedVisibility(featuredFlags);
+    } else if (activeFilters.size === 0) {
+      visibility = cardTagSets.map(() => true);
+    } else {
+      visibility = getFilteredVisibility(cardTagSets, activeFilters);
+    }
+    visibility = applyMaxVisible(visibility, maxVisible);
     cards.forEach((card, i) => {
       card.style.display = visibility[i] ? 'flex' : 'none';
     });
+    updateViewAllLink();
   }
 
-  function showAll() {
+  function showDefault() {
     activeFilters.clear();
     skillTags.forEach((t) => t.classList.remove('active'));
     if (resetButton) resetButton.classList.add('active');
@@ -54,25 +123,36 @@ export function initFilter() {
   skillTags.forEach((tag) => {
     tag.addEventListener('click', () => {
       const filterValue = tag.getAttribute('data-filter');
-      if (resetButton) resetButton.classList.remove('active');
+      const wasActive = tag.classList.contains('active');
 
-      if (tag.classList.contains('active')) {
-        tag.classList.remove('active');
-        activeFilters.delete(filterValue);
+      // Clear all active states (single-select)
+      if (resetButton) resetButton.classList.remove('active');
+      skillTags.forEach((t) => t.classList.remove('active'));
+      activeFilters.clear();
+
+      if (wasActive) {
+        // Clicking the same filter again deselects it → return to default
+        showDefault();
       } else {
         tag.classList.add('active');
         activeFilters.add(filterValue);
-      }
-
-      if (activeFilters.size === 0) {
-        showAll();
-      } else {
         render();
       }
     });
   });
 
   if (resetButton) {
-    resetButton.addEventListener('click', showAll);
+    resetButton.addEventListener('click', showDefault);
+  }
+
+  if (initialFilter) {
+    const matchingTag = Array.from(skillTags).find(
+      (t) => t.getAttribute('data-filter') === initialFilter
+    );
+    if (matchingTag) {
+      matchingTag.click();
+    }
+  } else {
+    render();
   }
 }

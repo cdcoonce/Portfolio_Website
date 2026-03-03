@@ -1,6 +1,6 @@
 'use strict';
 
-import { initFilter } from './filter.js';
+import { initFilter, getFilterFromURL } from './filter.js';
 import { initCarousel } from './carousel.js';
 
 /**
@@ -63,7 +63,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Initialize feature modules
-  initFilter();
-  initCarousel();
+  // Page-aware initialization
+  const page = document.body.dataset.page;
+
+  if (page === 'projects') {
+    initFilter({
+      maxVisible: null,
+      defaultFilter: 'all',
+      initialFilter: getFilterFromURL(),
+    });
+  } else {
+    initFilter({
+      maxVisible: 4,
+      defaultFilter: 'featured',
+    });
+    initCarousel();
+  }
 });

@@ -12,6 +12,7 @@ export default [
         setInterval: 'readonly',
         clearInterval: 'readonly',
         clearTimeout: 'readonly',
+        URLSearchParams: 'readonly',
       },
     },
     rules: {
