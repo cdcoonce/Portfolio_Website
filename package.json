@@ -4,9 +4,9 @@
   "description": "Welcome to the repository for my personal portfolio site: [**charleslikesdata.com**](https://charleslikesdata.com)",
   "main": "index.html",
   "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
+    "test": "NODE_OPTIONS='--experimental-vm-modules' jest",
+    "test:watch": "NODE_OPTIONS='--experimental-vm-modules' jest --watch",
+    "test:coverage": "NODE_OPTIONS='--experimental-vm-modules' jest --coverage",
     "lint:css": "stylelint 'WebContent/css/**/*.css'",
     "lint:js": "eslint 'WebContent/js/**/*.js'",
     "lint": "npm run lint:css && npm run lint:js",
@@ -21,7 +21,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/cdcoonce/Portfolio_Website/issues"
   },
