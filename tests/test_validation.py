@@ -40,7 +40,16 @@ class TestHTMLValidation:
     def test_featured_cards_exist(self, soup):
         cards = soup.find_all(class_='project-card')
         featured = [c for c in cards if 'featured' in c.get('class', [])]
-        assert len(featured) >= 3, f'Expected at least 3 featured cards, found {len(featured)}'
+        assert len(featured) == 4, f'Expected 4 featured cards, found {len(featured)}'
+
+    def test_data_page_attribute(self, soup):
+        body = soup.find('body')
+        assert body.get('data-page') == 'home', 'index.html body must have data-page="home"'
+
+    def test_view_all_link_exists(self, soup):
+        link = soup.find('a', class_='view-all-link')
+        assert link is not None, 'View All Projects link not found'
+        assert 'projects.html' in link['href']
 
     def test_project_cards_are_anchor_elements(self, soup):
         cards = soup.find_all(class_='project-card')
@@ -120,3 +129,37 @@ class TestHTMLValidation:
         assert len(inline_scripts) == 0, (
             f'{len(inline_scripts)} inline script(s) found in body'
         )
+
+
+@pytest.fixture(scope='module')
+def projects_soup():
+    html = Path('projects.html').read_text()
+    return BeautifulSoup(html, 'html.parser')
+
+
+@pytest.mark.validation
+class TestProjectsPageValidation:
+    def test_projects_page_exists(self):
+        assert Path('projects.html').is_file(), 'projects.html must exist at project root'
+
+    def test_projects_page_has_all_17_cards(self, projects_soup):
+        cards = projects_soup.find_all(class_='project-card')
+        assert len(cards) == 17, f'Expected 17 project cards, found {len(cards)}'
+
+    def test_projects_page_has_filter_buttons(self, projects_soup):
+        tags = projects_soup.find_all('button', class_='skill-tag')
+        assert len(tags) > 0, 'Projects page must have skill filter buttons'
+
+    def test_projects_page_has_data_page_attribute(self, projects_soup):
+        body = projects_soup.find('body')
+        assert body.get('data-page') == 'projects', 'projects.html body must have data-page="projects"'
+
+    def test_projects_page_has_featured_filter(self, projects_soup):
+        featured = projects_soup.find('button', attrs={'data-filter': 'featured'})
+        assert featured is not None, 'Projects page must have a Featured filter button'
+
+    def test_projects_page_has_semantic_structure(self, projects_soup):
+        assert projects_soup.find('header'), 'Missing <header>'
+        assert projects_soup.find('main'), 'Missing <main>'
+        assert projects_soup.find('nav'), 'Missing <nav>'
+        assert projects_soup.find('footer'), 'Missing <footer>'

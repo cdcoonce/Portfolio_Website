@@ -16,9 +16,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Charles Coonce — Data analyst portfolio showcasing projects in Python, SQL, R, Tableau, and more."
+      content="All data analytics projects by Charles Coonce — Python, SQL, R, Tableau, and more."
     />
-    <title>Charles Coonce | Data Analytics Portfolio</title>
+    <title>All Projects | Charles Coonce</title>
     <link rel="icon" type="image/svg+xml" href="./WebContent/assets/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -29,79 +29,29 @@
     <link rel="stylesheet" href="./WebContent/css/style.css" />
     <link rel="stylesheet" href="./WebContent/css/mediaqueries.css" />
   </head>
-  <body data-page="home">
+  <body data-page="projects">
     <header>
       <nav id="main-nav">
-        <a href="#profile" class="logo">Charles Coonce</a>
+        <a href="./index.html" class="logo">Charles Coonce</a>
         <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
           <span class="nav-toggle__bar"></span>
           <span class="nav-toggle__bar"></span>
           <span class="nav-toggle__bar"></span>
         </button>
         <ul class="nav-links">
-          <li><a href="#profile">Home</a></li>
+          <li><a href="./index.html">Home</a></li>
           <li><a href="#skills">Skills</a></li>
           <li><a href="#projects">Projects</a></li>
-          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="./index.html#testimonials">Testimonials</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
     </header>
     <main>
-      <section id="profile">
-        <div class="section__pic-container">
-          <img
-            src="./WebContent/assets/Headshots/LinkedinProfile.jpeg"
-            alt="Charles Coonce Profile Picture"
-            class="profile_pic"
-          />
-        </div>
-        <div class="section_text">
-          <p class="section_text__p1">Hello, I'm</p>
-          <h1 class="title">Charles Coonce</h1>
-          <p class="section_text__p2">
-            I’m an Analyst at Clearway Energy focused on analytics engineering and data-driven
-            problem solving. <br /><br />I’m passionate about building scalable data pipelines,
-            creating clear visual insights, and helping teams make informed decisions.
-          </p>
-          <div class="btn-container">
-            <a
-              class="btn btn-color-1"
-              href="https://github.com/cdcoonce"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              GitHub
-            </a>
-            <a
-              class="btn btn-color-1"
-              href="./WebContent/assets/CharlesCoonce_Resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Resume
-            </a>
-            <div class="icon-container">
-              <a class="icon" href="mailto:CharlesCoonce@Gmail.com">
-                <img src="./WebContent/assets/mailicon.png" alt="Email Charles Coonce" />
-              </a>
-              <a
-                class="icon"
-                href="https://www.linkedin.com/in/charlesdcoonce/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src="./WebContent/assets/linkedinicon.png" alt="My LinkedIn profile" />
-              </a>
-            </div>
-          </div>
-        </div>
-        <button class="scroll-down" aria-label="Scroll to skills section">↓</button>
-      </section>
       <section id="skills">
         <div class="skills-header">
-          <h2>Skills &amp; Tools</h2>
-          <button class="skill-filter-reset active" data-filter="featured">Featured</button>
+          <h2>All Projects</h2>
+          <button class="skill-filter-reset active" data-filter="all">All Projects</button>
         </div>
         <div class="skills-grid">
           <div class="skill-category">
@@ -133,6 +83,7 @@
           <div class="skill-category">
             <h3>Focus Areas</h3>
             <div class="skill-tags">
+              <button class="skill-tag" data-filter="featured">Featured</button>
               <button class="skill-tag" data-filter="visualization">Data Visualization</button>
               <button class="skill-tag" data-filter="analytics-dashboard">
                 Analytics Dashboards
@@ -568,101 +519,6 @@
             </div>
           </a>
         </div>
-        <div class="projects-footer">
-          <a href="./projects.html" class="btn btn-color-1 view-all-link"
-            >View All Projects</a
-          >
-        </div>
-      </section>
-      <section id="testimonials">
-        <h2 class="section_text__p1">Testimonials</h2>
-        <div class="testimonials-container">
-          <div class="btn-container">
-            <button id="prevRec" class="btn btn-color-2" aria-label="Previous testimonial">
-              &#10094;
-            </button>
-          </div>
-          <div class="testimonials" aria-live="polite">
-            <div class="testimonial">
-              <p class="rec">
-                During his time as an IT intern at OneAmerica Financial, he demonstrated
-                <strong>exceptional people skills</strong>, a <strong>strong work ethic</strong>,
-                and a <strong>genuine passion for technology</strong>."
-              </p>
-              <p class="author">Aaron Wallen</p>
-              <p class="job">Director of Business Analysis</p>
-              <p class="company">One America Financial</p>
-            </div>
-            <div class="testimonial">
-              <p class="rec">
-                Charles' approach was <strong>thorough, well planned, and inclusive</strong> of his
-                team. His demeanor while leading some difficult project meetings was
-                <strong>positive and encouraging</strong>, despite the challenges presented by
-                others, and showed both <strong>polish and empathy</strong>."
-              </p>
-              <p class="author">Kevin Brennan</p>
-              <p class="job">IT Business Planning Consultant</p>
-              <p class="company">One America Financial</p>
-            </div>
-            <div class="testimonial">
-              <p class="rec">
-                He <strong>collaborated and communicated</strong> well, focused on what his
-                stakeholders wanted, and demonstrated
-                <strong>interpersonal savviness and adaptability</strong>."
-              </p>
-              <p class="author">Katie Marks</p>
-              <p class="job">Business Relationship Management Director</p>
-              <p class="company">One America Financial</p>
-            </div>
-            <div class="testimonial">
-              <p class="rec">
-                He consistently <strong>sought out new challenges</strong> and opportunities to
-                learn, which is a testament to his <strong>passion</strong>.
-              </p>
-              <p class="author">Chris McGowan</p>
-              <p class="job">Training Director</p>
-              <p class="company">Montana Electrical Training Center</p>
-            </div>
-            <div class="testimonial">
-              <p class="rec">
-                He <strong>flourished</strong>, working his way up to senior level instructor and
-                assistant director, where he has learned <strong>all aspects</strong> of the
-                training center.
-              </p>
-              <p class="author">Troy Brandt</p>
-              <p class="job">Owner</p>
-              <p class="company">Eagle Electric</p>
-            </div>
-            <div class="testimonial">
-              <p class="rec">
-                His <strong>leadership qualities, passion, and work ethic</strong> show in the many
-                hats Charles wears every day to help better Montana’s apprentices, the Local, and
-                the IBEW.
-              </p>
-              <p class="author">Jackie McBroom</p>
-              <p class="job">Business Manager</p>
-              <p class="company">Local Union 233</p>
-            </div>
-            <div class="testimonial">
-              <p class="rec">
-                Working <strong>under pressure</strong> is an attribute most common with Charles.
-                When things need to be done at the eleventh hour, Charles is just the perfect fit
-                for the job. He is a practicable person that
-                <strong>relates theories to real life situation</strong>. Charles is a professional
-                at what he does, with the absolute objective of recording success.
-              </p>
-              <p class="author">Chris Allard</p>
-              <p class="job">Project Manager</p>
-              <p class="company">Mechanical Technologies Inc.</p>
-            </div>
-          </div>
-          <div class="btn-container">
-            <button id="nextRec" class="btn btn-color-2" aria-label="Next testimonial">
-              &#10095;
-            </button>
-          </div>
-        </div>
-        <div class="dots-container"></div>
       </section>
       <section id="contact">
         <h2>Get in Touch</h2>
@@ -689,7 +545,6 @@
     <footer>
       <p>Copyright &#169; <span id="copyright-year"></span> Charles Coonce. All Rights Reserved.</p>
     </footer>
-    <button class="back-to-top" aria-label="Back to top">&#8593;</button>
     <script type="module" src="./WebContent/js/main.js"></script>
   </body>
 </html>
