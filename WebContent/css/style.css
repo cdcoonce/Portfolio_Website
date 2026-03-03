@@ -1,3 +1,20 @@
+/* === Custom Properties === */
+
+:root {
+  --color-text-primary: #353535;
+  --color-text-secondary: rgb(85, 85, 85);
+  --color-bg-white: #fff;
+  --color-bg-light: #f9f9f9;
+  --color-bg-card-highlight: rgba(235, 241, 248, 0.4);
+  --color-accent-dark: rgb(53, 53, 53);
+  --color-accent-black: rgb(0, 0, 0);
+  --color-border: rgb(53, 53, 53);
+  --color-shadow: rgba(0, 0, 0, 0.1);
+  --color-dot-inactive: #ccc;
+  --color-counter: #666;
+  --color-quote: rgba(53, 53, 53, 0.2);
+}
+
 /* === General === */
 
 * {
@@ -10,7 +27,7 @@
 
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid #353535;
+  outline: 2px solid var(--color-text-primary);
   outline-offset: 2px;
 }
 
@@ -35,7 +52,7 @@ html {
 }
 
 p {
-  color: rgb(85, 85, 85);
+  color: var(--color-text-secondary);
 }
 
 /* === Navigation === */
@@ -48,7 +65,7 @@ p {
   justify-content: space-between;
   align-items: center;
   padding: 0.75rem 2rem;
-  background-color: #fff;
+  background-color: var(--color-bg-white);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
@@ -60,13 +77,13 @@ p {
 
 .nav-links a {
   text-decoration: none;
-  color: #353535;
+  color: var(--color-text-primary);
   font-weight: 500;
   transition: color 300ms ease;
 }
 
 .nav-links a:hover {
-  color: #000;
+  color: var(--color-accent-black);
 }
 
 .nav-toggle {
@@ -82,8 +99,8 @@ p {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: #353535;
-  color: #fff;
+  background-color: var(--color-text-primary);
+  color: var(--color-bg-white);
   border: none;
   cursor: pointer;
   font-size: 1.2rem;
@@ -118,8 +135,8 @@ p {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: #353535;
-  color: #fff;
+  background-color: var(--color-text-primary);
+  color: var(--color-bg-white);
   border: none;
   cursor: pointer;
   font-size: 1.2rem;
@@ -187,7 +204,7 @@ img,
 
 .btn-color-1,
 .btn-color-2 {
-  border: rgb(53, 53, 53) 0.1rem solid;
+  border: var(--color-border) 0.1rem solid;
 }
 
 .btn-color-1:hover,
@@ -197,12 +214,12 @@ img,
 
 .btn-color-1,
 .btn-color-2:hover {
-  background-color: rgb(53, 53, 53);
-  color: white;
+  background-color: var(--color-accent-dark);
+  color: var(--color-bg-white);
 }
 
 .btn-color-1:hover {
-  background: rgb(0, 0, 0);
+  background: var(--color-accent-black);
 }
 
 .btn-color-2 {
@@ -210,7 +227,7 @@ img,
 }
 
 .btn-color-2:hover {
-  border: rgb(255, 255, 255) 0.1rem solid;
+  border: var(--color-bg-white) 0.1rem solid;
 }
 
 /* === Sections === */
@@ -243,7 +260,7 @@ section {
 .logo {
   font-weight: 600;
   font-size: 1.25rem;
-  color: #353535;
+  color: var(--color-text-primary);
   text-decoration: none;
 }
 
@@ -290,7 +307,7 @@ section {
 
 #skills {
   padding: 2rem;
-  background-color: #f9f9f9;
+  background-color: var(--color-bg-light);
 }
 
 .skills-header {
@@ -303,17 +320,17 @@ section {
 
 .skills-header h2 {
   font-size: 1.5rem;
-  color: #353535;
+  color: var(--color-text-primary);
 }
 
 .skill-filter-reset {
   padding: 0.4rem 1rem;
-  border: 1px solid #353535;
+  border: 1px solid var(--color-text-primary);
   border-radius: 2rem;
   font-size: 0.85rem;
   font-family: inherit;
-  background-color: #353535;
-  color: #fff;
+  background-color: var(--color-text-primary);
+  color: var(--color-bg-white);
   cursor: pointer;
   transition:
     background-color 300ms ease,
@@ -321,8 +338,8 @@ section {
 }
 
 .skill-filter-reset:not(.active) {
-  background-color: #fff;
-  color: #353535;
+  background-color: var(--color-bg-white);
+  color: var(--color-text-primary);
 }
 
 .skills-grid {
@@ -337,7 +354,7 @@ section {
   font-size: 1rem;
   font-weight: 600;
   margin-bottom: 0.75rem;
-  color: #353535;
+  color: var(--color-text-primary);
 }
 
 .skill-tags {
@@ -348,12 +365,12 @@ section {
 
 .skill-tag {
   padding: 0.4rem 0.8rem;
-  border: 1px solid #353535;
+  border: 1px solid var(--color-text-primary);
   border-radius: 2rem;
   font-size: 0.85rem;
   font-family: inherit;
-  color: #353535;
-  background-color: #fff;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-white);
   cursor: pointer;
   transition:
     background-color 300ms ease,
@@ -362,15 +379,15 @@ section {
 
 .skill-tag:hover,
 .skill-tag.active {
-  background-color: #353535;
-  color: #fff;
+  background-color: var(--color-text-primary);
+  color: var(--color-bg-white);
 }
 
 /* === Projects Section === */
 
 #projects {
   padding: 2rem;
-  background-color: #f9f9f9;
+  background-color: var(--color-bg-light);
 }
 
 /* Projects Grid Layout */
@@ -383,10 +400,10 @@ section {
 
 /* Project Card */
 .project-card {
-  background-color: #fff;
+  background-color: var(--color-bg-white);
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px var(--color-shadow);
   transition:
     transform 0.3s,
     box-shadow 0.3s;
@@ -404,7 +421,7 @@ section {
 }
 
 .project-card.featured {
-  border-top: 3px solid #353535;
+  border-top: 3px solid var(--color-text-primary);
 }
 
 .project-card img {
@@ -433,7 +450,7 @@ section {
 
 .card-content p {
   margin-bottom: 0.5rem;
-  color: #555;
+  color: var(--color-text-secondary);
   flex-grow: 1;
 }
 
@@ -477,16 +494,16 @@ section {
   max-width: 100%;
   padding: 20px;
   text-align: left;
-  background-color: rgba(235, 241, 248, 0.4); /* Semi-transparent background */
+  background-color: var(--color-bg-card-highlight); /* Semi-transparent background */
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px var(--color-shadow);
   margin: 0 10px;
 }
 
 .testimonial::before {
   content: '\201C'; /* Left double quotation mark */
   font-size: 3rem;
-  color: rgba(53, 53, 53, 0.2);
+  color: var(--color-quote);
   font-family: Georgia, serif;
   line-height: 1;
   display: block;
@@ -494,35 +511,29 @@ section {
 }
 
 .rec {
-  justify-self: left;
+  text-align: left;
 }
 
 .author {
-  display: flex;
-  flex-direction: row;
   margin-top: 10px;
   font-weight: bold;
   font-size: 14px;
-  color: #555;
-  justify-content: flex-end;
+  color: var(--color-text-secondary);
+  text-align: right;
 }
 
 .job {
-  display: flex;
-  flex-direction: row;
   margin-top: 1px;
   font-size: 14px;
-  color: #555;
-  justify-content: flex-end;
+  color: var(--color-text-secondary);
+  text-align: right;
 }
 
 .company {
-  display: flex;
-  flex-direction: row;
   margin-top: 1px;
   font-size: 14px;
-  color: #555;
-  justify-content: flex-end;
+  color: var(--color-text-secondary);
+  text-align: right;
 }
 
 .testimonial.active {
@@ -543,20 +554,20 @@ section {
   width: 12px;
   height: 12px;
   margin: 0 6px;
-  background-color: #ccc;
+  background-color: var(--color-dot-inactive);
   border-radius: 50%;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .dot.active {
-  background-color: #353535;
+  background-color: var(--color-text-primary);
 }
 
 .testimonial-counter {
   text-align: center;
   font-size: 0.85rem;
-  color: #666;
+  color: var(--color-counter);
   margin-top: 0.5rem;
 }
 
