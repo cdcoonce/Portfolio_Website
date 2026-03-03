@@ -18,6 +18,8 @@ class TestHTMLValidation:
             assert img.get('alt'), f'Missing alt text: {img}'
 
     def test_semantic_structure(self, soup):
+        assert soup.find('header'), 'Missing <header>'
+        assert soup.find('main'), 'Missing <main>'
         assert soup.find('nav'), 'Missing <nav>'
         assert soup.find('footer'), 'Missing <footer>'
 
