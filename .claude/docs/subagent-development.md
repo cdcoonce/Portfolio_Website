@@ -61,13 +61,11 @@ Task tool (code-reviewer):
 ### 4. Apply Review Feedback
 
 **If issues found:**
-
 - Fix Critical issues immediately
 - Fix Important issues before next task
 - Note Minor issues
 
 **Dispatch follow-up subagent if needed:**
-
 ```
 "Fix issues from code review: [list issues]"
 ```
@@ -81,7 +79,6 @@ Task tool (code-reviewer):
 ### 6. Final Review
 
 After all tasks complete, dispatch final code-reviewer:
-
 - Reviews entire implementation
 - Checks all plan requirements met
 - Validates overall architecture
@@ -89,7 +86,6 @@ After all tasks complete, dispatch final code-reviewer:
 ### 7. Complete Development
 
 After final review passes:
-
 - Announce: "Subagent work complete!"
 
 ## Example Workflow
@@ -132,13 +128,11 @@ Done!
 ## Red Flags
 
 **Never:**
-
 - Skip code review between tasks
 - Proceed with unfixed Critical issues
 - Dispatch multiple implementation subagents in parallel (conflicts)
 - Implement without reading plan task
 
 **If subagent fails task:**
-
 - Dispatch fix subagent with specific instructions
 - Don't try to fix manually (context pollution)
