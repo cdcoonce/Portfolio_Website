@@ -42,11 +42,11 @@ A **multi-page static portfolio** built with vanilla HTML5, CSS3, and ES module 
 
 A personal portfolio for **Charles Coonce** — a data analytics professional. The site is hosted on **GitHub Pages** with a custom domain and organized across multiple pages:
 
-| Page | Route | Purpose |
-| --- | --- | --- |
-| **Home** | `/` | Hero profile, 4 featured project cards, testimonial carousel, contact links |
-| **All Projects** | `/projects.html` | Full gallery of 17 project cards with skill-tag filtering |
-| **404** | `/404.html` | Custom error page |
+| Page             | Route            | Purpose                                                                     |
+| ---------------- | ---------------- | --------------------------------------------------------------------------- |
+| **Home**         | `/`              | Hero profile, 4 featured project cards, testimonial carousel, contact links |
+| **All Projects** | `/projects.html` | Full gallery of 17 project cards with skill-tag filtering                   |
+| **404**          | `/404.html`      | Custom error page                                                           |
 
 Key features:
 
@@ -258,21 +258,21 @@ npm run serve
 
 ## Available Commands
 
-| Command | Description |
-| --- | --- |
-| `npm run serve` | Start local dev server on port 8000 |
-| `npm run format` | Auto-format HTML, CSS, JS, MD, and JSON files |
-| `npm run format:check` | Check formatting without modifying files |
-| `npm test` | Run Jest unit tests |
-| `npm run test:coverage` | Run Jest with coverage report |
-| `npm run lint:css` | Lint CSS with Stylelint |
-| `npm run lint:js` | Lint JS with ESLint |
-| `npm run lint` | Run all linters (Stylelint + ESLint) |
-| `uv run pytest` | Run Python test suite (validation, a11y, E2E) |
-| `make check` | Full suite — lint + JS tests + Python tests |
-| `make test-a11y` | Accessibility tests only |
-| `make test-e2e` | End-to-end browser tests only |
-| `make test-js` | Jest unit tests only |
+| Command                 | Description                                   |
+| ----------------------- | --------------------------------------------- |
+| `npm run serve`         | Start local dev server on port 8000           |
+| `npm run format`        | Auto-format HTML, CSS, JS, MD, and JSON files |
+| `npm run format:check`  | Check formatting without modifying files      |
+| `npm test`              | Run Jest unit tests                           |
+| `npm run test:coverage` | Run Jest with coverage report                 |
+| `npm run lint:css`      | Lint CSS with Stylelint                       |
+| `npm run lint:js`       | Lint JS with ESLint                           |
+| `npm run lint`          | Run all linters (Stylelint + ESLint)          |
+| `uv run pytest`         | Run Python test suite (validation, a11y, E2E) |
+| `make check`            | Full suite — lint + JS tests + Python tests   |
+| `make test-a11y`        | Accessibility tests only                      |
+| `make test-e2e`         | End-to-end browser tests only                 |
+| `make test-js`          | Jest unit tests only                          |
 
 ---
 
@@ -280,13 +280,13 @@ npm run serve
 
 The project uses a two-layer test strategy:
 
-| Layer | Tool | What it covers |
-| --- | --- | --- |
-| **JS Unit Tests** | Jest + jsdom | Filter logic, carousel state, viewport utilities |
-| **HTML Validation** | pytest + BeautifulSoup | Semantic markup, alt text, card structure, featured flags |
-| **Accessibility** | pytest + axe-playwright | WCAG 2.1 AA compliance, ARIA attributes, focus order |
-| **E2E Browser Tests** | pytest + Playwright | Navigation, gallery filtering, carousel interaction, URL params |
-| **Visual Regression** | pytest + Playwright | Screenshot comparison at breakpoints (stub) |
+| Layer                 | Tool                    | What it covers                                                  |
+| --------------------- | ----------------------- | --------------------------------------------------------------- |
+| **JS Unit Tests**     | Jest + jsdom            | Filter logic, carousel state, viewport utilities                |
+| **HTML Validation**   | pytest + BeautifulSoup  | Semantic markup, alt text, card structure, featured flags       |
+| **Accessibility**     | pytest + axe-playwright | WCAG 2.1 AA compliance, ARIA attributes, focus order            |
+| **E2E Browser Tests** | pytest + Playwright     | Navigation, gallery filtering, carousel interaction, URL params |
+| **Visual Regression** | pytest + Playwright     | Screenshot comparison at breakpoints (stub)                     |
 
 Run the full suite:
 
@@ -339,9 +339,9 @@ Enforced via `.editorconfig` and `.prettierrc`:
 
 This project uses a two-branch model:
 
-| Branch | Purpose |
-| --- | --- |
-| `master` | Development — all feature branches merge here |
+| Branch     | Purpose                                                              |
+| ---------- | -------------------------------------------------------------------- |
+| `master`   | Development — all feature branches merge here                        |
 | `gh-pages` | Production — auto-merged from `master` by CI; served by GitHub Pages |
 
 ### Branch Naming
@@ -377,25 +377,25 @@ Deployment is fully automated. Every merge into `master` triggers GitHub Actions
 
 All 17 project cards displayed on the site:
 
-| # | Project | Technologies |
-| --- | --- | --- |
-| 1 | **National Parks Dashboard** ⭐ | R, Shiny, Data Visualization |
-| 2 | **Wine Quality Analysis** ⭐ | Python, Machine Learning, Statistical Analysis |
-| 3 | **Manufacturing Downtime Analysis** ⭐ | Excel, Business Intelligence, Analytics Dashboard |
-| 4 | **Housing Affordability & Commute Analysis** ⭐ | Python, ETL, Machine Learning, Data Pipelines, Visualization |
-| 5 | Electricity Consumption | Python, ETL, Data Visualization |
-| 6 | National Parks Analysis | R, Statistical Analysis, Data Visualization |
-| 7 | Portfolio Website | HTML, CSS, JavaScript |
-| 8 | World Happiness Dashboard | R, Shiny, Data Visualization |
-| 9 | Data Archive | Python, ETL, Data Pipelines |
-| 10 | NYC Collision Analysis | Excel, Business Intelligence, Data Visualization |
-| 11 | Global CO2 Emissions | Tableau, Analytics Dashboard, Data Visualization |
-| 12 | AirBnB Listing Analysis | Python, ETL, Statistical Analysis |
-| 13 | Sleep Deprivation Analysis | Python, ETL, Statistical Analysis |
-| 14 | Restaurant Order Analysis | SQL, Business Intelligence |
-| 15 | Motor Vehicle Thefts | SQL, Excel, Data Visualization |
-| 16 | Baby Names Analysis | SQL, Data Visualization |
-| 17 | Spaceship Titanic | Python, Machine Learning |
+| #   | Project                                         | Technologies                                                 |
+| --- | ----------------------------------------------- | ------------------------------------------------------------ |
+| 1   | **National Parks Dashboard** ⭐                 | R, Shiny, Data Visualization                                 |
+| 2   | **Wine Quality Analysis** ⭐                    | Python, Machine Learning, Statistical Analysis               |
+| 3   | **Manufacturing Downtime Analysis** ⭐          | Excel, Business Intelligence, Analytics Dashboard            |
+| 4   | **Housing Affordability & Commute Analysis** ⭐ | Python, ETL, Machine Learning, Data Pipelines, Visualization |
+| 5   | Electricity Consumption                         | Python, ETL, Data Visualization                              |
+| 6   | National Parks Analysis                         | R, Statistical Analysis, Data Visualization                  |
+| 7   | Portfolio Website                               | HTML, CSS, JavaScript                                        |
+| 8   | World Happiness Dashboard                       | R, Shiny, Data Visualization                                 |
+| 9   | Data Archive                                    | Python, ETL, Data Pipelines                                  |
+| 10  | NYC Collision Analysis                          | Excel, Business Intelligence, Data Visualization             |
+| 11  | Global CO2 Emissions                            | Tableau, Analytics Dashboard, Data Visualization             |
+| 12  | AirBnB Listing Analysis                         | Python, ETL, Statistical Analysis                            |
+| 13  | Sleep Deprivation Analysis                      | Python, ETL, Statistical Analysis                            |
+| 14  | Restaurant Order Analysis                       | SQL, Business Intelligence                                   |
+| 15  | Motor Vehicle Thefts                            | SQL, Excel, Data Visualization                               |
+| 16  | Baby Names Analysis                             | SQL, Data Visualization                                      |
+| 17  | Spaceship Titanic                               | Python, Machine Learning                                     |
 
 ⭐ = Featured on the homepage
 
