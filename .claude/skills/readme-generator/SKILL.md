@@ -50,7 +50,7 @@ Write the README using the structure and guidelines below.
 
 Use this as your template. Include all sections, but scale depth to match the project's complexity. Use `---` horizontal rules between every major section for visual breathing room.
 
-````markdown
+```markdown
 # Project Name
 
 ![Language](https://img.shields.io/badge/...) ![Framework](https://img.shields.io/badge/...) ![Tool](https://img.shields.io/badge/...)
@@ -103,7 +103,6 @@ Expand on the description. Bold key terms. Use numbered lists for multi-step pro
 graph TD
     ...
 ```
-````
 
 ### Folder Structure
 
@@ -125,17 +124,15 @@ project-root/
 ## Getting Started
 
 ### Prerequisites
-
 ### Installation
-
 ### Running Tests
 
 ---
 
 ## Environment Variables
 
-| Variable | Required | Description                  |
-| -------- | -------- | ---------------------------- |
+| Variable | Required | Description |
+|----------|----------|-------------|
 | `DB_URL` | Yes      | PostgreSQL connection string |
 
 ---
@@ -146,14 +143,14 @@ Real code examples for the 2-3 most common operations.
 
 ---
 
-## API Reference <!-- if applicable -->
+## API Reference  <!-- if applicable -->
 
 ---
 
 ## Troubleshooting
 
-| Symptom         | Likely Cause | Fix           |
-| --------------- | ------------ | ------------- |
+| Symptom | Likely Cause | Fix |
+|---------|-------------|-----|
 | `error message` | What's wrong | How to fix it |
 
 ---
@@ -161,7 +158,6 @@ Real code examples for the 2-3 most common operations.
 ## Contact
 
 For questions or support, contact:
-
 - **Name** — email@company.com
 
 ---
@@ -170,7 +166,6 @@ For questions or support, contact:
 
 **Internal Use Only – Company Name**
 Proprietary software. © [Year] [Company]. All rights reserved.
-
 ```
 
 ## Shields.io Badges
@@ -197,4 +192,3 @@ Use mermaid diagrams generously — they make architecture, data flows, and proc
 ## Output
 
 Save the README as `README.md` in the root of the repository (or the current working directory if no repo root is identifiable). If a README.md already exists, confirm with the user before overwriting — they may want to keep parts of it.
-```

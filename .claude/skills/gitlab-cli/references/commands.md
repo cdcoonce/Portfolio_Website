@@ -43,7 +43,6 @@ glab issue create
 ```
 
 **Flags:**
-
 - `-t, --title` - Issue title (required unless interactive)
 - `-d, --description` - Issue description
 - `-l, --label` - Labels (comma-separated)
@@ -142,7 +141,6 @@ glab mr create --web
 ```
 
 **Flags:**
-
 - `-t, --title` - MR title
 - `-d, --description` - MR description
 - `-b, --target-branch` - Target branch (default: repo default)
