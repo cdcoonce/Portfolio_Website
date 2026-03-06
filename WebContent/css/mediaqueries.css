@@ -182,4 +182,18 @@
   .testimonial.active {
     height: fit-content;
   }
+
+  /* === Chat Agent === */
+
+  .chat-container h2 {
+    text-align: center;
+  }
+
+  .chat-subtitle {
+    text-align: center;
+  }
+
+  .chat-message {
+    max-width: 95%;
+  }
 }

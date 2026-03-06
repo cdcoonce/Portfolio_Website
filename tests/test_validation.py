@@ -163,3 +163,56 @@ class TestProjectsPageValidation:
         assert projects_soup.find('main'), 'Missing <main>'
         assert projects_soup.find('nav'), 'Missing <nav>'
         assert projects_soup.find('footer'), 'Missing <footer>'
+
+
+@pytest.mark.validation
+class TestChatSectionValidation:
+    """Validate the chat agent section HTML structure."""
+
+    def test_chat_section_exists(self, soup):
+        section = soup.find('section', id='chat-agent')
+        assert section is not None, 'Missing <section id="chat-agent">'
+
+    def test_chat_section_has_heading(self, soup):
+        section = soup.find('section', id='chat-agent')
+        assert section is not None
+        h2 = section.find('h2')
+        assert h2 is not None, 'Chat section missing <h2> heading'
+
+    def test_chat_section_between_projects_and_testimonials(self, soup):
+        sections = [s.get('id') for s in soup.find_all('section') if s.get('id')]
+        assert 'chat-agent' in sections, 'chat-agent section not found'
+        projects_idx = sections.index('projects')
+        chat_idx = sections.index('chat-agent')
+        testimonials_idx = sections.index('testimonials')
+        assert projects_idx < chat_idx < testimonials_idx, (
+            f'Section order wrong: projects={projects_idx}, chat={chat_idx}, testimonials={testimonials_idx}'
+        )
+
+    def test_chat_input_exists(self, soup):
+        section = soup.find('section', id='chat-agent')
+        assert section is not None
+        input_el = section.find('input', id='chat-input')
+        assert input_el is not None, 'Missing chat input field'
+
+    def test_chat_send_button_exists(self, soup):
+        section = soup.find('section', id='chat-agent')
+        assert section is not None
+        btn = section.find('button', id='chat-send')
+        assert btn is not None, 'Missing chat send button'
+
+    def test_chat_messages_container_exists(self, soup):
+        section = soup.find('section', id='chat-agent')
+        assert section is not None
+        messages = section.find('div', id='chat-messages')
+        assert messages is not None, 'Missing chat messages container'
+
+    def test_chat_input_has_aria_label(self, soup):
+        input_el = soup.find('input', id='chat-input')
+        assert input_el is not None
+        assert input_el.get('aria-label'), 'Chat input missing aria-label'
+
+    def test_chat_send_button_has_aria_label(self, soup):
+        btn = soup.find('button', id='chat-send')
+        assert btn is not None
+        assert btn.get('aria-label'), 'Chat send button missing aria-label'
