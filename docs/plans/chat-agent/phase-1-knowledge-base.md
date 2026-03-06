@@ -58,22 +58,29 @@ Pure markdown with headings — no YAML frontmatter.
 # Bio
 
 ## Who Is Charles Coonce?
+
 <paragraph — used as primary bio>
 
 ## Career Journey
+
 <paragraphs>
 
 ## Education
+
 <paragraphs>
 
 ## Professional Experience
+
 ### Company — Role (dates)
+
 <paragraphs>
 
 ## What Sets Charles Apart
+
 <paragraph>
 
 ## Connect with Charles
+
 - **Portfolio:** [url](url)
 - **Email:** email
 - **LinkedIn:** [url](url)
@@ -88,6 +95,7 @@ Narrative markdown with `##` category headings. Each category has a description 
 # Skills Overview
 
 ## Data Engineering & Pipelines
+
 <narrative paragraph>
 
 **Tools & Technologies:** Dagster, dbt, Polars, Snowflake, ...
@@ -97,6 +105,7 @@ Narrative markdown with `##` category headings. Each category has a description 
 ---
 
 ## Statistical Analysis & Modeling
+
 ...
 ```
 
@@ -118,27 +127,35 @@ All 21 project files use a `## Classification` section with markdown bold list i
 - **Featured:** Yes | No
 
 ## Summary
+
 <paragraph>
 
 ## Business Problem
+
 <paragraph>
 
 ## Approach
+
 <paragraphs>
 
 ## Key Results & Insights
+
 <bullet points>
 
 ## Technologies Used
+
 - **Category:** tool1, tool2
 
-## Challenges & Solutions        ← optional, ~9 files have this
+## Challenges & Solutions ← optional, ~9 files have this
+
 <paragraphs>
 
 ## Links
+
 - **GitHub:** https://github.com/cdcoonce/...
 
 ## Skills Demonstrated
+
 Skill A, Skill B, Skill C
 ```
 
@@ -159,12 +176,15 @@ skills_demonstrated:
 ---
 
 ## Summary
+
 <paragraph>
 
 ## Business Problem
+
 <paragraph>
 
 ## Approach
+
 ...
 ```
 

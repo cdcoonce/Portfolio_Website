@@ -34,16 +34,16 @@ Stateless: each request sends only the current question. The Lambda builds a sys
 
 Each phase has a detailed implementation document with full code, exact file paths, line numbers, and step-by-step instructions for agents.
 
-| Phase | Document | Summary |
-| ----- | -------- | ------- |
-| 1 | [phase-1-knowledge-base.md](./phase-1-knowledge-base.md) | Markdown context files + build script to generate JSON |
-| 2 | [phase-2-lambda-function.md](./phase-2-lambda-function.md) | Build Lambda handler with Anthropic SDK (TDD) |
-| 3 | [phase-3-aws-setup.md](./phase-3-aws-setup.md) | AWS account creation + Lambda deployment guide |
-| 4 | [phase-4-chat-ui.md](./phase-4-chat-ui.md) | HTML section + CSS styles (TDD) |
-| 5 | [phase-5-chat-js.md](./phase-5-chat-js.md) | JavaScript chat module (TDD) |
-| 6 | [phase-6-wiring.md](./phase-6-wiring.md) | Wire chat.js into main.js + config updates |
-| 7 | [phase-7-verification.md](./phase-7-verification.md) | Full test suite verification |
-| 8 | [phase-8-ci-cd.md](./phase-8-ci-cd.md) | CI/CD pipeline updates |
+| Phase | Document                                                   | Summary                                                |
+| ----- | ---------------------------------------------------------- | ------------------------------------------------------ |
+| 1     | [phase-1-knowledge-base.md](./phase-1-knowledge-base.md)   | Markdown context files + build script to generate JSON |
+| 2     | [phase-2-lambda-function.md](./phase-2-lambda-function.md) | Build Lambda handler with Anthropic SDK (TDD)          |
+| 3     | [phase-3-aws-setup.md](./phase-3-aws-setup.md)             | AWS account creation + Lambda deployment guide         |
+| 4     | [phase-4-chat-ui.md](./phase-4-chat-ui.md)                 | HTML section + CSS styles (TDD)                        |
+| 5     | [phase-5-chat-js.md](./phase-5-chat-js.md)                 | JavaScript chat module (TDD)                           |
+| 6     | [phase-6-wiring.md](./phase-6-wiring.md)                   | Wire chat.js into main.js + config updates             |
+| 7     | [phase-7-verification.md](./phase-7-verification.md)       | Full test suite verification                           |
+| 8     | [phase-8-ci-cd.md](./phase-8-ci-cd.md)                     | CI/CD pipeline updates                                 |
 
 ## Execution Order and Dependencies
 
@@ -65,26 +65,26 @@ Phase 1 (knowledge base)
 
 ## Files Summary
 
-| Action | File | Purpose |
-| ------ | ---- | ------- |
-| Create | `WebContent/context/about.md` | Person bio, contact, background |
-| Create | `WebContent/context/skills.md` | Skills by category |
-| Create | `WebContent/context/testimonials.md` | Colleague testimonials |
-| Create | `WebContent/context/projects/*.md` | 17 project files (one per project) |
-| Create | `scripts/build_knowledge_base.py` | Compiles context/ into JSON |
-| Create | `lambda/knowledge_base.json` | Generated output (do not edit directly) |
-| Create | `lambda/lambda_function.py` | Lambda handler |
-| Create | `lambda/requirements.txt` | Python deps |
-| Create | `lambda/tests/__init__.py` | Package marker |
-| Create | `lambda/tests/test_lambda.py` | Lambda unit tests |
-| Create | `WebContent/js/chat.js` | Chat UI module |
-| Create | `__tests__/chat.test.js` | Jest tests for chat |
-| Create | `tests/test_chat.py` | E2E tests for chat |
-| Create | `docs/plans/chat-agent/aws-setup.md` | AWS setup guide |
-| Modify | `index.html` | Add chat section + nav link |
-| Modify | `WebContent/css/style.css` | Chat styles |
-| Modify | `WebContent/css/mediaqueries.css` | Mobile chat styles |
-| Modify | `WebContent/js/main.js` | Import + init chat |
-| Modify | `tests/test_validation.py` | HTML validation tests |
-| Modify | `eslint.config.mjs` | Add fetch/localStorage globals |
-| Modify | `.prettierignore` | Exclude lambda/ |
+| Action | File                                 | Purpose                                 |
+| ------ | ------------------------------------ | --------------------------------------- |
+| Create | `WebContent/context/about.md`        | Person bio, contact, background         |
+| Create | `WebContent/context/skills.md`       | Skills by category                      |
+| Create | `WebContent/context/testimonials.md` | Colleague testimonials                  |
+| Create | `WebContent/context/projects/*.md`   | 17 project files (one per project)      |
+| Create | `scripts/build_knowledge_base.py`    | Compiles context/ into JSON             |
+| Create | `lambda/knowledge_base.json`         | Generated output (do not edit directly) |
+| Create | `lambda/lambda_function.py`          | Lambda handler                          |
+| Create | `lambda/requirements.txt`            | Python deps                             |
+| Create | `lambda/tests/__init__.py`           | Package marker                          |
+| Create | `lambda/tests/test_lambda.py`        | Lambda unit tests                       |
+| Create | `WebContent/js/chat.js`              | Chat UI module                          |
+| Create | `__tests__/chat.test.js`             | Jest tests for chat                     |
+| Create | `tests/test_chat.py`                 | E2E tests for chat                      |
+| Create | `docs/plans/chat-agent/aws-setup.md` | AWS setup guide                         |
+| Modify | `index.html`                         | Add chat section + nav link             |
+| Modify | `WebContent/css/style.css`           | Chat styles                             |
+| Modify | `WebContent/css/mediaqueries.css`    | Mobile chat styles                      |
+| Modify | `WebContent/js/main.js`              | Import + init chat                      |
+| Modify | `tests/test_validation.py`           | HTML validation tests                   |
+| Modify | `eslint.config.mjs`                  | Add fetch/localStorage globals          |
+| Modify | `.prettierignore`                    | Exclude lambda/                         |

@@ -93,17 +93,17 @@ Organized by **capability area**, not by tool name. Each capability area should 
 
 **Capability areas to cover:**
 
-| Capability Area | Tools & Technologies | Example Projects |
-|---|---|---|
-| **Data Engineering & Pipelines** | Python, Dagster, dbt, dlt, Polars, Snowflake, DuckDB | Renewable Asset Pipeline, Housing Affordability, Data Archive |
-| **Statistical Analysis & Modeling** | Python, statsmodels, scikit-learn, R | Housing Affordability, Wine Quality, Ames Housing, Sleep Deprivation |
-| **Machine Learning** | scikit-learn, TensorFlow/Keras, XGBoost | Ames Housing, Spaceship Titanic, Wine Quality |
-| **Data Visualization & Dashboards** | Tableau, R Shiny, Matplotlib, Streamlit | Global CO2 Emissions, National Parks Dashboard, World Happiness, Synthetic Signal Observatory |
-| **SQL & Database Analytics** | SQL (MySQL), DuckDB, Snowflake | Restaurant Sales, Baby Names, Motor Vehicle Thefts |
-| **Spreadsheet & Business Analysis** | Excel (Pivot Tables, Power Query, VLOOKUP) | Manufacturing Downtime, NYC Collision |
-| **Data Wrangling & ETL** | Python, Pandas, Polars, GeoPandas | Housing Affordability, Electricity Consumption, AirBnB Listing, Data Archive |
-| **Web Development** | HTML5, CSS3, JavaScript (ES Modules) | Portfolio Website |
-| **DevOps & Tooling** | Git, GitHub Actions, CI/CD, uv, pytest, Jest | Portfolio Website, Renewable Asset Pipeline, Housing Affordability |
+| Capability Area                     | Tools & Technologies                                 | Example Projects                                                                              |
+| ----------------------------------- | ---------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| **Data Engineering & Pipelines**    | Python, Dagster, dbt, dlt, Polars, Snowflake, DuckDB | Renewable Asset Pipeline, Housing Affordability, Data Archive                                 |
+| **Statistical Analysis & Modeling** | Python, statsmodels, scikit-learn, R                 | Housing Affordability, Wine Quality, Ames Housing, Sleep Deprivation                          |
+| **Machine Learning**                | scikit-learn, TensorFlow/Keras, XGBoost              | Ames Housing, Spaceship Titanic, Wine Quality                                                 |
+| **Data Visualization & Dashboards** | Tableau, R Shiny, Matplotlib, Streamlit              | Global CO2 Emissions, National Parks Dashboard, World Happiness, Synthetic Signal Observatory |
+| **SQL & Database Analytics**        | SQL (MySQL), DuckDB, Snowflake                       | Restaurant Sales, Baby Names, Motor Vehicle Thefts                                            |
+| **Spreadsheet & Business Analysis** | Excel (Pivot Tables, Power Query, VLOOKUP)           | Manufacturing Downtime, NYC Collision                                                         |
+| **Data Wrangling & ETL**            | Python, Pandas, Polars, GeoPandas                    | Housing Affordability, Electricity Consumption, AirBnB Listing, Data Archive                  |
+| **Web Development**                 | HTML5, CSS3, JavaScript (ES Modules)                 | Portfolio Website                                                                             |
+| **DevOps & Tooling**                | Git, GitHub Actions, CI/CD, uv, pytest, Jest         | Portfolio Website, Renewable Asset Pipeline, Housing Affordability                            |
 
 **Format guidance:** For each capability area, write 2–3 sentences describing Charles's experience at that level, then list the tools and reference the projects. Avoid just listing tools — explain what he does with them.
 
@@ -176,11 +176,11 @@ areas in skills.md. Example: Data Engineering, Statistical Analysis, Data Visual
 
 Each project should be classified to give the chat agent honest context:
 
-| Classification | Definition | Examples |
-|---|---|---|
-| **Independent** | Charles conceived, designed, and built the project on his own | Housing Affordability, Renewable Asset Pipeline, Portfolio Website, Synthetic Signal Observatory, Data Archive |
+| Classification        | Definition                                                                                                        | Examples                                                                                                                                                                    |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Independent**       | Charles conceived, designed, and built the project on his own                                                     | Housing Affordability, Renewable Asset Pipeline, Portfolio Website, Synthetic Signal Observatory, Data Archive                                                              |
 | **Guided Coursework** | Completed as part of a structured learning experience (e.g., Maven Analytics) with provided datasets and guidance | Manufacturing Downtime, Restaurant Sales, Baby Names, Motor Vehicle Thefts, NYC Collision, AirBnB Listing, Electricity Consumption, Global CO2 Emissions, Sleep Deprivation |
-| **Academic** | Completed as part of a university course with defined requirements | Ames Housing, Spaceship Titanic, Wine Quality |
+| **Academic**          | Completed as part of a university course with defined requirements                                                | Ames Housing, Spaceship Titanic, Wine Quality                                                                                                                               |
 
 > **How the agent should use this:** When asked about a guided project, the agent should be upfront that it was a structured learning exercise, while still highlighting the skills Charles applied and any ways he went beyond the base assignment. For independent projects, emphasize the end-to-end ownership.
 

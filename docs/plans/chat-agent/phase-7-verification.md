@@ -125,15 +125,15 @@ Verify that the new chat section does not introduce any WCAG 2.1 AA violations. 
 
 ### Common Failures
 
-| Symptom | Likely Cause | Fix |
-| ------- | ------------ | --- |
-| ESLint `no-undef` on `fetch` or `localStorage` | Phase 6 Step 2 incomplete | Add globals to `eslint.config.mjs` |
-| Prettier errors in `lambda/` | Phase 6 Step 3 incomplete | Add `lambda/` to `.prettierignore` |
-| `TestChatSectionValidation` fails | Phase 4 HTML not inserted correctly | Check `index.html` for `<section id="chat-agent">` |
-| Section order test fails | Chat section in wrong position | Must be between `</section>` (projects) and `<section id="testimonials">` |
-| Jest `Cannot find module chat.js` | Phase 5 file not created | Create `WebContent/js/chat.js` |
-| Existing test count changes (e.g., 18 cards instead of 17) | HTML insertion broke existing elements | Check that the chat section doesn't contain `class="project-card"` |
-| axe-core violations | Missing aria attributes | Ensure `aria-label`, `aria-live`, and `role` are present |
+| Symptom                                                    | Likely Cause                           | Fix                                                                       |
+| ---------------------------------------------------------- | -------------------------------------- | ------------------------------------------------------------------------- |
+| ESLint `no-undef` on `fetch` or `localStorage`             | Phase 6 Step 2 incomplete              | Add globals to `eslint.config.mjs`                                        |
+| Prettier errors in `lambda/`                               | Phase 6 Step 3 incomplete              | Add `lambda/` to `.prettierignore`                                        |
+| `TestChatSectionValidation` fails                          | Phase 4 HTML not inserted correctly    | Check `index.html` for `<section id="chat-agent">`                        |
+| Section order test fails                                   | Chat section in wrong position         | Must be between `</section>` (projects) and `<section id="testimonials">` |
+| Jest `Cannot find module chat.js`                          | Phase 5 file not created               | Create `WebContent/js/chat.js`                                            |
+| Existing test count changes (e.g., 18 cards instead of 17) | HTML insertion broke existing elements | Check that the chat section doesn't contain `class="project-card"`        |
+| axe-core violations                                        | Missing aria attributes                | Ensure `aria-label`, `aria-live`, and `role` are present                  |
 
 ## Output
 

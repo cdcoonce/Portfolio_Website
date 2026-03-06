@@ -59,7 +59,7 @@ import { initChat } from './chat.js';
 **Add initialization** — After `initCarousel();` (line 80), add:
 
 ```javascript
-    initChat();
+initChat();
 ```
 
 ### Result (relevant lines)

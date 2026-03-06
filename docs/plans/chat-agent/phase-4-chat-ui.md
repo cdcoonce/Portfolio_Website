@@ -198,42 +198,34 @@ The exact insertion point is after the closing `</section>` tag of the projects 
 Insert this HTML block:
 
 ```html
-      <section id="chat-agent">
-        <div class="chat-container">
-          <h2 class="section_text__p1">Ask Me Anything</h2>
-          <p class="chat-subtitle">
-            Have a question about my projects, skills, or experience? Ask my AI
-            assistant.
-          </p>
-          <div id="chat-messages" class="chat-messages" aria-live="polite" role="log">
-            <div class="chat-message assistant">
-              <p>
-                Hi! I'm Charles's AI assistant. Ask me about his projects, skills, or
-                experience.
-              </p>
-            </div>
-          </div>
-          <div class="chat-input-row">
-            <input
-              type="text"
-              id="chat-input"
-              class="chat-input"
-              placeholder="e.g., What projects use Python?"
-              aria-label="Type your question"
-              maxlength="1000"
-              autocomplete="off"
-            />
-            <button
-              id="chat-send"
-              class="btn btn-color-1 chat-send"
-              aria-label="Send message"
-            >
-              Send
-            </button>
-          </div>
-          <p id="chat-rate-limit" class="chat-rate-limit" hidden></p>
-        </div>
-      </section>
+<section id="chat-agent">
+  <div class="chat-container">
+    <h2 class="section_text__p1">Ask Me Anything</h2>
+    <p class="chat-subtitle">
+      Have a question about my projects, skills, or experience? Ask my AI assistant.
+    </p>
+    <div id="chat-messages" class="chat-messages" aria-live="polite" role="log">
+      <div class="chat-message assistant">
+        <p>Hi! I'm Charles's AI assistant. Ask me about his projects, skills, or experience.</p>
+      </div>
+    </div>
+    <div class="chat-input-row">
+      <input
+        type="text"
+        id="chat-input"
+        class="chat-input"
+        placeholder="e.g., What projects use Python?"
+        aria-label="Type your question"
+        maxlength="1000"
+        autocomplete="off"
+      />
+      <button id="chat-send" class="btn btn-color-1 chat-send" aria-label="Send message">
+        Send
+      </button>
+    </div>
+    <p id="chat-rate-limit" class="chat-rate-limit" hidden></p>
+  </div>
+</section>
 ```
 
 **Also add a nav link** — In the `<ul class="nav-links">` (lines 41-47), add after the Projects link (line 44):
@@ -241,16 +233,16 @@ Insert this HTML block:
 Current:
 
 ```html
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#testimonials">Testimonials</a></li>
+<li><a href="#projects">Projects</a></li>
+<li><a href="#testimonials">Testimonials</a></li>
 ```
 
 Change to:
 
 ```html
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#chat-agent">Ask AI</a></li>
-          <li><a href="#testimonials">Testimonials</a></li>
+<li><a href="#projects">Projects</a></li>
+<li><a href="#chat-agent">Ask AI</a></li>
+<li><a href="#testimonials">Testimonials</a></li>
 ```
 
 ---
@@ -411,19 +403,19 @@ Change to:
 Inside the `@media (max-width: 700px)` block (after the Testimonials rules, before the closing `}`), add:
 
 ```css
-  /* === Chat Agent === */
+/* === Chat Agent === */
 
-  .chat-container h2 {
-    text-align: center;
-  }
+.chat-container h2 {
+  text-align: center;
+}
 
-  .chat-subtitle {
-    text-align: center;
-  }
+.chat-subtitle {
+  text-align: center;
+}
 
-  .chat-message {
-    max-width: 95%;
-  }
+.chat-message {
+  max-width: 95%;
+}
 ```
 
 ---

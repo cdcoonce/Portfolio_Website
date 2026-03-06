@@ -102,10 +102,7 @@ describe('Rate Limiting', () => {
 
   test('expired requests are not counted', () => {
     const expired = Date.now() - RATE_LIMIT_CONFIG.WINDOW_MS - 1000;
-    localStorage.setItem(
-      RATE_LIMIT_CONFIG.STORAGE_KEY,
-      JSON.stringify([expired]),
-    );
+    localStorage.setItem(RATE_LIMIT_CONFIG.STORAGE_KEY, JSON.stringify([expired]));
     expect(isRateLimited()).toBe(false);
     expect(getRemainingRequests()).toBe(RATE_LIMIT_CONFIG.MAX_REQUESTS);
   });
@@ -227,10 +224,7 @@ export const isRateLimited = () => {
 export const recordRequest = () => {
   const timestamps = getValidTimestamps();
   timestamps.push(Date.now());
-  localStorage.setItem(
-    RATE_LIMIT_CONFIG.STORAGE_KEY,
-    JSON.stringify(timestamps),
-  );
+  localStorage.setItem(RATE_LIMIT_CONFIG.STORAGE_KEY, JSON.stringify(timestamps));
 };
 
 /**
@@ -239,10 +233,7 @@ export const recordRequest = () => {
  * @returns {number} Remaining requests (0 or positive).
  */
 export const getRemainingRequests = () => {
-  return Math.max(
-    0,
-    RATE_LIMIT_CONFIG.MAX_REQUESTS - getValidTimestamps().length,
-  );
+  return Math.max(0, RATE_LIMIT_CONFIG.MAX_REQUESTS - getValidTimestamps().length);
 };
 
 /**
@@ -332,8 +323,7 @@ export function initChat() {
       chatRateLimit.textContent = `${remaining} question${remaining === 1 ? '' : 's'} remaining this hour`;
       chatRateLimit.hidden = false;
     } else if (remaining === 0) {
-      chatRateLimit.textContent =
-        'Rate limit reached. Please try again later.';
+      chatRateLimit.textContent = 'Rate limit reached. Please try again later.';
       chatRateLimit.hidden = false;
       chatInput.disabled = true;
       chatSend.disabled = true;
@@ -376,12 +366,7 @@ export function initChat() {
       const loading = document.getElementById('chat-loading');
       if (loading) loading.remove();
 
-      appendMessage(
-        formatMessage(
-          'Sorry, something went wrong. Please try again.',
-          'assistant',
-        ),
-      );
+      appendMessage(formatMessage('Sorry, something went wrong. Please try again.', 'assistant'));
     } finally {
       isProcessing = false;
       chatSend.disabled = false;
