@@ -318,7 +318,7 @@
     },
     {
       "title": "Housing Affordability & Commute Trade-Off Analysis",
-      "type": "Independent",
+      "type": "Capstone Project — Arizona State University",
       "status": "Complete",
       "featured": true,
       "summary": "A data engineering and statistical analysis pipeline that quantifies the relationship between housing costs, commute time, and public transit accessibility across nine U.S. metropolitan areas. Charles built the entire project end-to-end — from data ingestion to regression analysis — to answer real research questions about where housing affordability and commute burdens intersect.",
