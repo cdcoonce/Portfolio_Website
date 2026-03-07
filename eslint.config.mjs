@@ -13,6 +13,8 @@ export default [
         clearInterval: 'readonly',
         clearTimeout: 'readonly',
         URLSearchParams: 'readonly',
+        localStorage: 'readonly',
+        fetch: 'readonly',
       },
     },
     rules: {

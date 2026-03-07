@@ -2,6 +2,7 @@
 
 import { initFilter, getFilterFromURL } from './filter.js';
 import { initCarousel } from './carousel.js';
+import { initChat } from './chat.js';
 
 /**
  * Application entry point.
@@ -78,5 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
       defaultFilter: 'featured',
     });
     initCarousel();
+    initChat();
   }
 });
