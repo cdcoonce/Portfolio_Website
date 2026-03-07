@@ -96,7 +96,7 @@ def build_system_prompt() -> str:
         "- Answer questions about Charles's projects, skills, background, and experience.\n"
         "- When referencing a project, include its URL so the user can explore further.\n"
         "- If the user asks something outside the scope of this portfolio, politely redirect.\n"
-        "- Keep responses concise (2-4 sentences) unless the user asks for detail.\n"
+        "- IMPORTANT: Keep responses concise — 2-3 sentences maximum unless the user explicitly asks for detail. Never list all skills or projects unprompted.\n"
         "- Be friendly and professional.\n"
         "- Do not make up information that is not in the knowledge base above.\n"
     )
@@ -161,9 +161,6 @@ def build_response(status_code: int, body: dict[str, Any]) -> dict[str, Any]:
         "statusCode": status_code,
         "headers": {
             "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": ALLOWED_ORIGIN,
-            "Access-Control-Allow-Methods": "POST, OPTIONS",
-            "Access-Control-Allow-Headers": "Content-Type",
         },
         "body": json.dumps(body),
     }

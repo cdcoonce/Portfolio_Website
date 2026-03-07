@@ -2,7 +2,7 @@
 
 /** Rate limit configuration. */
 export const RATE_LIMIT_CONFIG = {
-  MAX_REQUESTS: 10,
+  MAX_REQUESTS: 25,
   WINDOW_MS: 60 * 60 * 1000, // 1 hour
   STORAGE_KEY: 'chat_rate_limit',
 };
@@ -82,8 +82,20 @@ export const getRemainingRequests = () => {
  * @returns {string} HTML string for insertion into the DOM.
  */
 export const formatMessage = (text, role) => {
-  const content = role === 'user' ? escapeHtml(text) : text;
-  return `<div class="chat-message ${role}"><p>${content}</p></div>`;
+  if (role === 'user') {
+    return `<div class="chat-message ${role}"><p>${escapeHtml(text)}</p></div>`;
+  }
+  // Convert markdown to HTML for assistant messages
+  const html = text
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
+    .replace(
+      /(^|[^"'>])(https?:\/\/[^\s<]+)/g,
+      '$1<a href="$2" target="_blank" rel="noopener">$2</a>'
+    )
+    .replace(/\n/g, '<br>');
+  return `<div class="chat-message ${role}"><p>${html}</p></div>`;
 };
 
 // --- Private Helpers ---
