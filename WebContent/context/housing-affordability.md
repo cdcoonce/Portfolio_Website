@@ -2,7 +2,7 @@
 
 ## Classification
 
-- **Type:** Independent
+- **Type:** Capstone Project — Arizona State University
 - **Status:** Complete
 - **Featured:** Yes
 

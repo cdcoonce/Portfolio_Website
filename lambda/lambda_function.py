@@ -97,6 +97,7 @@ def build_system_prompt() -> str:
         "- When referencing a project, include its URL so the user can explore further.\n"
         "- If the user asks something outside the scope of this portfolio, politely redirect.\n"
         "- IMPORTANT: Keep responses concise — 2-3 sentences maximum unless the user explicitly asks for detail. Never list all skills or projects unprompted.\n"
+        "- IMPORTANT: When the user refers to something from the conversation (e.g., 'the last one', 'the first project', 'that one'), always resolve the reference using the conversation history, NOT the order of projects in the knowledge base above.\n"
         "- Be friendly and professional.\n"
         "- Do not make up information that is not in the knowledge base above.\n"
     )
@@ -107,7 +108,7 @@ def get_anthropic_client() -> anthropic.Anthropic:
     return anthropic.Anthropic()
 
 
-def parse_request(body: str | None) -> str:
+def parse_request(body: str | None) -> list[dict[str, str]]:
     """Parse and validate the incoming request body.
 
     Parameters
@@ -117,14 +118,13 @@ def parse_request(body: str | None) -> str:
 
     Returns
     -------
-    str
-        The validated user message.
+    list[dict[str, str]]
+        Validated conversation messages for the Anthropic API.
 
     Raises
     ------
     ValueError
-        If the body is missing, not valid JSON, missing the 'message' key,
-        or the message is empty or too long.
+        If the body is missing, not valid JSON, or messages are invalid.
     """
     if not body:
         raise ValueError("Request body is empty")
@@ -132,14 +132,34 @@ def parse_request(body: str | None) -> str:
         data = json.loads(body)
     except json.JSONDecodeError as exc:
         raise ValueError("Invalid JSON in request body") from exc
-    if "message" not in data:
-        raise ValueError("Missing 'message' key in request body")
-    message = data["message"].strip()
-    if not message:
-        raise ValueError("Message is empty")
-    if len(message) > MAX_MESSAGE_LENGTH:
-        raise ValueError(f"Message too long (max {MAX_MESSAGE_LENGTH} characters)")
-    return message
+
+    # Support both single message and conversation history
+    if "messages" in data:
+        messages = data["messages"]
+        if not isinstance(messages, list) or not messages:
+            raise ValueError("Messages must be a non-empty array")
+        # Validate the latest user message
+        last = messages[-1]
+        if last.get("role") != "user" or not last.get("content", "").strip():
+            raise ValueError("Last message must be a non-empty user message")
+        if len(last["content"]) > MAX_MESSAGE_LENGTH:
+            raise ValueError(f"Message too long (max {MAX_MESSAGE_LENGTH} characters)")
+        # Sanitize: only allow role and content keys, limit history length
+        allowed_roles = {"user", "assistant"}
+        clean = []
+        for m in messages[-10:]:  # Keep last 10 messages (5 turns)
+            if m.get("role") in allowed_roles and m.get("content"):
+                clean.append({"role": m["role"], "content": m["content"]})
+        return clean
+    elif "message" in data:
+        message = data["message"].strip()
+        if not message:
+            raise ValueError("Message is empty")
+        if len(message) > MAX_MESSAGE_LENGTH:
+            raise ValueError(f"Message too long (max {MAX_MESSAGE_LENGTH} characters)")
+        return [{"role": "user", "content": message}]
+    else:
+        raise ValueError("Missing 'message' or 'messages' key in request body")
 
 
 def build_response(status_code: int, body: dict[str, Any]) -> dict[str, Any]:
@@ -190,7 +210,7 @@ def handler(event: dict, context: Any) -> dict[str, Any]:
         return build_response(405, {"error": "Method not allowed"})
 
     try:
-        message = parse_request(event.get("body"))
+        messages = parse_request(event.get("body"))
     except ValueError as e:
         return build_response(400, {"error": str(e)})
 
@@ -200,7 +220,7 @@ def handler(event: dict, context: Any) -> dict[str, Any]:
             model=MODEL_ID,
             max_tokens=MAX_TOKENS,
             system=build_system_prompt(),
-            messages=[{"role": "user", "content": message}],
+            messages=messages,
         )
         assistant_text = response.content[0].text
         return build_response(200, {"response": assistant_text})
