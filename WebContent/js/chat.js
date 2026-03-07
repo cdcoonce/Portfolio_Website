@@ -120,11 +120,11 @@ const createLoadingHtml = () => {
  * @returns {Promise<string>} The assistant's response text.
  * @throws {Error} If the request fails or returns a non-OK status.
  */
-const sendMessage = async (message) => {
+const sendMessage = async (messages) => {
   const response = await fetch(LAMBDA_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ message }),
+    body: JSON.stringify({ messages }),
   });
 
   if (!response.ok) {
@@ -156,6 +156,7 @@ export function initChat() {
   }
 
   let isProcessing = false;
+  const conversationHistory = [];
 
   /** Appends HTML to the messages container and scrolls to bottom. */
   const appendMessage = (html) => {
@@ -201,11 +202,14 @@ export function initChat() {
 
     try {
       recordRequest();
-      const response = await sendMessage(message);
+      conversationHistory.push({ role: 'user', content: message });
+      const response = await sendMessage(conversationHistory);
 
       // Remove loading indicator
       const loading = document.getElementById('chat-loading');
       if (loading) loading.remove();
+
+      conversationHistory.push({ role: 'assistant', content: response });
 
       // Show assistant response
       appendMessage(formatMessage(response, 'assistant'));
