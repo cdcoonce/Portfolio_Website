@@ -11,8 +11,7 @@ export const RATE_LIMIT_CONFIG = {
  * Lambda Function URL — replace with your actual URL after deployment.
  * See docs/plans/chat-agent/aws-setup.md Step 8.
  */
-const LAMBDA_URL =
-  'https://YOUR_FUNCTION_URL.lambda-url.us-east-1.on.aws/';
+const LAMBDA_URL = 'https://a4qby7o6wqmq7rpb6rorezbc7u0tsyhc.lambda-url.us-west-1.on.aws/';
 
 // --- Pure Functions (exported for testing) ---
 
@@ -60,10 +59,7 @@ export const isRateLimited = () => {
 export const recordRequest = () => {
   const timestamps = getValidTimestamps();
   timestamps.push(Date.now());
-  localStorage.setItem(
-    RATE_LIMIT_CONFIG.STORAGE_KEY,
-    JSON.stringify(timestamps),
-  );
+  localStorage.setItem(RATE_LIMIT_CONFIG.STORAGE_KEY, JSON.stringify(timestamps));
 };
 
 /**
@@ -72,10 +68,7 @@ export const recordRequest = () => {
  * @returns {number} Remaining requests (0 or positive).
  */
 export const getRemainingRequests = () => {
-  return Math.max(
-    0,
-    RATE_LIMIT_CONFIG.MAX_REQUESTS - getValidTimestamps().length,
-  );
+  return Math.max(0, RATE_LIMIT_CONFIG.MAX_REQUESTS - getValidTimestamps().length);
 };
 
 /**
@@ -165,8 +158,7 @@ export function initChat() {
       chatRateLimit.textContent = `${remaining} question${remaining === 1 ? '' : 's'} remaining this hour`;
       chatRateLimit.hidden = false;
     } else if (remaining === 0) {
-      chatRateLimit.textContent =
-        'Rate limit reached. Please try again later.';
+      chatRateLimit.textContent = 'Rate limit reached. Please try again later.';
       chatRateLimit.hidden = false;
       chatInput.disabled = true;
       chatSend.disabled = true;
@@ -209,12 +201,7 @@ export function initChat() {
       const loading = document.getElementById('chat-loading');
       if (loading) loading.remove();
 
-      appendMessage(
-        formatMessage(
-          'Sorry, something went wrong. Please try again.',
-          'assistant',
-        ),
-      );
+      appendMessage(formatMessage('Sorry, something went wrong. Please try again.', 'assistant'));
     } finally {
       isProcessing = false;
       chatSend.disabled = false;

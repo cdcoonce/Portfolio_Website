@@ -5,8 +5,12 @@ portfolio context, and returns the response.
 """
 
 import json
+import logging
 from pathlib import Path
 from typing import Any
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 import anthropic
 
@@ -203,5 +207,6 @@ def handler(event: dict, context: Any) -> dict[str, Any]:
         )
         assistant_text = response.content[0].text
         return build_response(200, {"response": assistant_text})
-    except Exception:
+    except Exception as e:
+        logger.error("Anthropic API error: %s", e, exc_info=True)
         return build_response(500, {"error": "Internal server error"})

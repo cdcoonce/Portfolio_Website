@@ -6,3 +6,8 @@ node_modules
 __pycache__/
 .pytest_cache/
 coverage/
+
+# Lambda deployment artifacts
+lambda/package/
+lambda/deployment.zip
+lambda/output.json

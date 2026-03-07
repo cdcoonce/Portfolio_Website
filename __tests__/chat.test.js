@@ -38,10 +38,7 @@ describe('Rate Limiting', () => {
 
   test('expired requests are not counted', () => {
     const expired = Date.now() - RATE_LIMIT_CONFIG.WINDOW_MS - 1000;
-    localStorage.setItem(
-      RATE_LIMIT_CONFIG.STORAGE_KEY,
-      JSON.stringify([expired]),
-    );
+    localStorage.setItem(RATE_LIMIT_CONFIG.STORAGE_KEY, JSON.stringify([expired]));
     expect(isRateLimited()).toBe(false);
     expect(getRemainingRequests()).toBe(RATE_LIMIT_CONFIG.MAX_REQUESTS);
   });
