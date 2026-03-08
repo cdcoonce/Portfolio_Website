@@ -97,6 +97,7 @@ projects.sort(key=lambda p: (-ord_key(p["date_sort"]), p["title"]))
 ```
 
 Or sort in two passes (stable sort):
+
 ```python
 projects.sort(key=lambda p: p["title"])  # secondary: A-Z
 projects.sort(key=lambda p: p.get("date_sort", ""), reverse=True)  # primary: newest
@@ -126,7 +127,7 @@ Six plan files under `docs/plans/094-add-dates-to-project-cards/` are included. 
 ## Category Breakdown
 
 | Category | Count |
-|----------|-------|
+| -------- | ----- |
 | WARNING  | 1     |
 | INFO     | 5     |
 | ERROR    | 0     |
