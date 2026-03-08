@@ -5,6 +5,7 @@
 - **Type:** Capstone Project — Arizona State University
 - **Status:** Complete
 - **Featured:** Yes
+- **Date:** Dec 2025
 
 ## Summary
 
