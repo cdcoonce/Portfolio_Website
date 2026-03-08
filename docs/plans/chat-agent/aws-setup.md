@@ -83,7 +83,12 @@ Note the ARN from the `create-role` output — you'll need it in Step 7. It look
 cd lambda
 
 # Install dependencies into a package directory
-pip install -r requirements.txt -t package/
+# IMPORTANT: Use --platform to get Linux-compatible binaries (not macOS)
+pip install -r requirements.txt -t package/ \
+  --platform manylinux2014_x86_64 \
+  --only-binary=:all: \
+  --implementation cp \
+  --python-version 3.12
 
 # Copy handler and knowledge base into the package
 cp lambda_function.py knowledge_base.json package/
@@ -98,6 +103,8 @@ unzip -l deployment.zip | head -20
 ```
 
 The zip should contain `lambda_function.py`, `knowledge_base.json`, and the `anthropic/` package directory.
+
+> **Note:** The `--platform` and `--only-binary` flags ensure compiled extensions (like `pydantic_core`) are built for Amazon Linux, not your local OS. Without these, deploying from macOS will fail with `No module named 'pydantic_core._pydantic_core'`.
 
 ## Step 7: Deploy the Lambda Function
 
@@ -187,7 +194,11 @@ python scripts/build_knowledge_base.py
 # Then repackage and deploy
 cd lambda
 rm -rf package/ deployment.zip
-pip install -r requirements.txt -t package/
+pip install -r requirements.txt -t package/ \
+  --platform manylinux2014_x86_64 \
+  --only-binary=:all: \
+  --implementation cp \
+  --python-version 3.12
 cp lambda_function.py knowledge_base.json package/
 cd package && zip -r ../deployment.zip . && cd ..
 
