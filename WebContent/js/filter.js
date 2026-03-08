@@ -58,6 +58,21 @@ export const getFilterFromURL = () => {
 };
 
 /**
+ * Returns indices that would sort dates newest-first, with missing dates at the end.
+ * @param {string[]} dates - Array of date strings (e.g. '2024-01')
+ * @returns {number[]} Array of original indices in sorted order
+ */
+export const getSortedIndices = (dates) => {
+  return dates
+    .map((date, index) => ({ date: date || '0000-00', index }))
+    .sort((a, b) => {
+      const cmp = b.date.localeCompare(a.date);
+      return cmp !== 0 ? cmp : a.index - b.index;
+    })
+    .map(({ index }) => index);
+};
+
+/**
  * Wires filter buttons and reset button to project card visibility.
  * @param {Object} [config]
  * @param {number|null} [config.maxVisible=null] - Max cards to show (null = unlimited)
@@ -69,13 +84,23 @@ export function initFilter(config = {}) {
 
   const skillTags = document.querySelectorAll('button.skill-tag[data-filter]');
   const resetButton = document.querySelector('button.skill-filter-reset');
-  const cards = document.querySelectorAll('.project-card');
+  let cards = document.querySelectorAll('.project-card');
   const activeFilters = new Set();
 
   if (!skillTags.length || !cards.length) {
     console.warn('Skill filter buttons or project cards not found in DOM');
     return;
   }
+
+  // Sort cards by date (newest first)
+  const dates = Array.from(cards).map((c) => c.getAttribute('data-date') || '');
+  const sortedIndices = getSortedIndices(dates);
+  const grid = cards[0]?.parentElement;
+  if (grid) {
+    sortedIndices.forEach((i) => grid.appendChild(cards[i]));
+  }
+  // Re-query after reorder
+  cards = document.querySelectorAll('.project-card');
 
   const cardTagSets = Array.from(cards).map((c) => {
     let tags = c.getAttribute('data-tags') || '';

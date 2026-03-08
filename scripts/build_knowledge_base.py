@@ -8,8 +8,11 @@ a single JSON knowledge base for the Lambda function.
 """
 
 import json
+import logging
 import re
 from pathlib import Path
+
+logger = logging.getLogger(__name__)
 
 
 CONTEXT_DIR = Path("WebContent/context")
@@ -47,6 +50,7 @@ def parse_date_to_sort_key(date_str: str) -> str:
     month_abbr, year = match.group(1), match.group(2)
     month_num = MONTH_MAP.get(month_abbr, "")
     if not month_num:
+        logger.warning("Unrecognized month abbreviation: %r in date %r", month_abbr, date_str)
         return ""
     return f"{year}-{month_num}"
 
@@ -315,7 +319,8 @@ def load_all_projects() -> list[dict]:
         if md_file.name in NON_PROJECT_FILES:
             continue
         projects.append(load_project(md_file))
-    projects.sort(key=lambda p: (p.get("date_sort", ""), p["title"]), reverse=True)
+    projects.sort(key=lambda p: p["title"])
+    projects.sort(key=lambda p: p.get("date_sort", ""), reverse=True)
     return projects
 
 

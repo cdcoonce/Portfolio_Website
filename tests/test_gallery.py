@@ -89,3 +89,23 @@ class TestProjectsPage:
         projects_page.click('.skill-filter-reset')
         visible = projects_page.locator('.project-card:visible')
         assert visible.count() == 17, f'Expected 17 visible after reset, got {visible.count()}'
+
+    def test_cards_display_date(self, projects_page):
+        dates = projects_page.locator('.project-card:visible .project-date')
+        count = dates.count()
+        assert count == 17, f'Expected 17 date elements, got {count}'
+        for i in range(count):
+            text = dates.nth(i).text_content().strip()
+            assert text, f'Date element {i} is empty'
+
+    def test_cards_sorted_newest_first(self, projects_page):
+        cards = projects_page.locator('.project-card:visible')
+        count = cards.count()
+        dates = []
+        for i in range(count):
+            date_val = cards.nth(i).get_attribute('data-date') or ''
+            dates.append(date_val)
+        for i in range(len(dates) - 1):
+            assert dates[i] >= dates[i + 1], (
+                f'Card {i} ({dates[i]}) should sort before card {i + 1} ({dates[i + 1]})'
+            )
