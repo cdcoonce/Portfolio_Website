@@ -159,8 +159,7 @@ export function initChat() {
   const conversationHistory = [
     {
       role: 'assistant',
-      content:
-        "Hi! I'm Charles's AI assistant. Ask me about his projects, skills, or experience.",
+      content: "Hi! I'm Charles's AI assistant. Ask me about his projects, skills, or experience.",
     },
   ];
 

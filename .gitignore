@@ -9,5 +9,5 @@ coverage/
 
 # Lambda deployment artifacts
 lambda/package/
-lambda/deployment.zip
+lambda/deployment*.zip
 lambda/output.json
