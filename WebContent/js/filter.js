@@ -58,13 +58,6 @@ export const getFilterFromURL = () => {
 };
 
 /**
- * Wires filter buttons and reset button to project card visibility.
- * @param {Object} [config]
- * @param {number|null} [config.maxVisible=null] - Max cards to show (null = unlimited)
- * @param {string} [config.defaultFilter='all'] - Default filter: 'all' or 'featured'
- * @param {string|null} [config.initialFilter=null] - Pre-selected filter from URL param
- */
-/**
  * Returns indices that would sort dates newest-first, with missing dates at the end.
  * @param {string[]} dates - Array of date strings (e.g. '2024-01')
  * @returns {number[]} Array of original indices in sorted order
@@ -79,6 +72,13 @@ export const getSortedIndices = (dates) => {
     .map(({ index }) => index);
 };
 
+/**
+ * Wires filter buttons and reset button to project card visibility.
+ * @param {Object} [config]
+ * @param {number|null} [config.maxVisible=null] - Max cards to show (null = unlimited)
+ * @param {string} [config.defaultFilter='all'] - Default filter: 'all' or 'featured'
+ * @param {string|null} [config.initialFilter=null] - Pre-selected filter from URL param
+ */
 export function initFilter(config = {}) {
   const { maxVisible = null, defaultFilter = 'all', initialFilter = null } = config;
 

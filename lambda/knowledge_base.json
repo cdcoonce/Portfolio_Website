@@ -172,28 +172,33 @@
   ],
   "projects": [
     {
-      "title": "Synthetic Signal Observatory",
-      "type": "Independent",
-      "status": "In Progress",
-      "featured": false,
+      "title": "Housing Affordability & Commute Trade-Off Analysis",
+      "type": "Capstone Project — Arizona State University",
+      "status": "Complete",
+      "featured": true,
       "date": "Dec 2025",
       "date_sort": "2025-12",
-      "summary": "A Python-native, deployable, interactive dashboard that continuously generates synthetic signals, persists them locally, runs a lightweight analytics step, and visualizes results with interactive controls. Built with Streamlit, the project demonstrates Charles's ability to create end-to-end data applications with clean architecture and test coverage.",
-      "business_problem": "Data teams often need lightweight, self-contained tools for monitoring and analyzing streaming or continuously generated data. This project serves as a demonstration of how to build a deployable analytics dashboard that handles data generation, persistence, analysis, and visualization in a single application — the kind of internal tool that data teams frequently build for operational monitoring.",
-      "approach": "Charles structured the project with a clear separation of concerns: business logic lives as pure functions in a dedicated package, service and visualization layers handle orchestration and rendering, and the Streamlit app serves as a thin entrypoint. The project includes its own agent rules (AGENTS.md), architecture documentation (ARCHITECTURE.md), and a learnings log to track environment-specific quirks and pitfalls.",
-      "key_results": "- The dashboard generates, persists, and visualizes synthetic signals in real time with interactive user controls.\n- The architecture enforces clean boundaries between business logic, service layer, and UI — making the codebase testable and maintainable.\n- The project includes a full pytest suite and is designed for easy deployment.",
+      "summary": "A data engineering and statistical analysis pipeline that quantifies the relationship between housing costs, commute time, and public transit accessibility across nine U.S. metropolitan areas. Charles built the entire project end-to-end — from data ingestion to regression analysis — to answer real research questions about where housing affordability and commute burdens intersect.",
+      "business_problem": "Housing affordability is one of the most pressing issues facing American metro areas, but it is rarely analyzed in isolation. Where people can afford to live often determines how far they commute, and transit access plays a critical role in that equation. Policymakers, urban planners, and researchers need data-driven tools to identify which ZIP codes are most burdened by the combination of high rent and long commutes — and whether those burdens fall disproportionately on lower-income or minority communities.",
+      "approach": "Charles designed a reproducible two-stage pipeline. The first stage is a data engineering pipeline that ingests data from four sources: Census ACS (commute patterns, rent, income, demographics), Zillow (observed rent index), OpenStreetMap (transit stop density), and Census TIGER/Line (geographic boundaries). The pipeline fetches CBSA boundaries, maps census tracts to ZCTAs (ZIP Code Tabulation Areas), performs spatial joins, and aggregates everything into a clean, analysis-ready dataset for each metro area.\n\nThe second stage applies statistical analysis to answer three research questions. RQ1 uses OLS regression with robust standard errors to model how commute time influences rent-to-income ratio, comparing linear and quadratic specifications and selecting the best model via AIC. RQ2 examines equity by testing how housing and commute burdens vary by income segment and race, using interaction models, ANOVA, and K-Means clustering. RQ3 constructs a composite Affordability-Commute Index (ACI) and models it with both OLS and quantile regression to identify the most burdened areas.",
+      "key_results": "### Housing Affordability\n\n- **Miami and Los Angeles are the least affordable metros**, both exceeding or approaching the 30% rent-burdened threshold on average (31.0% and 28.3% respectively).\n- **Low-income residents exceed the 30% burden threshold in every metro**, ranging from 25.9% of income (Seattle) to 35.7% (Miami).\n- **Memphis has the widest affordability gap** between income segments (17.1 percentage points), indicating extreme income-based inequality despite a moderate overall average.\n- **Chicago is the most affordable on average** (21.1%) but still shows a 10.1-point gap between income groups.\n\n### RQ1 — Housing-Commute Trade-Off\n\n- **Commute time is statistically significant in only 4 of 9 metros** (Memphis, Seattle, Denver, DFW). In the other five, other factors dominate.\n- **Renter share is the most consistently significant predictor**, reaching p < 0.01 in 7 of 9 metros.\n- **Memphis has the strongest model fit** (R² = 0.73), likely because its simpler spatial structure follows a predictable center-periphery gradient.\n- **The concave relationship** in Denver, DFW, Memphis, and Miami indicates a \"drive until you qualify\" effect with diminishing returns — rent burden drops with longer commutes up to a point, then plateaus.\n\n### RQ2 — Equity Analysis\n\n- **All 9 metros show statistically significant income-based rent burden differences** (p < 0.0001 in all cases) — the single most robust finding in the entire analysis.\n- **8 of 9 metros show significant racial differences in rent burden.** Majority-white ZCTAs consistently have lower rent burdens.\n- **Seattle is the sole exception** — no significant racial differences (F = 0.11, p = 0.90). Seattle's affordability dynamics are income-driven but not race-stratified.\n- In **8 of 9 metros**, the commute-rent tradeoff operates similarly regardless of income level. **Seattle is again the exception** (p = 0.014): low-income residents there benefit more from the \"drive until you qualify\" tradeoff.\n- Every metro produced a distinct \"extreme pressure\" K-Means cluster. Atlanta had the highest single-cluster burden (0.527). Chicago's worst cluster combines the highest rent burden (0.333) with the longest commute (39.9 min) — a \"double-burdened\" zone.\n\n### RQ3 — Affordability-Commute Index (ACI)\n\n- **Transit access has contradictory effects depending on metro structure:**\n  - In **Chicago and Miami**, transit-rich areas have _higher_ combined ACI pressure because they are desirable, expensive locations.\n  - In **Dallas-Fort Worth**, transit access has a significant _negative_ relationship with ACI — the only metro where more transit = less combined pressure.\n  - In 6 other metros, transit has no measurable effect on ACI.\n- **Phoenix is essentially unexplainable** by this model (R² = 0.017). Its dynamics operate through mechanisms not captured by these variables.\n- **The Memphis paradox:** Best-fitting RQ1 model (R² = 0.73) but worst-fitting ACI model (R² = 0.17) — commute time alone powerfully predicts rent burden in Memphis, but adding transit collapses the model because Memphis has virtually no transit infrastructure.\n\n### Cross-Cutting Themes\n\n1. **Affordability is an income problem, not a commute problem.** Commute time predicts rent burden in only 4 of 9 metros. Policy interventions targeting commute reduction alone will not meaningfully address affordability.\n2. **Racial inequality in housing is pervasive but not universal.** 8 of 9 metros show significant racial rent burden disparities; Seattle is the exception.\n3. **Transit is a double-edged sword.** In dense cities it signals expensive, high-demand areas; in sprawling metros it genuinely serves affordability. Transit investment must be paired with affordability protections.\n4. **\"Drive until you qualify\" has limits.** The concave relationships show a spatial boundary where further driving no longer buys proportionally more affordability.\n5. **Metro structure matters more than metro size.** Explanatory power tracks with how consistently the metro follows an expected center-periphery gradient, not with observation count.\n\n### Policy Implications\n\n1. **Income-targeted interventions** (rental assistance, inclusionary zoning, wage policy) are more likely to reduce rent burden than commute-oriented strategies alone.\n2. **Transit investment requires affordability protections.** In Chicago and Miami, transit-rich areas already price out lower-income residents.\n3. **DFW's transit model is worth studying** — it is the only metro where transit access correlates with lower combined pressure.\n4. **Racial equity in housing** remains a challenge in 8 of 9 metros. Place-based policies must account for racial disparities in cost burden.\n\n### Notable Outliers\n\n- **Seattle:** No racial rent disparities, but significant commute × income interaction — a unique equity profile among the nine metros.\n- **Phoenix:** Neither model explains its affordability dynamics; rapid growth, seasonal migration, and land use patterns are candidate factors.\n- **Atlanta:** Contains a 2-ZCTA cluster with rent burden of 0.527, the highest single-cluster burden observed.\n- **Memphis:** Widest income gap (17.1pp), best RQ1 fit (R² = 0.73), worst ACI fit (R² = 0.17).",
       "technologies": [
-        "**Dashboard:** Streamlit",
-        "**Data processing:** Python (pure functions)",
-        "**Testing:** pytest",
+        "**Data pipeline:** Python, GeoPandas, Polars, Census ACS API, Zillow ZORI, OpenStreetMap Overpass API, Census TIGER/Line shapefiles",
+        "**Statistical analysis:** statsmodels (OLS, quantile regression), scikit-learn (K-Means, cross-validation), scipy (ANOVA)",
+        "**Visualization:** Matplotlib (diagnostic plots, choropleth maps)",
+        "**Testing & CI:** pytest, GitHub Actions, Ruff",
         "**Environment management:** uv"
       ],
-      "url": "https://github.com/cdcoonce/Synthetic_Signal_Observatory",
+      "url": "https://github.com/cdcoonce/housing-commute-analysis",
       "skills_demonstrated": [
-        "Data Visualization & Dashboards",
         "Data Engineering & Pipelines",
+        "Statistical Analysis & Modeling",
+        "Machine Learning",
+        "Data Wrangling & ETL",
+        "Data Visualization & Dashboards",
         "DevOps & Tooling"
-      ]
+      ],
+      "challenges": "One of the biggest challenges was mapping census tract-level data to ZCTA boundaries, since the two geographies don't align neatly. Charles implemented spatial joins using GeoPandas to handle the tract-to-ZCTA crosswalk, weighting aggregations by population overlap. Another challenge was handling the OpenStreetMap Overpass API, which has strict rate limits — the pipeline includes caching and retry logic to handle this gracefully. Finally, ensuring the analysis was truly reproducible across all nine metros required careful parameterization of both the pipeline and analysis stages."
     },
     {
       "title": "Renewable Asset Performance Pipeline",
@@ -223,33 +228,28 @@
       "challenges": "Designing the dbt model layers required careful thought about where to place business logic. Charles followed the staging → intermediate → mart pattern, keeping staging models as thin transformations and pushing aggregation and KPI computation into the intermediate and mart layers. Integrating Dagster with dbt also required mapping dbt models to Dagster assets correctly so that the dependency graph and sensor triggers worked as expected."
     },
     {
-      "title": "Housing Affordability & Commute Trade-Off Analysis",
-      "type": "Capstone Project — Arizona State University",
-      "status": "Complete",
-      "featured": true,
+      "title": "Synthetic Signal Observatory",
+      "type": "Independent",
+      "status": "In Progress",
+      "featured": false,
       "date": "Dec 2025",
       "date_sort": "2025-12",
-      "summary": "A data engineering and statistical analysis pipeline that quantifies the relationship between housing costs, commute time, and public transit accessibility across nine U.S. metropolitan areas. Charles built the entire project end-to-end — from data ingestion to regression analysis — to answer real research questions about where housing affordability and commute burdens intersect.",
-      "business_problem": "Housing affordability is one of the most pressing issues facing American metro areas, but it is rarely analyzed in isolation. Where people can afford to live often determines how far they commute, and transit access plays a critical role in that equation. Policymakers, urban planners, and researchers need data-driven tools to identify which ZIP codes are most burdened by the combination of high rent and long commutes — and whether those burdens fall disproportionately on lower-income or minority communities.",
-      "approach": "Charles designed a reproducible two-stage pipeline. The first stage is a data engineering pipeline that ingests data from four sources: Census ACS (commute patterns, rent, income, demographics), Zillow (observed rent index), OpenStreetMap (transit stop density), and Census TIGER/Line (geographic boundaries). The pipeline fetches CBSA boundaries, maps census tracts to ZCTAs (ZIP Code Tabulation Areas), performs spatial joins, and aggregates everything into a clean, analysis-ready dataset for each metro area.\n\nThe second stage applies statistical analysis to answer three research questions. RQ1 uses OLS regression with robust standard errors to model how commute time influences rent-to-income ratio, comparing linear and quadratic specifications and selecting the best model via AIC. RQ2 examines equity by testing how housing and commute burdens vary by income segment and race, using interaction models, ANOVA, and K-Means clustering. RQ3 constructs a composite Affordability-Commute Index (ACI) and models it with both OLS and quantile regression to identify the most burdened areas.",
-      "key_results": "### Housing Affordability\n\n- **Miami and Los Angeles are the least affordable metros**, both exceeding or approaching the 30% rent-burdened threshold on average (31.0% and 28.3% respectively).\n- **Low-income residents exceed the 30% burden threshold in every metro**, ranging from 25.9% of income (Seattle) to 35.7% (Miami).\n- **Memphis has the widest affordability gap** between income segments (17.1 percentage points), indicating extreme income-based inequality despite a moderate overall average.\n- **Chicago is the most affordable on average** (21.1%) but still shows a 10.1-point gap between income groups.\n\n### RQ1 — Housing-Commute Trade-Off\n\n- **Commute time is statistically significant in only 4 of 9 metros** (Memphis, Seattle, Denver, DFW). In the other five, other factors dominate.\n- **Renter share is the most consistently significant predictor**, reaching p < 0.01 in 7 of 9 metros.\n- **Memphis has the strongest model fit** (R² = 0.73), likely because its simpler spatial structure follows a predictable center-periphery gradient.\n- **The concave relationship** in Denver, DFW, Memphis, and Miami indicates a \"drive until you qualify\" effect with diminishing returns — rent burden drops with longer commutes up to a point, then plateaus.\n\n### RQ2 — Equity Analysis\n\n- **All 9 metros show statistically significant income-based rent burden differences** (p < 0.0001 in all cases) — the single most robust finding in the entire analysis.\n- **8 of 9 metros show significant racial differences in rent burden.** Majority-white ZCTAs consistently have lower rent burdens.\n- **Seattle is the sole exception** — no significant racial differences (F = 0.11, p = 0.90). Seattle's affordability dynamics are income-driven but not race-stratified.\n- In **8 of 9 metros**, the commute-rent tradeoff operates similarly regardless of income level. **Seattle is again the exception** (p = 0.014): low-income residents there benefit more from the \"drive until you qualify\" tradeoff.\n- Every metro produced a distinct \"extreme pressure\" K-Means cluster. Atlanta had the highest single-cluster burden (0.527). Chicago's worst cluster combines the highest rent burden (0.333) with the longest commute (39.9 min) — a \"double-burdened\" zone.\n\n### RQ3 — Affordability-Commute Index (ACI)\n\n- **Transit access has contradictory effects depending on metro structure:**\n  - In **Chicago and Miami**, transit-rich areas have _higher_ combined ACI pressure because they are desirable, expensive locations.\n  - In **Dallas-Fort Worth**, transit access has a significant _negative_ relationship with ACI — the only metro where more transit = less combined pressure.\n  - In 6 other metros, transit has no measurable effect on ACI.\n- **Phoenix is essentially unexplainable** by this model (R² = 0.017). Its dynamics operate through mechanisms not captured by these variables.\n- **The Memphis paradox:** Best-fitting RQ1 model (R² = 0.73) but worst-fitting ACI model (R² = 0.17) — commute time alone powerfully predicts rent burden in Memphis, but adding transit collapses the model because Memphis has virtually no transit infrastructure.\n\n### Cross-Cutting Themes\n\n1. **Affordability is an income problem, not a commute problem.** Commute time predicts rent burden in only 4 of 9 metros. Policy interventions targeting commute reduction alone will not meaningfully address affordability.\n2. **Racial inequality in housing is pervasive but not universal.** 8 of 9 metros show significant racial rent burden disparities; Seattle is the exception.\n3. **Transit is a double-edged sword.** In dense cities it signals expensive, high-demand areas; in sprawling metros it genuinely serves affordability. Transit investment must be paired with affordability protections.\n4. **\"Drive until you qualify\" has limits.** The concave relationships show a spatial boundary where further driving no longer buys proportionally more affordability.\n5. **Metro structure matters more than metro size.** Explanatory power tracks with how consistently the metro follows an expected center-periphery gradient, not with observation count.\n\n### Policy Implications\n\n1. **Income-targeted interventions** (rental assistance, inclusionary zoning, wage policy) are more likely to reduce rent burden than commute-oriented strategies alone.\n2. **Transit investment requires affordability protections.** In Chicago and Miami, transit-rich areas already price out lower-income residents.\n3. **DFW's transit model is worth studying** — it is the only metro where transit access correlates with lower combined pressure.\n4. **Racial equity in housing** remains a challenge in 8 of 9 metros. Place-based policies must account for racial disparities in cost burden.\n\n### Notable Outliers\n\n- **Seattle:** No racial rent disparities, but significant commute × income interaction — a unique equity profile among the nine metros.\n- **Phoenix:** Neither model explains its affordability dynamics; rapid growth, seasonal migration, and land use patterns are candidate factors.\n- **Atlanta:** Contains a 2-ZCTA cluster with rent burden of 0.527, the highest single-cluster burden observed.\n- **Memphis:** Widest income gap (17.1pp), best RQ1 fit (R² = 0.73), worst ACI fit (R² = 0.17).",
+      "summary": "A Python-native, deployable, interactive dashboard that continuously generates synthetic signals, persists them locally, runs a lightweight analytics step, and visualizes results with interactive controls. Built with Streamlit, the project demonstrates Charles's ability to create end-to-end data applications with clean architecture and test coverage.",
+      "business_problem": "Data teams often need lightweight, self-contained tools for monitoring and analyzing streaming or continuously generated data. This project serves as a demonstration of how to build a deployable analytics dashboard that handles data generation, persistence, analysis, and visualization in a single application — the kind of internal tool that data teams frequently build for operational monitoring.",
+      "approach": "Charles structured the project with a clear separation of concerns: business logic lives as pure functions in a dedicated package, service and visualization layers handle orchestration and rendering, and the Streamlit app serves as a thin entrypoint. The project includes its own agent rules (AGENTS.md), architecture documentation (ARCHITECTURE.md), and a learnings log to track environment-specific quirks and pitfalls.",
+      "key_results": "- The dashboard generates, persists, and visualizes synthetic signals in real time with interactive user controls.\n- The architecture enforces clean boundaries between business logic, service layer, and UI — making the codebase testable and maintainable.\n- The project includes a full pytest suite and is designed for easy deployment.",
       "technologies": [
-        "**Data pipeline:** Python, GeoPandas, Polars, Census ACS API, Zillow ZORI, OpenStreetMap Overpass API, Census TIGER/Line shapefiles",
-        "**Statistical analysis:** statsmodels (OLS, quantile regression), scikit-learn (K-Means, cross-validation), scipy (ANOVA)",
-        "**Visualization:** Matplotlib (diagnostic plots, choropleth maps)",
-        "**Testing & CI:** pytest, GitHub Actions, Ruff",
+        "**Dashboard:** Streamlit",
+        "**Data processing:** Python (pure functions)",
+        "**Testing:** pytest",
         "**Environment management:** uv"
       ],
-      "url": "https://github.com/cdcoonce/housing-commute-analysis",
+      "url": "https://github.com/cdcoonce/Synthetic_Signal_Observatory",
       "skills_demonstrated": [
-        "Data Engineering & Pipelines",
-        "Statistical Analysis & Modeling",
-        "Machine Learning",
-        "Data Wrangling & ETL",
         "Data Visualization & Dashboards",
+        "Data Engineering & Pipelines",
         "DevOps & Tooling"
-      ],
-      "challenges": "One of the biggest challenges was mapping census tract-level data to ZCTA boundaries, since the two geographies don't align neatly. Charles implemented spatial joins using GeoPandas to handle the tract-to-ZCTA crosswalk, weighting aggregations by population overlap. Another challenge was handling the OpenStreetMap Overpass API, which has strict rate limits — the pipeline includes caching and retry logic to handle this gracefully. Finally, ensuring the analysis was truly reproducible across all nine metros required careful parameterization of both the pipeline and analysis stages."
+      ]
     },
     {
       "title": "Ames Housing Price Prediction",
@@ -329,20 +329,20 @@
       "challenges": "The biggest challenge was ensuring consistency between the training and test preprocessing — particularly with one-hot encoding, where the test set could have different category levels. Charles built a unified preprocessing pipeline that handled this gracefully. Feature engineering was also iterative; the CryoSleep × low-spend interaction flag only emerged after initial SHAP analysis suggested the two features had a combined effect that wasn't captured by either alone."
     },
     {
-      "title": "Restaurant Sales Analysis",
+      "title": "Baby Names Analysis",
       "type": "Guided Coursework",
       "status": "Complete",
       "featured": false,
       "date": "Mar 2025",
       "date_sort": "2025-03",
-      "summary": "A SQL-based analysis of restaurant sales and menu item data. Charles explored the menu structure, pricing by category, and ordering trends to uncover insights that could help the restaurant optimize its menu and understand revenue drivers.",
-      "business_problem": "Restaurant operators need to understand which menu categories drive the most revenue, which items are most and least popular, and how ordering patterns look over time. These insights inform decisions about menu pricing, item promotion, and inventory planning.",
-      "approach": "Charles analyzed two related tables — menu items (with names, categories, and prices) and order details (with order IDs, timestamps, and item references). He used SQL aggregations to examine the menu composition, identify the most and least expensive items, calculate average prices by category, and determine the date range and volume of orders. He then joined the tables to find the most and least ordered items, identify the highest-spending orders, and break down those top orders by category.",
-      "key_results": "- Italian cuisine had the highest average price per dish at $16.75, followed by Asian ($13.48), Mexican ($11.80), and American ($10.07).\n- The order data spanned January 1 to March 31, 2023.\n- The top 5 highest-spending orders were dominated by Italian dishes, reinforcing that Italian food contributes significantly to total revenue.\n- The largest single order contained 14 items.\n- These findings suggest Italian items are both high-value and frequently ordered in large quantities, making them the restaurant's strongest revenue category.",
+      "summary": "A SQL-driven analysis of U.S. baby name trends from 1980 to 2009, exploring name popularity, decade-over-decade shifts, regional differences, and unique naming patterns. Charles used window functions, CTEs, and set operations to rank names, track popularity changes, and answer stakeholder-driven questions.",
+      "business_problem": "Understanding naming trends has applications in marketing, demographic research, and cultural analysis. This project simulates a scenario where a stakeholder wants to understand how baby name popularity has shifted over three decades, how trends differ across U.S. regions, and which names are uniquely popular or used across genders.",
+      "approach": "Charles structured the analysis around four objectives. First, he tracked popularity changes over time — identifying the overall most popular names, plotting individual name rankings by year using ROW_NUMBER(), and finding the biggest rank jumps between 1980 and 2009. Second, he compared popularity across decades using RANK() with decade groupings. Third, he analyzed regional patterns by joining the names table with a regions reference table and computing top names within each region. Fourth, he explored unique names — finding the most popular androgynous names, the shortest and longest names, and answering a custom stakeholder question about the geographic distribution of a specific name.",
+      "key_results": "- Michael and Jessica dominated the 1980s and 1990s as the top boy and girl names, respectively.\n- By the 2000s, Jacob and Emily emerged at the top, reflecting cultural shifts in naming preferences.\n- The South had the largest total number of births, influencing national trends.\n- Names like Aidan and Skylar showed the biggest popularity jumps from 1980 to 2009.\n- The most popular androgynous names (used for both genders) included some surprising entries like Michael and Jessica, which were occasionally used for the opposite gender.\n- The shortest names (2 letters, e.g., Ty, Bo) and longest names (15 letters, e.g., Franciscojavier) had vastly different popularity levels.",
       "technologies": [
-        "**SQL:** Aggregations (COUNT, AVG, SUM, MIN, MAX), JOINs, UNION, subqueries, GROUP BY, ORDER BY, LIMIT"
+        "**SQL:** Window functions (RANK, ROW_NUMBER), CTEs, UNION, JOINs, GROUP BY, HAVING, subqueries, CASE expressions"
       ],
-      "url": "https://github.com/cdcoonce/Restaurant_Order_Analysis",
+      "url": "https://github.com/cdcoonce/Baby_Names_Analysis",
       "skills_demonstrated": [
         "SQL & Database Analytics"
       ]
@@ -369,104 +369,43 @@
       ]
     },
     {
-      "title": "Baby Names Analysis",
+      "title": "Restaurant Sales Analysis",
       "type": "Guided Coursework",
       "status": "Complete",
       "featured": false,
       "date": "Mar 2025",
       "date_sort": "2025-03",
-      "summary": "A SQL-driven analysis of U.S. baby name trends from 1980 to 2009, exploring name popularity, decade-over-decade shifts, regional differences, and unique naming patterns. Charles used window functions, CTEs, and set operations to rank names, track popularity changes, and answer stakeholder-driven questions.",
-      "business_problem": "Understanding naming trends has applications in marketing, demographic research, and cultural analysis. This project simulates a scenario where a stakeholder wants to understand how baby name popularity has shifted over three decades, how trends differ across U.S. regions, and which names are uniquely popular or used across genders.",
-      "approach": "Charles structured the analysis around four objectives. First, he tracked popularity changes over time — identifying the overall most popular names, plotting individual name rankings by year using ROW_NUMBER(), and finding the biggest rank jumps between 1980 and 2009. Second, he compared popularity across decades using RANK() with decade groupings. Third, he analyzed regional patterns by joining the names table with a regions reference table and computing top names within each region. Fourth, he explored unique names — finding the most popular androgynous names, the shortest and longest names, and answering a custom stakeholder question about the geographic distribution of a specific name.",
-      "key_results": "- Michael and Jessica dominated the 1980s and 1990s as the top boy and girl names, respectively.\n- By the 2000s, Jacob and Emily emerged at the top, reflecting cultural shifts in naming preferences.\n- The South had the largest total number of births, influencing national trends.\n- Names like Aidan and Skylar showed the biggest popularity jumps from 1980 to 2009.\n- The most popular androgynous names (used for both genders) included some surprising entries like Michael and Jessica, which were occasionally used for the opposite gender.\n- The shortest names (2 letters, e.g., Ty, Bo) and longest names (15 letters, e.g., Franciscojavier) had vastly different popularity levels.",
+      "summary": "A SQL-based analysis of restaurant sales and menu item data. Charles explored the menu structure, pricing by category, and ordering trends to uncover insights that could help the restaurant optimize its menu and understand revenue drivers.",
+      "business_problem": "Restaurant operators need to understand which menu categories drive the most revenue, which items are most and least popular, and how ordering patterns look over time. These insights inform decisions about menu pricing, item promotion, and inventory planning.",
+      "approach": "Charles analyzed two related tables — menu items (with names, categories, and prices) and order details (with order IDs, timestamps, and item references). He used SQL aggregations to examine the menu composition, identify the most and least expensive items, calculate average prices by category, and determine the date range and volume of orders. He then joined the tables to find the most and least ordered items, identify the highest-spending orders, and break down those top orders by category.",
+      "key_results": "- Italian cuisine had the highest average price per dish at $16.75, followed by Asian ($13.48), Mexican ($11.80), and American ($10.07).\n- The order data spanned January 1 to March 31, 2023.\n- The top 5 highest-spending orders were dominated by Italian dishes, reinforcing that Italian food contributes significantly to total revenue.\n- The largest single order contained 14 items.\n- These findings suggest Italian items are both high-value and frequently ordered in large quantities, making them the restaurant's strongest revenue category.",
       "technologies": [
-        "**SQL:** Window functions (RANK, ROW_NUMBER), CTEs, UNION, JOINs, GROUP BY, HAVING, subqueries, CASE expressions"
+        "**SQL:** Aggregations (COUNT, AVG, SUM, MIN, MAX), JOINs, UNION, subqueries, GROUP BY, ORDER BY, LIMIT"
       ],
-      "url": "https://github.com/cdcoonce/Baby_Names_Analysis",
+      "url": "https://github.com/cdcoonce/Restaurant_Order_Analysis",
       "skills_demonstrated": [
         "SQL & Database Analytics"
       ]
     },
     {
-      "title": "Sleep Deprivation & Cognitive Performance Analysis",
+      "title": "AirBnB Listing Analysis",
       "type": "Guided Coursework",
       "status": "Complete",
       "featured": false,
       "date": "Feb 2025",
       "date_sort": "2025-02",
-      "summary": "An exploratory and moderation analysis investigating how sleep factors relate to cognitive and emotional outcomes. Charles examined whether stress levels moderate the relationships between sleep metrics (quality and hours) and performance outcomes (reaction time and emotion regulation), finding statistically significant effects in both low-stress and high-stress subgroups.",
-      "business_problem": "Workplace performance and employee wellbeing are directly affected by sleep quality. Understanding how sleep interacts with stress to influence cognitive performance and emotional regulation can inform targeted wellness interventions — for example, prioritizing sleep quality programs for low-stress employees and sleep duration programs for high-stress employees.",
-      "approach": "Charles performed exploratory data analysis to understand variable distributions and relationships across measures including sleep hours, sleep quality, daytime sleepiness, reaction time, cognitive accuracy, and emotion regulation. He then split participants into stress-level subgroups and conducted moderation analyses using centered regression models. For the low-stress group, he modeled emotion regulation as a function of sleep quality. For the high-stress group, he modeled PVT reaction time as a function of sleep hours.",
-      "key_results": "- In the low-stress subgroup, sleep quality was a significant positive predictor of emotion regulation — each 1-unit increase in sleep quality above the mean was associated with approximately 1.20 points higher emotion regulation scores (p ≈ 0.036, R² = 0.148).\n- In the high-stress subgroup, sleep hours significantly predicted faster reaction times — each additional hour of sleep was associated with approximately 16.92 units faster PVT reaction time (p ≈ 0.037, R² = 0.147).\n- These findings suggest that stress plays a moderating role: in low-stress conditions, sleep quality matters most for emotional outcomes, while in high-stress conditions, sleep duration matters most for cognitive performance.\n- While the models explain a modest portion of variance, they point to clear, actionable differences in how sleep interventions should be targeted based on stress levels.",
+      "summary": "An exploratory analysis of Paris AirBnB listings examining pricing trends and the impact of 2015 regulatory changes on the market. Charles cleaned and filtered the dataset, aggregated pricing by neighbourhood, and built time-series visualizations that revealed a decrease in new hosts and an increase in average prices following the introduction of regulations.",
+      "business_problem": "AirBnB faces increasing regulatory pressure in major cities. Leadership at the company needed a visual summary of how Paris listings were affected by regulations introduced in 2015 — specifically whether the regulations reduced the number of new hosts entering the market and how pricing responded. Understanding these dynamics helps inform strategic decisions about market expansion and compliance.",
+      "approach": "Charles started by exploring the dataset to understand its structure and identify quality issues, including missing host registration dates that he addressed through imputation. He filtered the data to Paris-only listings and selected relevant columns including host details, neighbourhood, accommodations, and price. After removing invalid entries (zero-priced listings), he grouped data by neighbourhood to calculate average pricing trends and created time-series visualizations comparing the number of new hosts against average price per night using dual-axis plots.",
+      "key_results": "- The analysis showed a clear decrease in the number of new hosts entering the Paris market after the 2015 regulatory changes.\n- Average price per night showed an upward trend across various neighbourhoods following the regulations.\n- The dual-axis visualization effectively demonstrated the inverse relationship between host entry rates and pricing, suggesting the regulations constrained supply while demand-side pressure pushed prices higher.",
       "technologies": [
-        "**Data analysis:** Python, Pandas, NumPy",
-        "**Statistical modeling:** statsmodels (OLS regression with centering)",
-        "**Visualization:** Matplotlib (scatter plots with regression lines)",
-        "**Environment:** Jupyter Notebook"
+        "**Data processing:** Python, Pandas",
+        "**Visualization:** Matplotlib (time-series plots, dual-axis charts)",
+        "**Environment:** Jupyter Notebook, uv"
       ],
-      "url": "https://github.com/cdcoonce/Sleep_Deprivation_Analysis",
+      "url": "https://github.com/cdcoonce/Airbnb_Listing_Analysis",
       "skills_demonstrated": [
-        "Statistical Analysis & Modeling",
-        "Data Visualization & Dashboards"
-      ]
-    },
-    {
-      "title": "NYC Collision Analysis",
-      "type": "Guided Coursework",
-      "status": "Complete",
-      "featured": false,
-      "date": "Feb 2025",
-      "date_sort": "2025-02",
-      "summary": "An Excel-based analysis of NYC vehicular collision data identifying seasonal patterns, high-risk time periods, and contributing factors. Charles used pivot tables, heatmaps with conditional formatting, and custom calculated columns to produce actionable insights for road safety improvement.",
-      "business_problem": "New York City experiences thousands of vehicular collisions annually, but not all times, locations, and causes carry equal risk. Traffic safety planners need to understand when collisions peak (by month, day, and hour), what the most dangerous contributing factors are, and which of those factors are most likely to result in injury or death — so they can allocate enforcement and infrastructure resources effectively.",
-      "approach": "Charles prepared the data by extracting weekday and hour values from the date and time columns using WEEKDAY and HOUR functions. He created a calculated column to enable percentage computations for contributing factor analysis. He then built three analytical views: a time-series line chart comparing monthly collision trends across 2021, 2022, and 2023; a heatmap using conditional formatting to visualize collision density by day of week and hour; and a contributing factors analysis using pivot tables and data bars to rank the most dangerous causes.",
-      "key_results": "- Notable increases in collisions occurred in warmer months, particularly between February and June, with a general downward trend from June through December.\n- Rush hours (2 PM – 6 PM) on weekdays showed the highest collision density, while late night and early morning hours had the lowest.\n- Weekends between 12 AM and 1 AM showed elevated collision numbers compared to the same hours on weekdays.\n- The top 3 contributing factors were driver inattention/distraction, unspecified causes, and failure to yield right-of-way.\n- More than 60% of \"failure to yield\" collisions resulted in injury or death, making it the most dangerous specific factor.\n- Nearly 30% of top contributing factors were classified as \"unspecified,\" suggesting a data quality issue that limits more precise analysis.",
-      "technologies": [
-        "**Excel:** Pivot tables, WEEKDAY function, HOUR function, conditional formatting (heatmaps), calculated columns, data bars, line charts"
-      ],
-      "url": "https://github.com/cdcoonce/NYC_Collision_Analysis",
-      "skills_demonstrated": [
-        "Spreadsheet & Business Analysis",
-        "Data Visualization & Dashboards"
-      ]
-    },
-    {
-      "title": "Manufacturing Downtime Analysis",
-      "type": "Guided Coursework",
-      "status": "Complete",
-      "featured": true,
-      "date": "Feb 2025",
-      "date_sort": "2025-02",
-      "summary": "An Excel-based analysis of production line downtime for a soft drink bottling operation. Charles calculated line efficiency, identified the top downtime factors using Pareto analysis, and built an operator-by-factor matrix to pinpoint where targeted training would have the most impact.",
-      "business_problem": "A production manager inherited a bottling line with no visibility into what was causing downtime or how efficiently operators were running. Without data-driven insight, the team couldn't prioritize training or maintenance investments.",
-      "approach": "Charles started by calculating batch-level efficiency — comparing actual production time to the standard minimum for each product using VLOOKUP to pull benchmark times from a products reference table. He then aggregated downtime logs by factor and applied a Pareto analysis to find the 20% of factors causing 80% of lost time. Finally, he cross-referenced downtime by operator and factor to create a heat map showing where each operator was losing the most time, using SUMIFS for the aggregation and conditional formatting for visual emphasis.",
-      "key_results": "- Overall line efficiency was approximately 64%.\n- The lowest-performing operator (Mac) ran at 61% efficiency — a clear candidate for targeted coaching.\n- The top 5 downtime factors accounted for roughly 80% of total downtime, consistent with the Pareto principle.\n- Three of those top 5 factors were operator errors, pointing to training as the highest-leverage intervention.\n- Recommendations included standardized machine adjustment training, batch change coaching for specific operators, and a preventative maintenance schedule.",
-      "technologies": [
-        "**Excel:** Pivot tables, VLOOKUP, SUMIFS, conditional formatting, combo charts (Pareto), and bar charts for efficiency comparison."
-      ],
-      "url": "https://github.com/cdcoonce/Manufacturing_Downtime_Analysis",
-      "skills_demonstrated": [
-        "Spreadsheet & Business Analysis",
-        "Data Visualization & Dashboards"
-      ],
-      "challenges": "The main challenge was structuring the raw downtime logs so they could be cross-referenced with both the productivity data and the operator assignments. Charles used VLOOKUP to map each downtime entry back to its operator, then SUMIFS to build the operator-by-factor matrix — a practical exercise in joining data across related tables without a database."
-    },
-    {
-      "title": "Global CO₂ Emissions Analysis",
-      "type": "Guided Coursework",
-      "status": "Complete",
-      "featured": false,
-      "date": "Feb 2025",
-      "date_sort": "2025-02",
-      "summary": "A Tableau dashboard analyzing global carbon emissions data from 1750 to 2022. Charles built interactive visualizations — including a choropleth map, bubble chart, and time-series line chart — with parameterized controls that let users explore how different countries have contributed to global CO₂ emissions over time.",
-      "business_problem": "Understanding historical and current patterns of carbon emissions is critical for policymakers, researchers, and organizations working on climate strategy. With a 79-column dataset spanning centuries of emissions data, users need an interactive tool to filter, compare, and explore trends rather than sifting through raw data. Key questions include which countries have historically dominated emissions, how per capita emissions compare to absolute emissions, and how each country's share of global emissions has shifted over time.",
-      "approach": "Charles began with data profiling, discovering that the dataset included aggregated regional groupings (like \"Asia\" and \"European Union\") that would distort country-level analysis. He filtered these out by removing rows without valid ISO country codes. He converted emissions columns to numeric types for proper aggregation and created an integer parameter to enable dynamic \"Top N\" filtering in Tableau. He then built three main visualizations: a choropleth map of per capita emissions, a bubble chart comparing emissions against population, and a line chart tracking each country's share of global emissions over time.",
-      "key_results": "- Early industrial powers (certain European countries and the United States) dominated CO₂ emissions until the mid-20th century, after which countries like China and India increased their share significantly.\n- Per capita analysis revealed a different story than absolute emissions — some countries with large total emissions have moderate per capita rates due to large populations, while smaller countries can have very high per capita emissions.\n- The interactive dashboard allows users to dynamically select how many countries to display and compare specific countries side by side.",
-      "technologies": [
-        "**Visualization:** Tableau (choropleth maps, bubble charts, line charts, parameters, filters, calculated fields)"
-      ],
-      "url": "https://github.com/cdcoonce/Global_CO2_Emissions",
-      "skills_demonstrated": [
+        "Data Wrangling & ETL",
         "Data Visualization & Dashboards"
       ]
     },
@@ -493,24 +432,85 @@
       ]
     },
     {
-      "title": "AirBnB Listing Analysis",
+      "title": "Global CO₂ Emissions Analysis",
       "type": "Guided Coursework",
       "status": "Complete",
       "featured": false,
       "date": "Feb 2025",
       "date_sort": "2025-02",
-      "summary": "An exploratory analysis of Paris AirBnB listings examining pricing trends and the impact of 2015 regulatory changes on the market. Charles cleaned and filtered the dataset, aggregated pricing by neighbourhood, and built time-series visualizations that revealed a decrease in new hosts and an increase in average prices following the introduction of regulations.",
-      "business_problem": "AirBnB faces increasing regulatory pressure in major cities. Leadership at the company needed a visual summary of how Paris listings were affected by regulations introduced in 2015 — specifically whether the regulations reduced the number of new hosts entering the market and how pricing responded. Understanding these dynamics helps inform strategic decisions about market expansion and compliance.",
-      "approach": "Charles started by exploring the dataset to understand its structure and identify quality issues, including missing host registration dates that he addressed through imputation. He filtered the data to Paris-only listings and selected relevant columns including host details, neighbourhood, accommodations, and price. After removing invalid entries (zero-priced listings), he grouped data by neighbourhood to calculate average pricing trends and created time-series visualizations comparing the number of new hosts against average price per night using dual-axis plots.",
-      "key_results": "- The analysis showed a clear decrease in the number of new hosts entering the Paris market after the 2015 regulatory changes.\n- Average price per night showed an upward trend across various neighbourhoods following the regulations.\n- The dual-axis visualization effectively demonstrated the inverse relationship between host entry rates and pricing, suggesting the regulations constrained supply while demand-side pressure pushed prices higher.",
+      "summary": "A Tableau dashboard analyzing global carbon emissions data from 1750 to 2022. Charles built interactive visualizations — including a choropleth map, bubble chart, and time-series line chart — with parameterized controls that let users explore how different countries have contributed to global CO₂ emissions over time.",
+      "business_problem": "Understanding historical and current patterns of carbon emissions is critical for policymakers, researchers, and organizations working on climate strategy. With a 79-column dataset spanning centuries of emissions data, users need an interactive tool to filter, compare, and explore trends rather than sifting through raw data. Key questions include which countries have historically dominated emissions, how per capita emissions compare to absolute emissions, and how each country's share of global emissions has shifted over time.",
+      "approach": "Charles began with data profiling, discovering that the dataset included aggregated regional groupings (like \"Asia\" and \"European Union\") that would distort country-level analysis. He filtered these out by removing rows without valid ISO country codes. He converted emissions columns to numeric types for proper aggregation and created an integer parameter to enable dynamic \"Top N\" filtering in Tableau. He then built three main visualizations: a choropleth map of per capita emissions, a bubble chart comparing emissions against population, and a line chart tracking each country's share of global emissions over time.",
+      "key_results": "- Early industrial powers (certain European countries and the United States) dominated CO₂ emissions until the mid-20th century, after which countries like China and India increased their share significantly.\n- Per capita analysis revealed a different story than absolute emissions — some countries with large total emissions have moderate per capita rates due to large populations, while smaller countries can have very high per capita emissions.\n- The interactive dashboard allows users to dynamically select how many countries to display and compare specific countries side by side.",
       "technologies": [
-        "**Data processing:** Python, Pandas",
-        "**Visualization:** Matplotlib (time-series plots, dual-axis charts)",
-        "**Environment:** Jupyter Notebook, uv"
+        "**Visualization:** Tableau (choropleth maps, bubble charts, line charts, parameters, filters, calculated fields)"
       ],
-      "url": "https://github.com/cdcoonce/Airbnb_Listing_Analysis",
+      "url": "https://github.com/cdcoonce/Global_CO2_Emissions",
       "skills_demonstrated": [
-        "Data Wrangling & ETL",
+        "Data Visualization & Dashboards"
+      ]
+    },
+    {
+      "title": "Manufacturing Downtime Analysis",
+      "type": "Guided Coursework",
+      "status": "Complete",
+      "featured": true,
+      "date": "Feb 2025",
+      "date_sort": "2025-02",
+      "summary": "An Excel-based analysis of production line downtime for a soft drink bottling operation. Charles calculated line efficiency, identified the top downtime factors using Pareto analysis, and built an operator-by-factor matrix to pinpoint where targeted training would have the most impact.",
+      "business_problem": "A production manager inherited a bottling line with no visibility into what was causing downtime or how efficiently operators were running. Without data-driven insight, the team couldn't prioritize training or maintenance investments.",
+      "approach": "Charles started by calculating batch-level efficiency — comparing actual production time to the standard minimum for each product using VLOOKUP to pull benchmark times from a products reference table. He then aggregated downtime logs by factor and applied a Pareto analysis to find the 20% of factors causing 80% of lost time. Finally, he cross-referenced downtime by operator and factor to create a heat map showing where each operator was losing the most time, using SUMIFS for the aggregation and conditional formatting for visual emphasis.",
+      "key_results": "- Overall line efficiency was approximately 64%.\n- The lowest-performing operator (Mac) ran at 61% efficiency — a clear candidate for targeted coaching.\n- The top 5 downtime factors accounted for roughly 80% of total downtime, consistent with the Pareto principle.\n- Three of those top 5 factors were operator errors, pointing to training as the highest-leverage intervention.\n- Recommendations included standardized machine adjustment training, batch change coaching for specific operators, and a preventative maintenance schedule.",
+      "technologies": [
+        "**Excel:** Pivot tables, VLOOKUP, SUMIFS, conditional formatting, combo charts (Pareto), and bar charts for efficiency comparison."
+      ],
+      "url": "https://github.com/cdcoonce/Manufacturing_Downtime_Analysis",
+      "skills_demonstrated": [
+        "Spreadsheet & Business Analysis",
+        "Data Visualization & Dashboards"
+      ],
+      "challenges": "The main challenge was structuring the raw downtime logs so they could be cross-referenced with both the productivity data and the operator assignments. Charles used VLOOKUP to map each downtime entry back to its operator, then SUMIFS to build the operator-by-factor matrix — a practical exercise in joining data across related tables without a database."
+    },
+    {
+      "title": "NYC Collision Analysis",
+      "type": "Guided Coursework",
+      "status": "Complete",
+      "featured": false,
+      "date": "Feb 2025",
+      "date_sort": "2025-02",
+      "summary": "An Excel-based analysis of NYC vehicular collision data identifying seasonal patterns, high-risk time periods, and contributing factors. Charles used pivot tables, heatmaps with conditional formatting, and custom calculated columns to produce actionable insights for road safety improvement.",
+      "business_problem": "New York City experiences thousands of vehicular collisions annually, but not all times, locations, and causes carry equal risk. Traffic safety planners need to understand when collisions peak (by month, day, and hour), what the most dangerous contributing factors are, and which of those factors are most likely to result in injury or death — so they can allocate enforcement and infrastructure resources effectively.",
+      "approach": "Charles prepared the data by extracting weekday and hour values from the date and time columns using WEEKDAY and HOUR functions. He created a calculated column to enable percentage computations for contributing factor analysis. He then built three analytical views: a time-series line chart comparing monthly collision trends across 2021, 2022, and 2023; a heatmap using conditional formatting to visualize collision density by day of week and hour; and a contributing factors analysis using pivot tables and data bars to rank the most dangerous causes.",
+      "key_results": "- Notable increases in collisions occurred in warmer months, particularly between February and June, with a general downward trend from June through December.\n- Rush hours (2 PM – 6 PM) on weekdays showed the highest collision density, while late night and early morning hours had the lowest.\n- Weekends between 12 AM and 1 AM showed elevated collision numbers compared to the same hours on weekdays.\n- The top 3 contributing factors were driver inattention/distraction, unspecified causes, and failure to yield right-of-way.\n- More than 60% of \"failure to yield\" collisions resulted in injury or death, making it the most dangerous specific factor.\n- Nearly 30% of top contributing factors were classified as \"unspecified,\" suggesting a data quality issue that limits more precise analysis.",
+      "technologies": [
+        "**Excel:** Pivot tables, WEEKDAY function, HOUR function, conditional formatting (heatmaps), calculated columns, data bars, line charts"
+      ],
+      "url": "https://github.com/cdcoonce/NYC_Collision_Analysis",
+      "skills_demonstrated": [
+        "Spreadsheet & Business Analysis",
+        "Data Visualization & Dashboards"
+      ]
+    },
+    {
+      "title": "Sleep Deprivation & Cognitive Performance Analysis",
+      "type": "Guided Coursework",
+      "status": "Complete",
+      "featured": false,
+      "date": "Feb 2025",
+      "date_sort": "2025-02",
+      "summary": "An exploratory and moderation analysis investigating how sleep factors relate to cognitive and emotional outcomes. Charles examined whether stress levels moderate the relationships between sleep metrics (quality and hours) and performance outcomes (reaction time and emotion regulation), finding statistically significant effects in both low-stress and high-stress subgroups.",
+      "business_problem": "Workplace performance and employee wellbeing are directly affected by sleep quality. Understanding how sleep interacts with stress to influence cognitive performance and emotional regulation can inform targeted wellness interventions — for example, prioritizing sleep quality programs for low-stress employees and sleep duration programs for high-stress employees.",
+      "approach": "Charles performed exploratory data analysis to understand variable distributions and relationships across measures including sleep hours, sleep quality, daytime sleepiness, reaction time, cognitive accuracy, and emotion regulation. He then split participants into stress-level subgroups and conducted moderation analyses using centered regression models. For the low-stress group, he modeled emotion regulation as a function of sleep quality. For the high-stress group, he modeled PVT reaction time as a function of sleep hours.",
+      "key_results": "- In the low-stress subgroup, sleep quality was a significant positive predictor of emotion regulation — each 1-unit increase in sleep quality above the mean was associated with approximately 1.20 points higher emotion regulation scores (p ≈ 0.036, R² = 0.148).\n- In the high-stress subgroup, sleep hours significantly predicted faster reaction times — each additional hour of sleep was associated with approximately 16.92 units faster PVT reaction time (p ≈ 0.037, R² = 0.147).\n- These findings suggest that stress plays a moderating role: in low-stress conditions, sleep quality matters most for emotional outcomes, while in high-stress conditions, sleep duration matters most for cognitive performance.\n- While the models explain a modest portion of variance, they point to clear, actionable differences in how sleep interventions should be targeted based on stress levels.",
+      "technologies": [
+        "**Data analysis:** Python, Pandas, NumPy",
+        "**Statistical modeling:** statsmodels (OLS regression with centering)",
+        "**Visualization:** Matplotlib (scatter plots with regression lines)",
+        "**Environment:** Jupyter Notebook"
+      ],
+      "url": "https://github.com/cdcoonce/Sleep_Deprivation_Analysis",
+      "skills_demonstrated": [
+        "Statistical Analysis & Modeling",
         "Data Visualization & Dashboards"
       ]
     },
@@ -566,29 +566,6 @@
       "challenges": "The main challenge was handling multicollinearity between features. Several pairs of variables — like density and residual sugar, or total and free sulfur dioxide — were highly correlated, which can inflate variance in model coefficients. Charles addressed this by computing correlation matrices, setting a threshold of 0.65, and systematically removing the less predictive feature from each correlated pair."
     },
     {
-      "title": "World Happiness Dashboard",
-      "type": "Independent",
-      "status": "Complete",
-      "featured": false,
-      "date": "Sep 2024",
-      "date_sort": "2024-09",
-      "summary": "An R-based analysis and interactive dashboard exploring the factors that drive happiness across countries worldwide. Charles cleaned and analyzed the World Happiness Report data, applied statistical modeling to understand the relationships between happiness and factors like GDP, social support, and life expectancy, and built visualizations and an optional Shiny dashboard for interactive exploration.",
-      "business_problem": "The World Happiness Report ranks countries by wellbeing measures annually, but the raw rankings don't explain why some countries score higher than others. Policymakers, researchers, and NGOs benefit from understanding which factors — economic output, social support, health, freedom, generosity, or corruption — most strongly predict happiness, and how these relationships vary across regions and over time.",
-      "approach": "Charles cleaned and preprocessed the raw datasets by handling missing values, standardizing variable names, and transforming the data for analysis. He conducted exploratory data analysis to investigate trends and patterns in happiness scores, then examined the relationships between happiness and its component factors using correlation studies and regression analysis. He created visualizations using ggplot2 and plotly to reveal key trends and regional comparisons, and built an optional Shiny-based dashboard for interactive data exploration.",
-      "key_results": "- The analysis identified the key factors most strongly associated with national happiness scores, with GDP per capita and social support consistently emerging as top predictors.\n- Regional comparisons revealed significant differences in happiness drivers — some regions showed strong economic correlations while others were more influenced by social factors.\n- The interactive dashboard allows users to explore country-level and regional trends dynamically, making the data accessible to non-technical audiences.",
-      "technologies": [
-        "**Data processing:** R (dplyr, tidyr, readr)",
-        "**Visualization:** ggplot2, plotly",
-        "**Dashboard:** R Shiny (optional interactive component)",
-        "**Statistical analysis:** R (regression analysis, correlation studies)"
-      ],
-      "url": "https://github.com/cdcoonce/World_Happiness_Report",
-      "skills_demonstrated": [
-        "Data Visualization & Dashboards",
-        "Statistical Analysis & Modeling"
-      ]
-    },
-    {
       "title": "National Parks Visitation Dashboard",
       "type": "Independent",
       "status": "Complete",
@@ -611,29 +588,27 @@
       ]
     },
     {
-      "title": "Portfolio Website",
+      "title": "World Happiness Dashboard",
       "type": "Independent",
       "status": "Complete",
       "featured": false,
-      "date": "Aug 2024",
-      "date_sort": "2024-08",
-      "summary": "A multi-page static portfolio website built from scratch with vanilla HTML5, CSS3, and ES module JavaScript — no frameworks, no bundlers, no build step. The site showcases Charles's projects with filterable galleries, a testimonial carousel, responsive design, and WCAG 2.1 AA accessibility compliance. It is maintained with professional-grade tooling including CI/CD, automated testing, and semantic versioning.",
-      "business_problem": "A data professional's portfolio needs to be more than a list of projects — it needs to demonstrate technical ability, attention to detail, and professionalism. Charles built his portfolio site to serve as both a showcase of his project work and a standalone demonstration of web development skills, code quality practices, and DevOps discipline.",
-      "approach": "Charles designed and built the site as a multi-page static application. The homepage features a hero profile section, four featured project cards with skill-tag filtering, a testimonial carousel with auto-scroll and dot pagination, and contact links. A dedicated gallery page displays all 17 projects with URL-driven filtering (e.g., `projects.html?filter=python`). The JavaScript is organized as ES modules with pure functions for business logic and thin DOM wrappers for rendering, making the codebase testable.\n\nThe site is tested with a two-layer strategy: Jest with jsdom for JavaScript unit tests (filter logic, carousel state, utilities) and pytest with Playwright for integration tests (HTML validation, accessibility, E2E browser tests, link checking). Linting is enforced with ESLint, Stylelint, and Prettier. A GitHub Actions CI/CD pipeline runs all checks on every PR and automatically deploys passing changes from master to gh-pages.",
-      "key_results": "- The site serves 17 project cards across a homepage (4 featured) and a full gallery page, with single-select skill-tag filtering and URL-driven deep links.\n- The testimonial carousel displays 7 recommendations with responsive layout (2 on desktop, 1 on mobile), auto-scroll at 20-second intervals, and dot pagination.\n- Responsive breakpoints at 1250px and 700px ensure the site works well on desktop, tablet, and mobile, with a hamburger menu for mobile navigation.\n- WCAG 2.1 AA compliance is verified through automated axe-core accessibility testing.\n- The CI/CD pipeline runs Prettier, Stylelint, ESLint, Jest, and pytest on every pull request, with automatic deployment on merge to master.\n- The site is hosted on GitHub Pages with a custom domain at charleslikesdata.com.",
+      "date": "Sep 2024",
+      "date_sort": "2024-09",
+      "summary": "An R-based analysis and interactive dashboard exploring the factors that drive happiness across countries worldwide. Charles cleaned and analyzed the World Happiness Report data, applied statistical modeling to understand the relationships between happiness and factors like GDP, social support, and life expectancy, and built visualizations and an optional Shiny dashboard for interactive exploration.",
+      "business_problem": "The World Happiness Report ranks countries by wellbeing measures annually, but the raw rankings don't explain why some countries score higher than others. Policymakers, researchers, and NGOs benefit from understanding which factors — economic output, social support, health, freedom, generosity, or corruption — most strongly predict happiness, and how these relationships vary across regions and over time.",
+      "approach": "Charles cleaned and preprocessed the raw datasets by handling missing values, standardizing variable names, and transforming the data for analysis. He conducted exploratory data analysis to investigate trends and patterns in happiness scores, then examined the relationships between happiness and its component factors using correlation studies and regression analysis. He created visualizations using ggplot2 and plotly to reveal key trends and regional comparisons, and built an optional Shiny-based dashboard for interactive data exploration.",
+      "key_results": "- The analysis identified the key factors most strongly associated with national happiness scores, with GDP per capita and social support consistently emerging as top predictors.\n- Regional comparisons revealed significant differences in happiness drivers — some regions showed strong economic correlations while others were more influenced by social factors.\n- The interactive dashboard allows users to explore country-level and regional trends dynamically, making the data accessible to non-technical audiences.",
       "technologies": [
-        "**Frontend:** HTML5 (semantic elements, ARIA attributes), CSS3 (custom properties, media queries), JavaScript (ES modules, strict mode)",
-        "**Testing:** Jest + jsdom (JS unit tests), pytest + Playwright (E2E, accessibility, validation), axe-core (WCAG compliance)",
-        "**Linting & formatting:** ESLint, Stylelint, Prettier, EditorConfig",
-        "**CI/CD:** GitHub Actions (lint → test → deploy pipeline)",
-        "**Hosting:** GitHub Pages with custom domain (CNAME)"
+        "**Data processing:** R (dplyr, tidyr, readr)",
+        "**Visualization:** ggplot2, plotly",
+        "**Dashboard:** R Shiny (optional interactive component)",
+        "**Statistical analysis:** R (regression analysis, correlation studies)"
       ],
-      "url": "https://charleslikesdata.com",
+      "url": "https://github.com/cdcoonce/World_Happiness_Report",
       "skills_demonstrated": [
-        "Web Development",
-        "DevOps & Tooling"
-      ],
-      "challenges": "Building the project filtering system required careful coordination between the HTML data attributes (data-tags on each card), the JavaScript filter logic, and the URL parameter support for deep linking. Charles kept the filtering logic as pure functions that could be unit tested with Jest, while the DOM manipulation layer stayed thin. Another challenge was making the testimonial carousel accessible — it needed keyboard navigation, proper ARIA attributes, and responsive behavior that changed the number of visible cards based on viewport width."
+        "Data Visualization & Dashboards",
+        "Statistical Analysis & Modeling"
+      ]
     },
     {
       "title": "National Parks Visitation Analysis",
@@ -660,6 +635,31 @@
         "Data Wrangling & ETL"
       ],
       "challenges": "The main challenge was integrating the clustering output with the TSP solver and then mapping the optimized routes geographically. Charles used the geosphere package for distance calculations between park coordinates, fed those into the TSP solver, and then plotted the resulting routes using sf and ggplot2. Handling the coordinate systems and ensuring the route visualization aligned with the cluster map required careful coordination between packages."
+    },
+    {
+      "title": "Portfolio Website",
+      "type": "Independent",
+      "status": "Complete",
+      "featured": false,
+      "date": "Aug 2024",
+      "date_sort": "2024-08",
+      "summary": "A multi-page static portfolio website built from scratch with vanilla HTML5, CSS3, and ES module JavaScript — no frameworks, no bundlers, no build step. The site showcases Charles's projects with filterable galleries, a testimonial carousel, responsive design, and WCAG 2.1 AA accessibility compliance. It is maintained with professional-grade tooling including CI/CD, automated testing, and semantic versioning.",
+      "business_problem": "A data professional's portfolio needs to be more than a list of projects — it needs to demonstrate technical ability, attention to detail, and professionalism. Charles built his portfolio site to serve as both a showcase of his project work and a standalone demonstration of web development skills, code quality practices, and DevOps discipline.",
+      "approach": "Charles designed and built the site as a multi-page static application. The homepage features a hero profile section, four featured project cards with skill-tag filtering, a testimonial carousel with auto-scroll and dot pagination, and contact links. A dedicated gallery page displays all 17 projects with URL-driven filtering (e.g., `projects.html?filter=python`). The JavaScript is organized as ES modules with pure functions for business logic and thin DOM wrappers for rendering, making the codebase testable.\n\nThe site is tested with a two-layer strategy: Jest with jsdom for JavaScript unit tests (filter logic, carousel state, utilities) and pytest with Playwright for integration tests (HTML validation, accessibility, E2E browser tests, link checking). Linting is enforced with ESLint, Stylelint, and Prettier. A GitHub Actions CI/CD pipeline runs all checks on every PR and automatically deploys passing changes from master to gh-pages.",
+      "key_results": "- The site serves 17 project cards across a homepage (4 featured) and a full gallery page, with single-select skill-tag filtering and URL-driven deep links.\n- The testimonial carousel displays 7 recommendations with responsive layout (2 on desktop, 1 on mobile), auto-scroll at 20-second intervals, and dot pagination.\n- Responsive breakpoints at 1250px and 700px ensure the site works well on desktop, tablet, and mobile, with a hamburger menu for mobile navigation.\n- WCAG 2.1 AA compliance is verified through automated axe-core accessibility testing.\n- The CI/CD pipeline runs Prettier, Stylelint, ESLint, Jest, and pytest on every pull request, with automatic deployment on merge to master.\n- The site is hosted on GitHub Pages with a custom domain at charleslikesdata.com.",
+      "technologies": [
+        "**Frontend:** HTML5 (semantic elements, ARIA attributes), CSS3 (custom properties, media queries), JavaScript (ES modules, strict mode)",
+        "**Testing:** Jest + jsdom (JS unit tests), pytest + Playwright (E2E, accessibility, validation), axe-core (WCAG compliance)",
+        "**Linting & formatting:** ESLint, Stylelint, Prettier, EditorConfig",
+        "**CI/CD:** GitHub Actions (lint → test → deploy pipeline)",
+        "**Hosting:** GitHub Pages with custom domain (CNAME)"
+      ],
+      "url": "https://charleslikesdata.com",
+      "skills_demonstrated": [
+        "Web Development",
+        "DevOps & Tooling"
+      ],
+      "challenges": "Building the project filtering system required careful coordination between the HTML data attributes (data-tags on each card), the JavaScript filter logic, and the URL parameter support for deep linking. Charles kept the filtering logic as pure functions that could be unit tested with Jest, while the DOM manipulation layer stayed thin. Another challenge was making the testimonial carousel accessible — it needed keyboard navigation, proper ARIA attributes, and responsive behavior that changed the number of visible cards based on viewport width."
     }
   ],
   "testimonials": [

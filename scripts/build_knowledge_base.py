@@ -315,7 +315,8 @@ def load_all_projects() -> list[dict]:
         if md_file.name in NON_PROJECT_FILES:
             continue
         projects.append(load_project(md_file))
-    projects.sort(key=lambda p: (p.get("date_sort", ""), p["title"]), reverse=True)
+    projects.sort(key=lambda p: p["title"])
+    projects.sort(key=lambda p: p.get("date_sort", ""), reverse=True)
     return projects
 
 
