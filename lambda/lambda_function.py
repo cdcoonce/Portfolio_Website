@@ -50,8 +50,9 @@ def build_system_prompt() -> str:
     for i, p in enumerate(projects, 1):
         featured = " [FEATURED]" if p.get("featured") else ""
         techs = "; ".join(p.get("technologies", []))
+        date = f" ({p['date']})" if p.get("date") else ""
         entry = (
-            f"{i}. {p['title']}{featured}\n"
+            f"{i}. {p['title']}{featured}{date}\n"
             f"   Type: {p.get('type', '')}\n"
             f"   Summary: {p.get('summary', '')}\n"
             f"   Technologies: {techs}\n"
