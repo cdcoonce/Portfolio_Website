@@ -172,155 +172,63 @@
   ],
   "projects": [
     {
-      "title": "AirBnB Listing Analysis",
-      "type": "Guided Coursework",
-      "status": "Complete",
-      "featured": false,
-      "summary": "An exploratory analysis of Paris AirBnB listings examining pricing trends and the impact of 2015 regulatory changes on the market. Charles cleaned and filtered the dataset, aggregated pricing by neighbourhood, and built time-series visualizations that revealed a decrease in new hosts and an increase in average prices following the introduction of regulations.",
-      "business_problem": "AirBnB faces increasing regulatory pressure in major cities. Leadership at the company needed a visual summary of how Paris listings were affected by regulations introduced in 2015 — specifically whether the regulations reduced the number of new hosts entering the market and how pricing responded. Understanding these dynamics helps inform strategic decisions about market expansion and compliance.",
-      "approach": "Charles started by exploring the dataset to understand its structure and identify quality issues, including missing host registration dates that he addressed through imputation. He filtered the data to Paris-only listings and selected relevant columns including host details, neighbourhood, accommodations, and price. After removing invalid entries (zero-priced listings), he grouped data by neighbourhood to calculate average pricing trends and created time-series visualizations comparing the number of new hosts against average price per night using dual-axis plots.",
-      "key_results": "- The analysis showed a clear decrease in the number of new hosts entering the Paris market after the 2015 regulatory changes.\n- Average price per night showed an upward trend across various neighbourhoods following the regulations.\n- The dual-axis visualization effectively demonstrated the inverse relationship between host entry rates and pricing, suggesting the regulations constrained supply while demand-side pressure pushed prices higher.",
-      "technologies": [
-        "**Data processing:** Python, Pandas",
-        "**Visualization:** Matplotlib (time-series plots, dual-axis charts)",
-        "**Environment:** Jupyter Notebook, uv"
-      ],
-      "url": "https://github.com/cdcoonce/Airbnb_Listing_Analysis",
-      "skills_demonstrated": [
-        "Data Wrangling & ETL",
-        "Data Visualization & Dashboards"
-      ]
-    },
-    {
-      "title": "Ames Housing Price Prediction",
-      "type": "Academic",
-      "status": "Complete",
-      "featured": false,
-      "summary": "A predictive modeling project comparing Linear Regression, k-Nearest Neighbors, and a Neural Network on the Ames Housing Dataset. Charles built this for an Applied Predictive Modeling course to demonstrate the bias-variance tradeoff and evaluate how model flexibility impacts performance on a real-world regression task.",
-      "business_problem": "Accurately predicting home sale prices is valuable for real estate professionals, appraisers, and homebuyers. The Ames Housing Dataset, with 79 features describing 2,930 homes, provides a rich testbed for understanding which modeling approaches best capture the complex relationships between property characteristics and sale price.",
-      "approach": "Charles started with data preparation — removing irrelevant columns, handling missing values, and engineering new features like total square footage (TotalSF), combined bathroom count (TotalBath), age at sale (AgeAtSale), and time since last remodel (RemodelAge). He built a preprocessing pipeline using scikit-learn's ColumnTransformer with imputation, standard scaling for numeric features, and one-hot encoding for categorical variables.\n\nHe then trained three models of increasing flexibility: Linear Regression as a high-bias baseline, k-Nearest Neighbors (testing k from 1 to 40 to demonstrate the bias-variance tradeoff), and a Neural Network with two hidden layers (128 and 64 neurons, ReLU activation) built in TensorFlow/Keras.",
-      "key_results": "- The Neural Network achieved the best performance with an RMSE of approximately $26,940, followed by kNN at $27,025 and Linear Regression at $28,152.\n- The kNN analysis clearly demonstrated the bias-variance tradeoff — very low k values overfit (high variance), while high k values underfit (high bias), with optimal performance around k=5.\n- The Neural Network captured complex nonlinear relationships without significant overfitting, validating the benefit of increased model flexibility when paired with proper architecture.\n- Cross-validation confirmed that kNN consistently outperformed Linear Regression, while the Neural Network showed the best generalization overall.\n- Feature engineering (especially TotalSF) significantly improved results across all models.",
-      "technologies": [
-        "**Data processing:** Pandas, NumPy",
-        "**Machine learning:** scikit-learn (Linear Regression, KNeighborsRegressor, Pipeline, ColumnTransformer)",
-        "**Neural network:** TensorFlow, Keras",
-        "**Validation:** KFold cross-validation, train/test split",
-        "**Visualization:** Matplotlib (correlation heatmap, bias-variance plot, training curves, parity plot)"
-      ],
-      "url": "https://github.com/cdcoonce/Ames_Housing_Model_Comparison",
-      "skills_demonstrated": [
-        "Machine Learning",
-        "Statistical Analysis & Modeling",
-        "Data Wrangling & ETL",
-        "Data Visualization & Dashboards"
-      ],
-      "challenges": "The dataset has 79 features with a mix of numeric and categorical variables, many with missing values. Charles addressed this by building a robust preprocessing pipeline that handled imputation, scaling, and encoding in a single reproducible step. Selecting the right k value for kNN required systematic experimentation, which he visualized as an RMSE vs. k plot to clearly show the tradeoff."
-    },
-    {
-      "title": "Baby Names Analysis",
-      "type": "Guided Coursework",
-      "status": "Complete",
-      "featured": false,
-      "summary": "A SQL-driven analysis of U.S. baby name trends from 1980 to 2009, exploring name popularity, decade-over-decade shifts, regional differences, and unique naming patterns. Charles used window functions, CTEs, and set operations to rank names, track popularity changes, and answer stakeholder-driven questions.",
-      "business_problem": "Understanding naming trends has applications in marketing, demographic research, and cultural analysis. This project simulates a scenario where a stakeholder wants to understand how baby name popularity has shifted over three decades, how trends differ across U.S. regions, and which names are uniquely popular or used across genders.",
-      "approach": "Charles structured the analysis around four objectives. First, he tracked popularity changes over time — identifying the overall most popular names, plotting individual name rankings by year using ROW_NUMBER(), and finding the biggest rank jumps between 1980 and 2009. Second, he compared popularity across decades using RANK() with decade groupings. Third, he analyzed regional patterns by joining the names table with a regions reference table and computing top names within each region. Fourth, he explored unique names — finding the most popular androgynous names, the shortest and longest names, and answering a custom stakeholder question about the geographic distribution of a specific name.",
-      "key_results": "- Michael and Jessica dominated the 1980s and 1990s as the top boy and girl names, respectively.\n- By the 2000s, Jacob and Emily emerged at the top, reflecting cultural shifts in naming preferences.\n- The South had the largest total number of births, influencing national trends.\n- Names like Aidan and Skylar showed the biggest popularity jumps from 1980 to 2009.\n- The most popular androgynous names (used for both genders) included some surprising entries like Michael and Jessica, which were occasionally used for the opposite gender.\n- The shortest names (2 letters, e.g., Ty, Bo) and longest names (15 letters, e.g., Franciscojavier) had vastly different popularity levels.",
-      "technologies": [
-        "**SQL:** Window functions (RANK, ROW_NUMBER), CTEs, UNION, JOINs, GROUP BY, HAVING, subqueries, CASE expressions"
-      ],
-      "url": "https://github.com/cdcoonce/Baby_Names_Analysis",
-      "skills_demonstrated": [
-        "SQL & Database Analytics"
-      ]
-    },
-    {
-      "title": "Google Analytics Data Archive",
+      "title": "Synthetic Signal Observatory",
       "type": "Independent",
-      "status": "Complete",
+      "status": "In Progress",
       "featured": false,
-      "summary": "A data preservation project where Charles designed and deployed Python scripts to export, validate, and anonymize historical Google Analytics 3 data from 70 web properties before Google's deprecation deadline. Completed during his internship at OneAmerica Financial, this project preserved over 10 years of web analytics data that would have otherwise been permanently lost.",
-      "business_problem": "Google announced that Universal Analytics (GA3) would be permanently deprecated on July 1, 2024, after which all historical data would become inaccessible. OneAmerica Financial had 70 web properties with years of analytics history that stakeholders relied on for trend analysis and reporting. Manually exporting this data through the Google Analytics dashboard was impractical given the volume and the tight one-month deadline.",
-      "approach": "Charles developed a Python-based automation pipeline consisting of three scripts. The first script authenticated with the Google Analytics API and iterated through all 70 properties, extracting data monthly and yearly as CSV files and saving them to an enterprise server. The second script performed automated validation — scanning each exported file to verify record counts, date ranges, and expected column headers, while flagging anomalies or missing values for manual review. The third script anonymized sensitive property names using a token mapping system, replacing identifying attributes with unique IDs before sharing or archiving the files.\n\nBefore writing any code, Charles collaborated with stakeholders to define and finalize a data dictionary specifying exactly which metrics and dimensions each CSV would contain.",
-      "key_results": "- Successfully archived all historical analytics data from 70 properties before the deprecation deadline.\n- Automated validation caught data discrepancies early, preserving data integrity across the entire archive.\n- The token-based anonymization system protected sensitive property names while maintaining data usability.\n- The automated approach reduced what would have been weeks of manual export work to a manageable timeline.\n- Validation reports (both summary and detailed) provided stakeholders with confidence in the completeness and accuracy of the archived data.",
+      "date": "Dec 2025",
+      "date_sort": "2025-12",
+      "summary": "A Python-native, deployable, interactive dashboard that continuously generates synthetic signals, persists them locally, runs a lightweight analytics step, and visualizes results with interactive controls. Built with Streamlit, the project demonstrates Charles's ability to create end-to-end data applications with clean architecture and test coverage.",
+      "business_problem": "Data teams often need lightweight, self-contained tools for monitoring and analyzing streaming or continuously generated data. This project serves as a demonstration of how to build a deployable analytics dashboard that handles data generation, persistence, analysis, and visualization in a single application — the kind of internal tool that data teams frequently build for operational monitoring.",
+      "approach": "Charles structured the project with a clear separation of concerns: business logic lives as pure functions in a dedicated package, service and visualization layers handle orchestration and rendering, and the Streamlit app serves as a thin entrypoint. The project includes its own agent rules (AGENTS.md), architecture documentation (ARCHITECTURE.md), and a learnings log to track environment-specific quirks and pitfalls.",
+      "key_results": "- The dashboard generates, persists, and visualizes synthetic signals in real time with interactive user controls.\n- The architecture enforces clean boundaries between business logic, service layer, and UI — making the codebase testable and maintainable.\n- The project includes a full pytest suite and is designed for easy deployment.",
       "technologies": [
-        "**Scripting:** Python",
-        "**API integration:** Google Analytics API (authentication, data extraction)",
-        "**Validation:** Automated Python scripts for record counts, date ranges, column verification",
-        "**Anonymization:** Token mapping system for sensitive property names",
-        "**Data format:** CSV (organized by year and month)"
+        "**Dashboard:** Streamlit",
+        "**Data processing:** Python (pure functions)",
+        "**Testing:** pytest",
+        "**Environment management:** uv"
       ],
-      "url": "https://github.com/cdcoonce/Google_Analytics_Data_Archive",
+      "url": "https://github.com/cdcoonce/Synthetic_Signal_Observatory",
       "skills_demonstrated": [
-        "Data Wrangling & ETL",
+        "Data Visualization & Dashboards",
         "Data Engineering & Pipelines",
         "DevOps & Tooling"
-      ],
-      "challenges": "The biggest challenge was scale — 70 properties, each with potentially years of monthly data, all needing to be extracted, validated, and anonymized within about a month. Charles addressed this by building the extraction script to iterate through properties programmatically rather than handling each one manually. The validation script was essential for catching issues that would have been invisible in a manual process, such as incomplete date ranges or unexpected column mismatches."
-    },
-    {
-      "title": "Electricity Consumption Analysis",
-      "type": "Guided Coursework",
-      "status": "Complete",
-      "featured": false,
-      "summary": "An exploratory data analysis of seasonal electricity consumption patterns for Morocco's National Power Co. Charles analyzed hourly power data across three zones to identify peak load periods by hour and day, producing visualizations that could inform strategic infrastructure investments to prevent outages.",
-      "business_problem": "Electricity grids need to anticipate demand surges to prevent outages. Morocco's National Power Co. needed to understand when consumption peaks occur — by hour, day of week, and season — so they could make informed decisions about capacity investments and demand management strategies. Without clear visibility into these patterns, the utility risked underinvesting in infrastructure during critical periods.",
-      "approach": "Charles worked with a CSV dataset containing timestamped power consumption readings for three zones. He derived additional features — total consumption, hour of day, and day of week — from the raw timestamps. He then resampled the data to hourly frequency to create a stacked area chart showing consumption by zone over January 2017, and built a heatmap of average total consumption by day of week and hour of day to visually identify peak periods.",
-      "key_results": "- Consumption fluctuates significantly over the course of the day, with identifiable peak periods visible in the hourly area charts.\n- The heatmap revealed specific days and hours with consistently higher average consumption, suggesting targeted windows for investment in capacity or demand management.\n- Zone-level breakdowns showed how each zone contributes to overall load at different times, providing more granular insight for operational planning.",
-      "technologies": [
-        "**Data processing:** Python, Pandas",
-        "**Visualization:** Seaborn (heatmaps), Matplotlib (area charts)",
-        "**Environment:** Jupyter Notebook, uv"
-      ],
-      "url": "https://github.com/cdcoonce/Electricity_Consumption_Analysis",
-      "skills_demonstrated": [
-        "Data Wrangling & ETL",
-        "Data Visualization & Dashboards"
       ]
     },
     {
-      "title": "Energy Analytics Pipeline with Dagster",
+      "title": "Renewable Asset Performance Pipeline",
       "type": "Independent",
       "status": "Complete",
       "featured": false,
-      "summary": "A modern energy analytics pipeline built with Dagster's software-defined assets, dbt transformations, and DuckDB. The pipeline ingests power trend data, performs analytical transformations, and includes a custom Dagster sensor that sends automated email notifications when key assets are materialized — demonstrating event-driven data architecture.",
-      "business_problem": "Energy companies need reliable, automated pipelines that not only transform data but also notify stakeholders when critical datasets are refreshed. Manual monitoring of pipeline runs is error-prone and doesn't scale. This project demonstrates how to build an observable, event-driven pipeline where data updates automatically trigger downstream actions like notifications.",
-      "approach": "Charles built the pipeline using Dagster's software-defined asset paradigm, where each dbt model is wrapped as a Dagster asset. Power trend data starts as a CSV, gets transformed through dbt models within DuckDB, and is orchestrated through Dagster's job system. He implemented a custom AssetSensorDefinition that listens for the materialization of the `power_trends_by_day` asset and triggers an email notification using a utility function backed by SMTP. Polars is used for data verification and analysis.",
-      "key_results": "- The pipeline successfully demonstrates the software-defined asset paradigm — dependencies are inferred from asset relationships rather than hard-coded as a DAG.\n- The asset sensor reliably triggers email notifications when the daily power trends asset is materialized, showcasing event-driven monitoring.\n- The architecture is modular and extensible, with clear separation between asset definitions, jobs, sensors, and utilities.",
+      "date": "Dec 2025",
+      "date_sort": "2025-12",
+      "summary": "A production-grade analytics engineering pipeline for weather-adjusted renewable energy asset performance analysis. Charles built this project to demonstrate the full modern data stack — Dagster orchestration, dlt ingestion, dbt transformations, and Polars processing — all feeding into a DuckDB analytical warehouse that computes capacity factors, weather-normalized metrics, and rolling correlations for wind and solar assets.",
+      "business_problem": "Renewable energy operators need to understand how weather conditions affect the performance of their wind and solar assets. Raw generation data alone doesn't tell the full story — an asset producing less power on a cloudy day isn't underperforming, it's responding to conditions. Operators need weather-adjusted performance metrics, capacity factors, and correlation analysis to distinguish between weather effects and genuine asset issues that need attention.",
+      "approach": "Charles designed and built a multi-stage pipeline. First, mock data generators create two years of realistic hourly weather and generation data for 10 assets (both wind and solar) as Parquet files. A dlt pipeline incrementally loads these into DuckDB. Then dbt models transform the data through staging, intermediate, and mart layers — applying data quality checks, computing daily aggregations, joining weather and generation data, and producing final analytical tables with KPIs. Dagster orchestrates the entire workflow, with a custom sensor that sends email notifications when key assets are materialized.",
+      "key_results": "- The pipeline computes capacity factors, weather-adjusted expected generation, and rolling 7-day and 30-day Pearson correlations between weather variables and generation output.\n- The mart layer produces two key analytical tables: daily asset performance summaries and weather-normalized performance scores (0–100 scale).\n- The Dagster sensor demonstrates event-driven architecture by triggering automated notifications on asset materialization.\n- The full pipeline is reproducible and follows modern analytics engineering best practices with clear separation of ingestion, transformation, and orchestration.",
       "technologies": [
-        "**Orchestration:** Dagster (software-defined assets, sensors, jobs)",
-        "**Transformation:** dbt",
+        "**Orchestration:** Dagster (software-defined assets, sensors, schedules)",
+        "**Ingestion:** dlt (incremental loading from Parquet to DuckDB)",
+        "**Transformation:** dbt (staging, intermediate, and mart models)",
+        "**Processing:** Polars",
         "**Storage:** DuckDB",
-        "**Data processing:** Polars",
-        "**Notifications:** Python SMTP email utility"
+        "**Code quality:** Ruff, mypy, pytest, pre-commit hooks"
       ],
-      "url": "https://github.com/cdcoonce/Energy_Analytics_Pipeline",
+      "url": "https://github.com/cdcoonce/Weather_Adjusted_Generation_Analytics",
       "skills_demonstrated": [
         "Data Engineering & Pipelines",
-        "SQL & Database Analytics"
-      ]
-    },
-    {
-      "title": "Global CO₂ Emissions Analysis",
-      "type": "Guided Coursework",
-      "status": "Complete",
-      "featured": false,
-      "summary": "A Tableau dashboard analyzing global carbon emissions data from 1750 to 2022. Charles built interactive visualizations — including a choropleth map, bubble chart, and time-series line chart — with parameterized controls that let users explore how different countries have contributed to global CO₂ emissions over time.",
-      "business_problem": "Understanding historical and current patterns of carbon emissions is critical for policymakers, researchers, and organizations working on climate strategy. With a 79-column dataset spanning centuries of emissions data, users need an interactive tool to filter, compare, and explore trends rather than sifting through raw data. Key questions include which countries have historically dominated emissions, how per capita emissions compare to absolute emissions, and how each country's share of global emissions has shifted over time.",
-      "approach": "Charles began with data profiling, discovering that the dataset included aggregated regional groupings (like \"Asia\" and \"European Union\") that would distort country-level analysis. He filtered these out by removing rows without valid ISO country codes. He converted emissions columns to numeric types for proper aggregation and created an integer parameter to enable dynamic \"Top N\" filtering in Tableau. He then built three main visualizations: a choropleth map of per capita emissions, a bubble chart comparing emissions against population, and a line chart tracking each country's share of global emissions over time.",
-      "key_results": "- Early industrial powers (certain European countries and the United States) dominated CO₂ emissions until the mid-20th century, after which countries like China and India increased their share significantly.\n- Per capita analysis revealed a different story than absolute emissions — some countries with large total emissions have moderate per capita rates due to large populations, while smaller countries can have very high per capita emissions.\n- The interactive dashboard allows users to dynamically select how many countries to display and compare specific countries side by side.",
-      "technologies": [
-        "**Visualization:** Tableau (choropleth maps, bubble charts, line charts, parameters, filters, calculated fields)"
+        "SQL & Database Analytics",
+        "DevOps & Tooling"
       ],
-      "url": "https://github.com/cdcoonce/Global_CO2_Emissions",
-      "skills_demonstrated": [
-        "Data Visualization & Dashboards"
-      ]
+      "challenges": "Designing the dbt model layers required careful thought about where to place business logic. Charles followed the staging → intermediate → mart pattern, keeping staging models as thin transformations and pushing aggregation and KPI computation into the intermediate and mart layers. Integrating Dagster with dbt also required mapping dbt models to Dagster assets correctly so that the dependency graph and sensor triggers worked as expected."
     },
     {
       "title": "Housing Affordability & Commute Trade-Off Analysis",
       "type": "Capstone Project — Arizona State University",
       "status": "Complete",
       "featured": true,
+      "date": "Dec 2025",
+      "date_sort": "2025-12",
       "summary": "A data engineering and statistical analysis pipeline that quantifies the relationship between housing costs, commute time, and public transit accessibility across nine U.S. metropolitan areas. Charles built the entire project end-to-end — from data ingestion to regression analysis — to answer real research questions about where housing affordability and commute burdens intersect.",
       "business_problem": "Housing affordability is one of the most pressing issues facing American metro areas, but it is rarely analyzed in isolation. Where people can afford to live often determines how far they commute, and transit access plays a critical role in that equation. Policymakers, urban planners, and researchers need data-driven tools to identify which ZIP codes are most burdened by the combination of high rent and long commutes — and whether those burdens fall disproportionately on lower-income or minority communities.",
       "approach": "Charles designed a reproducible two-stage pipeline. The first stage is a data engineering pipeline that ingests data from four sources: Census ACS (commute patterns, rent, income, demographics), Zillow (observed rent index), OpenStreetMap (transit stop density), and Census TIGER/Line (geographic boundaries). The pipeline fetches CBSA boundaries, maps census tracts to ZCTAs (ZIP Code Tabulation Areas), performs spatial joins, and aggregates everything into a clean, analysis-ready dataset for each metro area.\n\nThe second stage applies statistical analysis to answer three research questions. RQ1 uses OLS regression with robust standard errors to model how commute time influences rent-to-income ratio, comparing linear and quadratic specifications and selecting the best model via AIC. RQ2 examines equity by testing how housing and commute burdens vary by income segment and race, using interaction models, ANOVA, and K-Means clustering. RQ3 constructs a composite Affordability-Commute Index (ACI) and models it with both OLS and quantile regression to identify the most burdened areas.",
@@ -344,189 +252,54 @@
       "challenges": "One of the biggest challenges was mapping census tract-level data to ZCTA boundaries, since the two geographies don't align neatly. Charles implemented spatial joins using GeoPandas to handle the tract-to-ZCTA crosswalk, weighting aggregations by population overlap. Another challenge was handling the OpenStreetMap Overpass API, which has strict rate limits — the pipeline includes caching and retry logic to handle this gracefully. Finally, ensuring the analysis was truly reproducible across all nine metros required careful parameterization of both the pipeline and analysis stages."
     },
     {
-      "title": "Manufacturing Downtime Analysis",
-      "type": "Guided Coursework",
-      "status": "Complete",
-      "featured": true,
-      "summary": "An Excel-based analysis of production line downtime for a soft drink bottling operation. Charles calculated line efficiency, identified the top downtime factors using Pareto analysis, and built an operator-by-factor matrix to pinpoint where targeted training would have the most impact.",
-      "business_problem": "A production manager inherited a bottling line with no visibility into what was causing downtime or how efficiently operators were running. Without data-driven insight, the team couldn't prioritize training or maintenance investments.",
-      "approach": "Charles started by calculating batch-level efficiency — comparing actual production time to the standard minimum for each product using VLOOKUP to pull benchmark times from a products reference table. He then aggregated downtime logs by factor and applied a Pareto analysis to find the 20% of factors causing 80% of lost time. Finally, he cross-referenced downtime by operator and factor to create a heat map showing where each operator was losing the most time, using SUMIFS for the aggregation and conditional formatting for visual emphasis.",
-      "key_results": "- Overall line efficiency was approximately 64%.\n- The lowest-performing operator (Mac) ran at 61% efficiency — a clear candidate for targeted coaching.\n- The top 5 downtime factors accounted for roughly 80% of total downtime, consistent with the Pareto principle.\n- Three of those top 5 factors were operator errors, pointing to training as the highest-leverage intervention.\n- Recommendations included standardized machine adjustment training, batch change coaching for specific operators, and a preventative maintenance schedule.",
-      "technologies": [
-        "**Excel:** Pivot tables, VLOOKUP, SUMIFS, conditional formatting, combo charts (Pareto), and bar charts for efficiency comparison."
-      ],
-      "url": "https://github.com/cdcoonce/Manufacturing_Downtime_Analysis",
-      "skills_demonstrated": [
-        "Spreadsheet & Business Analysis",
-        "Data Visualization & Dashboards"
-      ],
-      "challenges": "The main challenge was structuring the raw downtime logs so they could be cross-referenced with both the productivity data and the operator assignments. Charles used VLOOKUP to map each downtime entry back to its operator, then SUMIFS to build the operator-by-factor matrix — a practical exercise in joining data across related tables without a database."
-    },
-    {
-      "title": "Motor Vehicle Thefts Analysis",
-      "type": "Guided Coursework",
+      "title": "Ames Housing Price Prediction",
+      "type": "Academic",
       "status": "Complete",
       "featured": false,
-      "summary": "A SQL and Excel analysis of motor vehicle thefts in New Zealand, examining when, where, and which vehicles are most frequently stolen. Charles wrote analytical SQL queries to uncover patterns by time, location, vehicle type, and demographics, then created visualizations in Excel to communicate the findings.",
-      "business_problem": "Law enforcement and public safety agencies need data-driven insights into vehicle theft patterns to allocate resources effectively. Understanding which vehicle types are targeted, when thefts peak, and which regions are most affected allows for more targeted patrols, public awareness campaigns, and prevention strategies.",
-      "approach": "Charles structured the analysis around three objectives: when vehicles are stolen (by year, month, and day of week), which vehicles are stolen (by type, age, color, and luxury status), and where thefts occur (by region, population density). He wrote SQL queries using aggregations, joins, CASE expressions, CTEs, and UNION operations to extract insights from the relational dataset. He then visualized the results in Excel with charts showing theft trends by population density, regional distribution, vehicle characteristics, and day-of-week patterns.",
-      "key_results": "- Vehicle thefts are most prevalent in high-density regions, particularly Auckland.\n- Monday had the highest theft frequency, while Saturday had the lowest.\n- Silver was the most commonly stolen vehicle color, followed by white and black.\n- Station wagons, saloons, and hatchbacks were the most stolen vehicle types.\n- Luxury vehicles accounted for only a small proportion of total thefts.\n- High-density and low-density regions showed different vehicle type theft profiles, suggesting different theft motivations or opportunities.",
+      "date": "Oct 2025",
+      "date_sort": "2025-10",
+      "summary": "A predictive modeling project comparing Linear Regression, k-Nearest Neighbors, and a Neural Network on the Ames Housing Dataset. Charles built this for an Applied Predictive Modeling course to demonstrate the bias-variance tradeoff and evaluate how model flexibility impacts performance on a real-world regression task.",
+      "business_problem": "Accurately predicting home sale prices is valuable for real estate professionals, appraisers, and homebuyers. The Ames Housing Dataset, with 79 features describing 2,930 homes, provides a rich testbed for understanding which modeling approaches best capture the complex relationships between property characteristics and sale price.",
+      "approach": "Charles started with data preparation — removing irrelevant columns, handling missing values, and engineering new features like total square footage (TotalSF), combined bathroom count (TotalBath), age at sale (AgeAtSale), and time since last remodel (RemodelAge). He built a preprocessing pipeline using scikit-learn's ColumnTransformer with imputation, standard scaling for numeric features, and one-hot encoding for categorical variables.\n\nHe then trained three models of increasing flexibility: Linear Regression as a high-bias baseline, k-Nearest Neighbors (testing k from 1 to 40 to demonstrate the bias-variance tradeoff), and a Neural Network with two hidden layers (128 and 64 neurons, ReLU activation) built in TensorFlow/Keras.",
+      "key_results": "- The Neural Network achieved the best performance with an RMSE of approximately $26,940, followed by kNN at $27,025 and Linear Regression at $28,152.\n- The kNN analysis clearly demonstrated the bias-variance tradeoff — very low k values overfit (high variance), while high k values underfit (high bias), with optimal performance around k=5.\n- The Neural Network captured complex nonlinear relationships without significant overfitting, validating the benefit of increased model flexibility when paired with proper architecture.\n- Cross-validation confirmed that kNN consistently outperformed Linear Regression, while the Neural Network showed the best generalization overall.\n- Feature engineering (especially TotalSF) significantly improved results across all models.",
       "technologies": [
-        "**SQL:** Aggregations, JOINs, CTEs, CASE expressions, UNION, subqueries",
-        "**Excel:** Data visualization and formatting"
+        "**Data processing:** Pandas, NumPy",
+        "**Machine learning:** scikit-learn (Linear Regression, KNeighborsRegressor, Pipeline, ColumnTransformer)",
+        "**Neural network:** TensorFlow, Keras",
+        "**Validation:** KFold cross-validation, train/test split",
+        "**Visualization:** Matplotlib (correlation heatmap, bias-variance plot, training curves, parity plot)"
       ],
-      "url": "https://github.com/cdcoonce/Motor_Vehicle_Thefts",
+      "url": "https://github.com/cdcoonce/Ames_Housing_Model_Comparison",
       "skills_demonstrated": [
-        "SQL & Database Analytics",
-        "Data Visualization & Dashboards"
-      ]
-    },
-    {
-      "title": "National Parks Visitation Analysis",
-      "type": "Independent",
-      "status": "Complete",
-      "featured": false,
-      "summary": "An R-based analysis of U.S. National Parks visitation data from 1904 to 2016, combining exploratory visualization with clustering and route optimization. Charles analyzed visitation trends across regions, identified the most popular parks, grouped parks into geographic clusters, and applied the Traveling Salesman Problem (TSP) to create efficient multi-park visit itineraries.",
-      "business_problem": "Planning a trip to visit multiple national parks is a logistical challenge — parks are spread across vast distances, and visitors want to maximize the number of parks they see while minimizing travel time. Beyond trip planning, understanding long-term visitation trends helps the National Park Service with resource allocation, capacity planning, and identifying parks that may be underserved relative to demand.",
-      "approach": "Charles started with data exploration and cleaning, addressing missing values and inconsistent formats in the historical dataset. He then created visualizations of visitation trends over time — both nationally and by region — using line plots and faceted views. A state-level heatmap showed total visitation by geography, and a bubble plot highlighted the most visited parks. He then applied hierarchical clustering to group parks by geographic proximity and used the TSP algorithm to compute the most efficient driving routes within each cluster, mapping the results with spatial libraries.",
-      "key_results": "- Overall national park visitation has increased steadily since 1904, with the Pacific West and Intermountain regions seeing the steepest growth.\n- California, Wyoming, and Washington had the highest total visitation at the state level.\n- Hierarchical clustering produced five main geographic clusters of parks, each suitable for a multi-park road trip.\n- TSP optimization provided efficient routes within each cluster, offering practical itineraries for park visitors.",
-      "technologies": [
-        "**Data processing:** R (dplyr, tidyr, stringr, readr)",
-        "**Visualization:** ggplot2, gridExtra, usmap, sf, scales, gganimate",
-        "**Clustering:** hierarchical clustering (cluster package)",
-        "**Route optimization:** TSP package",
-        "**Spatial analysis:** sf, geosphere, httr, jsonlite"
-      ],
-      "url": "https://github.com/cdcoonce/National_Parks_Project",
-      "skills_demonstrated": [
-        "Data Visualization & Dashboards",
+        "Machine Learning",
         "Statistical Analysis & Modeling",
-        "Data Wrangling & ETL"
-      ],
-      "challenges": "The main challenge was integrating the clustering output with the TSP solver and then mapping the optimized routes geographically. Charles used the geosphere package for distance calculations between park coordinates, fed those into the TSP solver, and then plotted the resulting routes using sf and ggplot2. Handling the coordinate systems and ensuring the route visualization aligned with the cluster map required careful coordination between packages."
-    },
-    {
-      "title": "National Parks Visitation Dashboard",
-      "type": "Independent",
-      "status": "Complete",
-      "featured": true,
-      "summary": "An interactive R Shiny dashboard that allows users to explore U.S. National Parks visitation data over time. Users can filter by park and year range, view dynamic time-series visualizations, and browse detailed data in a color-coded interactive table.",
-      "business_problem": "The National Park Service collects visitation data across dozens of parks over many decades, but raw data tables are hard to explore and compare. Park administrators, researchers, and enthusiasts need an accessible way to filter, visualize, and compare visitation trends across parks and time periods without needing to write code or build their own charts.",
-      "approach": "Charles built a Shiny web application with a sidebar panel for user controls and a main panel for outputs. The app reads a CSV dataset, cleans it by filtering out summary rows and converting data types, and then uses reactive expressions to dynamically filter the data based on user selections. A dropdown allows multi-park selection, and a slider controls the year range. The app renders a time-series line chart using ggplot2 and an interactive data table using the DT package, with custom color coding based on visitor counts.",
-      "key_results": "- The dashboard is deployed and publicly accessible, allowing anyone to explore park visitation trends interactively.\n- Users can compare visitation patterns across multiple parks simultaneously, revealing trends like the steady growth in visitation at popular parks and seasonal patterns.\n- The color-coded data table makes it easy to spot high-visitation and low-visitation years at a glance.\n- Additional context — such as region and state information for selected parks — is displayed dynamically alongside the visualizations.",
-      "technologies": [
-        "**Dashboard framework:** R Shiny",
-        "**Visualization:** ggplot2",
-        "**Data tables:** DT package",
-        "**Data processing:** R (dplyr, readr)"
-      ],
-      "url": "https://iuq9gs-charles-coonce.shinyapps.io/visitation/",
-      "skills_demonstrated": [
+        "Data Wrangling & ETL",
         "Data Visualization & Dashboards"
-      ]
-    },
-    {
-      "title": "NYC Collision Analysis",
-      "type": "Guided Coursework",
-      "status": "Complete",
-      "featured": false,
-      "summary": "An Excel-based analysis of NYC vehicular collision data identifying seasonal patterns, high-risk time periods, and contributing factors. Charles used pivot tables, heatmaps with conditional formatting, and custom calculated columns to produce actionable insights for road safety improvement.",
-      "business_problem": "New York City experiences thousands of vehicular collisions annually, but not all times, locations, and causes carry equal risk. Traffic safety planners need to understand when collisions peak (by month, day, and hour), what the most dangerous contributing factors are, and which of those factors are most likely to result in injury or death — so they can allocate enforcement and infrastructure resources effectively.",
-      "approach": "Charles prepared the data by extracting weekday and hour values from the date and time columns using WEEKDAY and HOUR functions. He created a calculated column to enable percentage computations for contributing factor analysis. He then built three analytical views: a time-series line chart comparing monthly collision trends across 2021, 2022, and 2023; a heatmap using conditional formatting to visualize collision density by day of week and hour; and a contributing factors analysis using pivot tables and data bars to rank the most dangerous causes.",
-      "key_results": "- Notable increases in collisions occurred in warmer months, particularly between February and June, with a general downward trend from June through December.\n- Rush hours (2 PM – 6 PM) on weekdays showed the highest collision density, while late night and early morning hours had the lowest.\n- Weekends between 12 AM and 1 AM showed elevated collision numbers compared to the same hours on weekdays.\n- The top 3 contributing factors were driver inattention/distraction, unspecified causes, and failure to yield right-of-way.\n- More than 60% of \"failure to yield\" collisions resulted in injury or death, making it the most dangerous specific factor.\n- Nearly 30% of top contributing factors were classified as \"unspecified,\" suggesting a data quality issue that limits more precise analysis.",
-      "technologies": [
-        "**Excel:** Pivot tables, WEEKDAY function, HOUR function, conditional formatting (heatmaps), calculated columns, data bars, line charts"
       ],
-      "url": "https://github.com/cdcoonce/NYC_Collision_Analysis",
-      "skills_demonstrated": [
-        "Spreadsheet & Business Analysis",
-        "Data Visualization & Dashboards"
-      ]
+      "challenges": "The dataset has 79 features with a mix of numeric and categorical variables, many with missing values. Charles addressed this by building a robust preprocessing pipeline that handled imputation, scaling, and encoding in a single reproducible step. Selecting the right k value for kNN required systematic experimentation, which he visualized as an RMSE vs. k plot to clearly show the tradeoff."
     },
     {
-      "title": "Portfolio Website",
+      "title": "Energy Analytics Pipeline with Dagster",
       "type": "Independent",
       "status": "Complete",
       "featured": false,
-      "summary": "A multi-page static portfolio website built from scratch with vanilla HTML5, CSS3, and ES module JavaScript — no frameworks, no bundlers, no build step. The site showcases Charles's projects with filterable galleries, a testimonial carousel, responsive design, and WCAG 2.1 AA accessibility compliance. It is maintained with professional-grade tooling including CI/CD, automated testing, and semantic versioning.",
-      "business_problem": "A data professional's portfolio needs to be more than a list of projects — it needs to demonstrate technical ability, attention to detail, and professionalism. Charles built his portfolio site to serve as both a showcase of his project work and a standalone demonstration of web development skills, code quality practices, and DevOps discipline.",
-      "approach": "Charles designed and built the site as a multi-page static application. The homepage features a hero profile section, four featured project cards with skill-tag filtering, a testimonial carousel with auto-scroll and dot pagination, and contact links. A dedicated gallery page displays all 17 projects with URL-driven filtering (e.g., `projects.html?filter=python`). The JavaScript is organized as ES modules with pure functions for business logic and thin DOM wrappers for rendering, making the codebase testable.\n\nThe site is tested with a two-layer strategy: Jest with jsdom for JavaScript unit tests (filter logic, carousel state, utilities) and pytest with Playwright for integration tests (HTML validation, accessibility, E2E browser tests, link checking). Linting is enforced with ESLint, Stylelint, and Prettier. A GitHub Actions CI/CD pipeline runs all checks on every PR and automatically deploys passing changes from master to gh-pages.",
-      "key_results": "- The site serves 17 project cards across a homepage (4 featured) and a full gallery page, with single-select skill-tag filtering and URL-driven deep links.\n- The testimonial carousel displays 7 recommendations with responsive layout (2 on desktop, 1 on mobile), auto-scroll at 20-second intervals, and dot pagination.\n- Responsive breakpoints at 1250px and 700px ensure the site works well on desktop, tablet, and mobile, with a hamburger menu for mobile navigation.\n- WCAG 2.1 AA compliance is verified through automated axe-core accessibility testing.\n- The CI/CD pipeline runs Prettier, Stylelint, ESLint, Jest, and pytest on every pull request, with automatic deployment on merge to master.\n- The site is hosted on GitHub Pages with a custom domain at charleslikesdata.com.",
+      "date": "Jun 2025",
+      "date_sort": "2025-06",
+      "summary": "A modern energy analytics pipeline built with Dagster's software-defined assets, dbt transformations, and DuckDB. The pipeline ingests power trend data, performs analytical transformations, and includes a custom Dagster sensor that sends automated email notifications when key assets are materialized — demonstrating event-driven data architecture.",
+      "business_problem": "Energy companies need reliable, automated pipelines that not only transform data but also notify stakeholders when critical datasets are refreshed. Manual monitoring of pipeline runs is error-prone and doesn't scale. This project demonstrates how to build an observable, event-driven pipeline where data updates automatically trigger downstream actions like notifications.",
+      "approach": "Charles built the pipeline using Dagster's software-defined asset paradigm, where each dbt model is wrapped as a Dagster asset. Power trend data starts as a CSV, gets transformed through dbt models within DuckDB, and is orchestrated through Dagster's job system. He implemented a custom AssetSensorDefinition that listens for the materialization of the `power_trends_by_day` asset and triggers an email notification using a utility function backed by SMTP. Polars is used for data verification and analysis.",
+      "key_results": "- The pipeline successfully demonstrates the software-defined asset paradigm — dependencies are inferred from asset relationships rather than hard-coded as a DAG.\n- The asset sensor reliably triggers email notifications when the daily power trends asset is materialized, showcasing event-driven monitoring.\n- The architecture is modular and extensible, with clear separation between asset definitions, jobs, sensors, and utilities.",
       "technologies": [
-        "**Frontend:** HTML5 (semantic elements, ARIA attributes), CSS3 (custom properties, media queries), JavaScript (ES modules, strict mode)",
-        "**Testing:** Jest + jsdom (JS unit tests), pytest + Playwright (E2E, accessibility, validation), axe-core (WCAG compliance)",
-        "**Linting & formatting:** ESLint, Stylelint, Prettier, EditorConfig",
-        "**CI/CD:** GitHub Actions (lint → test → deploy pipeline)",
-        "**Hosting:** GitHub Pages with custom domain (CNAME)"
-      ],
-      "url": "https://charleslikesdata.com",
-      "skills_demonstrated": [
-        "Web Development",
-        "DevOps & Tooling"
-      ],
-      "challenges": "Building the project filtering system required careful coordination between the HTML data attributes (data-tags on each card), the JavaScript filter logic, and the URL parameter support for deep linking. Charles kept the filtering logic as pure functions that could be unit tested with Jest, while the DOM manipulation layer stayed thin. Another challenge was making the testimonial carousel accessible — it needed keyboard navigation, proper ARIA attributes, and responsive behavior that changed the number of visible cards based on viewport width."
-    },
-    {
-      "title": "Renewable Asset Performance Pipeline",
-      "type": "Independent",
-      "status": "Complete",
-      "featured": false,
-      "summary": "A production-grade analytics engineering pipeline for weather-adjusted renewable energy asset performance analysis. Charles built this project to demonstrate the full modern data stack — Dagster orchestration, dlt ingestion, dbt transformations, and Polars processing — all feeding into a DuckDB analytical warehouse that computes capacity factors, weather-normalized metrics, and rolling correlations for wind and solar assets.",
-      "business_problem": "Renewable energy operators need to understand how weather conditions affect the performance of their wind and solar assets. Raw generation data alone doesn't tell the full story — an asset producing less power on a cloudy day isn't underperforming, it's responding to conditions. Operators need weather-adjusted performance metrics, capacity factors, and correlation analysis to distinguish between weather effects and genuine asset issues that need attention.",
-      "approach": "Charles designed and built a multi-stage pipeline. First, mock data generators create two years of realistic hourly weather and generation data for 10 assets (both wind and solar) as Parquet files. A dlt pipeline incrementally loads these into DuckDB. Then dbt models transform the data through staging, intermediate, and mart layers — applying data quality checks, computing daily aggregations, joining weather and generation data, and producing final analytical tables with KPIs. Dagster orchestrates the entire workflow, with a custom sensor that sends email notifications when key assets are materialized.",
-      "key_results": "- The pipeline computes capacity factors, weather-adjusted expected generation, and rolling 7-day and 30-day Pearson correlations between weather variables and generation output.\n- The mart layer produces two key analytical tables: daily asset performance summaries and weather-normalized performance scores (0–100 scale).\n- The Dagster sensor demonstrates event-driven architecture by triggering automated notifications on asset materialization.\n- The full pipeline is reproducible and follows modern analytics engineering best practices with clear separation of ingestion, transformation, and orchestration.",
-      "technologies": [
-        "**Orchestration:** Dagster (software-defined assets, sensors, schedules)",
-        "**Ingestion:** dlt (incremental loading from Parquet to DuckDB)",
-        "**Transformation:** dbt (staging, intermediate, and mart models)",
-        "**Processing:** Polars",
+        "**Orchestration:** Dagster (software-defined assets, sensors, jobs)",
+        "**Transformation:** dbt",
         "**Storage:** DuckDB",
-        "**Code quality:** Ruff, mypy, pytest, pre-commit hooks"
+        "**Data processing:** Polars",
+        "**Notifications:** Python SMTP email utility"
       ],
-      "url": "https://github.com/cdcoonce/Weather_Adjusted_Generation_Analytics",
+      "url": "https://github.com/cdcoonce/Energy_Analytics_Pipeline",
       "skills_demonstrated": [
         "Data Engineering & Pipelines",
-        "SQL & Database Analytics",
-        "DevOps & Tooling"
-      ],
-      "challenges": "Designing the dbt model layers required careful thought about where to place business logic. Charles followed the staging → intermediate → mart pattern, keeping staging models as thin transformations and pushing aggregation and KPI computation into the intermediate and mart layers. Integrating Dagster with dbt also required mapping dbt models to Dagster assets correctly so that the dependency graph and sensor triggers worked as expected."
-    },
-    {
-      "title": "Restaurant Sales Analysis",
-      "type": "Guided Coursework",
-      "status": "Complete",
-      "featured": false,
-      "summary": "A SQL-based analysis of restaurant sales and menu item data. Charles explored the menu structure, pricing by category, and ordering trends to uncover insights that could help the restaurant optimize its menu and understand revenue drivers.",
-      "business_problem": "Restaurant operators need to understand which menu categories drive the most revenue, which items are most and least popular, and how ordering patterns look over time. These insights inform decisions about menu pricing, item promotion, and inventory planning.",
-      "approach": "Charles analyzed two related tables — menu items (with names, categories, and prices) and order details (with order IDs, timestamps, and item references). He used SQL aggregations to examine the menu composition, identify the most and least expensive items, calculate average prices by category, and determine the date range and volume of orders. He then joined the tables to find the most and least ordered items, identify the highest-spending orders, and break down those top orders by category.",
-      "key_results": "- Italian cuisine had the highest average price per dish at $16.75, followed by Asian ($13.48), Mexican ($11.80), and American ($10.07).\n- The order data spanned January 1 to March 31, 2023.\n- The top 5 highest-spending orders were dominated by Italian dishes, reinforcing that Italian food contributes significantly to total revenue.\n- The largest single order contained 14 items.\n- These findings suggest Italian items are both high-value and frequently ordered in large quantities, making them the restaurant's strongest revenue category.",
-      "technologies": [
-        "**SQL:** Aggregations (COUNT, AVG, SUM, MIN, MAX), JOINs, UNION, subqueries, GROUP BY, ORDER BY, LIMIT"
-      ],
-      "url": "https://github.com/cdcoonce/Restaurant_Order_Analysis",
-      "skills_demonstrated": [
         "SQL & Database Analytics"
-      ]
-    },
-    {
-      "title": "Sleep Deprivation & Cognitive Performance Analysis",
-      "type": "Guided Coursework",
-      "status": "Complete",
-      "featured": false,
-      "summary": "An exploratory and moderation analysis investigating how sleep factors relate to cognitive and emotional outcomes. Charles examined whether stress levels moderate the relationships between sleep metrics (quality and hours) and performance outcomes (reaction time and emotion regulation), finding statistically significant effects in both low-stress and high-stress subgroups.",
-      "business_problem": "Workplace performance and employee wellbeing are directly affected by sleep quality. Understanding how sleep interacts with stress to influence cognitive performance and emotional regulation can inform targeted wellness interventions — for example, prioritizing sleep quality programs for low-stress employees and sleep duration programs for high-stress employees.",
-      "approach": "Charles performed exploratory data analysis to understand variable distributions and relationships across measures including sleep hours, sleep quality, daytime sleepiness, reaction time, cognitive accuracy, and emotion regulation. He then split participants into stress-level subgroups and conducted moderation analyses using centered regression models. For the low-stress group, he modeled emotion regulation as a function of sleep quality. For the high-stress group, he modeled PVT reaction time as a function of sleep hours.",
-      "key_results": "- In the low-stress subgroup, sleep quality was a significant positive predictor of emotion regulation — each 1-unit increase in sleep quality above the mean was associated with approximately 1.20 points higher emotion regulation scores (p ≈ 0.036, R² = 0.148).\n- In the high-stress subgroup, sleep hours significantly predicted faster reaction times — each additional hour of sleep was associated with approximately 16.92 units faster PVT reaction time (p ≈ 0.037, R² = 0.147).\n- These findings suggest that stress plays a moderating role: in low-stress conditions, sleep quality matters most for emotional outcomes, while in high-stress conditions, sleep duration matters most for cognitive performance.\n- While the models explain a modest portion of variance, they point to clear, actionable differences in how sleep interventions should be targeted based on stress levels.",
-      "technologies": [
-        "**Data analysis:** Python, Pandas, NumPy",
-        "**Statistical modeling:** statsmodels (OLS regression with centering)",
-        "**Visualization:** Matplotlib (scatter plots with regression lines)",
-        "**Environment:** Jupyter Notebook"
-      ],
-      "url": "https://github.com/cdcoonce/Sleep_Deprivation_Analysis",
-      "skills_demonstrated": [
-        "Statistical Analysis & Modeling",
-        "Data Visualization & Dashboards"
       ]
     },
     {
@@ -534,6 +307,8 @@
       "type": "Academic",
       "status": "Complete",
       "featured": false,
+      "date": "May 2025",
+      "date_sort": "2025-05",
       "summary": "A machine learning classification project for the Kaggle Spaceship Titanic competition. Charles predicted whether passengers were transported to another dimension using extensive feature engineering, multiple model comparison, SHAP-based interpretability analysis, and a final stacking ensemble that outperformed all individual models.",
       "business_problem": "The Spaceship Titanic competition is a Kaggle learning competition that challenges participants to build a binary classifier from passenger attributes. While the scenario is fictional, the techniques are directly applicable to real-world classification problems — customer churn prediction, fraud detection, medical diagnosis — where feature engineering, model selection, and interpretability all matter.",
       "approach": "Charles began with exploratory data analysis to understand class distributions and feature relationships. He then performed extensive feature engineering: parsing cabin codes into deck, number, and side components; extracting group structure from passenger IDs; and creating interaction features like a combined spending total and a CryoSleep × low-spend flag. After preprocessing (group-based imputation, one-hot encoding, standard scaling), he evaluated six models: Logistic Regression, SVM, KNN, Random Forest, XGBoost, and a Stacking Ensemble. He tuned hyperparameters using GridSearchCV and RandomizedSearchCV, and used SHAP for global feature importance, dependence plots, and individual prediction explanations.",
@@ -554,32 +329,224 @@
       "challenges": "The biggest challenge was ensuring consistency between the training and test preprocessing — particularly with one-hot encoding, where the test set could have different category levels. Charles built a unified preprocessing pipeline that handled this gracefully. Feature engineering was also iterative; the CryoSleep × low-spend interaction flag only emerged after initial SHAP analysis suggested the two features had a combined effect that wasn't captured by either alone."
     },
     {
-      "title": "Synthetic Signal Observatory",
-      "type": "Independent",
-      "status": "In Progress",
+      "title": "Restaurant Sales Analysis",
+      "type": "Guided Coursework",
+      "status": "Complete",
       "featured": false,
-      "summary": "A Python-native, deployable, interactive dashboard that continuously generates synthetic signals, persists them locally, runs a lightweight analytics step, and visualizes results with interactive controls. Built with Streamlit, the project demonstrates Charles's ability to create end-to-end data applications with clean architecture and test coverage.",
-      "business_problem": "Data teams often need lightweight, self-contained tools for monitoring and analyzing streaming or continuously generated data. This project serves as a demonstration of how to build a deployable analytics dashboard that handles data generation, persistence, analysis, and visualization in a single application — the kind of internal tool that data teams frequently build for operational monitoring.",
-      "approach": "Charles structured the project with a clear separation of concerns: business logic lives as pure functions in a dedicated package, service and visualization layers handle orchestration and rendering, and the Streamlit app serves as a thin entrypoint. The project includes its own agent rules (AGENTS.md), architecture documentation (ARCHITECTURE.md), and a learnings log to track environment-specific quirks and pitfalls.",
-      "key_results": "- The dashboard generates, persists, and visualizes synthetic signals in real time with interactive user controls.\n- The architecture enforces clean boundaries between business logic, service layer, and UI — making the codebase testable and maintainable.\n- The project includes a full pytest suite and is designed for easy deployment.",
+      "date": "Mar 2025",
+      "date_sort": "2025-03",
+      "summary": "A SQL-based analysis of restaurant sales and menu item data. Charles explored the menu structure, pricing by category, and ordering trends to uncover insights that could help the restaurant optimize its menu and understand revenue drivers.",
+      "business_problem": "Restaurant operators need to understand which menu categories drive the most revenue, which items are most and least popular, and how ordering patterns look over time. These insights inform decisions about menu pricing, item promotion, and inventory planning.",
+      "approach": "Charles analyzed two related tables — menu items (with names, categories, and prices) and order details (with order IDs, timestamps, and item references). He used SQL aggregations to examine the menu composition, identify the most and least expensive items, calculate average prices by category, and determine the date range and volume of orders. He then joined the tables to find the most and least ordered items, identify the highest-spending orders, and break down those top orders by category.",
+      "key_results": "- Italian cuisine had the highest average price per dish at $16.75, followed by Asian ($13.48), Mexican ($11.80), and American ($10.07).\n- The order data spanned January 1 to March 31, 2023.\n- The top 5 highest-spending orders were dominated by Italian dishes, reinforcing that Italian food contributes significantly to total revenue.\n- The largest single order contained 14 items.\n- These findings suggest Italian items are both high-value and frequently ordered in large quantities, making them the restaurant's strongest revenue category.",
       "technologies": [
-        "**Dashboard:** Streamlit",
-        "**Data processing:** Python (pure functions)",
-        "**Testing:** pytest",
-        "**Environment management:** uv"
+        "**SQL:** Aggregations (COUNT, AVG, SUM, MIN, MAX), JOINs, UNION, subqueries, GROUP BY, ORDER BY, LIMIT"
       ],
-      "url": "https://github.com/cdcoonce/Synthetic_Signal_Observatory",
+      "url": "https://github.com/cdcoonce/Restaurant_Order_Analysis",
       "skills_demonstrated": [
-        "Data Visualization & Dashboards",
+        "SQL & Database Analytics"
+      ]
+    },
+    {
+      "title": "Motor Vehicle Thefts Analysis",
+      "type": "Guided Coursework",
+      "status": "Complete",
+      "featured": false,
+      "date": "Mar 2025",
+      "date_sort": "2025-03",
+      "summary": "A SQL and Excel analysis of motor vehicle thefts in New Zealand, examining when, where, and which vehicles are most frequently stolen. Charles wrote analytical SQL queries to uncover patterns by time, location, vehicle type, and demographics, then created visualizations in Excel to communicate the findings.",
+      "business_problem": "Law enforcement and public safety agencies need data-driven insights into vehicle theft patterns to allocate resources effectively. Understanding which vehicle types are targeted, when thefts peak, and which regions are most affected allows for more targeted patrols, public awareness campaigns, and prevention strategies.",
+      "approach": "Charles structured the analysis around three objectives: when vehicles are stolen (by year, month, and day of week), which vehicles are stolen (by type, age, color, and luxury status), and where thefts occur (by region, population density). He wrote SQL queries using aggregations, joins, CASE expressions, CTEs, and UNION operations to extract insights from the relational dataset. He then visualized the results in Excel with charts showing theft trends by population density, regional distribution, vehicle characteristics, and day-of-week patterns.",
+      "key_results": "- Vehicle thefts are most prevalent in high-density regions, particularly Auckland.\n- Monday had the highest theft frequency, while Saturday had the lowest.\n- Silver was the most commonly stolen vehicle color, followed by white and black.\n- Station wagons, saloons, and hatchbacks were the most stolen vehicle types.\n- Luxury vehicles accounted for only a small proportion of total thefts.\n- High-density and low-density regions showed different vehicle type theft profiles, suggesting different theft motivations or opportunities.",
+      "technologies": [
+        "**SQL:** Aggregations, JOINs, CTEs, CASE expressions, UNION, subqueries",
+        "**Excel:** Data visualization and formatting"
+      ],
+      "url": "https://github.com/cdcoonce/Motor_Vehicle_Thefts",
+      "skills_demonstrated": [
+        "SQL & Database Analytics",
+        "Data Visualization & Dashboards"
+      ]
+    },
+    {
+      "title": "Baby Names Analysis",
+      "type": "Guided Coursework",
+      "status": "Complete",
+      "featured": false,
+      "date": "Mar 2025",
+      "date_sort": "2025-03",
+      "summary": "A SQL-driven analysis of U.S. baby name trends from 1980 to 2009, exploring name popularity, decade-over-decade shifts, regional differences, and unique naming patterns. Charles used window functions, CTEs, and set operations to rank names, track popularity changes, and answer stakeholder-driven questions.",
+      "business_problem": "Understanding naming trends has applications in marketing, demographic research, and cultural analysis. This project simulates a scenario where a stakeholder wants to understand how baby name popularity has shifted over three decades, how trends differ across U.S. regions, and which names are uniquely popular or used across genders.",
+      "approach": "Charles structured the analysis around four objectives. First, he tracked popularity changes over time — identifying the overall most popular names, plotting individual name rankings by year using ROW_NUMBER(), and finding the biggest rank jumps between 1980 and 2009. Second, he compared popularity across decades using RANK() with decade groupings. Third, he analyzed regional patterns by joining the names table with a regions reference table and computing top names within each region. Fourth, he explored unique names — finding the most popular androgynous names, the shortest and longest names, and answering a custom stakeholder question about the geographic distribution of a specific name.",
+      "key_results": "- Michael and Jessica dominated the 1980s and 1990s as the top boy and girl names, respectively.\n- By the 2000s, Jacob and Emily emerged at the top, reflecting cultural shifts in naming preferences.\n- The South had the largest total number of births, influencing national trends.\n- Names like Aidan and Skylar showed the biggest popularity jumps from 1980 to 2009.\n- The most popular androgynous names (used for both genders) included some surprising entries like Michael and Jessica, which were occasionally used for the opposite gender.\n- The shortest names (2 letters, e.g., Ty, Bo) and longest names (15 letters, e.g., Franciscojavier) had vastly different popularity levels.",
+      "technologies": [
+        "**SQL:** Window functions (RANK, ROW_NUMBER), CTEs, UNION, JOINs, GROUP BY, HAVING, subqueries, CASE expressions"
+      ],
+      "url": "https://github.com/cdcoonce/Baby_Names_Analysis",
+      "skills_demonstrated": [
+        "SQL & Database Analytics"
+      ]
+    },
+    {
+      "title": "Sleep Deprivation & Cognitive Performance Analysis",
+      "type": "Guided Coursework",
+      "status": "Complete",
+      "featured": false,
+      "date": "Feb 2025",
+      "date_sort": "2025-02",
+      "summary": "An exploratory and moderation analysis investigating how sleep factors relate to cognitive and emotional outcomes. Charles examined whether stress levels moderate the relationships between sleep metrics (quality and hours) and performance outcomes (reaction time and emotion regulation), finding statistically significant effects in both low-stress and high-stress subgroups.",
+      "business_problem": "Workplace performance and employee wellbeing are directly affected by sleep quality. Understanding how sleep interacts with stress to influence cognitive performance and emotional regulation can inform targeted wellness interventions — for example, prioritizing sleep quality programs for low-stress employees and sleep duration programs for high-stress employees.",
+      "approach": "Charles performed exploratory data analysis to understand variable distributions and relationships across measures including sleep hours, sleep quality, daytime sleepiness, reaction time, cognitive accuracy, and emotion regulation. He then split participants into stress-level subgroups and conducted moderation analyses using centered regression models. For the low-stress group, he modeled emotion regulation as a function of sleep quality. For the high-stress group, he modeled PVT reaction time as a function of sleep hours.",
+      "key_results": "- In the low-stress subgroup, sleep quality was a significant positive predictor of emotion regulation — each 1-unit increase in sleep quality above the mean was associated with approximately 1.20 points higher emotion regulation scores (p ≈ 0.036, R² = 0.148).\n- In the high-stress subgroup, sleep hours significantly predicted faster reaction times — each additional hour of sleep was associated with approximately 16.92 units faster PVT reaction time (p ≈ 0.037, R² = 0.147).\n- These findings suggest that stress plays a moderating role: in low-stress conditions, sleep quality matters most for emotional outcomes, while in high-stress conditions, sleep duration matters most for cognitive performance.\n- While the models explain a modest portion of variance, they point to clear, actionable differences in how sleep interventions should be targeted based on stress levels.",
+      "technologies": [
+        "**Data analysis:** Python, Pandas, NumPy",
+        "**Statistical modeling:** statsmodels (OLS regression with centering)",
+        "**Visualization:** Matplotlib (scatter plots with regression lines)",
+        "**Environment:** Jupyter Notebook"
+      ],
+      "url": "https://github.com/cdcoonce/Sleep_Deprivation_Analysis",
+      "skills_demonstrated": [
+        "Statistical Analysis & Modeling",
+        "Data Visualization & Dashboards"
+      ]
+    },
+    {
+      "title": "NYC Collision Analysis",
+      "type": "Guided Coursework",
+      "status": "Complete",
+      "featured": false,
+      "date": "Feb 2025",
+      "date_sort": "2025-02",
+      "summary": "An Excel-based analysis of NYC vehicular collision data identifying seasonal patterns, high-risk time periods, and contributing factors. Charles used pivot tables, heatmaps with conditional formatting, and custom calculated columns to produce actionable insights for road safety improvement.",
+      "business_problem": "New York City experiences thousands of vehicular collisions annually, but not all times, locations, and causes carry equal risk. Traffic safety planners need to understand when collisions peak (by month, day, and hour), what the most dangerous contributing factors are, and which of those factors are most likely to result in injury or death — so they can allocate enforcement and infrastructure resources effectively.",
+      "approach": "Charles prepared the data by extracting weekday and hour values from the date and time columns using WEEKDAY and HOUR functions. He created a calculated column to enable percentage computations for contributing factor analysis. He then built three analytical views: a time-series line chart comparing monthly collision trends across 2021, 2022, and 2023; a heatmap using conditional formatting to visualize collision density by day of week and hour; and a contributing factors analysis using pivot tables and data bars to rank the most dangerous causes.",
+      "key_results": "- Notable increases in collisions occurred in warmer months, particularly between February and June, with a general downward trend from June through December.\n- Rush hours (2 PM – 6 PM) on weekdays showed the highest collision density, while late night and early morning hours had the lowest.\n- Weekends between 12 AM and 1 AM showed elevated collision numbers compared to the same hours on weekdays.\n- The top 3 contributing factors were driver inattention/distraction, unspecified causes, and failure to yield right-of-way.\n- More than 60% of \"failure to yield\" collisions resulted in injury or death, making it the most dangerous specific factor.\n- Nearly 30% of top contributing factors were classified as \"unspecified,\" suggesting a data quality issue that limits more precise analysis.",
+      "technologies": [
+        "**Excel:** Pivot tables, WEEKDAY function, HOUR function, conditional formatting (heatmaps), calculated columns, data bars, line charts"
+      ],
+      "url": "https://github.com/cdcoonce/NYC_Collision_Analysis",
+      "skills_demonstrated": [
+        "Spreadsheet & Business Analysis",
+        "Data Visualization & Dashboards"
+      ]
+    },
+    {
+      "title": "Manufacturing Downtime Analysis",
+      "type": "Guided Coursework",
+      "status": "Complete",
+      "featured": true,
+      "date": "Feb 2025",
+      "date_sort": "2025-02",
+      "summary": "An Excel-based analysis of production line downtime for a soft drink bottling operation. Charles calculated line efficiency, identified the top downtime factors using Pareto analysis, and built an operator-by-factor matrix to pinpoint where targeted training would have the most impact.",
+      "business_problem": "A production manager inherited a bottling line with no visibility into what was causing downtime or how efficiently operators were running. Without data-driven insight, the team couldn't prioritize training or maintenance investments.",
+      "approach": "Charles started by calculating batch-level efficiency — comparing actual production time to the standard minimum for each product using VLOOKUP to pull benchmark times from a products reference table. He then aggregated downtime logs by factor and applied a Pareto analysis to find the 20% of factors causing 80% of lost time. Finally, he cross-referenced downtime by operator and factor to create a heat map showing where each operator was losing the most time, using SUMIFS for the aggregation and conditional formatting for visual emphasis.",
+      "key_results": "- Overall line efficiency was approximately 64%.\n- The lowest-performing operator (Mac) ran at 61% efficiency — a clear candidate for targeted coaching.\n- The top 5 downtime factors accounted for roughly 80% of total downtime, consistent with the Pareto principle.\n- Three of those top 5 factors were operator errors, pointing to training as the highest-leverage intervention.\n- Recommendations included standardized machine adjustment training, batch change coaching for specific operators, and a preventative maintenance schedule.",
+      "technologies": [
+        "**Excel:** Pivot tables, VLOOKUP, SUMIFS, conditional formatting, combo charts (Pareto), and bar charts for efficiency comparison."
+      ],
+      "url": "https://github.com/cdcoonce/Manufacturing_Downtime_Analysis",
+      "skills_demonstrated": [
+        "Spreadsheet & Business Analysis",
+        "Data Visualization & Dashboards"
+      ],
+      "challenges": "The main challenge was structuring the raw downtime logs so they could be cross-referenced with both the productivity data and the operator assignments. Charles used VLOOKUP to map each downtime entry back to its operator, then SUMIFS to build the operator-by-factor matrix — a practical exercise in joining data across related tables without a database."
+    },
+    {
+      "title": "Global CO₂ Emissions Analysis",
+      "type": "Guided Coursework",
+      "status": "Complete",
+      "featured": false,
+      "date": "Feb 2025",
+      "date_sort": "2025-02",
+      "summary": "A Tableau dashboard analyzing global carbon emissions data from 1750 to 2022. Charles built interactive visualizations — including a choropleth map, bubble chart, and time-series line chart — with parameterized controls that let users explore how different countries have contributed to global CO₂ emissions over time.",
+      "business_problem": "Understanding historical and current patterns of carbon emissions is critical for policymakers, researchers, and organizations working on climate strategy. With a 79-column dataset spanning centuries of emissions data, users need an interactive tool to filter, compare, and explore trends rather than sifting through raw data. Key questions include which countries have historically dominated emissions, how per capita emissions compare to absolute emissions, and how each country's share of global emissions has shifted over time.",
+      "approach": "Charles began with data profiling, discovering that the dataset included aggregated regional groupings (like \"Asia\" and \"European Union\") that would distort country-level analysis. He filtered these out by removing rows without valid ISO country codes. He converted emissions columns to numeric types for proper aggregation and created an integer parameter to enable dynamic \"Top N\" filtering in Tableau. He then built three main visualizations: a choropleth map of per capita emissions, a bubble chart comparing emissions against population, and a line chart tracking each country's share of global emissions over time.",
+      "key_results": "- Early industrial powers (certain European countries and the United States) dominated CO₂ emissions until the mid-20th century, after which countries like China and India increased their share significantly.\n- Per capita analysis revealed a different story than absolute emissions — some countries with large total emissions have moderate per capita rates due to large populations, while smaller countries can have very high per capita emissions.\n- The interactive dashboard allows users to dynamically select how many countries to display and compare specific countries side by side.",
+      "technologies": [
+        "**Visualization:** Tableau (choropleth maps, bubble charts, line charts, parameters, filters, calculated fields)"
+      ],
+      "url": "https://github.com/cdcoonce/Global_CO2_Emissions",
+      "skills_demonstrated": [
+        "Data Visualization & Dashboards"
+      ]
+    },
+    {
+      "title": "Electricity Consumption Analysis",
+      "type": "Guided Coursework",
+      "status": "Complete",
+      "featured": false,
+      "date": "Feb 2025",
+      "date_sort": "2025-02",
+      "summary": "An exploratory data analysis of seasonal electricity consumption patterns for Morocco's National Power Co. Charles analyzed hourly power data across three zones to identify peak load periods by hour and day, producing visualizations that could inform strategic infrastructure investments to prevent outages.",
+      "business_problem": "Electricity grids need to anticipate demand surges to prevent outages. Morocco's National Power Co. needed to understand when consumption peaks occur — by hour, day of week, and season — so they could make informed decisions about capacity investments and demand management strategies. Without clear visibility into these patterns, the utility risked underinvesting in infrastructure during critical periods.",
+      "approach": "Charles worked with a CSV dataset containing timestamped power consumption readings for three zones. He derived additional features — total consumption, hour of day, and day of week — from the raw timestamps. He then resampled the data to hourly frequency to create a stacked area chart showing consumption by zone over January 2017, and built a heatmap of average total consumption by day of week and hour of day to visually identify peak periods.",
+      "key_results": "- Consumption fluctuates significantly over the course of the day, with identifiable peak periods visible in the hourly area charts.\n- The heatmap revealed specific days and hours with consistently higher average consumption, suggesting targeted windows for investment in capacity or demand management.\n- Zone-level breakdowns showed how each zone contributes to overall load at different times, providing more granular insight for operational planning.",
+      "technologies": [
+        "**Data processing:** Python, Pandas",
+        "**Visualization:** Seaborn (heatmaps), Matplotlib (area charts)",
+        "**Environment:** Jupyter Notebook, uv"
+      ],
+      "url": "https://github.com/cdcoonce/Electricity_Consumption_Analysis",
+      "skills_demonstrated": [
+        "Data Wrangling & ETL",
+        "Data Visualization & Dashboards"
+      ]
+    },
+    {
+      "title": "AirBnB Listing Analysis",
+      "type": "Guided Coursework",
+      "status": "Complete",
+      "featured": false,
+      "date": "Feb 2025",
+      "date_sort": "2025-02",
+      "summary": "An exploratory analysis of Paris AirBnB listings examining pricing trends and the impact of 2015 regulatory changes on the market. Charles cleaned and filtered the dataset, aggregated pricing by neighbourhood, and built time-series visualizations that revealed a decrease in new hosts and an increase in average prices following the introduction of regulations.",
+      "business_problem": "AirBnB faces increasing regulatory pressure in major cities. Leadership at the company needed a visual summary of how Paris listings were affected by regulations introduced in 2015 — specifically whether the regulations reduced the number of new hosts entering the market and how pricing responded. Understanding these dynamics helps inform strategic decisions about market expansion and compliance.",
+      "approach": "Charles started by exploring the dataset to understand its structure and identify quality issues, including missing host registration dates that he addressed through imputation. He filtered the data to Paris-only listings and selected relevant columns including host details, neighbourhood, accommodations, and price. After removing invalid entries (zero-priced listings), he grouped data by neighbourhood to calculate average pricing trends and created time-series visualizations comparing the number of new hosts against average price per night using dual-axis plots.",
+      "key_results": "- The analysis showed a clear decrease in the number of new hosts entering the Paris market after the 2015 regulatory changes.\n- Average price per night showed an upward trend across various neighbourhoods following the regulations.\n- The dual-axis visualization effectively demonstrated the inverse relationship between host entry rates and pricing, suggesting the regulations constrained supply while demand-side pressure pushed prices higher.",
+      "technologies": [
+        "**Data processing:** Python, Pandas",
+        "**Visualization:** Matplotlib (time-series plots, dual-axis charts)",
+        "**Environment:** Jupyter Notebook, uv"
+      ],
+      "url": "https://github.com/cdcoonce/Airbnb_Listing_Analysis",
+      "skills_demonstrated": [
+        "Data Wrangling & ETL",
+        "Data Visualization & Dashboards"
+      ]
+    },
+    {
+      "title": "Google Analytics Data Archive",
+      "type": "Independent",
+      "status": "Complete",
+      "featured": false,
+      "date": "Dec 2024",
+      "date_sort": "2024-12",
+      "summary": "A data preservation project where Charles designed and deployed Python scripts to export, validate, and anonymize historical Google Analytics 3 data from 70 web properties before Google's deprecation deadline. Completed during his internship at OneAmerica Financial, this project preserved over 10 years of web analytics data that would have otherwise been permanently lost.",
+      "business_problem": "Google announced that Universal Analytics (GA3) would be permanently deprecated on July 1, 2024, after which all historical data would become inaccessible. OneAmerica Financial had 70 web properties with years of analytics history that stakeholders relied on for trend analysis and reporting. Manually exporting this data through the Google Analytics dashboard was impractical given the volume and the tight one-month deadline.",
+      "approach": "Charles developed a Python-based automation pipeline consisting of three scripts. The first script authenticated with the Google Analytics API and iterated through all 70 properties, extracting data monthly and yearly as CSV files and saving them to an enterprise server. The second script performed automated validation — scanning each exported file to verify record counts, date ranges, and expected column headers, while flagging anomalies or missing values for manual review. The third script anonymized sensitive property names using a token mapping system, replacing identifying attributes with unique IDs before sharing or archiving the files.\n\nBefore writing any code, Charles collaborated with stakeholders to define and finalize a data dictionary specifying exactly which metrics and dimensions each CSV would contain.",
+      "key_results": "- Successfully archived all historical analytics data from 70 properties before the deprecation deadline.\n- Automated validation caught data discrepancies early, preserving data integrity across the entire archive.\n- The token-based anonymization system protected sensitive property names while maintaining data usability.\n- The automated approach reduced what would have been weeks of manual export work to a manageable timeline.\n- Validation reports (both summary and detailed) provided stakeholders with confidence in the completeness and accuracy of the archived data.",
+      "technologies": [
+        "**Scripting:** Python",
+        "**API integration:** Google Analytics API (authentication, data extraction)",
+        "**Validation:** Automated Python scripts for record counts, date ranges, column verification",
+        "**Anonymization:** Token mapping system for sensitive property names",
+        "**Data format:** CSV (organized by year and month)"
+      ],
+      "url": "https://github.com/cdcoonce/Google_Analytics_Data_Archive",
+      "skills_demonstrated": [
+        "Data Wrangling & ETL",
         "Data Engineering & Pipelines",
         "DevOps & Tooling"
-      ]
+      ],
+      "challenges": "The biggest challenge was scale — 70 properties, each with potentially years of monthly data, all needing to be extracted, validated, and anonymized within about a month. Charles addressed this by building the extraction script to iterate through properties programmatically rather than handling each one manually. The validation script was essential for catching issues that would have been invisible in a manual process, such as incomplete date ranges or unexpected column mismatches."
     },
     {
       "title": "Wine Quality Analysis",
       "type": "Academic",
       "status": "Complete",
       "featured": true,
+      "date": "Nov 2024",
+      "date_sort": "2024-11",
       "summary": "A statistical and machine learning analysis of the Wine Quality Dataset from the UCI Machine Learning Repository. Charles explored the physicochemical properties of red and white Portuguese wines to identify the key features that influence quality ratings, then built predictive regression models to estimate wine quality scores.",
       "business_problem": "Wine quality assessment traditionally relies on expert tasters, which is subjective and difficult to scale. If measurable chemical properties — like acidity, alcohol content, and sulfur dioxide levels — can reliably predict quality, producers could use data to guide production decisions, optimize blending, and maintain consistency across vintages.",
       "approach": "Charles started with exploratory data analysis, examining feature distributions, pair plots, and a correlation matrix to understand how the 11 physicochemical attributes relate to quality ratings for both red and white wines separately. He identified that alcohol content was the strongest positive predictor of quality for both wine types, while volatile acidity negatively impacted quality, especially in reds.\n\nHe then built gradient boosted regression models using the full feature set and evaluated performance using RMSE and R² on train/test splits. To address multicollinearity, he identified highly correlated feature pairs (threshold > 0.65) — such as density and residual sugar in white wines — and removed redundant features to build leaner models.",
@@ -603,6 +570,8 @@
       "type": "Independent",
       "status": "Complete",
       "featured": false,
+      "date": "Sep 2024",
+      "date_sort": "2024-09",
       "summary": "An R-based analysis and interactive dashboard exploring the factors that drive happiness across countries worldwide. Charles cleaned and analyzed the World Happiness Report data, applied statistical modeling to understand the relationships between happiness and factors like GDP, social support, and life expectancy, and built visualizations and an optional Shiny dashboard for interactive exploration.",
       "business_problem": "The World Happiness Report ranks countries by wellbeing measures annually, but the raw rankings don't explain why some countries score higher than others. Policymakers, researchers, and NGOs benefit from understanding which factors — economic output, social support, health, freedom, generosity, or corruption — most strongly predict happiness, and how these relationships vary across regions and over time.",
       "approach": "Charles cleaned and preprocessed the raw datasets by handling missing values, standardizing variable names, and transforming the data for analysis. He conducted exploratory data analysis to investigate trends and patterns in happiness scores, then examined the relationships between happiness and its component factors using correlation studies and regression analysis. He created visualizations using ggplot2 and plotly to reveal key trends and regional comparisons, and built an optional Shiny-based dashboard for interactive data exploration.",
@@ -618,6 +587,79 @@
         "Data Visualization & Dashboards",
         "Statistical Analysis & Modeling"
       ]
+    },
+    {
+      "title": "National Parks Visitation Dashboard",
+      "type": "Independent",
+      "status": "Complete",
+      "featured": true,
+      "date": "Sep 2024",
+      "date_sort": "2024-09",
+      "summary": "An interactive R Shiny dashboard that allows users to explore U.S. National Parks visitation data over time. Users can filter by park and year range, view dynamic time-series visualizations, and browse detailed data in a color-coded interactive table.",
+      "business_problem": "The National Park Service collects visitation data across dozens of parks over many decades, but raw data tables are hard to explore and compare. Park administrators, researchers, and enthusiasts need an accessible way to filter, visualize, and compare visitation trends across parks and time periods without needing to write code or build their own charts.",
+      "approach": "Charles built a Shiny web application with a sidebar panel for user controls and a main panel for outputs. The app reads a CSV dataset, cleans it by filtering out summary rows and converting data types, and then uses reactive expressions to dynamically filter the data based on user selections. A dropdown allows multi-park selection, and a slider controls the year range. The app renders a time-series line chart using ggplot2 and an interactive data table using the DT package, with custom color coding based on visitor counts.",
+      "key_results": "- The dashboard is deployed and publicly accessible, allowing anyone to explore park visitation trends interactively.\n- Users can compare visitation patterns across multiple parks simultaneously, revealing trends like the steady growth in visitation at popular parks and seasonal patterns.\n- The color-coded data table makes it easy to spot high-visitation and low-visitation years at a glance.\n- Additional context — such as region and state information for selected parks — is displayed dynamically alongside the visualizations.",
+      "technologies": [
+        "**Dashboard framework:** R Shiny",
+        "**Visualization:** ggplot2",
+        "**Data tables:** DT package",
+        "**Data processing:** R (dplyr, readr)"
+      ],
+      "url": "https://iuq9gs-charles-coonce.shinyapps.io/visitation/",
+      "skills_demonstrated": [
+        "Data Visualization & Dashboards"
+      ]
+    },
+    {
+      "title": "Portfolio Website",
+      "type": "Independent",
+      "status": "Complete",
+      "featured": false,
+      "date": "Aug 2024",
+      "date_sort": "2024-08",
+      "summary": "A multi-page static portfolio website built from scratch with vanilla HTML5, CSS3, and ES module JavaScript — no frameworks, no bundlers, no build step. The site showcases Charles's projects with filterable galleries, a testimonial carousel, responsive design, and WCAG 2.1 AA accessibility compliance. It is maintained with professional-grade tooling including CI/CD, automated testing, and semantic versioning.",
+      "business_problem": "A data professional's portfolio needs to be more than a list of projects — it needs to demonstrate technical ability, attention to detail, and professionalism. Charles built his portfolio site to serve as both a showcase of his project work and a standalone demonstration of web development skills, code quality practices, and DevOps discipline.",
+      "approach": "Charles designed and built the site as a multi-page static application. The homepage features a hero profile section, four featured project cards with skill-tag filtering, a testimonial carousel with auto-scroll and dot pagination, and contact links. A dedicated gallery page displays all 17 projects with URL-driven filtering (e.g., `projects.html?filter=python`). The JavaScript is organized as ES modules with pure functions for business logic and thin DOM wrappers for rendering, making the codebase testable.\n\nThe site is tested with a two-layer strategy: Jest with jsdom for JavaScript unit tests (filter logic, carousel state, utilities) and pytest with Playwright for integration tests (HTML validation, accessibility, E2E browser tests, link checking). Linting is enforced with ESLint, Stylelint, and Prettier. A GitHub Actions CI/CD pipeline runs all checks on every PR and automatically deploys passing changes from master to gh-pages.",
+      "key_results": "- The site serves 17 project cards across a homepage (4 featured) and a full gallery page, with single-select skill-tag filtering and URL-driven deep links.\n- The testimonial carousel displays 7 recommendations with responsive layout (2 on desktop, 1 on mobile), auto-scroll at 20-second intervals, and dot pagination.\n- Responsive breakpoints at 1250px and 700px ensure the site works well on desktop, tablet, and mobile, with a hamburger menu for mobile navigation.\n- WCAG 2.1 AA compliance is verified through automated axe-core accessibility testing.\n- The CI/CD pipeline runs Prettier, Stylelint, ESLint, Jest, and pytest on every pull request, with automatic deployment on merge to master.\n- The site is hosted on GitHub Pages with a custom domain at charleslikesdata.com.",
+      "technologies": [
+        "**Frontend:** HTML5 (semantic elements, ARIA attributes), CSS3 (custom properties, media queries), JavaScript (ES modules, strict mode)",
+        "**Testing:** Jest + jsdom (JS unit tests), pytest + Playwright (E2E, accessibility, validation), axe-core (WCAG compliance)",
+        "**Linting & formatting:** ESLint, Stylelint, Prettier, EditorConfig",
+        "**CI/CD:** GitHub Actions (lint → test → deploy pipeline)",
+        "**Hosting:** GitHub Pages with custom domain (CNAME)"
+      ],
+      "url": "https://charleslikesdata.com",
+      "skills_demonstrated": [
+        "Web Development",
+        "DevOps & Tooling"
+      ],
+      "challenges": "Building the project filtering system required careful coordination between the HTML data attributes (data-tags on each card), the JavaScript filter logic, and the URL parameter support for deep linking. Charles kept the filtering logic as pure functions that could be unit tested with Jest, while the DOM manipulation layer stayed thin. Another challenge was making the testimonial carousel accessible — it needed keyboard navigation, proper ARIA attributes, and responsive behavior that changed the number of visible cards based on viewport width."
+    },
+    {
+      "title": "National Parks Visitation Analysis",
+      "type": "Independent",
+      "status": "Complete",
+      "featured": false,
+      "date": "Aug 2024",
+      "date_sort": "2024-08",
+      "summary": "An R-based analysis of U.S. National Parks visitation data from 1904 to 2016, combining exploratory visualization with clustering and route optimization. Charles analyzed visitation trends across regions, identified the most popular parks, grouped parks into geographic clusters, and applied the Traveling Salesman Problem (TSP) to create efficient multi-park visit itineraries.",
+      "business_problem": "Planning a trip to visit multiple national parks is a logistical challenge — parks are spread across vast distances, and visitors want to maximize the number of parks they see while minimizing travel time. Beyond trip planning, understanding long-term visitation trends helps the National Park Service with resource allocation, capacity planning, and identifying parks that may be underserved relative to demand.",
+      "approach": "Charles started with data exploration and cleaning, addressing missing values and inconsistent formats in the historical dataset. He then created visualizations of visitation trends over time — both nationally and by region — using line plots and faceted views. A state-level heatmap showed total visitation by geography, and a bubble plot highlighted the most visited parks. He then applied hierarchical clustering to group parks by geographic proximity and used the TSP algorithm to compute the most efficient driving routes within each cluster, mapping the results with spatial libraries.",
+      "key_results": "- Overall national park visitation has increased steadily since 1904, with the Pacific West and Intermountain regions seeing the steepest growth.\n- California, Wyoming, and Washington had the highest total visitation at the state level.\n- Hierarchical clustering produced five main geographic clusters of parks, each suitable for a multi-park road trip.\n- TSP optimization provided efficient routes within each cluster, offering practical itineraries for park visitors.",
+      "technologies": [
+        "**Data processing:** R (dplyr, tidyr, stringr, readr)",
+        "**Visualization:** ggplot2, gridExtra, usmap, sf, scales, gganimate",
+        "**Clustering:** hierarchical clustering (cluster package)",
+        "**Route optimization:** TSP package",
+        "**Spatial analysis:** sf, geosphere, httr, jsonlite"
+      ],
+      "url": "https://github.com/cdcoonce/National_Parks_Project",
+      "skills_demonstrated": [
+        "Data Visualization & Dashboards",
+        "Statistical Analysis & Modeling",
+        "Data Wrangling & ETL"
+      ],
+      "challenges": "The main challenge was integrating the clustering output with the TSP solver and then mapping the optimized routes geographically. Charles used the geosphere package for distance calculations between park coordinates, fed those into the TSP solver, and then plotted the resulting routes using sf and ggplot2. Handling the coordinate systems and ensuring the route visualization aligned with the cluster map required careful coordination between packages."
     }
   ],
   "testimonials": [
