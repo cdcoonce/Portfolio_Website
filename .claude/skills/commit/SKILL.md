@@ -25,17 +25,17 @@ Stage and commit changes following conventional commit style and atomic commit p
 
 ### Types
 
-| Type       | When to use                                              | Example                                       |
-| ---------- | -------------------------------------------------------- | --------------------------------------------- |
-| `feat`     | New feature or capability                                | `feat: add user authentication flow`          |
-| `fix`      | Bug fix                                                  | `fix: resolve null pointer on empty input`    |
-| `refactor` | Code change that neither fixes a bug nor adds a feature  | `refactor: extract parser into standalone module` |
-| `style`    | Formatting, whitespace, semicolons — no logic change     | `style: apply formatter to config files`      |
-| `docs`     | Documentation only                                       | `docs: add API usage examples to readme`      |
-| `test`     | Adding or updating tests                                 | `test: add edge case coverage for validator`  |
-| `chore`    | Build process, tooling, dependencies, config             | `chore: update dependency lockfile`           |
-| `perf`     | Performance improvement                                  | `perf: cache repeated database lookups`       |
-| `ci`       | CI/CD pipeline changes                                   | `ci: add lint step to PR workflow`            |
+| Type       | When to use                                             | Example                                           |
+| ---------- | ------------------------------------------------------- | ------------------------------------------------- |
+| `feat`     | New feature or capability                               | `feat: add user authentication flow`              |
+| `fix`      | Bug fix                                                 | `fix: resolve null pointer on empty input`        |
+| `refactor` | Code change that neither fixes a bug nor adds a feature | `refactor: extract parser into standalone module` |
+| `style`    | Formatting, whitespace, semicolons — no logic change    | `style: apply formatter to config files`          |
+| `docs`     | Documentation only                                      | `docs: add API usage examples to readme`          |
+| `test`     | Adding or updating tests                                | `test: add edge case coverage for validator`      |
+| `chore`    | Build process, tooling, dependencies, config            | `chore: update dependency lockfile`               |
+| `perf`     | Performance improvement                                 | `perf: cache repeated database lookups`           |
+| `ci`       | CI/CD pipeline changes                                  | `ci: add lint step to PR workflow`                |
 
 ### Scope (Optional)
 

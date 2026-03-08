@@ -8,15 +8,15 @@ Detailed guidance for edge cases and decisions beyond the basics in SKILL.md.
 
 These three are the most commonly confused:
 
-| Scenario                                    | Type       | Reasoning                                   |
-| ------------------------------------------- | ---------- | ------------------------------------------- |
-| Add a new API endpoint                      | `feat`     | New capability exposed to users/consumers   |
-| Rename internal helper for clarity           | `refactor` | No behavior change, no new capability       |
-| Move a function to a different module        | `refactor` | Restructuring without behavior change       |
-| Add a new dev dependency                    | `chore`    | Tooling change, not a feature or refactor   |
-| Update lockfile after dependency bump        | `chore`    | Build/dependency maintenance                |
-| Swap out an internal algorithm (same output) | `refactor` | Behavior unchanged from consumer's view     |
-| Swap out an internal algorithm (faster)      | `perf`     | Behavior unchanged but measurably faster    |
+| Scenario                                     | Type       | Reasoning                                 |
+| -------------------------------------------- | ---------- | ----------------------------------------- |
+| Add a new API endpoint                       | `feat`     | New capability exposed to users/consumers |
+| Rename internal helper for clarity           | `refactor` | No behavior change, no new capability     |
+| Move a function to a different module        | `refactor` | Restructuring without behavior change     |
+| Add a new dev dependency                     | `chore`    | Tooling change, not a feature or refactor |
+| Update lockfile after dependency bump        | `chore`    | Build/dependency maintenance              |
+| Swap out an internal algorithm (same output) | `refactor` | Behavior unchanged from consumer's view   |
+| Swap out an internal algorithm (faster)      | `perf`     | Behavior unchanged but measurably faster  |
 
 ### fix vs refactor
 
@@ -171,12 +171,12 @@ Valid keywords: `Closes`, `Fixes`, `Resolves` (and lowercase variants).
 
 ## Common Mistakes
 
-| Mistake                              | Problem                          | Fix                                          |
-| ------------------------------------ | -------------------------------- | -------------------------------------------- |
-| `feat: Add new feature`             | Capitalized summary              | `feat: add new feature`                      |
-| `fix: fixed the bug.`              | Past tense + trailing period     | `fix: resolve null check on empty input`     |
-| `update stuff`                       | No type, vague summary           | `refactor: simplify error handling in parser` |
-| `feat: refactor auth and add tests` | Multiple unrelated changes       | Split into `refactor(auth)` + `test(auth)`   |
-| `chore: fix bug in login`          | Wrong type                       | `fix(auth): prevent login with expired token` |
-| `WIP`                                | Not a meaningful commit message  | Use `git stash` or a draft branch instead    |
-| `git commit -m "..." --no-verify`   | Skipping hooks hides real issues | Fix the hook failure, then commit normally   |
+| Mistake                             | Problem                          | Fix                                           |
+| ----------------------------------- | -------------------------------- | --------------------------------------------- |
+| `feat: Add new feature`             | Capitalized summary              | `feat: add new feature`                       |
+| `fix: fixed the bug.`               | Past tense + trailing period     | `fix: resolve null check on empty input`      |
+| `update stuff`                      | No type, vague summary           | `refactor: simplify error handling in parser` |
+| `feat: refactor auth and add tests` | Multiple unrelated changes       | Split into `refactor(auth)` + `test(auth)`    |
+| `chore: fix bug in login`           | Wrong type                       | `fix(auth): prevent login with expired token` |
+| `WIP`                               | Not a meaningful commit message  | Use `git stash` or a draft branch instead     |
+| `git commit -m "..." --no-verify`   | Skipping hooks hides real issues | Fix the hook failure, then commit normally    |

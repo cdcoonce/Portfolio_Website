@@ -70,20 +70,21 @@ Run this from the repository root so the `fileb://` path resolves correctly.
 ### Step 5: Verify
 
 Check that the response includes:
+
 - `"LastUpdateStatus": "InProgress"` or `"Successful"`
 - `"FunctionName": "portfolio-chat-agent"`
 - Updated `CodeSha256` value
 
 ## Configuration
 
-| Setting | Value |
-|---------|-------|
+| Setting       | Value                  |
+| ------------- | ---------------------- |
 | Function name | `portfolio-chat-agent` |
-| Runtime | `python3.12` |
-| Region | `us-west-1` |
-| Memory | 256 MB |
-| Timeout | 30 seconds |
-| Architecture | `x86_64` |
+| Runtime       | `python3.12`           |
+| Region        | `us-west-1`            |
+| Memory        | 256 MB                 |
+| Timeout       | 30 seconds             |
+| Architecture  | `x86_64`               |
 
 ## Rules
 
@@ -94,12 +95,12 @@ Check that the response includes:
 
 ## Troubleshooting
 
-| Problem | Solution |
-|---------|----------|
-| `No module named 'pydantic_core._pydantic_core'` | Missing `--platform` flag during pip install — dependencies were built for macOS instead of Linux |
-| `Unable to load paramfile fileb://` | Wrong working directory — run the deploy command from the repository root |
-| `ResourceNotFoundException` | Lambda function doesn't exist yet — use `aws lambda create-function` (see `docs/plans/chat-agent/aws-setup.md` Step 7) |
-| `CodeStorageExceededException` | Deployment zip too large — check for unnecessary dependencies in `requirements.txt` |
+| Problem                                          | Solution                                                                                                               |
+| ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| `No module named 'pydantic_core._pydantic_core'` | Missing `--platform` flag during pip install — dependencies were built for macOS instead of Linux                      |
+| `Unable to load paramfile fileb://`              | Wrong working directory — run the deploy command from the repository root                                              |
+| `ResourceNotFoundException`                      | Lambda function doesn't exist yet — use `aws lambda create-function` (see `docs/plans/chat-agent/aws-setup.md` Step 7) |
+| `CodeStorageExceededException`                   | Deployment zip too large — check for unnecessary dependencies in `requirements.txt`                                    |
 
 ## Reference Documentation
 

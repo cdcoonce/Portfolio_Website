@@ -47,8 +47,8 @@ The second stage applies statistical analysis to answer three research questions
 ### RQ3 — Affordability-Commute Index (ACI)
 
 - **Transit access has contradictory effects depending on metro structure:**
-  - In **Chicago and Miami**, transit-rich areas have *higher* combined ACI pressure because they are desirable, expensive locations.
-  - In **Dallas-Fort Worth**, transit access has a significant *negative* relationship with ACI — the only metro where more transit = less combined pressure.
+  - In **Chicago and Miami**, transit-rich areas have _higher_ combined ACI pressure because they are desirable, expensive locations.
+  - In **Dallas-Fort Worth**, transit access has a significant _negative_ relationship with ACI — the only metro where more transit = less combined pressure.
   - In 6 other metros, transit has no measurable effect on ACI.
 - **Phoenix is essentially unexplainable** by this model (R² = 0.017). Its dynamics operate through mechanisms not captured by these variables.
 - **The Memphis paradox:** Best-fitting RQ1 model (R² = 0.73) but worst-fitting ACI model (R² = 0.17) — commute time alone powerfully predicts rent burden in Memphis, but adding transit collapses the model because Memphis has virtually no transit infrastructure.
