@@ -5,6 +5,7 @@
 - **Type:** Independent
 - **Status:** Complete
 - **Featured:** No
+- **Date:** Dec 2025
 
 ## Summary
 

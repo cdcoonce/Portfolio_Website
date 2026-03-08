@@ -18,6 +18,7 @@ from build_knowledge_base import (
     load_skills,
     load_testimonials,
     parse_classification,
+    parse_date_to_sort_key,
     parse_links,
     parse_skills_demonstrated,
     parse_technologies,
@@ -68,8 +69,37 @@ class TestParseClassification:
         result = parse_classification(text)
         assert result["featured"] is False
 
+    def test_parses_date(self):
+        text = (
+            "- **Type:** Independent\n"
+            "- **Status:** Complete\n"
+            "- **Featured:** No\n"
+            "- **Date:** Jan 2025\n"
+        )
+        result = parse_classification(text)
+        assert result["date"] == "Jan 2025"
+        assert result["date_sort"] == "2025-01"
+
+    def test_missing_date_defaults_empty(self):
+        text = (
+            "- **Type:** Independent\n"
+            "- **Status:** Complete\n"
+            "- **Featured:** No\n"
+        )
+        result = parse_classification(text)
+        assert result.get("date", "") == ""
+        assert result.get("date_sort", "") == ""
+
     def test_empty_text(self):
         assert parse_classification("") == {}
+
+
+class TestParseDateToSortKey:
+    def test_converts_month_year_to_sort_key(self):
+        assert parse_date_to_sort_key("Jan 2025") == "2025-01"
+
+    def test_empty_string(self):
+        assert parse_date_to_sort_key("") == ""
 
 
 class TestParseLinks:
@@ -197,6 +227,20 @@ class TestLoadAllProjects:
         projects = load_all_projects()
         in_progress = [p for p in projects if p["status"] == "In Progress"]
         assert len(in_progress) == 1
+
+    def test_all_projects_have_date(self):
+        projects = load_all_projects()
+        for p in projects:
+            assert p["date"], f'{p["title"]} is missing a date'
+
+    def test_projects_sorted_newest_first(self):
+        projects = load_all_projects()
+        for i in range(len(projects) - 1):
+            assert projects[i]["date_sort"] >= projects[i + 1]["date_sort"], (
+                f'{projects[i]["title"]} ({projects[i]["date_sort"]}) '
+                f'should sort before {projects[i + 1]["title"]} '
+                f'({projects[i + 1]["date_sort"]})'
+            )
 
 
 class TestLoadTestimonials:

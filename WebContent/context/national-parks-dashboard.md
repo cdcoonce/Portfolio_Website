@@ -5,6 +5,7 @@
 - **Type:** Independent
 - **Status:** Complete
 - **Featured:** Yes
+- **Date:** Sep 2024
 
 ## Summary
 

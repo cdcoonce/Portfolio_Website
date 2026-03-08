@@ -8,8 +8,11 @@ a single JSON knowledge base for the Lambda function.
 """
 
 import json
+import logging
 import re
 from pathlib import Path
+
+logger = logging.getLogger(__name__)
 
 
 CONTEXT_DIR = Path("WebContent/context")
@@ -17,6 +20,39 @@ OUTPUT_FILE = Path("lambda/knowledge_base.json")
 
 # These files are not projects — handle them separately
 NON_PROJECT_FILES = {"bio.md", "skills.md", "testimonials.md"}
+
+MONTH_MAP = {
+    "Jan": "01", "Feb": "02", "Mar": "03", "Apr": "04",
+    "May": "05", "Jun": "06", "Jul": "07", "Aug": "08",
+    "Sep": "09", "Oct": "10", "Nov": "11", "Dec": "12",
+}
+
+
+def parse_date_to_sort_key(date_str: str) -> str:
+    """Convert a 'Mon YYYY' date string to a sortable 'YYYY-MM' key.
+
+    Parameters
+    ----------
+    date_str : str
+        Date string like "Jan 2025" or "Dec 2024".
+
+    Returns
+    -------
+    str
+        Sortable key like "2025-01", or "" if input is empty.
+    """
+    date_str = date_str.strip()
+    if not date_str:
+        return ""
+    match = re.match(r"([A-Z][a-z]{2})\s+(\d{4})", date_str)
+    if not match:
+        return ""
+    month_abbr, year = match.group(1), match.group(2)
+    month_num = MONTH_MAP.get(month_abbr, "")
+    if not month_num:
+        logger.warning("Unrecognized month abbreviation: %r in date %r", month_abbr, date_str)
+        return ""
+    return f"{year}-{month_num}"
 
 
 def extract_sections(text: str) -> dict[str, str]:
@@ -63,7 +99,7 @@ def parse_classification(section_text: str) -> dict:
     Returns
     -------
     dict
-        Keys: type, status, featured.
+        Keys: type, status, featured, date, date_sort.
     """
     result = {}
     for line in section_text.split("\n"):
@@ -76,6 +112,11 @@ def parse_classification(section_text: str) -> dict:
         featured_match = re.match(r".*\*\*Featured:\*\*\s*(.+)", line)
         if featured_match:
             result["featured"] = featured_match.group(1).strip().lower() == "yes"
+        date_match = re.match(r".*\*\*Date:\*\*\s*(.+)", line)
+        if date_match:
+            date_val = date_match.group(1).strip()
+            result["date"] = date_val
+            result["date_sort"] = parse_date_to_sort_key(date_val)
     return result
 
 
@@ -248,6 +289,8 @@ def load_project(filepath: Path) -> dict:
         "type": classification.get("type", ""),
         "status": classification.get("status", "Complete"),
         "featured": classification.get("featured", False),
+        "date": classification.get("date", ""),
+        "date_sort": classification.get("date_sort", ""),
         "summary": sections.get("summary", ""),
         "business_problem": sections.get("business problem", ""),
         "approach": sections.get("approach", ""),
@@ -270,12 +313,14 @@ def load_project(filepath: Path) -> dict:
 
 
 def load_all_projects() -> list[dict]:
-    """Load all project files (any .md not in NON_PROJECT_FILES)."""
+    """Load all project files, sorted newest-first by date."""
     projects = []
     for md_file in sorted(CONTEXT_DIR.glob("*.md")):
         if md_file.name in NON_PROJECT_FILES:
             continue
         projects.append(load_project(md_file))
+    projects.sort(key=lambda p: p["title"])
+    projects.sort(key=lambda p: p.get("date_sort", ""), reverse=True)
     return projects
 
 
