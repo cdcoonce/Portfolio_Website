@@ -52,10 +52,11 @@ docs(contributing): add setup instructions
 1. **Review changes** — Run `git status` and `git diff` (staged + unstaged) to understand what changed
 2. **Check recent history** — Run `git log --oneline -10` to match the project's existing commit style
 3. **Verify intent** — Confirm the changes form a single logical unit; if not, suggest splitting into multiple commits
-4. **Stage files** — Add specific files by name (`git add file1 file2`), never `git add -A` or `git add .`
-5. **Craft message** — Select the correct type, add scope if helpful, write an imperative summary
-6. **Commit** — Use a heredoc for the message to ensure clean formatting
-7. **Verify** — Run `git status` after to confirm the commit succeeded
+4. **Run CI checks** — Before staging, run the project's linters, formatters, and test suite to catch issues early. Check `package.json` scripts, `Makefile`, or CI config for available commands. Fix any failures before proceeding.
+5. **Stage files** — Add specific files by name (`git add file1 file2`), never `git add -A` or `git add .`
+6. **Craft message** — Select the correct type, add scope if helpful, write an imperative summary
+7. **Commit** — Use a heredoc for the message to ensure clean formatting
+8. **Verify** — Run `git status` after to confirm the commit succeeded
 
 ### Multi-line Commits
 
