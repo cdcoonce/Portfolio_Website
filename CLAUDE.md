@@ -68,6 +68,10 @@ Skills live in `.claude/skills/`. Each `SKILL.md` defines an invocable skill wit
 **Trigger when:** user asks to create, generate, update, or improve a README, or says "document this project".
 **References:** [.claude/skills/readme-generator/references/](.claude/skills/readme-generator/references/) — analysis methodology, mermaid guidelines, badge reference.
 
+### `/deploy`
+
+**Trigger when:** user asks to deploy, redeploy, push to Lambda, or update the chat agent — or after updating context files or `lambda_function.py`.
+
 ## Project Context
 
 See [.claude/docs/project.md](.claude/docs/project.md) for project-specific details (tech stack, architecture, test markers).
