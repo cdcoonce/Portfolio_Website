@@ -3,6 +3,7 @@ import {
   applyMaxVisible,
   getFeaturedVisibility,
   getFilterFromURL,
+  getSortedIndices,
 } from '../WebContent/js/filter.js';
 
 describe('getFilteredVisibility', () => {
@@ -78,6 +79,23 @@ describe('getFeaturedVisibility', () => {
 
   test('returns all false when no featured cards', () => {
     expect(getFeaturedVisibility([false, false, false])).toEqual([false, false, false]);
+  });
+});
+
+describe('getSortedIndices', () => {
+  test('sorts newest first', () => {
+    const result = getSortedIndices(['2024-01', '2025-06', '2024-12']);
+    expect(result).toEqual([1, 2, 0]);
+  });
+
+  test('handles missing date — sorts to end', () => {
+    const result = getSortedIndices(['2025-01', '', '2024-06']);
+    expect(result).toEqual([0, 2, 1]);
+  });
+
+  test('stable sort for same date', () => {
+    const result = getSortedIndices(['2025-01', '2025-01', '2024-06']);
+    expect(result).toEqual([0, 1, 2]);
   });
 });
 
