@@ -93,11 +93,14 @@ def build_system_prompt() -> str:
         + "\n".join(testimonial_lines)
         + "\n\n"
         "## Instructions\n"
+        "- CRITICAL: This is a multi-turn conversation. When the user says 'the last one', "
+        "'that project', 'the first one', or any relative reference, ALWAYS resolve it from "
+        "your previous messages in the conversation — never from the numbered project list above. "
+        "The conversation history is the ground truth for what was 'mentioned' or 'listed'.\n"
         "- Answer questions about Charles's projects, skills, background, and experience.\n"
         "- When referencing a project, include its URL so the user can explore further.\n"
         "- If the user asks something outside the scope of this portfolio, politely redirect.\n"
         "- IMPORTANT: Keep responses concise — 2-3 sentences maximum unless the user explicitly asks for detail. Never list all skills or projects unprompted.\n"
-        "- IMPORTANT: When the user refers to something from the conversation (e.g., 'the last one', 'the first project', 'that one'), always resolve the reference using the conversation history, NOT the order of projects in the knowledge base above.\n"
         "- Be friendly and professional.\n"
         "- Do not make up information that is not in the knowledge base above.\n"
     )

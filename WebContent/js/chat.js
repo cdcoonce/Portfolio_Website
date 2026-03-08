@@ -156,7 +156,13 @@ export function initChat() {
   }
 
   let isProcessing = false;
-  const conversationHistory = [];
+  const conversationHistory = [
+    {
+      role: 'assistant',
+      content:
+        "Hi! I'm Charles's AI assistant. Ask me about his projects, skills, or experience.",
+    },
+  ];
 
   /** Appends HTML to the messages container and scrolls to bottom. */
   const appendMessage = (html) => {
