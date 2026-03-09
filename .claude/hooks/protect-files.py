@@ -10,7 +10,7 @@ file_path = data.get("tool_input", {}).get("file_path", "")
 if not file_path:
     sys.exit(0)
 
-PROTECTED_PATTERNS = [".env", "package-lock.json", "node_modules/", ".git/"]
+PROTECTED_PATTERNS = [".env", "package-lock.json", "uv.lock", "node_modules/", ".git/"]
 
 for pattern in PROTECTED_PATTERNS:
     if pattern in file_path:
