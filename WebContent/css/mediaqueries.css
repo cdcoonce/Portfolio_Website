@@ -29,6 +29,14 @@
     padding-bottom: 2vw;
   }
 
+  .hero-chat {
+    margin-top: 3rem;
+  }
+
+  .scroll-down {
+    display: none;
+  }
+
   #profile,
   .section-container {
     display: block;
