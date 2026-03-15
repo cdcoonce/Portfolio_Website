@@ -97,6 +97,41 @@
             </div>
           </div>
         </div>
+        <div id="chat-agent" class="hero-chat">
+          <div class="chat-container">
+            <h2 class="section_text__p1">Ask Me Anything</h2>
+            <p class="chat-subtitle">
+              Have a question about my projects, skills, or experience? Ask my AI assistant.
+            </p>
+            <div id="chat-messages" class="chat-messages" aria-live="polite" role="log">
+              <div class="chat-message assistant">
+                <p>
+                  Hi! I'm Charles's AI assistant. Ask me about his projects, skills, or experience.
+                </p>
+              </div>
+            </div>
+            <div class="chat-input-row">
+              <input
+                type="text"
+                id="chat-input"
+                class="chat-input"
+                placeholder="e.g., What projects use Python?"
+                aria-label="Type your question"
+                maxlength="1000"
+                autocomplete="off"
+              />
+              <button
+                type="button"
+                id="chat-send"
+                class="btn btn-color-1 chat-send"
+                aria-label="Send message"
+              >
+                Send
+              </button>
+            </div>
+            <p id="chat-rate-limit" class="chat-rate-limit" hidden></p>
+          </div>
+        </div>
         <button class="scroll-down" aria-label="Scroll to skills section">↓</button>
       </section>
       <section id="skills">
@@ -152,41 +187,6 @@
         <div class="projects-grid"></div>
         <div class="projects-footer">
           <a href="./projects.html" class="btn btn-color-1 view-all-link">View All Projects</a>
-        </div>
-      </section>
-      <section id="chat-agent">
-        <div class="chat-container">
-          <h2 class="section_text__p1">Ask Me Anything</h2>
-          <p class="chat-subtitle">
-            Have a question about my projects, skills, or experience? Ask my AI assistant.
-          </p>
-          <div id="chat-messages" class="chat-messages" aria-live="polite" role="log">
-            <div class="chat-message assistant">
-              <p>
-                Hi! I'm Charles's AI assistant. Ask me about his projects, skills, or experience.
-              </p>
-            </div>
-          </div>
-          <div class="chat-input-row">
-            <input
-              type="text"
-              id="chat-input"
-              class="chat-input"
-              placeholder="e.g., What projects use Python?"
-              aria-label="Type your question"
-              maxlength="1000"
-              autocomplete="off"
-            />
-            <button
-              type="button"
-              id="chat-send"
-              class="btn btn-color-1 chat-send"
-              aria-label="Send message"
-            >
-              Send
-            </button>
-          </div>
-          <p id="chat-rate-limit" class="chat-rate-limit" hidden></p>
         </div>
       </section>
       <section id="testimonials">
