@@ -22,15 +22,15 @@ projects.js (data) → renderer.js (DOM) → main.js (orchestrates) → filter.j
    ```js
    export const projects = [
      {
-       id: "national-parks-dashboard",
-       href: "https://...",
-       title: "National Parks Dashboard",
-       date: "2024-09", // YYYY-MM format, sole source for dates
-       description: "Interactive Shiny dashboard...",
-       image: "./WebContent/assets/...",
-       imageAlt: "National Parks Dashboard",
+       id: 'national-parks-dashboard',
+       href: 'https://...',
+       title: 'National Parks Dashboard',
+       date: '2024-09', // YYYY-MM format, sole source for dates
+       description: 'Interactive Shiny dashboard...',
+       image: './WebContent/assets/...',
+       imageAlt: 'National Parks Dashboard',
        imageContain: true, // ONLY present when true (omit for default cover behavior)
-       tags: ["r", "shiny", "analytics-dashboard", "visualization"],
+       tags: ['r', 'shiny', 'analytics-dashboard', 'visualization'],
        featured: true, // ONLY present when true
      },
      // ... all projects (18 on this branch)
@@ -60,14 +60,14 @@ projects.js (data) → renderer.js (DOM) → main.js (orchestrates) → filter.j
 4. **[`WebContent/js/main.js`](WebContent/js/main.js)** — Import projects + renderer, render cards before `initFilter()`:
 
    ```js
-   import { projects } from "./projects.js";
-   import { renderProjectCards } from "./renderer.js";
+   import { projects } from './projects.js';
+   import { renderProjectCards } from './renderer.js';
    // inside DOMContentLoaded:
-   const grid = document.querySelector(".projects-grid");
+   const grid = document.querySelector('.projects-grid');
    if (grid) {
      renderProjectCards(grid, projects);
    } else {
-     console.warn("projects-grid container not found");
+     console.warn('projects-grid container not found');
    }
    // then existing initFilter() calls — unchanged
    ```

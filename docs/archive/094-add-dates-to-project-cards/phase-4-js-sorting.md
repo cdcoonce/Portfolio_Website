@@ -33,16 +33,16 @@ describe('getSortedIndices', () => {
 ## Implementation
 
 1. **Export new pure function** `getSortedIndices(dates)` from `filter.js`:
-    - Maps each date to `{ date, index }` pair
-    - Replaces missing/empty dates with `"0000-00"` (sorts to end)
-    - Sorts descending by date string (`b.date.localeCompare(a.date)`)
-    - Returns array of original indices in sorted order
+   - Maps each date to `{ date, index }` pair
+   - Replaces missing/empty dates with `"0000-00"` (sorts to end)
+   - Sorts descending by date string (`b.date.localeCompare(a.date)`)
+   - Returns array of original indices in sorted order
 
 2. **In `initFilter()`**, before building `cardTagSets`:
-    - Read `data-date` from all cards
-    - Compute sorted indices via `getSortedIndices()`
-    - Reorder DOM: `sortedIndices.forEach(i => container.appendChild(cards[i]))`
-    - Re-query cards after reorder so subsequent filter logic uses the new order
+   - Read `data-date` from all cards
+   - Compute sorted indices via `getSortedIndices()`
+   - Reorder DOM: `sortedIndices.forEach(i => container.appendChild(cards[i]))`
+   - Re-query cards after reorder so subsequent filter logic uses the new order
 
 ## Verify
 
