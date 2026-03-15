@@ -4,7 +4,7 @@
 
 - **Type:** Guided Coursework
 - **Status:** Complete
-- **Featured:** Yes
+- **Featured:** No
 - **Date:** Feb 2025
 
 ## Summary
