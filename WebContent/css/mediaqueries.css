@@ -185,6 +185,10 @@
 
   /* === Chat Agent === */
 
+  .hero-chat {
+    padding: 0 1rem;
+  }
+
   .chat-container h2 {
     text-align: center;
   }

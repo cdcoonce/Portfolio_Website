@@ -256,11 +256,18 @@ section {
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
+  place-content: center center;
+  flex-wrap: wrap;
   max-width: 1700px;
   margin: 0 auto;
-  gap: 3rem;
+  gap: 4rem 3rem;
   min-height: calc(100vh - 4rem);
+}
+
+.hero-chat {
+  flex-basis: 100%;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
 .logo {
@@ -489,10 +496,7 @@ section {
 /* === Chat Agent Section === */
 
 #chat-agent {
-  padding: 2rem;
-  background-color: var(--color-bg-white);
-  max-width: 800px;
-  margin: 2rem auto;
+  padding: 0;
 }
 
 .chat-container {
