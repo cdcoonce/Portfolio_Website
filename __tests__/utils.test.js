@@ -1,4 +1,4 @@
-import { getItemsToShow, isDesktop } from '../WebContent/js/utils.js';
+import { getItemsToShow, isDesktop, formatProjectDate } from '../WebContent/js/utils.js';
 
 describe('getItemsToShow', () => {
   test('returns desktop count when viewport exceeds breakpoint', () => {
@@ -25,5 +25,27 @@ describe('isDesktop', () => {
 
   test('returns true above breakpoint', () => {
     expect(isDesktop(1400, 1200)).toBe(true);
+  });
+});
+
+describe('formatProjectDate', () => {
+  test('formats YYYY-MM to abbreviated month and year', () => {
+    expect(formatProjectDate('2024-09')).toBe('Sep 2024');
+  });
+
+  test('formats January correctly', () => {
+    expect(formatProjectDate('2025-01')).toBe('Jan 2025');
+  });
+
+  test('formats December correctly', () => {
+    expect(formatProjectDate('2024-12')).toBe('Dec 2024');
+  });
+
+  test('returns empty string for undefined input', () => {
+    expect(formatProjectDate(undefined)).toBe('');
+  });
+
+  test('returns empty string for empty string input', () => {
+    expect(formatProjectDate('')).toBe('');
   });
 });
