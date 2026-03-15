@@ -20,17 +20,17 @@ In `TestParseClassification`:
 
 1. **Add `MONTH_MAP` dict** at module level:
 
-    ```python
-    MONTH_MAP = {
-        "Jan": "01", "Feb": "02", "Mar": "03", "Apr": "04",
-        "May": "05", "Jun": "06", "Jul": "07", "Aug": "08",
-        "Sep": "09", "Oct": "10", "Nov": "11", "Dec": "12",
-    }
-    ```
+   ```python
+   MONTH_MAP = {
+       "Jan": "01", "Feb": "02", "Mar": "03", "Apr": "04",
+       "May": "05", "Jun": "06", "Jul": "07", "Aug": "08",
+       "Sep": "09", "Oct": "10", "Nov": "11", "Dec": "12",
+   }
+   ```
 
 2. **Add `parse_date_to_sort_key(date_str: str) -> str`** helper:
-    - Parses `Mon YYYY` into `YYYY-MM` using `MONTH_MAP`
-    - Returns `""` for empty/missing input
+   - Parses `Mon YYYY` into `YYYY-MM` using `MONTH_MAP`
+   - Returns `""` for empty/missing input
 
 3. **Update `parse_classification()`** — add regex for `**Date:**` line, call `parse_date_to_sort_key()`, return both `date` and `date_sort` in result dict
 
