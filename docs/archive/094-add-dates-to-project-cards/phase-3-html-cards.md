@@ -53,25 +53,25 @@ After:
 
 Only 17 of 21 context files have HTML cards. The 4 context-only projects (national-parks-analysis, energy-analytics-pipeline, renewable-asset-pipeline, synthetic-signal-observatory) receive dates in Phase 2 only for the knowledge base.
 
-| Card Title                                | data-date | Display  |
-| ----------------------------------------- | --------- | -------- |
-| National Parks Dashboard                  | 2024-09   | Sep 2024 |
-| Wine Quality Analysis                     | 2024-11   | Nov 2024 |
-| Electricity Consumption                   | 2025-02   | Feb 2025 |
-| Manufacturing Downtime Analysis           | 2025-02   | Feb 2025 |
-| Portfolio Website                         | 2024-08   | Aug 2024 |
-| World Happiness Dashboard                 | 2024-09   | Sep 2024 |
-| Data Archive                              | 2024-12   | Dec 2024 |
-| NYC Collision Analysis                    | 2025-02   | Feb 2025 |
-| Global CO2 Emissions                      | 2025-02   | Feb 2025 |
-| AirBnB Listing Analysis                   | 2025-02   | Feb 2025 |
-| Sleep Deprivation Analysis                | 2025-02   | Feb 2025 |
-| Restaurant Order Analysis                 | 2025-03   | Mar 2025 |
-| Motor Vehicle Thefts                      | 2025-03   | Mar 2025 |
-| Baby Names Analysis                       | 2025-03   | Mar 2025 |
-| Spaceship Titanic Classification          | 2025-05   | May 2025 |
-| Ames Housing Price Prediction             | 2025-10   | Oct 2025 |
-| Housing Affordability & Commute Tradeoffs | 2025-12   | Dec 2025 |
+| Card Title | data-date | Display |
+| --- | --- | --- |
+| National Parks Dashboard | 2024-09 | Sep 2024 |
+| Wine Quality Analysis | 2024-11 | Nov 2024 |
+| Electricity Consumption | 2025-02 | Feb 2025 |
+| Manufacturing Downtime Analysis | 2025-02 | Feb 2025 |
+| Portfolio Website | 2024-08 | Aug 2024 |
+| World Happiness Dashboard | 2024-09 | Sep 2024 |
+| Data Archive | 2024-12 | Dec 2024 |
+| NYC Collision Analysis | 2025-02 | Feb 2025 |
+| Global CO2 Emissions | 2025-02 | Feb 2025 |
+| AirBnB Listing Analysis | 2025-02 | Feb 2025 |
+| Sleep Deprivation Analysis | 2025-02 | Feb 2025 |
+| Restaurant Order Analysis | 2025-03 | Mar 2025 |
+| Motor Vehicle Thefts | 2025-03 | Mar 2025 |
+| Baby Names Analysis | 2025-03 | Mar 2025 |
+| Spaceship Titanic Classification | 2025-05 | May 2025 |
+| Ames Housing Price Prediction | 2025-10 | Oct 2025 |
+| Housing Affordability & Commute Tradeoffs | 2025-12 | Dec 2025 |
 
 ## Verify
 
