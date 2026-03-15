@@ -3,6 +3,8 @@
 import { initFilter, getFilterFromURL } from './filter.js';
 import { initCarousel } from './carousel.js';
 import { initChat } from './chat.js';
+import { projects } from './projects.js';
+import { renderProjectCards } from './renderer.js';
 
 /**
  * Application entry point.
@@ -62,6 +64,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const navHeight = nav ? nav.offsetHeight : 0;
       window.scrollTo({ top: skills.offsetTop - navHeight, behavior: 'smooth' });
     });
+  }
+
+  // Render project cards from data module
+  const grid = document.querySelector('.projects-grid');
+  if (grid) {
+    renderProjectCards(grid, projects);
+  } else {
+    console.warn('projects-grid container not found');
   }
 
   // Page-aware initialization

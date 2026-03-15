@@ -18,3 +18,30 @@ export const getItemsToShow = (viewportWidth, breakpoint, desktopCount, mobileCo
  * @returns {boolean}
  */
 export const isDesktop = (viewportWidth, breakpoint) => viewportWidth >= breakpoint;
+
+const MONTH_ABBR = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
+];
+
+/**
+ * Formats a YYYY-MM date string into an abbreviated display string.
+ * @param {string} dateStr - Date in 'YYYY-MM' format
+ * @returns {string} Formatted date like 'Sep 2024', or empty string if invalid
+ */
+export function formatProjectDate(dateStr) {
+  if (!dateStr) return '';
+  const [year, month] = dateStr.split('-');
+  const monthIndex = parseInt(month, 10) - 1;
+  return `${MONTH_ABBR[monthIndex]} ${year}`;
+}
