@@ -216,7 +216,7 @@ class TestLoadProject:
 class TestLoadAllProjects:
     def test_returns_21_projects(self):
         projects = load_all_projects()
-        assert len(projects) == 21
+        assert len(projects) == 22
 
     def test_4_featured_projects(self):
         projects = load_all_projects()
@@ -275,7 +275,7 @@ class TestBuild:
         kb = build()
         assert kb["person"]["name"] == "Charles Coonce"
         assert len(kb["skills"]) == 9
-        assert len(kb["projects"]) == 21
+        assert len(kb["projects"]) == 22
         assert isinstance(kb["testimonials"], list)
 
     def test_full_build_is_json_serializable(self):

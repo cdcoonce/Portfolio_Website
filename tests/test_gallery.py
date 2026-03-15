@@ -61,14 +61,14 @@ class TestGallery:
 class TestProjectsPage:
     def test_all_cards_visible_by_default(self, projects_page):
         visible = projects_page.locator('.project-card:visible')
-        assert visible.count() == 17, f'Expected 17 visible cards, got {visible.count()}'
+        assert visible.count() == 18, f'Expected 17 visible cards, got {visible.count()}'
 
     def test_filter_works(self, projects_page):
         projects_page.click('[data-filter="python"]')
         visible = projects_page.locator('.project-card:visible')
         count = visible.count()
         assert count > 0, 'No cards visible after filtering'
-        assert count <= 17
+        assert count <= 18
 
     def test_url_param_preselects_filter(self, browser, server):
         page = browser.new_page()
@@ -88,12 +88,12 @@ class TestProjectsPage:
         projects_page.click('[data-filter="python"]')
         projects_page.click('.skill-filter-reset')
         visible = projects_page.locator('.project-card:visible')
-        assert visible.count() == 17, f'Expected 17 visible after reset, got {visible.count()}'
+        assert visible.count() == 18, f'Expected 17 visible after reset, got {visible.count()}'
 
     def test_cards_display_date(self, projects_page):
         dates = projects_page.locator('.project-card:visible .project-date')
         count = dates.count()
-        assert count == 17, f'Expected 17 date elements, got {count}'
+        assert count == 18, f'Expected 17 date elements, got {count}'
         for i in range(count):
             text = dates.nth(i).text_content().strip()
             assert text, f'Date element {i} is empty'
