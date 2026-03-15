@@ -29,7 +29,7 @@ class TestHTMLValidation:
 
     def test_all_project_cards_have_descriptions(self, soup):
         cards = soup.find_all(class_='project-card')
-        assert len(cards) == 17, f'Expected 17 project cards, found {len(cards)}'
+        assert len(cards) == 18, f'Expected 18 project cards, found {len(cards)}'
         for card in cards:
             content = card.find('div', class_='card-content')
             desc = content.find('p') if content else None
@@ -53,7 +53,7 @@ class TestHTMLValidation:
 
     def test_project_cards_are_anchor_elements(self, soup):
         cards = soup.find_all(class_='project-card')
-        assert len(cards) == 17, f'Expected 17 project cards, found {len(cards)}'
+        assert len(cards) == 18, f'Expected 18 project cards, found {len(cards)}'
         for card in cards:
             title = card.find('h3')
             title_text = title.get_text(strip=True) if title else 'unknown'
@@ -142,9 +142,9 @@ class TestProjectsPageValidation:
     def test_projects_page_exists(self):
         assert Path('projects.html').is_file(), 'projects.html must exist at project root'
 
-    def test_projects_page_has_all_17_cards(self, projects_soup):
+    def test_projects_page_has_all_18_cards(self, projects_soup):
         cards = projects_soup.find_all(class_='project-card')
-        assert len(cards) == 17, f'Expected 17 project cards, found {len(cards)}'
+        assert len(cards) == 18, f'Expected 18 project cards, found {len(cards)}'
 
     def test_projects_page_has_filter_buttons(self, projects_soup):
         tags = projects_soup.find_all('button', class_='skill-tag')
