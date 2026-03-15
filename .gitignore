@@ -7,6 +7,11 @@ __pycache__/
 .pytest_cache/
 coverage/
 
+# Claude Code local config and artifacts
+.claude/settings.local.json
+.claude/*.zip
+.claude/.DS_Store
+
 # Lambda deployment artifacts
 lambda/package/
 lambda/deployment*.zip
