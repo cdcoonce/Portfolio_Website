@@ -26,7 +26,7 @@ Full process: [.claude/docs/parallel-agents.md](.claude/docs/parallel-agents.md)
 
 ## Planning
 
-Write implementation plans to `docs/plans/{file_name}.md` before starting non-trivial work. Once a plan has been fully implemented, move it to `docs/plans/archive/`.
+Write implementation plans to `docs/plans/{file_name}.md` before starting non-trivial work. Once a plan has been fully implemented, move it to `docs/archive/`.
 
 ## Code Style
 
@@ -55,10 +55,6 @@ Skills live in `.claude/skills/`. Each `SKILL.md` defines an invocable skill wit
 
 **Trigger when:** user needs to interact with GitLab — issues, merge requests, MR reviews, CI/CD pipelines, or pushing changes.
 
-### `/github-cli`
-
-**Trigger when:** user needs to interact with GitHub — issues, pull requests, PR reviews, GitHub Actions workflows, or pushing changes.
-
 ### `/commit`
 
 **Trigger when:** user asks to commit, make a commit, save work, or when Claude needs to commit changes after completing a task.
@@ -68,9 +64,15 @@ Skills live in `.claude/skills/`. Each `SKILL.md` defines an invocable skill wit
 **Trigger when:** user asks to create, generate, update, or improve a README, or says "document this project".
 **References:** [.claude/skills/readme-generator/references/](.claude/skills/readme-generator/references/) — analysis methodology, mermaid guidelines, badge reference.
 
-### `/deploy`
+### `/plan-ceo-review`
 
-**Trigger when:** user asks to deploy, redeploy, push to Lambda, or update the chat agent — or after updating context files or `lambda_function.py`.
+**Trigger when:** user asks for a plan review, CEO review, mega review, or wants a plan challenged/stress-tested before implementation.
+**References:** [.claude/skills/plan-ceo-review/references/](.claude/skills/plan-ceo-review/references/) — review sections, required outputs.
+
+### `/project-context`
+
+**Trigger when:** user asks to create, update, or refresh project context, says "update project.md", or when onboarding Claude to a new repo.
+**Output:** `.claude/docs/project.md`
 
 ## Project Context
 
