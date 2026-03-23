@@ -11,6 +11,7 @@ coverage/
 .claude/settings.local.json
 .claude/*.zip
 .claude/.DS_Store
+.claude/worktrees/
 
 # Lambda deployment artifacts
 lambda/package/
