@@ -23,12 +23,23 @@ The site is tested with a two-layer strategy: Jest with jsdom for JavaScript uni
 
 ## Key Results & Insights
 
-- The site serves 17 project cards across a homepage (4 featured) and a full gallery page, with single-select skill-tag filtering and URL-driven deep links.
-- The testimonial carousel displays 7 recommendations with responsive layout (2 on desktop, 1 on mobile), auto-scroll at 20-second intervals, and dot pagination.
-- Responsive breakpoints at 1250px and 700px ensure the site works well on desktop, tablet, and mobile, with a hamburger menu for mobile navigation.
-- WCAG 2.1 AA compliance is verified through automated axe-core accessibility testing.
-- The CI/CD pipeline runs Prettier, Stylelint, ESLint, Jest, and pytest on every pull request, with automatic deployment on merge to master.
-- The site is hosted on GitHub Pages with a custom domain at charleslikesdata.com.
+### Site Functionality
+
+- **17 project cards** span two pages — a homepage (4 featured) and a full gallery — with single-select skill-tag filtering and URL-driven deep links that preserve filter state across navigation (e.g., `projects.html?filter=python` bookmarks a filtered view).
+- The testimonial carousel displays **7 professional recommendations** with responsive layout (2 visible on desktop, 1 on mobile), auto-scroll at 20-second intervals, manual navigation arrows, and dot pagination — all keyboard-navigable and ARIA-attributed.
+- Responsive breakpoints at **1250px and 700px** ensure correct layout across desktop, tablet, and mobile viewports, with a hamburger menu replacing the navigation bar on smaller screens.
+
+### Code Quality & Engineering Standards
+
+- **JavaScript organized as ES modules** with pure filtering functions decoupled from DOM manipulation — enabling Jest unit testing of business logic without launching a browser or mocking the DOM extensively.
+- **WCAG 2.1 AA compliance** is continuously verified through automated axe-core accessibility tests in every CI run — compliance is a measurable pass/fail metric, not a one-time manual audit that drifts over time.
+- Semantic HTML5 with ARIA attributes throughout: all interactive elements are keyboard-navigable, all images have descriptive alt text, and the page structure is screen-reader-compatible.
+
+### DevOps & CI/CD
+
+- **GitHub Actions pipeline runs Prettier, Stylelint, ESLint, Jest, and pytest** (including Playwright E2E tests) on every pull request — code reaches master only when all checks pass, with no manual gate-keeping required.
+- Automatic deployment from master to gh-pages means every merged PR goes live at **charleslikesdata.com** within minutes with no manual deployment step — a production-grade delivery pattern applied to a personal project.
+- Semantic versioning in `package.json` and a maintained `CHANGELOG.md` demonstrate release discipline: every significant change is documented with type, scope, and rationale rather than accumulating undifferentiated commits.
 
 ## Technologies Used
 

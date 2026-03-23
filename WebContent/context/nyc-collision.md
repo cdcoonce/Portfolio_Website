@@ -21,12 +21,26 @@ Charles prepared the data by extracting weekday and hour values from the date an
 
 ## Key Results & Insights
 
-- Notable increases in collisions occurred in warmer months, particularly between February and June, with a general downward trend from June through December.
-- Rush hours (2 PM – 6 PM) on weekdays showed the highest collision density, while late night and early morning hours had the lowest.
-- Weekends between 12 AM and 1 AM showed elevated collision numbers compared to the same hours on weekdays.
-- The top 3 contributing factors were driver inattention/distraction, unspecified causes, and failure to yield right-of-way.
-- More than 60% of "failure to yield" collisions resulted in injury or death, making it the most dangerous specific factor.
-- Nearly 30% of top contributing factors were classified as "unspecified," suggesting a data quality issue that limits more precise analysis.
+### Seasonal Patterns
+
+- **Collision rates increased significantly in warmer months**, particularly February through June, then declined from June through December — consistent with increased vehicle activity, cycling traffic, and pedestrian exposure in spring and early summer.
+- Multi-year comparison across 2021, 2022, and 2023 showed consistent seasonal patterns, suggesting the February–June peak is a structural feature of NYC collision dynamics, not an outlier year.
+
+### Time-of-Day and Day-of-Week Patterns
+
+- **Rush hours (2 PM – 6 PM) on weekdays showed the highest collision density** — afternoon rush generates higher collision risk than morning rush, likely due to fatigue accumulation across the day combined with peak traffic volume.
+- **Late night and early morning hours had the lowest weekday collision counts**, but weekend overnight hours (particularly 12 AM – 1 AM Saturday and Sunday) showed elevated collisions relative to the same hours on weekdays — consistent with alcohol-related driving patterns.
+
+### Contributing Factors and Severity
+
+- **Driver inattention/distraction was the leading cause of collisions**, followed by unspecified causes and failure to yield right-of-way — establishing that behavioral factors dominate over mechanical or infrastructure failures.
+- **"Failure to yield" was the most dangerous specific factor**: more than 60% of collisions citing this cause resulted in injury or death, far exceeding the lethality rate of inattention collisions — a finding with direct implications for enforcement prioritization.
+- **Nearly 30% of contributing factors were classified as "unspecified"**, indicating a systematic data quality problem in collision reporting that limits the precision of any intervention strategy and highlights an opportunity for improved data collection.
+
+### Analytical Takeaway
+
+- The most actionable finding is the severity differential: enforcement targeting "failure to yield" violations would address the highest-injury-per-incident factor even if it is not the most common cause.
+- The seasonal and time-of-day patterns provide a foundation for targeted enforcement scheduling — concentrating resources in February–June afternoons and weekend overnights would address the two highest-risk windows simultaneously.
 
 ## Technologies Used
 

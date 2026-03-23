@@ -21,12 +21,26 @@ Charles structured the analysis around four objectives. First, he tracked popula
 
 ## Key Results & Insights
 
-- Michael and Jessica dominated the 1980s and 1990s as the top boy and girl names, respectively.
-- By the 2000s, Jacob and Emily emerged at the top, reflecting cultural shifts in naming preferences.
-- The South had the largest total number of births, influencing national trends.
-- Names like Aidan and Skylar showed the biggest popularity jumps from 1980 to 2009.
-- The most popular androgynous names (used for both genders) included some surprising entries like Michael and Jessica, which were occasionally used for the opposite gender.
-- The shortest names (2 letters, e.g., Ty, Bo) and longest names (15 letters, e.g., Franciscojavier) had vastly different popularity levels.
+### Decade-Over-Decade Trends
+
+- **Michael and Jessica dominated the 1980s and 1990s** as the top boy and girl names respectively — a cultural consistency across two decades that reflects a generational peak before giving way to new patterns.
+- **By the 2000s, Jacob and Emily had risen to the top**, marking a clear generational shift — syllable patterns, cultural influences, and pop culture references all drive decade-scale naming cycles in measurable ways.
+- **Names like Aidan and Skylar showed the largest rank jumps from 1980 to 2009**, demonstrating how a name can go from obscurity to national prominence within a single generation — a pattern attributable to a confluence of pop culture moments and social network effects.
+
+### Regional Analysis
+
+- **The South had the largest total number of births** across the 1980–2009 window, giving it an outsized influence on national name rankings — names that trend first in high-birth regions propagate upward in overall rankings more quickly.
+- Regional top-name lists revealed distinct preferences beyond just birth volume, pointing to cultural, religious, and demographic variation in naming conventions across U.S. regions.
+
+### Unique Naming Patterns
+
+- **The most popular androgynous names** (used for both genders in measurable quantities) included unexpected entries — names historically gendered one way that cross over in small but statistically visible proportions.
+- **Name length varied widely**: the shortest tracked names (2 letters, e.g., Ty, Bo) clustered at low-to-moderate popularity, while the longest (15 letters, e.g., Franciscojavier) appeared in very small volumes — reflecting the trade-off between distinctiveness and ease of use.
+
+### SQL Technique Takeaways
+
+- Window functions (`ROW_NUMBER()`, `RANK()`) enabled per-year and per-decade ranking without subquery duplication — a key advantage over traditional aggregation for temporal analysis.
+- CTEs and `UNION` operations allowed multi-step analytic questions to be answered in single, readable queries — a pattern directly applicable to business intelligence reporting workflows.
 
 ## Technologies Used
 
