@@ -21,9 +21,21 @@ Charles built the pipeline using Dagster's software-defined asset paradigm, wher
 
 ## Key Results & Insights
 
-- The pipeline successfully demonstrates the software-defined asset paradigm — dependencies are inferred from asset relationships rather than hard-coded as a DAG.
-- The asset sensor reliably triggers email notifications when the daily power trends asset is materialized, showcasing event-driven monitoring.
-- The architecture is modular and extensible, with clear separation between asset definitions, jobs, sensors, and utilities.
+### Pipeline Architecture Outcomes
+
+- **Demonstrated that Dagster's software-defined asset paradigm eliminates manual DAG wiring** — dependencies are declared through function inputs and outputs rather than explicit edges, making the pipeline self-documenting and easier to refactor.
+- The `power_trends_by_day` asset is the materialization trigger for the downstream sensor, proving that **asset-centric orchestration enables clean separation between computation and reaction** — the sensor has no knowledge of how the asset is computed, only that it has been updated.
+- **dbt + DuckDB + Dagster forms a cohesive local analytics stack**: dbt handles the SQL transformation layer, DuckDB provides fast in-process analytics without a server, and Dagster ties them together with observability and scheduling.
+
+### Event-Driven Monitoring
+
+- **The custom `AssetSensorDefinition` fires reliably** on each successful materialization of the daily asset — demonstrating that event-driven stakeholder notification can be implemented without a separate message queue or scheduler.
+- The SMTP email notification utility is decoupled from both the sensor and the asset, making it independently testable and reusable — a design decision that reinforces single-responsibility principles in pipeline code.
+
+### Extensibility Demonstration
+
+- The modular structure (assets / jobs / sensors / utilities as separate concerns) means adding a new data source requires only a new asset definition — the sensor and job layers require no modification.
+- Polars was used for data verification rather than Pandas, demonstrating comfort with the modern Python data ecosystem beyond the standard Pandas-centric workflow.
 
 ## Technologies Used
 

@@ -188,9 +188,9 @@ UTF-8 encoding corruption occurs when text is saved or transmitted with incorrec
 | âœ"          | ✓       | Checkmark           |
 | â†           | ←       | Left arrow          |
 | â†'          | →       | Right arrow         |
-| Â©           | ©       | Copyright           |
-| Â®           | ®       | Registered          |
-| â„¢          | ™       | Trademark           |
+| Â©          | ©      | Copyright           |
+| Â®          | ®      | Registered          |
+| â„¢          | ™      | Trademark           |
 | â"Œâ"€â"€â"˜ | ┌──┘    | Box drawing         |
 
 ### Example

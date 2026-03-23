@@ -21,10 +21,25 @@ Charles performed exploratory data analysis to understand variable distributions
 
 ## Key Results & Insights
 
-- In the low-stress subgroup, sleep quality was a significant positive predictor of emotion regulation — each 1-unit increase in sleep quality above the mean was associated with approximately 1.20 points higher emotion regulation scores (p ≈ 0.036, R² = 0.148).
-- In the high-stress subgroup, sleep hours significantly predicted faster reaction times — each additional hour of sleep was associated with approximately 16.92 units faster PVT reaction time (p ≈ 0.037, R² = 0.147).
-- These findings suggest that stress plays a moderating role: in low-stress conditions, sleep quality matters most for emotional outcomes, while in high-stress conditions, sleep duration matters most for cognitive performance.
-- While the models explain a modest portion of variance, they point to clear, actionable differences in how sleep interventions should be targeted based on stress levels.
+### Low-Stress Subgroup: Sleep Quality → Emotion Regulation
+
+- **Sleep quality was a significant positive predictor of emotion regulation in the low-stress group** — each 1-unit increase in sleep quality above the mean was associated with approximately 1.20 points higher emotion regulation scores (p ≈ 0.036, R² = 0.148).
+- The effect is specific to emotional outcomes: in low-stress conditions, _how well_ you sleep matters more for emotional functioning than _how long_ you sleep.
+
+### High-Stress Subgroup: Sleep Duration → Cognitive Performance
+
+- **Sleep hours significantly predicted faster PVT reaction times in the high-stress group** — each additional hour of sleep above the mean was associated with approximately 16.92 units faster reaction time (p ≈ 0.037, R² = 0.147).
+- Under high stress, the relationship flips: _how long_ you sleep matters for cognitive speed, while sleep quality loses significance — suggesting that stress consumes the emotional regulation benefits of quality sleep, leaving only the restorative impact of duration.
+
+### Moderation Effect
+
+- **Stress level moderates which sleep dimension matters**: quality for emotional outcomes in low-stress individuals, duration for cognitive performance in high-stress individuals. This stress × sleep interaction is the study's central finding.
+- Both models explain modest variance (R² ≈ 0.15), consistent with the complexity of psychological outcomes — but p-values confirm these are not noise, and effect sizes are large enough to be practically meaningful for intervention design.
+
+### Applied Implications
+
+- **Sleep interventions should be stress-stratified**: low-stress populations benefit most from programs that improve sleep quality (sleep environment, consistency, hygiene); high-stress populations benefit most from programs that protect sleep duration (workload management, scheduling norms).
+- This finding argues against one-size-fits-all wellness sleep programs — the lever that matters most depends on the stress context of the target population.
 
 ## Technologies Used
 

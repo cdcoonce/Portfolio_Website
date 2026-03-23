@@ -23,11 +23,25 @@ He then trained three models of increasing flexibility: Linear Regression as a h
 
 ## Key Results & Insights
 
-- The Neural Network achieved the best performance with an RMSE of approximately $26,940, followed by kNN at $27,025 and Linear Regression at $28,152.
-- The kNN analysis clearly demonstrated the bias-variance tradeoff — very low k values overfit (high variance), while high k values underfit (high bias), with optimal performance around k=5.
-- The Neural Network captured complex nonlinear relationships without significant overfitting, validating the benefit of increased model flexibility when paired with proper architecture.
-- Cross-validation confirmed that kNN consistently outperformed Linear Regression, while the Neural Network showed the best generalization overall.
-- Feature engineering (especially TotalSF) significantly improved results across all models.
+### Model Performance
+
+- **The Neural Network achieved the best overall performance** (RMSE ≈ $26,940), narrowly outperforming kNN ($27,025) and Linear Regression ($28,152) — a gap of roughly $1,200 between best and worst, reflecting meaningful but not dramatic differences across model classes.
+- Cross-validation confirmed the ranking: the Neural Network generalized best, kNN consistently outperformed Linear Regression, and all three models benefited substantially from feature engineering.
+
+### Bias-Variance Tradeoff (kNN Analysis)
+
+- **The kNN RMSE-vs-k plot clearly demonstrated the bias-variance tradeoff**: at k=1, the model memorized training data (near-zero training error, high test error); as k increased toward 40, performance plateaued into underfitting. Optimal performance emerged around k=5.
+- This visual illustration of the tradeoff — overfit at low k, underfit at high k — made kNN the most pedagogically valuable model in the comparison, even though it finished second overall.
+
+### Feature Engineering Impact
+
+- **TotalSF (combined square footage across all floors and basement) was the single most impactful engineered feature**, contributing more predictive signal than any raw feature in the dataset.
+- TotalBath (combined full and half bath count), AgeAtSale, and RemodelAge further grounded the model in the property's lifecycle, capturing depreciation effects that raw year-built columns underrepresent.
+
+### Analytical Takeaway
+
+- **Model flexibility is valuable only when paired with proper architecture.** The Neural Network's advantage came from its ability to model interactions without overfitting — not just from adding layers.
+- The performance gap between the three models was modest, but feature engineering moved all three significantly — validating that a well-engineered feature set often matters more than model choice.
 
 ## Technologies Used
 

@@ -21,9 +21,22 @@ Charles began with data profiling, discovering that the dataset included aggrega
 
 ## Key Results & Insights
 
-- Early industrial powers (certain European countries and the United States) dominated CO₂ emissions until the mid-20th century, after which countries like China and India increased their share significantly.
-- Per capita analysis revealed a different story than absolute emissions — some countries with large total emissions have moderate per capita rates due to large populations, while smaller countries can have very high per capita emissions.
-- The interactive dashboard allows users to dynamically select how many countries to display and compare specific countries side by side.
+### Historical Emissions Patterns
+
+- **Early industrial powers (the United Kingdom, United States, and select Western European nations) dominated global emissions from the mid-1800s through the mid-20th century**, reflecting coal-driven industrialization. Their share of global emissions declined sharply after mid-century as Asia industrialized.
+- **China's share of global CO₂ emissions grew dramatically from the 1980s onward**, surpassing the United States in absolute terms by the 2000s — a trend made immediately visible in the line chart's share-of-global-emissions view.
+- The United States held the largest cumulative historical emissions share through most of the 20th century, a distinction that persists when the time-series is aggregated over the full 1750–2022 span.
+
+### Per Capita vs. Absolute Emissions
+
+- **Per capita and absolute emissions rankings diverge significantly** — countries like Qatar, Kuwait, and several Gulf states rank among the highest per capita emitters despite negligible absolute totals, while China and India rank lower per capita despite massive absolute emissions.
+- The choropleth map made this divergence visually compelling: large countries with enormous populations appear muted on a per capita basis despite dominating absolute rankings, while small high-income oil states are intensely colored.
+- This per capita framing is critical for equity-based policy discussions — responsibility for historical emissions is distributed very differently depending on which metric is used.
+
+### Dashboard Interactivity
+
+- The dynamic "Top N" parameter allows users to focus on the most significant emitters at any point in time, reducing visual noise and enabling cleaner country-to-country comparison.
+- Filtering out non-country aggregates (regional groupings without ISO codes) was essential — their inclusion would have made the top-emitter charts misleading by mixing country-level and supra-national totals.
 
 ## Technologies Used
 

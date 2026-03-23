@@ -50,7 +50,7 @@ Write the file using the structure below. If `.claude/docs/project.md` already e
 
 The generated `project.md` must follow this structure. Scale depth to match the project — small projects may skip sections, complex projects may add subsections.
 
-```markdown
+````markdown
 # {Project Name} — Project Context
 
 {One-sentence description: what it is, what it does, key technology.}
@@ -67,6 +67,7 @@ The generated `project.md` must follow this structure. Scale depth to match the 
 ```text
 {annotated directory tree — one short phrase per entry}
 ```
+````
 
 ## Data Flow
 
@@ -88,7 +89,6 @@ The generated `project.md` must follow this structure. Scale depth to match the 
 
 - **{Pattern name}** (`{file}`): {one-sentence explanation}
 - ...only non-obvious patterns worth calling out
-```
 
 ---
 

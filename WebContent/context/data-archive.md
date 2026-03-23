@@ -23,11 +23,27 @@ Before writing any code, Charles collaborated with stakeholders to define and fi
 
 ## Key Results & Insights
 
-- Successfully archived all historical analytics data from 70 properties before the deprecation deadline.
-- Automated validation caught data discrepancies early, preserving data integrity across the entire archive.
-- The token-based anonymization system protected sensitive property names while maintaining data usability.
-- The automated approach reduced what would have been weeks of manual export work to a manageable timeline.
-- Validation reports (both summary and detailed) provided stakeholders with confidence in the completeness and accuracy of the archived data.
+### Scale & Scope
+
+- **70 web properties archived** — each with up to 10+ years of monthly and yearly data — extracted, validated, and anonymized within a one-month window before Google's irreversible July 2024 deprecation deadline.
+- The automated extraction script eliminated an impractical volume of manual dashboard exports, reducing a weeks-long manual process to a single programmatic pipeline run per property — a concrete demonstration of automation's leverage on data preservation tasks.
+- All files were organized on the enterprise server by property, year, and month, preserving the original temporal structure rather than flattening the entire archive into a single export.
+
+### Data Quality & Integrity
+
+- **Automated validation verified record counts, date ranges, and column headers for every exported file** — catching discrepancies that manual spot-checking across hundreds of CSVs would almost certainly have missed.
+- The validation pipeline produced both summary reports (property-level pass/fail) and detailed reports (file-level anomaly logs), giving stakeholders confidence in completeness without requiring them to audit every CSV individually.
+- The data dictionary, co-designed with stakeholders before a single line of code was written, ensured every file contained exactly the agreed-upon metrics and dimensions — preventing the common pitfall of format mismatches discovered after the migration window closes.
+
+### Privacy & Security
+
+- A **token-based anonymization system replaced sensitive property identifiers** (business unit names, product landing page URLs) with unique IDs, enabling the archive to be shared across teams without exposing identifying business information.
+- The token map was maintained separately from the archive itself, so the anonymized CSVs could be distributed to broader audiences while the mapping key stayed restricted to authorized stakeholders.
+
+### Business Impact
+
+- By preserving **over 10 years of historical web analytics** across 70 properties, the project enabled OneAmerica Financial to retain trend analysis and year-over-year benchmarking capabilities that would have been permanently destroyed at the deprecation deadline — data that cannot be regenerated.
+- Completing the project as a single developer within a one-month internship demonstrates the kind of high-leverage automation work that scales data preservation efforts without scaling headcount.
 
 ## Technologies Used
 

@@ -23,12 +23,27 @@ Dagster orchestrates all three phases, including dbt runs via `DbtCliResource` w
 
 ## Key Results & Insights
 
-- Successfully ingests data from **13 Oura API v2 endpoints** on a daily cadence with full idempotency
-- Snowflake warehouse organized across four schemas: `OURA_RAW` (raw VARIANT tables), `OURA_STAGING` (typed columns), `OURA_MARTS` (joined fact tables), and `CONFIG` (OAuth token storage)
-- The `fact_daily_wellness` mart joins sleep, activity, and readiness data into a single daily row using FULL OUTER JOINs to handle days with partial data
-- OAuth2 tokens are stored in Snowflake (`CONFIG.OAUTH_TOKENS`) with automatic refresh, eliminating local file dependencies
-- RSA key-pair authentication secures all Snowflake connections (both Dagster resources and dbt profiles)
-- Daily partitions enable targeted backfills and selective materialization through the Dagster UI
+### Pipeline Architecture
+
+- **Successfully ingests data from 13 Oura API v2 endpoints** on a daily cadence with full idempotency — endpoints include sleep, activity, readiness, heart rate, SpO2, stress, resilience, workouts, sessions, and tags.
+- **Four-schema Snowflake warehouse** provides clear separation of concerns: `OURA_RAW` (raw VARIANT JSON), `OURA_STAGING` (typed and renamed columns), `OURA_MARTS` (analysis-ready joined fact tables), and `CONFIG` (OAuth token storage) — a warehouse organization pattern directly applicable to production analytics engineering workflows.
+- **Delete-then-insert upsert pattern with temp table batching** makes every pipeline run idempotent and backfill-safe — high-volume endpoints like heart rate required batched inserts rather than row-by-row inserts to avoid timeout failures on large historical loads.
+
+### Data Modeling
+
+- **The `fact_daily_wellness` mart** joins sleep, activity, and readiness data into a single daily row using FULL OUTER JOINs — a deliberate design choice to preserve days where only a subset of endpoints returned data, rather than silently dropping partial days from the mart.
+- **dbt staging models** handle all VARIANT extraction using Snowflake's `raw_data:field::type` syntax, type-casting JSON fields into properly typed columns before they reach the mart layer — keeping raw data as an immutable historical record while marts stay clean and queryable.
+
+### Security and Operations
+
+- **OAuth2 tokens stored in Snowflake** (`CONFIG.OAUTH_TOKENS`) with automatic refresh, eliminating local file dependencies that would break the pipeline when run from a different environment.
+- **RSA key-pair authentication** secures all Snowflake connections (both Dagster resources and dbt profiles), replacing password-based auth with a more secure and automation-friendly approach.
+- **Daily partitions** in Dagster enable targeted backfills and selective materialization through the UI — if the API is unavailable for a day, exactly that partition can be re-run without reprocessing the full history.
+
+### Engineering Challenges Solved
+
+- **DuckDB → Snowflake migration** required rewriting all 13 dbt staging models to use VARIANT extraction syntax and redesigning the load strategy from direct inserts to temp table batching — a practical lesson in how warehouse choice propagates through every layer of the stack.
+- The OAuth token management migration from local files to a Snowflake config table eliminated a class of environment-specific credential failures that would have made the pipeline fragile to run on any machine other than the original development box.
 
 ## Technologies Used
 

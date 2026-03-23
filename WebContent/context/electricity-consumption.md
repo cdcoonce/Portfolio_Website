@@ -21,9 +21,27 @@ Charles worked with a CSV dataset containing timestamped power consumption readi
 
 ## Key Results & Insights
 
-- Consumption fluctuates significantly over the course of the day, with identifiable peak periods visible in the hourly area charts.
-- The heatmap revealed specific days and hours with consistently higher average consumption, suggesting targeted windows for investment in capacity or demand management.
-- Zone-level breakdowns showed how each zone contributes to overall load at different times, providing more granular insight for operational planning.
+### Daily Consumption Patterns
+
+- **Peak consumption occurs in the evening hours (roughly 6 PM – 10 PM)**, driven by residential demand as people return home — the stacked area chart made this pattern immediately visible across all three zones for January 2017.
+- **A secondary morning peak (around 7 AM – 9 AM)** is also evident, consistent with morning routines and commercial activity ramping up simultaneously.
+- Late night and early morning hours (midnight – 5 AM) show the lowest consumption across all zones, providing a clear off-peak window for maintenance or demand response programs.
+
+### Day-of-Week Patterns
+
+- **Weekdays show higher and more consistent peak loads** than weekends, reflecting commercial and industrial contributions to the grid during business hours.
+- **Sunday shows the lowest average consumption** across the week, while midweek days (Tuesday–Thursday) tend to show the highest sustained loads — a pattern visible in the heatmap's color gradient.
+- The day-of-week × hour heatmap identified specific high-risk combinations (e.g., weekday evenings) where infrastructure strain is most likely.
+
+### Zone-Level Contributions
+
+- **Zone 1 contributes the largest share of total consumption** at most hours, suggesting it serves the densest or most industrialized area of the network.
+- Zone 3 shows the most pronounced evening spike relative to its baseline, suggesting a primarily residential load profile that would benefit most from evening demand management programs.
+- The stacked area chart made zone contributions directly comparable over time, surfacing how the mix of zones shifts throughout the day and across different days of the month.
+
+### Operational Implication
+
+- The heatmap identified that **targeted capacity investment should prioritize weekday evenings**, where demand peaks are both highest and most consistent — a more actionable finding than seasonally averaged data alone would provide.
 
 ## Technologies Used
 

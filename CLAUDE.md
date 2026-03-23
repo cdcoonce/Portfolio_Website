@@ -119,6 +119,7 @@ Skills live in `.claude/skills/`. Each `SKILL.md` defines an invocable skill wit
 ## Project Context
 
 See [.claude/docs/project.md](.claude/docs/project.md) for project-specific details (tech stack, architecture, test markers).
+
 ## Testing
 
 ### Backend

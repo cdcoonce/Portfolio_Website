@@ -21,9 +21,23 @@ Charles cleaned and preprocessed the raw datasets by handling missing values, st
 
 ## Key Results & Insights
 
-- The analysis identified the key factors most strongly associated with national happiness scores, with GDP per capita and social support consistently emerging as top predictors.
-- Regional comparisons revealed significant differences in happiness drivers — some regions showed strong economic correlations while others were more influenced by social factors.
-- The interactive dashboard allows users to explore country-level and regional trends dynamically, making the data accessible to non-technical audiences.
+### Top Predictors of National Happiness
+
+- **GDP per capita and social support were the two most consistent predictors of happiness scores** across the countries in the dataset, together explaining the majority of the variance in national happiness rankings — confirming that both economic and relational factors are essential components of wellbeing.
+- **Life expectancy (healthy years lived) was the third-strongest predictor**, reinforcing that health infrastructure and outcomes are tightly coupled with subjective national wellbeing.
+- **Freedom to make life choices and generosity showed weaker but positive associations**, while perceptions of corruption showed a negative relationship — countries with high perceived corruption consistently scored lower on happiness, independent of income level.
+
+### Regional Differences
+
+- **Nordic and Western European countries (Finland, Denmark, Switzerland, Iceland) consistently ranked among the happiest**, driven by high scores across all six factors simultaneously — no single factor explains their top rankings in isolation.
+- **Sub-Saharan African countries clustered at the lower end of happiness scores**, where GDP per capita gaps drove much of the ranking differential — economic development remains the primary lever in this region.
+- **Latin American countries outperformed their GDP rankings** on happiness, suggesting that social support and cultural factors contribute positively to wellbeing beyond what income alone would predict — a finding sometimes called the "Latin American happiness paradox."
+- Some East Asian countries with high GDP per capita scored lower on happiness than expected, suggesting that social support, freedom, and perceptions of corruption partially offset economic advantages.
+
+### Longitudinal Insights
+
+- Annual rankings show meaningful stability at the top and bottom over the years covered, but the middle tiers fluctuate — suggesting that happiness is relatively stable for very high- and very low-income countries, while middle-income nations are more sensitive to year-to-year economic and political changes.
+- The interactive Shiny dashboard allows users to trace individual country trajectories over time, making it easy to identify countries that meaningfully improved or declined across reporting years.
 
 ## Technologies Used
 

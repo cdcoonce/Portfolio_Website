@@ -23,11 +23,26 @@ He then built gradient boosted regression models using the full feature set and 
 
 ## Key Results & Insights
 
-- Alcohol content was the strongest quality predictor for both red wines (correlation 0.48) and white wines (correlation 0.44).
-- Volatile acidity had the strongest negative impact on red wine quality (correlation -0.39).
-- Full-feature models achieved test R² of approximately 0.54 (red) and 0.55 (white), with training R² of 0.93 for both — indicating some overfitting that could be addressed with regularization.
-- Removing highly correlated features (free sulfur dioxide and fixed acidity for reds; density and residual sugar for whites) produced more interpretable models without significant loss in performance.
-- Feature importance plots confirmed that alcohol, volatile acidity, and sulphates were the most influential variables.
+### Exploratory Findings
+
+- **Alcohol content was the strongest quality predictor for both wine types** — correlation of 0.48 for reds and 0.44 for whites — suggesting that fermentation completeness and body are the most reliable chemical proxies for expert quality ratings.
+- **Volatile acidity had the strongest negative impact on red wine quality** (correlation -0.39), reflecting the perceptible "vinegar" off-flavor that tasters penalize — a relationship that does not appear as strongly in white wines, which tolerate higher acidity differently.
+- Red and white wines showed distinct chemical profiles requiring separate models: the features that predict quality in reds do not transfer directly to whites, making a combined model inappropriate.
+
+### Model Performance
+
+- **Full-feature gradient boosted models achieved test R² ≈ 0.54 (red) and 0.55 (white)**, with training R² of 0.93 for both — a large train/test gap indicating significant overfitting despite gradient boosting's built-in regularization.
+- The gap between train and test R² (~0.38–0.39 points) signals that 11 physicochemical features capture meaningful but incomplete signal: subjective tasting is influenced by texture, finish, and contextual factors the chemical measurements don't fully quantify.
+
+### Feature Selection and Multicollinearity
+
+- **Removing highly correlated feature pairs** (density–residual sugar for whites; free sulfur dioxide–fixed acidity for reds; threshold > 0.65) produced leaner models with comparable test R² — demonstrating that correlated redundant features inflate apparent model complexity without improving generalization.
+- **Feature importance plots consistently ranked alcohol, volatile acidity, and sulphates at the top** regardless of whether correlated features were included, validating these three as the core signal variables for quality prediction.
+
+### Practical Implications
+
+- The R² values around 0.54–0.55 suggest chemical properties alone cannot fully predict wine quality — a production use case would benefit from additional sensory descriptors beyond the 11 physicochemical measurements available in this dataset.
+- For winemakers, the alcohol and volatile acidity findings translate directly to intervention points: managing fermentation conditions (alcohol) and controlling acetic acid bacteria (volatile acidity) are the two highest-leverage quality levers during production.
 
 ## Technologies Used
 
