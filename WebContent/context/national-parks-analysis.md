@@ -21,10 +21,23 @@ Charles started with data exploration and cleaning, addressing missing values an
 
 ## Key Results & Insights
 
-- Overall national park visitation has increased steadily since 1904, with the Pacific West and Intermountain regions seeing the steepest growth.
-- California, Wyoming, and Washington had the highest total visitation at the state level.
-- Hierarchical clustering produced five main geographic clusters of parks, each suitable for a multi-park road trip.
-- TSP optimization provided efficient routes within each cluster, offering practical itineraries for park visitors.
+### Visitation Trends
+
+- **National park visitation increased dramatically over the century covered** (1904–2016), with the most pronounced acceleration occurring post-WWII as car ownership expanded and the Interstate Highway System made parks more accessible.
+- **The Pacific West and Intermountain regions showed the steepest long-term growth**, driven by high-traffic parks like Grand Canyon, Yellowstone, Yosemite, and Olympic — parks that saw visitation grow from hundreds of thousands to millions annually.
+- **California, Wyoming, and Washington led in total state-level visitation**, reflecting the concentration of iconic, marquee parks in those states rather than the number of parks alone.
+
+### Geographic Clustering
+
+- **Hierarchical clustering produced five geographically coherent clusters** of parks, aligning with natural regional groupings: the Pacific Northwest, California, the Intermountain Southwest, the Rocky Mountain corridor, and the Eastern parks.
+- Cluster membership was driven by geographic proximity rather than visitation level, meaning each cluster contains a mix of high- and low-traffic parks — useful for itinerary planning because travelers aren't automatically routed only to the most crowded destinations.
+- The bubble plot clearly distinguished the handful of "mega-parks" (by visitation) from the long tail of lesser-visited parks, highlighting that a small number of parks absorb a disproportionate share of total annual visits.
+
+### Route Optimization
+
+- **TSP optimization within each cluster produced efficient multi-park driving routes** that minimize total distance — a practical tool for trip planning that goes beyond simple "top parks" lists by accounting for travel logistics.
+- The geosphere-based distance matrix correctly handled the spherical geometry of cross-continental distances, ensuring route calculations were accurate rather than relying on flat-plane approximations.
+- The optimized routes surfaced non-obvious stopping sequences where visiting a less-famous park en route between two major parks adds minimal travel time — a finding not visible from ranked-popularity lists alone.
 
 ## Technologies Used
 

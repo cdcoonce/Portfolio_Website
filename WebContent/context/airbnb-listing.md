@@ -21,9 +21,21 @@ Charles started by exploring the dataset to understand its structure and identif
 
 ## Key Results & Insights
 
-- The analysis showed a clear decrease in the number of new hosts entering the Paris market after the 2015 regulatory changes.
-- Average price per night showed an upward trend across various neighbourhoods following the regulations.
-- The dual-axis visualization effectively demonstrated the inverse relationship between host entry rates and pricing, suggesting the regulations constrained supply while demand-side pressure pushed prices higher.
+### Regulatory Impact on Host Supply
+
+- **New host registrations declined noticeably after 2015**, with the time-series clearly showing a slowdown in host entry following the introduction of Paris short-term rental regulations — consistent with a supply-side chilling effect from increased compliance requirements.
+- The pre-2015 period showed relatively consistent growth in new hosts; post-2015, that growth flattened or reversed depending on the neighbourhood, suggesting the regulations did not affect all areas uniformly.
+
+### Pricing Response
+
+- **Average nightly prices trended upward across Parisian neighbourhoods following the regulations**, consistent with a constrained supply environment — fewer new hosts entering the market reduced competition and put upward pressure on prices.
+- The dual-axis visualization revealed an **inverse relationship between new host entry rates and average pricing**: as new host growth declined, average price per night increased — a pattern visible across the post-2015 window.
+- Neighbourhoods with higher pre-regulation host density showed more pronounced price increases, suggesting the regulations had the sharpest effect in already-competitive areas.
+
+### Analytical Takeaway
+
+- The Paris case illustrates a classic supply-restriction dynamic: regulations designed to protect long-term housing availability reduced short-term supply, which in turn increased prices for remaining guests — a trade-off regulators and policymakers in other cities can learn from.
+- Missing host registration dates required imputation, which is a common data quality challenge in marketplace datasets and a consideration when interpreting the exact timing of the post-regulation trend break.
 
 ## Technologies Used
 

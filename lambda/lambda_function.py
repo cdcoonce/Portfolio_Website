@@ -51,10 +51,17 @@ def build_system_prompt() -> str:
         featured = " [FEATURED]" if p.get("featured") else ""
         techs = "; ".join(p.get("technologies", []))
         date = f" ({p['date']})" if p.get("date") else ""
+        key_results = p.get("key_results", "")
+        key_results_block = (
+            f"\n   Key Results:\n{chr(10).join('     ' + ln for ln in key_results.splitlines())}"
+            if key_results
+            else ""
+        )
         entry = (
             f"{i}. {p['title']}{featured}{date}\n"
             f"   Type: {p.get('type', '')}\n"
-            f"   Summary: {p.get('summary', '')}\n"
+            f"   Summary: {p.get('summary', '')}"
+            f"{key_results_block}\n"
             f"   Technologies: {techs}\n"
             f"   URL: {p.get('url', '')}"
         )

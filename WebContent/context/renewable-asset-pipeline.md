@@ -21,10 +21,22 @@ Charles designed and built a multi-stage pipeline. First, mock data generators c
 
 ## Key Results & Insights
 
-- The pipeline computes capacity factors, weather-adjusted expected generation, and rolling 7-day and 30-day Pearson correlations between weather variables and generation output.
-- The mart layer produces two key analytical tables: daily asset performance summaries and weather-normalized performance scores (0–100 scale).
-- The Dagster sensor demonstrates event-driven architecture by triggering automated notifications on asset materialization.
-- The full pipeline is reproducible and follows modern analytics engineering best practices with clear separation of ingestion, transformation, and orchestration.
+### Analytical Outputs
+
+- **Capacity factor computation enables apples-to-apples comparison across assets**: by expressing actual generation as a percentage of theoretical maximum (nameplate × hours), the pipeline separates weather-driven underperformance from genuine asset issues — the core distinction operators need.
+- **Rolling 7-day and 30-day Pearson correlations** between weather variables (wind speed, irradiance) and generation output quantify how tightly each asset tracks its expected weather-driven profile, flagging assets where the correlation drops below typical range as candidates for inspection.
+- **Weather-normalized performance scores (0–100 scale)** distill complex multi-variable relationships into a single actionable KPI per asset per day — making performance monitoring accessible to non-technical stakeholders without sacrificing analytical rigor.
+- The `fact_daily_asset_performance` mart joins weather and generation data to produce a single daily row per asset, enabling straight-forward dashboarding and SQL-based alerting without complex joins at query time.
+
+### Architecture Validation
+
+- **The dlt incremental loading pattern successfully handles two years of hourly data** for 10 assets — roughly 175,000 rows — without full refreshes, demonstrating that incremental ingestion scales cleanly for time-series data.
+- **The staging → intermediate → mart dbt pattern enforces a clean separation of concerns**: staging models do nothing but type-cast and rename, intermediate models join and aggregate, and mart models expose final KPIs — making the transformation graph easy to audit and test.
+- The end-to-end pipeline (generate → ingest → transform → orchestrate → notify) demonstrates all four layers of the modern data stack in a single, self-contained project.
+
+### Event-Driven Monitoring
+
+- The Dagster sensor fires on key asset materialization, proving that **operational awareness can be built into the pipeline itself** rather than bolted on as a separate monitoring tool — a design pattern directly applicable to production energy data environments.
 
 ## Technologies Used
 

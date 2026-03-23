@@ -90,8 +90,6 @@ The generated `project.md` must follow this structure. Scale depth to match the 
 - **{Pattern name}** (`{file}`): {one-sentence explanation}
 - ...only non-obvious patterns worth calling out
 
-````
-
 ---
 
 ## Writing Guidelines
@@ -112,4 +110,4 @@ After generating project.md, check if `CLAUDE.md` references it. If not, suggest
 
 ```markdown
 See [.claude/docs/project.md](.claude/docs/project.md) for project-specific details (tech stack, architecture, test markers).
-````
+```

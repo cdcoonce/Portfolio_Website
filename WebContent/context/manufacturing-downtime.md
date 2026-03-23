@@ -21,11 +21,27 @@ Charles started by calculating batch-level efficiency — comparing actual produ
 
 ## Key Results & Insights
 
-- Overall line efficiency was approximately 64%.
-- The lowest-performing operator (Mac) ran at 61% efficiency — a clear candidate for targeted coaching.
-- The top 5 downtime factors accounted for roughly 80% of total downtime, consistent with the Pareto principle.
-- Three of those top 5 factors were operator errors, pointing to training as the highest-leverage intervention.
-- Recommendations included standardized machine adjustment training, batch change coaching for specific operators, and a preventative maintenance schedule.
+### Line Efficiency
+
+- **Overall line efficiency was approximately 64%**, meaning the bottling operation lost 36% of available production time — a substantial gap from benchmark performance that quantifies the scale of the improvement opportunity.
+- **Efficiency varied meaningfully across operators**, ranging from Mac's 61% (the lowest) to higher-performing peers — a spread that points to operator skill and training, not just equipment, as a key driver of production variability.
+
+### Pareto Analysis — Downtime Factors
+
+- **The top 5 downtime factors accounted for roughly 80% of total downtime**, consistent with the Pareto principle — confirming that a targeted intervention on a small set of root causes would address the majority of lost production time.
+- **Three of the top 5 factors were operator errors** (not equipment failures or material issues), making targeted training the highest-leverage intervention available — maintenance investments alone would be insufficient.
+- The remaining top-5 factors were equipment-related, supporting a two-track action plan: training for human factors, preventative maintenance scheduling for mechanical ones.
+
+### Recommendations
+
+- **Standardized machine adjustment training** for all operators, focused on the specific tasks most frequently coded as operator error in the downtime log.
+- **Batch change coaching** for the lowest-performing operators, targeting the changeover procedures where variability was highest.
+- **Preventative maintenance schedule** targeting the equipment-side downtime factors before they escalate into longer unplanned stoppages.
+
+### Analytical Takeaway
+
+- This project demonstrates how Excel can answer operational business questions that many organizations assume require specialized manufacturing software — VLOOKUP, SUMIFS, and conditional formatting are sufficient tools for a meaningful Pareto and operator analysis.
+- The most important insight was not the efficiency number itself, but the breakdown of _why_ the line was inefficient — without that decomposition, a manager might invest in equipment when the real opportunity is training.
 
 ## Technologies Used
 

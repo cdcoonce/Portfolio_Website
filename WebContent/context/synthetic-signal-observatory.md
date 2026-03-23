@@ -21,9 +21,22 @@ Charles structured the project with a clear separation of concerns: business log
 
 ## Key Results & Insights
 
-- The dashboard generates, persists, and visualizes synthetic signals in real time with interactive user controls.
-- The architecture enforces clean boundaries between business logic, service layer, and UI — making the codebase testable and maintainable.
-- The project includes a full pytest suite and is designed for easy deployment.
+### Architectural Achievements
+
+- **Pure-function business logic layer is fully unit-testable in isolation** — signal generation, analytics, and transformation logic live as standalone Python functions with no Streamlit dependencies, allowing pytest to validate behavior without launching the UI.
+- **Clean three-layer separation** (business logic → service layer → Streamlit entrypoint) means any of the three layers can be swapped independently — the signal generator could be replaced with a real data source, or the Streamlit UI replaced with a REST API, without touching the analytics logic.
+- The project ships with its own `AGENTS.md` and `ARCHITECTURE.md`, demonstrating that documentation and team onboarding are treated as first-class deliverables rather than afterthoughts.
+
+### Application Capabilities
+
+- **The dashboard continuously generates synthetic signals, persists them to local storage, runs analytics, and updates visualizations** — completing the full "generate → store → analyze → display" loop that mirrors production monitoring tool patterns.
+- Interactive controls (signal type, frequency, amplitude parameters) let users explore how different signal characteristics affect the analytics output, making the app educational as well as functional.
+- The learnings log captures environment-specific quirks and Streamlit gotchas encountered during development — a practice that shortens onboarding time for future contributors.
+
+### Engineering Standards
+
+- The full pytest suite validates the analytics logic at the function level, providing a safety net for refactoring and demonstrating that data application code can and should be tested even when the UI is built with a rapid prototyping framework like Streamlit.
+- The project is structured for easy deployment (Streamlit Cloud or Docker) with `uv`-managed dependencies, meaning reproducibility is built in from the start rather than retrofitted later.
 
 ## Technologies Used
 
