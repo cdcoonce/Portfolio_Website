@@ -10,6 +10,7 @@ coverage/
 # Claude Code local config and artifacts
 .claude/settings.local.json
 .claude/*.zip
+.claude/**/*.zip
 .claude/.DS_Store
 .claude/worktrees/
 

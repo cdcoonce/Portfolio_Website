@@ -44,18 +44,21 @@ Skills live in `.claude/skills/`. Each `SKILL.md` defines an invocable skill wit
 **Trigger when:** user asks for a "code review", "quality check", pre-commit review, or wants code analyzed for issues.
 **Output:** Save markdown report to `docs/code_reviews/{YYYY-MM-DD}_{file_name}.md`.
 
-### `/github-cli`
-
-**Trigger when:** user needs to interact with GitHub — issues, pull requests, PR reviews, CI/CD pipelines, or pushing changes.
-
 ### `/commit`
 
 **Trigger when:** user asks to commit, make a commit, save work, or when Claude needs to commit changes after completing a task.
 
-### `/readme-generator`
+### `/deploy`
 
-**Trigger when:** user asks to create, generate, update, or improve a README, or says "document this project".
-**References:** [.claude/skills/readme-generator/references/](.claude/skills/readme-generator/references/) — analysis methodology, mermaid guidelines, badge reference.
+**Trigger when:** user asks to deploy, redeploy, push to Lambda, update the chat agent, or after updating context files or `lambda/lambda_function.py`. Rebuilds the knowledge base, packages dependencies, and deploys to AWS Lambda.
+
+### `/dignified-python`
+
+**Trigger when:** user asks about Python best practices, type hints, exception handling patterns, "make this more Pythonic", or writing/reviewing any Python code in this project.
+
+### `/github-cli`
+
+**Trigger when:** user needs to interact with GitHub — issues, pull requests, PR reviews, CI/CD pipelines, or pushing changes.
 
 ### `/grill-me`
 
@@ -70,6 +73,15 @@ Skills live in `.claude/skills/`. Each `SKILL.md` defines an invocable skill wit
 
 **Trigger when:** user asks to create, update, or refresh project context, says "update project.md", or when onboarding Claude to a new repo.
 **Output:** `.claude/docs/project.md`
+
+### `/readme-generator`
+
+**Trigger when:** user asks to create, generate, update, or improve a README, or says "document this project".
+**References:** [.claude/skills/readme-generator/references/](.claude/skills/readme-generator/references/) — analysis methodology, mermaid guidelines, badge reference.
+
+### `/setup-pre-commit`
+
+**Trigger when:** user wants to add pre-commit hooks, configure commit-time linting, formatting, type checking, or testing.
 
 ### `/tdd`
 
