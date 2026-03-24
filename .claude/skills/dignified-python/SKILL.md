@@ -29,15 +29,15 @@ Auto-invoke when users ask about:
 
 ## When to Use This Skill vs. Others
 
-| User Need                    | Use This Skill              | Alternative Skill         |
-| ---------------------------- | --------------------------- | ------------------------- |
-| "make this pythonic"         | ✅ Yes - Python standards   |                           |
-| "is this good python"        | ✅ Yes - code quality       |                           |
-| "type hints"                 | ✅ Yes - typing guidance    |                           |
-| "LBYL vs EAFP"               | ✅ Yes - exception patterns |                           |
-| "pathlib vs os.path"         | ✅ Yes - path handling      |                           |
-| "Dagster-specific patterns"  | ❌ No                       | `/dagster-expert`         |
-| "CLI argument parsing"       | ✅ Yes - CLI patterns       |                           |
+| User Need                   | Use This Skill              | Alternative Skill |
+| --------------------------- | --------------------------- | ----------------- |
+| "make this pythonic"        | ✅ Yes - Python standards   |                   |
+| "is this good python"       | ✅ Yes - code quality       |                   |
+| "type hints"                | ✅ Yes - typing guidance    |                   |
+| "LBYL vs EAFP"              | ✅ Yes - exception patterns |                   |
+| "pathlib vs os.path"        | ✅ Yes - path handling      |                   |
+| "Dagster-specific patterns" | ❌ No                       | `/dagster-expert` |
+| "CLI argument parsing"      | ✅ Yes - CLI patterns       |                   |
 
 ## Core Knowledge (ALWAYS Loaded)
 
