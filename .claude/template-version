@@ -1,0 +1,18 @@
+# Claude Workflow Template Version
+#
+# Tracks which version of the claude-workflow baseline this repo's
+# .claude/ config was last synced from. Use this to detect drift
+# and know when to pull in updated skills, hooks, or agent configs.
+#
+# Source: ~/Documents/GitHub/claude-workflow (local)
+# Synced: 2026-03-23
+#
+# Skills sourced from core/:
+#   commit, daa-code-review, deploy (custom), design-an-interface,
+#   dev-cycle, dignified-python, git-guardrails-claude-code, github-cli,
+#   grill-me, improve-codebase-architecture, plan-ceo-review, prd-to-issues,
+#   prd-to-plan, project-context, readme-generator, request-refactor-plan,
+#   setup-pre-commit, tdd, triage-issue, write-a-prd, write-a-skill
+#
+# Custom skills (not in core):
+#   deploy — Lambda deployment for portfolio-chat-agent
