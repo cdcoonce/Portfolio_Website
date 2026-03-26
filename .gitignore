@@ -14,6 +14,9 @@ coverage/
 .claude/.DS_Store
 .claude/worktrees/
 
+# Test artifacts
+tests/snapshots/
+
 # Lambda deployment artifacts
 lambda/package/
 lambda/deployment*.zip
