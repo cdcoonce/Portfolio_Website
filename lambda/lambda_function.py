@@ -15,25 +15,59 @@ logger.setLevel(logging.INFO)
 import anthropic
 
 MAX_MESSAGE_LENGTH = 1000
+
+
+# --- Error hierarchy with HTTP status semantics ---
+
+
+class ChatAgentError(Exception):
+    """Base error for chat agent operations."""
+
+
+class RequestError(ChatAgentError):
+    """Client input validation failure -> HTTP 400."""
+
+
+class ApiError(ChatAgentError):
+    """Upstream API failure -> HTTP 502."""
+
+
+class EmptyResponseError(ChatAgentError):
+    """API returned no text content -> HTTP 502."""
+
+
 MODEL_ID = "claude-haiku-4-5-20251001"
 MAX_TOKENS = 512
-ALLOWED_ORIGIN = "https://charleslikesdata.com"
-
 _knowledge_base: dict | None = None
 
 
-def load_knowledge_base() -> dict:
-    """Load the portfolio knowledge base from the bundled JSON file."""
+def load_knowledge_base(path: Path | None = None) -> dict:
+    """Load the portfolio knowledge base from a JSON file.
+
+    Parameters
+    ----------
+    path : Path | None
+        Path to the knowledge base JSON. If None, uses the bundled default.
+    """
     global _knowledge_base
+    if path is not None:
+        return json.loads(path.read_text())
     if _knowledge_base is None:
         kb_path = Path(__file__).parent / "knowledge_base.json"
         _knowledge_base = json.loads(kb_path.read_text())
     return _knowledge_base
 
 
-def build_system_prompt() -> str:
-    """Construct the system prompt from the knowledge base."""
-    kb = load_knowledge_base()
+def build_system_prompt(kb: dict | None = None) -> str:
+    """Construct the system prompt from the knowledge base.
+
+    Parameters
+    ----------
+    kb : dict | None
+        Knowledge base dict. If None, loads from bundled JSON file.
+    """
+    if kb is None:
+        kb = load_knowledge_base()
     person = kb["person"]
     skills = kb["skills"]
     projects = kb["projects"]
@@ -114,67 +148,156 @@ def build_system_prompt() -> str:
     )
 
 
-def get_anthropic_client() -> anthropic.Anthropic:
-    """Create an Anthropic client using the ANTHROPIC_API_KEY env var."""
-    return anthropic.Anthropic()
-
-
-def parse_request(body: str | None) -> list[dict[str, str]]:
-    """Parse and validate the incoming request body.
+class ChatRequest:
+    """Validated conversation request — parse/validate/sanitize boundary.
 
     Parameters
     ----------
-    body : str | None
-        Raw JSON string from the request body.
-
-    Returns
-    -------
-    list[dict[str, str]]
-        Validated conversation messages for the Anthropic API.
-
-    Raises
-    ------
-    ValueError
-        If the body is missing, not valid JSON, or messages are invalid.
+    messages : list[dict[str, str]]
+        Sanitized conversation messages ready for the Anthropic API.
     """
-    if not body:
-        raise ValueError("Request body is empty")
-    try:
-        data = json.loads(body)
-    except json.JSONDecodeError as exc:
-        raise ValueError("Invalid JSON in request body") from exc
 
-    # Support both single message and conversation history
-    if "messages" in data:
-        messages = data["messages"]
-        if not isinstance(messages, list) or not messages:
-            raise ValueError("Messages must be a non-empty array")
-        # Validate the latest user message
-        last = messages[-1]
-        if last.get("role") != "user" or not last.get("content", "").strip():
-            raise ValueError("Last message must be a non-empty user message")
-        if len(last["content"]) > MAX_MESSAGE_LENGTH:
-            raise ValueError(f"Message too long (max {MAX_MESSAGE_LENGTH} characters)")
-        # Sanitize: only allow role and content keys, limit history length
-        allowed_roles = {"user", "assistant"}
-        clean = []
-        for m in messages[-10:]:  # Keep last 10 messages (5 turns)
-            if m.get("role") in allowed_roles and m.get("content"):
-                clean.append({"role": m["role"], "content": m["content"]})
-        return clean
-    elif "message" in data:
-        message = data["message"].strip()
-        if not message:
-            raise ValueError("Message is empty")
-        if len(message) > MAX_MESSAGE_LENGTH:
-            raise ValueError(f"Message too long (max {MAX_MESSAGE_LENGTH} characters)")
-        return [{"role": "user", "content": message}]
-    else:
-        raise ValueError("Missing 'message' or 'messages' key in request body")
+    def __init__(self, messages: list[dict[str, str]]) -> None:
+        self.messages = messages
+
+    @staticmethod
+    def from_body(body: str | None) -> "ChatRequest":
+        """Parse raw JSON body into a validated ChatRequest.
+
+        Parameters
+        ----------
+        body : str | None
+            Raw JSON string from the request body.
+
+        Returns
+        -------
+        ChatRequest
+            Validated request with sanitized messages.
+
+        Raises
+        ------
+        RequestError
+            If the body is missing, not valid JSON, or messages are invalid.
+        """
+        if not body:
+            raise RequestError("Request body is empty")
+        try:
+            data = json.loads(body)
+        except json.JSONDecodeError as exc:
+            raise RequestError("Invalid JSON in request body") from exc
+
+        if "messages" in data:
+            messages = data["messages"]
+            if not isinstance(messages, list) or not messages:
+                raise RequestError("Messages must be a non-empty array")
+            last = messages[-1]
+            if last.get("role") != "user" or not last.get("content", "").strip():
+                raise RequestError("Last message must be a non-empty user message")
+            if len(last["content"]) > MAX_MESSAGE_LENGTH:
+                raise RequestError(
+                    f"Message too long (max {MAX_MESSAGE_LENGTH} characters)"
+                )
+            allowed_roles = {"user", "assistant"}
+            clean = []
+            for m in messages[-10:]:
+                if m.get("role") in allowed_roles and m.get("content"):
+                    clean.append({"role": m["role"], "content": m["content"]})
+            return ChatRequest(clean)
+        elif "message" in data:
+            message = data["message"].strip()
+            if not message:
+                raise RequestError("Message is empty")
+            if len(message) > MAX_MESSAGE_LENGTH:
+                raise RequestError(
+                    f"Message too long (max {MAX_MESSAGE_LENGTH} characters)"
+                )
+            return ChatRequest([{"role": "user", "content": message}])
+        else:
+            raise RequestError(
+                "Missing 'message' or 'messages' key in request body"
+            )
+
+
+class ChatAgent:
+    """Injectable LLM orchestrator — no patching needed in tests.
+
+    Parameters
+    ----------
+    client : anthropic.Anthropic
+        Anthropic API client (injected for testability).
+    system_prompt : str
+        System prompt for the conversation.
+    model : str
+        Model ID for the Anthropic API.
+    max_tokens : int
+        Maximum tokens in the response.
+    """
+
+    def __init__(
+        self,
+        *,
+        client: anthropic.Anthropic,
+        system_prompt: str,
+        model: str = MODEL_ID,
+        max_tokens: int = MAX_TOKENS,
+    ) -> None:
+        self._client = client
+        self._system_prompt = system_prompt
+        self._model = model
+        self._max_tokens = max_tokens
+
+    def reply(self, request: ChatRequest) -> str:
+        """Send messages to Claude, return assistant text.
+
+        Parameters
+        ----------
+        request : ChatRequest
+            Validated conversation request.
+
+        Returns
+        -------
+        str
+            Assistant response text.
+
+        Raises
+        ------
+        ApiError
+            If the Anthropic API call fails.
+        EmptyResponseError
+            If the API returns no text content.
+        """
+        try:
+            response = self._client.messages.create(
+                model=self._model,
+                max_tokens=self._max_tokens,
+                system=self._system_prompt,
+                messages=request.messages,
+            )
+        except anthropic.APIError as exc:
+            raise ApiError(str(exc)) from exc
+
+        # Filter for TextBlock — future-proof against ToolUseBlock
+        for block in response.content:
+            if getattr(block, "type", None) == "text":
+                return block.text
+
+        raise EmptyResponseError("API returned no text content")
+
+
+def create_default_agent() -> ChatAgent:
+    """Wire up the production ChatAgent with real client and knowledge base."""
+    return ChatAgent(
+        client=anthropic.Anthropic(),
+        system_prompt=build_system_prompt(),
+    )
 
 
 def build_response(status_code: int, body: dict[str, Any]) -> dict[str, Any]:
-    """Build a Lambda Function URL response with CORS headers.
+    """Build a Lambda Function URL response.
+
+    CORS is handled by the AWS Lambda Function URL configuration,
+    not by application-level headers. See the AllowOrigins list in
+    the Function URL CORS settings.
 
     Parameters
     ----------
@@ -197,8 +320,13 @@ def build_response(status_code: int, body: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def handler(event: dict, context: Any) -> dict[str, Any]:
-    """Lambda Function URL handler.
+_default_agent: ChatAgent | None = None
+
+
+def handler_with_agent(
+    event: dict, context: Any, agent: ChatAgent
+) -> dict[str, Any]:
+    """Testable Lambda core — all dependencies injected.
 
     Parameters
     ----------
@@ -206,6 +334,8 @@ def handler(event: dict, context: Any) -> dict[str, Any]:
         Lambda Function URL event.
     context : Any
         Lambda context object (unused).
+    agent : ChatAgent
+        Injected chat agent for LLM calls.
 
     Returns
     -------
@@ -221,20 +351,38 @@ def handler(event: dict, context: Any) -> dict[str, Any]:
         return build_response(405, {"error": "Method not allowed"})
 
     try:
-        messages = parse_request(event.get("body"))
-    except ValueError as e:
-        return build_response(400, {"error": str(e)})
-
-    try:
-        client = get_anthropic_client()
-        response = client.messages.create(
-            model=MODEL_ID,
-            max_tokens=MAX_TOKENS,
-            system=build_system_prompt(),
-            messages=messages,
-        )
-        assistant_text = response.content[0].text
+        request = ChatRequest.from_body(event.get("body"))
+        assistant_text = agent.reply(request)
         return build_response(200, {"response": assistant_text})
+    except RequestError as e:
+        return build_response(400, {"error": str(e)})
+    except EmptyResponseError:
+        logger.error("Empty response from AI")
+        return build_response(502, {"error": "Empty response from AI"})
+    except ApiError as e:
+        logger.error("AI service error: %s", e, exc_info=True)
+        return build_response(502, {"error": "AI service error"})
     except Exception as e:
-        logger.error("Anthropic API error: %s", e, exc_info=True)
+        logger.exception("Unexpected %s: %s", type(e).__name__, e)
         return build_response(500, {"error": "Internal server error"})
+
+
+def handler(event: dict, context: Any) -> dict[str, Any]:
+    """Lambda Function URL entry point — delegates to handler_with_agent.
+
+    Parameters
+    ----------
+    event : dict
+        Lambda Function URL event.
+    context : Any
+        Lambda context object (unused).
+
+    Returns
+    -------
+    dict[str, Any]
+        Lambda Function URL response.
+    """
+    global _default_agent
+    if _default_agent is None:
+        _default_agent = create_default_agent()
+    return handler_with_agent(event, context, _default_agent)
