@@ -28,13 +28,14 @@ export const escapeHtml = (text) => {
 };
 
 /**
- * Gets non-expired request timestamps from localStorage.
+ * Gets non-expired request timestamps from storage.
  *
+ * @param {Storage} storage - Storage backend (defaults to localStorage).
  * @returns {number[]} Timestamps within the current rate limit window.
  */
-const getValidTimestamps = () => {
+const getValidTimestamps = (storage = localStorage) => {
   try {
-    const raw = localStorage.getItem(RATE_LIMIT_CONFIG.STORAGE_KEY);
+    const raw = storage.getItem(RATE_LIMIT_CONFIG.STORAGE_KEY);
     if (!raw) return [];
     const timestamps = JSON.parse(raw);
     const cutoff = Date.now() - RATE_LIMIT_CONFIG.WINDOW_MS;
@@ -47,28 +48,32 @@ const getValidTimestamps = () => {
 /**
  * Checks if the user has exceeded the rate limit.
  *
+ * @param {Storage} [storage=localStorage] - Storage backend for rate limit data.
  * @returns {boolean} True if rate limited.
  */
-export const isRateLimited = () => {
-  return getValidTimestamps().length >= RATE_LIMIT_CONFIG.MAX_REQUESTS;
+export const isRateLimited = (storage = localStorage) => {
+  return getValidTimestamps(storage).length >= RATE_LIMIT_CONFIG.MAX_REQUESTS;
 };
 
 /**
- * Records a new request timestamp in localStorage.
+ * Records a new request timestamp in storage.
+ *
+ * @param {Storage} [storage=localStorage] - Storage backend for rate limit data.
  */
-export const recordRequest = () => {
-  const timestamps = getValidTimestamps();
+export const recordRequest = (storage = localStorage) => {
+  const timestamps = getValidTimestamps(storage);
   timestamps.push(Date.now());
-  localStorage.setItem(RATE_LIMIT_CONFIG.STORAGE_KEY, JSON.stringify(timestamps));
+  storage.setItem(RATE_LIMIT_CONFIG.STORAGE_KEY, JSON.stringify(timestamps));
 };
 
 /**
  * Returns the number of remaining requests in the current window.
  *
+ * @param {Storage} [storage=localStorage] - Storage backend for rate limit data.
  * @returns {number} Remaining requests (0 or positive).
  */
-export const getRemainingRequests = () => {
-  return Math.max(0, RATE_LIMIT_CONFIG.MAX_REQUESTS - getValidTimestamps().length);
+export const getRemainingRequests = (storage = localStorage) => {
+  return Math.max(0, RATE_LIMIT_CONFIG.MAX_REQUESTS - getValidTimestamps(storage).length);
 };
 
 /**
@@ -116,12 +121,15 @@ const createLoadingHtml = () => {
 /**
  * Sends a message to the Lambda function.
  *
- * @param {string} message - User's question.
+ * @param {Array<{role: string, content: string}>} messages - Conversation history.
+ * @param {Object} options - Send options.
+ * @param {string} options.apiUrl - API endpoint URL.
+ * @param {Function} options.fetchFn - Fetch implementation.
  * @returns {Promise<string>} The assistant's response text.
  * @throws {Error} If the request fails or returns a non-OK status.
  */
-const sendMessage = async (messages) => {
-  const response = await fetch(LAMBDA_URL, {
+const sendMessage = async (messages, { apiUrl, fetchFn }) => {
+  const response = await fetchFn(apiUrl, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ messages }),
@@ -144,8 +152,14 @@ const sendMessage = async (messages) => {
  * Wires up the send button and Enter key to submit messages,
  * displays responses, and manages rate limiting UI.
  * Only runs when the required DOM elements exist.
+ *
+ * @param {Object} [options] - Optional dependency overrides.
+ * @param {string} [options.apiUrl] - API endpoint URL (defaults to LAMBDA_URL).
+ * @param {Function} [options.fetchFn] - Fetch implementation (defaults to global fetch).
+ * @param {Storage} [options.storage] - Storage backend (defaults to localStorage).
  */
-export function initChat() {
+export function initChat({ apiUrl = LAMBDA_URL, fetchFn, storage = localStorage } = {}) {
+  const resolvedFetch = fetchFn || globalThis.fetch;
   const chatInput = document.getElementById('chat-input');
   const chatSend = document.getElementById('chat-send');
   const chatMessages = document.getElementById('chat-messages');
@@ -171,7 +185,7 @@ export function initChat() {
 
   /** Updates the rate limit warning text and disables input at zero. */
   const updateRateLimitDisplay = () => {
-    const remaining = getRemainingRequests();
+    const remaining = getRemainingRequests(storage);
     if (remaining <= 3 && remaining > 0) {
       chatRateLimit.textContent = `${remaining} question${remaining === 1 ? '' : 's'} remaining this hour`;
       chatRateLimit.hidden = false;
@@ -190,7 +204,7 @@ export function initChat() {
     const message = chatInput.value.trim();
     if (!message || isProcessing) return;
 
-    if (isRateLimited()) {
+    if (isRateLimited(storage)) {
       updateRateLimitDisplay();
       return;
     }
@@ -206,9 +220,9 @@ export function initChat() {
     appendMessage(createLoadingHtml());
 
     try {
-      recordRequest();
+      recordRequest(storage);
       conversationHistory.push({ role: 'user', content: message });
-      const response = await sendMessage(conversationHistory);
+      const response = await sendMessage(conversationHistory, { apiUrl, fetchFn: resolvedFetch });
 
       // Remove loading indicator
       const loading = document.getElementById('chat-loading');
