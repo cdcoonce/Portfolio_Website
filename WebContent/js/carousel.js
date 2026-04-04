@@ -4,7 +4,7 @@ import { getItemsToShow, isDesktop } from './utils.js';
 
 /** Configuration constants for testimonial carousel behavior */
 export const CAROUSEL_CONFIG = {
-  DESKTOP_BREAKPOINT: 1200,
+  DESKTOP_BREAKPOINT: 1250, // Must match mediaqueries.css @media breakpoint
   AUTO_SCROLL_INTERVAL_MS: 20000,
   TESTIMONIALS_DESKTOP: 2,
   TESTIMONIALS_MOBILE: 1,

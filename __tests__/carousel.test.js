@@ -1,10 +1,17 @@
 import {
+  CAROUSEL_CONFIG,
   getNextIndex,
   getPrevIndex,
   getDotCount,
   getActiveDotIndex,
   getCounterText,
 } from '../WebContent/js/carousel.js';
+
+describe('CAROUSEL_CONFIG', () => {
+  test('DESKTOP_BREAKPOINT matches CSS media query (1250px)', () => {
+    expect(CAROUSEL_CONFIG.DESKTOP_BREAKPOINT).toBe(1250);
+  });
+});
 
 describe('getNextIndex', () => {
   test('advances by step when not at end', () => {
