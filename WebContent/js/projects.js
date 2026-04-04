@@ -220,3 +220,31 @@ export const projects = [
     featured: true,
   },
 ];
+
+/**
+ * Derived tag registry — the sorted, unique set of every tag used across all projects.
+ * This is the single source of truth for filterable tags; filter buttons are generated
+ * from this array, making orphan buttons structurally impossible.
+ *
+ * @type {string[]}
+ */
+export const tags = [...new Set(projects.flatMap((p) => p.tags))].sort();
+
+/**
+ * Human-readable display labels for tags that need special formatting.
+ * Tags not listed here are title-cased automatically by the renderer.
+ *
+ * @type {Record<string, string>}
+ */
+export const TAG_LABELS = {
+  'analytics-dashboard': 'Analytics Dashboards',
+  'business-intelligence': 'Business Intelligence',
+  'data-pipelines': 'Data Pipelines',
+  'machine-learning': 'Machine Learning',
+  'statistical-analysis': 'Statistical Analysis',
+  css: 'CSS',
+  etl: 'ETL/ELT',
+  html: 'HTML',
+  r: 'R',
+  sql: 'SQL',
+};

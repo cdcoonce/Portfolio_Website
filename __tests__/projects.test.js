@@ -1,4 +1,4 @@
-import { projects } from '../WebContent/js/projects.js';
+import { projects, tags, TAG_LABELS } from '../WebContent/js/projects.js';
 
 describe('projects data', () => {
   test('exports a non-empty array', () => {
@@ -57,5 +57,53 @@ describe('projects data', () => {
         expect(project.imageContain).toBe(true);
       }
     }
+  });
+});
+
+describe('tags derived registry', () => {
+  test('tags is a sorted array', () => {
+    expect(Array.isArray(tags)).toBe(true);
+    const sorted = [...tags].sort();
+    expect(tags).toEqual(sorted);
+  });
+
+  test('tags contains only unique values', () => {
+    expect(new Set(tags).size).toBe(tags.length);
+  });
+
+  test('every project tag appears in the tags registry', () => {
+    const allProjectTags = projects.flatMap((p) => p.tags);
+    for (const tag of allProjectTags) {
+      expect(tags).toContain(tag);
+    }
+  });
+
+  test('tags contains no values absent from all projects', () => {
+    const allProjectTags = new Set(projects.flatMap((p) => p.tags));
+    for (const tag of tags) {
+      expect(allProjectTags.has(tag)).toBe(true);
+    }
+  });
+});
+
+describe('TAG_LABELS', () => {
+  test('is a plain object', () => {
+    expect(typeof TAG_LABELS).toBe('object');
+    expect(TAG_LABELS).not.toBeNull();
+  });
+
+  test('every key in TAG_LABELS exists in tags', () => {
+    for (const key of Object.keys(TAG_LABELS)) {
+      expect(tags).toContain(key);
+    }
+  });
+
+  test('maps multi-word or abbreviated tags to readable labels', () => {
+    expect(TAG_LABELS['etl']).toBe('ETL/ELT');
+    expect(TAG_LABELS['machine-learning']).toBe('Machine Learning');
+    expect(TAG_LABELS['r']).toBe('R');
+    expect(TAG_LABELS['sql']).toBe('SQL');
+    expect(TAG_LABELS['html']).toBe('HTML');
+    expect(TAG_LABELS['css']).toBe('CSS');
   });
 });

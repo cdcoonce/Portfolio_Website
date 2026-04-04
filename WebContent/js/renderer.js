@@ -80,3 +80,41 @@ export function renderProjectCards(container, projects) {
     container.appendChild(card);
   }
 }
+
+/**
+ * Converts a kebab-case tag to title case for display.
+ *
+ * @param {string} tag - Tag string (e.g. 'machine-learning')
+ * @returns {string} Title-cased string (e.g. 'Machine Learning')
+ */
+function titleCase(tag) {
+  return tag
+    .split('-')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
+
+/**
+ * Renders filter buttons into a container from a derived tag registry.
+ *
+ * Each button gets the `skill-tag` class and a `data-filter` attribute matching the tag.
+ * Display text comes from the labels map (if the tag has an entry) or falls back
+ * to automatic title-casing.
+ *
+ * @param {HTMLElement} container - The DOM element to render buttons into
+ * @param {string[]} tagList - Sorted array of tag strings
+ * @param {Object} [options]
+ * @param {Record<string, string>} [options.labels={}] - Tag-to-display-name mapping
+ */
+export function renderFilterButtons(container, tagList, options = {}) {
+  const { labels = {} } = options;
+  container.innerHTML = '';
+
+  for (const tag of tagList) {
+    const button = document.createElement('button');
+    button.classList.add('skill-tag');
+    button.dataset.filter = tag;
+    button.textContent = labels[tag] || titleCase(tag);
+    container.appendChild(button);
+  }
+}

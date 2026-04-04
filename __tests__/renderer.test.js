@@ -1,4 +1,8 @@
-import { createProjectCard, renderProjectCards } from '../WebContent/js/renderer.js';
+import {
+  createProjectCard,
+  renderProjectCards,
+  renderFilterButtons,
+} from '../WebContent/js/renderer.js';
 
 const sampleProject = {
   id: 'test-project',
@@ -118,5 +122,55 @@ describe('renderProjectCards', () => {
     expect(container.children.length).toBe(1);
     expect(container.children[0].tagName).toBe('A');
     expect(container.querySelector('a.project-card')).not.toBeNull();
+  });
+});
+
+describe('renderFilterButtons', () => {
+  const sampleTags = ['css', 'etl', 'python'];
+  const sampleLabels = { etl: 'ETL/ELT', css: 'CSS' };
+
+  test('creates correct number of buttons', () => {
+    const container = document.createElement('div');
+    renderFilterButtons(container, sampleTags);
+    const buttons = container.querySelectorAll('button.skill-tag');
+    expect(buttons.length).toBe(sampleTags.length);
+  });
+
+  test('each button has correct data-filter attribute', () => {
+    const container = document.createElement('div');
+    renderFilterButtons(container, sampleTags);
+    const buttons = container.querySelectorAll('button.skill-tag');
+    const filters = Array.from(buttons).map((b) => b.dataset.filter);
+    expect(filters).toEqual(['css', 'etl', 'python']);
+  });
+
+  test('uses TAG_LABELS for display names when available', () => {
+    const container = document.createElement('div');
+    renderFilterButtons(container, sampleTags, { labels: sampleLabels });
+    const buttons = container.querySelectorAll('button.skill-tag');
+    const texts = Array.from(buttons).map((b) => b.textContent);
+    expect(texts).toEqual(['CSS', 'ETL/ELT', 'Python']);
+  });
+
+  test('falls back to title-cased tag when no label exists', () => {
+    const container = document.createElement('div');
+    renderFilterButtons(container, ['python', 'machine-learning'], { labels: {} });
+    const buttons = container.querySelectorAll('button.skill-tag');
+    expect(buttons[0].textContent).toBe('Python');
+    expect(buttons[1].textContent).toBe('Machine Learning');
+  });
+
+  test('clears existing content before rendering', () => {
+    const container = document.createElement('div');
+    container.innerHTML = '<p>Old</p>';
+    renderFilterButtons(container, sampleTags);
+    expect(container.querySelectorAll('p').length).toBe(0);
+    expect(container.querySelectorAll('button.skill-tag').length).toBe(sampleTags.length);
+  });
+
+  test('renders nothing for empty tags array', () => {
+    const container = document.createElement('div');
+    renderFilterButtons(container, []);
+    expect(container.querySelectorAll('button.skill-tag').length).toBe(0);
   });
 });
