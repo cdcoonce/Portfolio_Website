@@ -248,3 +248,22 @@ export const TAG_LABELS = {
   r: 'R',
   sql: 'SQL',
 };
+
+/**
+ * Curated groupings for the categorized filter grid.
+ * Each category gets an h3 heading and a group of filter buttons.
+ * Tags that exist in the derived `tags` array but don't appear in any
+ * category are collected into an auto-generated "Other" group, ensuring
+ * no tag is ever unfilterable.
+ *
+ * @type {Array<{name: string, tags: string[]}>}
+ */
+export const TAG_CATEGORIES = [
+  { name: 'Languages', tags: ['python', 'sql', 'r'] },
+  { name: 'Techniques', tags: ['etl', 'machine-learning', 'statistical-analysis'] },
+  { name: 'Tools & Platforms', tags: ['tableau', 'excel', 'shiny'] },
+  {
+    name: 'Focus Areas',
+    tags: ['visualization', 'analytics-dashboard', 'data-pipelines', 'business-intelligence'],
+  },
+];

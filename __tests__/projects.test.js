@@ -1,4 +1,4 @@
-import { projects, tags, TAG_LABELS } from '../WebContent/js/projects.js';
+import { projects, tags, TAG_LABELS, TAG_CATEGORIES } from '../WebContent/js/projects.js';
 
 describe('projects data', () => {
   test('exports a non-empty array', () => {
@@ -105,5 +105,52 @@ describe('TAG_LABELS', () => {
     expect(TAG_LABELS['sql']).toBe('SQL');
     expect(TAG_LABELS['html']).toBe('HTML');
     expect(TAG_LABELS['css']).toBe('CSS');
+  });
+});
+
+describe('TAG_CATEGORIES', () => {
+  test('is a non-empty array of category objects', () => {
+    expect(Array.isArray(TAG_CATEGORIES)).toBe(true);
+    expect(TAG_CATEGORIES.length).toBeGreaterThan(0);
+  });
+
+  test('every category has a name and a non-empty tags array', () => {
+    for (const category of TAG_CATEGORIES) {
+      expect(typeof category.name).toBe('string');
+      expect(category.name.length).toBeGreaterThan(0);
+      expect(Array.isArray(category.tags)).toBe(true);
+      expect(category.tags.length).toBeGreaterThan(0);
+    }
+  });
+
+  test('every categorized tag exists in the derived tags registry', () => {
+    const allCategorized = TAG_CATEGORIES.flatMap((c) => c.tags);
+    for (const tag of allCategorized) {
+      expect(tags).toContain(tag);
+    }
+  });
+
+  test('no tag appears in multiple categories', () => {
+    const seen = new Set();
+    for (const category of TAG_CATEGORIES) {
+      for (const tag of category.tags) {
+        expect(seen.has(tag)).toBe(false);
+        seen.add(tag);
+      }
+    }
+  });
+
+  test('warns when tags exist that are not in any category (catch-all coverage)', () => {
+    const categorized = new Set(TAG_CATEGORIES.flatMap((c) => c.tags));
+    const uncategorized = tags.filter((t) => !categorized.has(t));
+    if (uncategorized.length > 0) {
+      console.warn(
+        `Uncategorized tags will appear in "Other": ${uncategorized.join(', ')}. ` +
+          'Consider adding them to TAG_CATEGORIES.'
+      );
+    }
+    // This test always passes — it's a dev-time nudge, not a gate.
+    // The catch-all in renderFilterButtons ensures they're still filterable.
+    expect(true).toBe(true);
   });
 });

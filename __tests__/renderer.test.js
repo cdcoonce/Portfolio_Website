@@ -127,50 +127,101 @@ describe('renderProjectCards', () => {
 
 describe('renderFilterButtons', () => {
   const sampleTags = ['css', 'etl', 'python'];
+  const sampleCategories = [
+    { name: 'Languages', tags: ['python'] },
+    { name: 'Techniques', tags: ['etl'] },
+  ];
   const sampleLabels = { etl: 'ETL/ELT', css: 'CSS' };
 
-  test('creates correct number of buttons', () => {
+  test('renders a skills-grid with skill-category groups', () => {
     const container = document.createElement('div');
-    renderFilterButtons(container, sampleTags);
+    renderFilterButtons(container, sampleTags, sampleCategories);
+    const grid = container.querySelector('.skills-grid');
+    expect(grid).not.toBeNull();
+    const categories = grid.querySelectorAll('.skill-category');
+    // 2 defined + 1 "Other" for uncategorized 'css'
+    expect(categories.length).toBe(3);
+  });
+
+  test('each category has an h3 heading and skill-tags wrapper', () => {
+    const container = document.createElement('div');
+    renderFilterButtons(container, sampleTags, sampleCategories);
+    const categories = container.querySelectorAll('.skill-category');
+    for (const cat of categories) {
+      expect(cat.querySelector('h3')).not.toBeNull();
+      expect(cat.querySelector('.skill-tags')).not.toBeNull();
+    }
+  });
+
+  test('category headings match category names', () => {
+    const container = document.createElement('div');
+    renderFilterButtons(container, sampleTags, sampleCategories);
+    const headings = Array.from(container.querySelectorAll('.skill-category h3')).map(
+      (h) => h.textContent
+    );
+    expect(headings).toEqual(['Languages', 'Techniques', 'Other']);
+  });
+
+  test('creates correct total number of buttons across all categories', () => {
+    const container = document.createElement('div');
+    renderFilterButtons(container, sampleTags, sampleCategories);
     const buttons = container.querySelectorAll('button.skill-tag');
-    expect(buttons.length).toBe(sampleTags.length);
+    expect(buttons.length).toBe(3); // python + etl + css (in Other)
   });
 
   test('each button has correct data-filter attribute', () => {
     const container = document.createElement('div');
-    renderFilterButtons(container, sampleTags);
+    renderFilterButtons(container, sampleTags, sampleCategories);
     const buttons = container.querySelectorAll('button.skill-tag');
     const filters = Array.from(buttons).map((b) => b.dataset.filter);
-    expect(filters).toEqual(['css', 'etl', 'python']);
+    expect(filters).toEqual(['python', 'etl', 'css']);
   });
 
-  test('uses TAG_LABELS for display names when available', () => {
+  test('uses labels for display names when available', () => {
     const container = document.createElement('div');
-    renderFilterButtons(container, sampleTags, { labels: sampleLabels });
+    renderFilterButtons(container, sampleTags, sampleCategories, { labels: sampleLabels });
     const buttons = container.querySelectorAll('button.skill-tag');
     const texts = Array.from(buttons).map((b) => b.textContent);
-    expect(texts).toEqual(['CSS', 'ETL/ELT', 'Python']);
+    expect(texts).toEqual(['Python', 'ETL/ELT', 'CSS']);
   });
 
   test('falls back to title-cased tag when no label exists', () => {
     const container = document.createElement('div');
-    renderFilterButtons(container, ['python', 'machine-learning'], { labels: {} });
+    const cats = [{ name: 'Test', tags: ['python', 'machine-learning'] }];
+    renderFilterButtons(container, ['python', 'machine-learning'], cats, { labels: {} });
     const buttons = container.querySelectorAll('button.skill-tag');
     expect(buttons[0].textContent).toBe('Python');
     expect(buttons[1].textContent).toBe('Machine Learning');
   });
 
+  test('does not create Other category when all tags are categorized', () => {
+    const container = document.createElement('div');
+    const fullCoverage = [
+      { name: 'Languages', tags: ['python'] },
+      { name: 'Techniques', tags: ['etl'] },
+      { name: 'Web', tags: ['css'] },
+    ];
+    renderFilterButtons(container, sampleTags, fullCoverage);
+    const headings = Array.from(container.querySelectorAll('.skill-category h3')).map(
+      (h) => h.textContent
+    );
+    expect(headings).toEqual(['Languages', 'Techniques', 'Web']);
+    expect(headings).not.toContain('Other');
+  });
+
   test('clears existing content before rendering', () => {
     const container = document.createElement('div');
     container.innerHTML = '<p>Old</p>';
-    renderFilterButtons(container, sampleTags);
+    renderFilterButtons(container, sampleTags, sampleCategories);
     expect(container.querySelectorAll('p').length).toBe(0);
-    expect(container.querySelectorAll('button.skill-tag').length).toBe(sampleTags.length);
+    expect(container.querySelector('.skills-grid')).not.toBeNull();
   });
 
-  test('renders nothing for empty tags array', () => {
+  test('renders empty grid for empty tags array', () => {
     const container = document.createElement('div');
-    renderFilterButtons(container, []);
-    expect(container.querySelectorAll('button.skill-tag').length).toBe(0);
+    renderFilterButtons(container, [], []);
+    const grid = container.querySelector('.skills-grid');
+    expect(grid).not.toBeNull();
+    expect(grid.querySelectorAll('button.skill-tag').length).toBe(0);
   });
 });

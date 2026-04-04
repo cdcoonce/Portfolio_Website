@@ -3,7 +3,7 @@
 import { initFilter, getFilterFromURL } from './filter.js';
 import { initCarousel } from './carousel.js';
 import { initChat } from './chat.js';
-import { projects, tags, TAG_LABELS } from './projects.js';
+import { projects, tags, TAG_LABELS, TAG_CATEGORIES } from './projects.js';
 import { renderProjectCards, renderFilterButtons } from './renderer.js';
 
 /**
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Render filter buttons from derived tag registry
   const filterContainer = document.getElementById('filter-buttons');
   if (filterContainer) {
-    renderFilterButtons(filterContainer, tags, { labels: TAG_LABELS });
+    renderFilterButtons(filterContainer, tags, TAG_CATEGORIES, { labels: TAG_LABELS });
   }
 
   // Page-aware initialization
