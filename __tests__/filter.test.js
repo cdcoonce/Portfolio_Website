@@ -1,9 +1,11 @@
+import { jest } from '@jest/globals';
 import {
   getFilteredVisibility,
   applyMaxVisible,
   getFeaturedVisibility,
   getFilterFromURL,
   getSortedIndices,
+  initFilter,
 } from '../WebContent/js/filter.js';
 
 describe('getFilteredVisibility', () => {
@@ -123,5 +125,67 @@ describe('getFilterFromURL', () => {
   test('returns null for empty filter param', () => {
     window.history.replaceState({}, '', '/?filter=');
     expect(getFilterFromURL()).toBeNull();
+  });
+});
+
+describe('initFilter with knownTags', () => {
+  let container;
+  let warnSpy;
+
+  beforeEach(() => {
+    container = document.createElement('div');
+    document.body.innerHTML = '';
+    document.body.appendChild(container);
+
+    // Create filter buttons with one unknown tag
+    const knownBtn = document.createElement('button');
+    knownBtn.classList.add('skill-tag');
+    knownBtn.dataset.filter = 'python';
+    knownBtn.textContent = 'Python';
+    container.appendChild(knownBtn);
+
+    const unknownBtn = document.createElement('button');
+    unknownBtn.classList.add('skill-tag');
+    unknownBtn.dataset.filter = 'nonexistent-tag';
+    unknownBtn.textContent = 'Nonexistent';
+    container.appendChild(unknownBtn);
+
+    const resetBtn = document.createElement('button');
+    resetBtn.classList.add('skill-filter-reset');
+    resetBtn.classList.add('active');
+    container.appendChild(resetBtn);
+
+    // Create a project card
+    const card = document.createElement('a');
+    card.classList.add('project-card');
+    card.dataset.tags = 'python,etl';
+    card.dataset.date = '2024-01';
+    card.style.display = 'flex';
+    container.appendChild(card);
+
+    warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    warnSpy.mockRestore();
+    document.body.innerHTML = '';
+  });
+
+  test('logs warning for filter buttons with tags not in knownTags', () => {
+    initFilter({ knownTags: new Set(['python', 'etl']) });
+    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('nonexistent-tag'));
+  });
+
+  test('does not warn when all filter tags are in knownTags', () => {
+    // Remove the unknown button first
+    const unknownBtn = container.querySelector('[data-filter="nonexistent-tag"]');
+    unknownBtn.remove();
+
+    initFilter({ knownTags: new Set(['python', 'etl']) });
+    // Should only have the standard "not found" warn or no warn at all
+    const tagWarns = warnSpy.mock.calls.filter(
+      (call) => typeof call[0] === 'string' && call[0].includes('not in knownTags')
+    );
+    expect(tagWarns.length).toBe(0);
   });
 });

@@ -79,10 +79,14 @@ class TestProjectsPage:
         assert visible.count() > 0
         page.close()
 
-    def test_featured_filter(self, projects_page):
-        projects_page.click('[data-filter="featured"]')
-        visible = projects_page.locator('.project-card:visible')
+    def test_featured_filter_via_home_page(self, browser, server):
+        """Featured filter only exists on the home page, not the projects page."""
+        page = browser.new_page()
+        page.goto(f'{server}/index.html')
+        page.click('[data-filter="featured"]')
+        visible = page.locator('.project-card:visible')
         assert visible.count() == 4, f'Expected 4 featured cards, got {visible.count()}'
+        page.close()
 
     def test_reset_shows_all(self, projects_page):
         projects_page.click('[data-filter="python"]')

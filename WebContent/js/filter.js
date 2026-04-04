@@ -78,9 +78,15 @@ export const getSortedIndices = (dates) => {
  * @param {number|null} [config.maxVisible=null] - Max cards to show (null = unlimited)
  * @param {string} [config.defaultFilter='all'] - Default filter: 'all' or 'featured'
  * @param {string|null} [config.initialFilter=null] - Pre-selected filter from URL param
+ * @param {Set<string>|null} [config.knownTags=null] - Known tag registry; warns if a filter button uses an unknown tag
  */
 export function initFilter(config = {}) {
-  const { maxVisible = null, defaultFilter = 'all', initialFilter = null } = config;
+  const {
+    maxVisible = null,
+    defaultFilter = 'all',
+    initialFilter = null,
+    knownTags = null,
+  } = config;
 
   const skillTags = document.querySelectorAll('button.skill-tag[data-filter]');
   const resetButton = document.querySelector('button.skill-filter-reset');
@@ -90,6 +96,18 @@ export function initFilter(config = {}) {
   if (!skillTags.length || !cards.length) {
     console.warn('Skill filter buttons or project cards not found in DOM');
     return;
+  }
+
+  // Warn about filter buttons whose data-filter value is not in the known tag registry
+  if (knownTags) {
+    for (const tag of skillTags) {
+      const filterValue = tag.getAttribute('data-filter');
+      if (!knownTags.has(filterValue)) {
+        console.warn(
+          `Filter button "${filterValue}" is not in knownTags — no project uses this tag`
+        );
+      }
+    }
   }
 
   // Sort cards by date (newest first)
