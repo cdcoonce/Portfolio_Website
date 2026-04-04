@@ -80,3 +80,80 @@ export function renderProjectCards(container, projects) {
     container.appendChild(card);
   }
 }
+
+/**
+ * Converts a kebab-case tag to title case for display.
+ *
+ * @param {string} tag - Tag string (e.g. 'machine-learning')
+ * @returns {string} Title-cased string (e.g. 'Machine Learning')
+ */
+function titleCase(tag) {
+  return tag
+    .split('-')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
+
+/**
+ * Creates a single filter button element.
+ *
+ * @param {string} tag - Tag identifier (e.g. 'python')
+ * @param {Record<string, string>} labels - Tag-to-display-name mapping
+ * @returns {HTMLButtonElement}
+ */
+function createFilterButton(tag, labels) {
+  const button = document.createElement('button');
+  button.classList.add('skill-tag');
+  button.dataset.filter = tag;
+  button.textContent = labels[tag] || titleCase(tag);
+  return button;
+}
+
+/**
+ * Renders a categorized filter grid into a container.
+ *
+ * Generates a `.skills-grid` with `.skill-category` groups, each containing
+ * an h3 heading and `.skill-tags` wrapper with filter buttons. Tags present
+ * in `allTags` but not assigned to any category are collected into an "Other"
+ * catch-all group, ensuring every tag is filterable.
+ *
+ * @param {HTMLElement} container - The DOM element to render into
+ * @param {string[]} allTags - Complete derived tag list (source of truth)
+ * @param {Array<{name: string, tags: string[]}>} categories - Curated groupings
+ * @param {Object} [options]
+ * @param {Record<string, string>} [options.labels={}] - Tag-to-display-name mapping
+ */
+export function renderFilterButtons(container, allTags, categories, options = {}) {
+  const { labels = {} } = options;
+  container.innerHTML = '';
+
+  const categorized = new Set(categories.flatMap((c) => c.tags));
+  const uncategorized = allTags.filter((t) => !categorized.has(t));
+
+  const allGroups =
+    uncategorized.length > 0 ? [...categories, { name: 'Other', tags: uncategorized }] : categories;
+
+  const grid = document.createElement('div');
+  grid.classList.add('skills-grid');
+
+  for (const category of allGroups) {
+    const group = document.createElement('div');
+    group.classList.add('skill-category');
+
+    const heading = document.createElement('h3');
+    heading.textContent = category.name;
+    group.appendChild(heading);
+
+    const tagsWrapper = document.createElement('div');
+    tagsWrapper.classList.add('skill-tags');
+
+    for (const tag of category.tags) {
+      tagsWrapper.appendChild(createFilterButton(tag, labels));
+    }
+
+    group.appendChild(tagsWrapper);
+    grid.appendChild(group);
+  }
+
+  container.appendChild(grid);
+}

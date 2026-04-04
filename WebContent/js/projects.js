@@ -220,3 +220,50 @@ export const projects = [
     featured: true,
   },
 ];
+
+/**
+ * Derived tag registry — the sorted, unique set of every tag used across all projects.
+ * This is the single source of truth for filterable tags; filter buttons are generated
+ * from this array, making orphan buttons structurally impossible.
+ *
+ * @type {string[]}
+ */
+export const tags = [...new Set(projects.flatMap((p) => p.tags))].sort();
+
+/**
+ * Human-readable display labels for tags that need special formatting.
+ * Tags not listed here are title-cased automatically by the renderer.
+ *
+ * @type {Record<string, string>}
+ */
+export const TAG_LABELS = {
+  'analytics-dashboard': 'Analytics Dashboards',
+  'business-intelligence': 'Business Intelligence',
+  'data-pipelines': 'Data Pipelines',
+  'machine-learning': 'Machine Learning',
+  'statistical-analysis': 'Statistical Analysis',
+  css: 'CSS',
+  etl: 'ETL/ELT',
+  html: 'HTML',
+  r: 'R',
+  sql: 'SQL',
+};
+
+/**
+ * Curated groupings for the categorized filter grid.
+ * Each category gets an h3 heading and a group of filter buttons.
+ * Tags that exist in the derived `tags` array but don't appear in any
+ * category are collected into an auto-generated "Other" group, ensuring
+ * no tag is ever unfilterable.
+ *
+ * @type {Array<{name: string, tags: string[]}>}
+ */
+export const TAG_CATEGORIES = [
+  { name: 'Languages', tags: ['python', 'sql', 'r'] },
+  { name: 'Techniques', tags: ['etl', 'machine-learning', 'statistical-analysis'] },
+  { name: 'Tools & Platforms', tags: ['tableau', 'excel', 'shiny'] },
+  {
+    name: 'Focus Areas',
+    tags: ['visualization', 'analytics-dashboard', 'data-pipelines', 'business-intelligence'],
+  },
+];

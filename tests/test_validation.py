@@ -119,17 +119,18 @@ class TestProjectsPageValidation:
         grid = projects_soup.find('div', class_='projects-grid')
         assert grid is not None, 'Projects page must have .projects-grid container'
 
-    def test_projects_page_has_filter_buttons(self, projects_soup):
-        tags = projects_soup.find_all('button', class_='skill-tag')
-        assert len(tags) > 0, 'Projects page must have skill filter buttons'
+    def test_projects_page_has_filter_buttons_container(self, projects_soup):
+        container = projects_soup.find('div', id='filter-buttons')
+        assert container is not None, 'Projects page must have #filter-buttons container for dynamic rendering'
 
     def test_projects_page_has_data_page_attribute(self, projects_soup):
         body = projects_soup.find('body')
         assert body.get('data-page') == 'projects', 'projects.html body must have data-page="projects"'
 
-    def test_projects_page_has_featured_filter(self, projects_soup):
-        featured = projects_soup.find('button', attrs={'data-filter': 'featured'})
-        assert featured is not None, 'Projects page must have a Featured filter button'
+    def test_projects_page_has_all_projects_reset_button(self, projects_soup):
+        reset = projects_soup.find('button', class_='skill-filter-reset')
+        assert reset is not None, 'Projects page must have a reset filter button'
+        assert reset.get('data-filter') == 'all', 'Reset button should have data-filter="all"'
 
     def test_projects_page_has_semantic_structure(self, projects_soup):
         assert projects_soup.find('header'), 'Missing <header>'
