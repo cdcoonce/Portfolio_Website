@@ -5,6 +5,7 @@ requires-python = ">=3.11"
 
 [dependency-groups]
 dev = [
+  "anthropic>=0.40.0",
   "pytest",
   "pytest-playwright",
   "axe-playwright-python",
@@ -13,7 +14,7 @@ dev = [
 ]
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["tests", "lambda/tests"]
 markers = [
     "slow: visual regression tests",
     "a11y: accessibility tests",
