@@ -70,8 +70,14 @@ def splice_content(existing: str, new_content: str) -> str:
     if not pattern.search(existing):
         raise ValueError("Generated markers not found in file content")
 
+    matches = pattern.findall(existing)
+    if len(matches) > 1:
+        raise ValueError(
+            f"File contains {len(matches)} generated blocks; named blocks not yet supported"
+        )
+
     replacement = f"{GEN_START}\n{new_content.rstrip()}\n{GEN_END}"
-    return pattern.sub(replacement, existing)
+    return pattern.sub(lambda _: replacement, existing)
 
 
 def _build_fresh_home(generated_content: str) -> str:

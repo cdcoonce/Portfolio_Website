@@ -24,7 +24,10 @@ def _read_package_json(repo_root: Path) -> dict:
     pkg_path = repo_root / "package.json"
     if not pkg_path.exists():
         return {}
-    return json.loads(pkg_path.read_text(encoding="utf-8"))
+    try:
+        return json.loads(pkg_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return {}
 
 
 def _read_pyproject(repo_root: Path) -> str:
@@ -113,7 +116,6 @@ def generate(repo_root: Path) -> str:
     dev_deps = pkg.get("devDependencies", {})
 
     # --- Tech stack table ---
-    node_version = dev_deps.get("jest", "").lstrip("^~") or "see package.json"
     jest_version = dev_deps.get("jest", "unknown").lstrip("^~")
     eslint_version = dev_deps.get("eslint", "unknown").lstrip("^~")
     prettier_version = dev_deps.get("prettier", "unknown").lstrip("^~")
@@ -155,5 +157,20 @@ def generate(repo_root: Path) -> str:
         for name, cmd in scripts.items():
             lines.append(f"| `npm run {name}` | `{cmd}` |")
         lines.append("")
+
+    # --- Wiki pages ---
+    lines.append("### Wiki Pages\n")
+    lines.append("- [Home](Home) — this page")
+    lines.append("- [Architecture](Architecture)")
+    lines.append("- [Frontend Modules](Frontend-Modules)")
+    lines.append("- [Lambda Chat Agent](Lambda-Chat-Agent)")
+    lines.append("- [Testing](Testing)")
+    lines.append("- [CSS Design System](CSS-Design-System)")
+    lines.append("- [Knowledge Base](Knowledge-Base)")
+    lines.append("- [Contributing](Contributing)")
+    lines.append("- [CI/CD Pipeline](CI-CD-Pipeline)")
+    lines.append("- [Changelog](Changelog)")
+    lines.append("- [Architecture Decision Log](Architecture-Decision-Log)")
+    lines.append("")
 
     return "\n".join(lines)

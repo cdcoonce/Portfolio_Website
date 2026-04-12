@@ -78,6 +78,20 @@ class TestSpliceContent:
         assert "Intro paragraph." in result
         assert "Footer text." in result
 
+    def test_splice_raises_on_multiple_generated_blocks(self):
+        """ValueError is raised when content has more than one generated block."""
+        original = (
+            "# Page\n\n"
+            "<!-- generated:start -->\n"
+            "block one\n"
+            "<!-- generated:end -->\n\n"
+            "<!-- generated:start -->\n"
+            "block two\n"
+            "<!-- generated:end -->\n"
+        )
+        with pytest.raises(ValueError, match="generated blocks"):
+            splice_content(original, "new content")
+
 
 # ---------------------------------------------------------------------------
 # Orchestrator file creation
@@ -134,11 +148,16 @@ class TestOrchestratorRun:
         assert today in content
 
     def test_home_generated_block_has_content(self, tmp_path):
-        """Home.md generated block contains tech stack content."""
+        """Home.md generated block contains 'Tech Stack' between the generated markers."""
         run(repo_root=REPO_ROOT, wiki_dir=tmp_path)
         content = (tmp_path / "Home.md").read_text()
-        # Should have a heading or table
-        assert "Node" in content or "Python" in content or "npm" in content
+        # Extract the generated block
+        start_marker = "<!-- generated:start -->"
+        end_marker = "<!-- generated:end -->"
+        start_idx = content.index(start_marker) + len(start_marker)
+        end_idx = content.index(end_marker)
+        generated_block = content[start_idx:end_idx]
+        assert "Tech Stack" in generated_block, "Expected 'Tech Stack' inside the generated block"
 
 
 # ---------------------------------------------------------------------------
@@ -181,3 +200,9 @@ class TestGenerateHome:
         """Output references Python version requirement from pyproject.toml."""
         output = generate(REPO_ROOT)
         assert "3.11" in output or "Python" in output
+
+    def test_generate_home_with_missing_files(self, tmp_path):
+        """generate() does not crash when package.json and pyproject.toml are absent."""
+        output = generate(tmp_path)
+        assert isinstance(output, str)
+        assert len(output) > 0
