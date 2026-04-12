@@ -141,11 +141,10 @@ class TestGenerateKnowledgeBase:
         assert ".md" in output
 
     def test_has_word_count_column(self):
-        """Output contains word count data."""
+        """Output contains word count data with digits between table pipe characters."""
+        import re
         output = generate_knowledge_base.generate(REPO_ROOT)
-        assert "word" in output.lower() or any(
-            char.isdigit() for char in output
-        ), "Expected numeric word counts"
+        assert re.search(r"\|\s*\d[\d,]*\s*\|", output), "Expected word count column with digits between pipes"
 
     def test_has_bio_file(self):
         """Output contains bio.md (known context file)."""
@@ -310,12 +309,19 @@ class TestGenerateChangelog:
         assert len(output) > 0
 
     def test_has_commit_type_header(self):
-        """Output contains at least one conventional commit type header."""
+        """Output contains at least one conventional commit type H3 header."""
         output = generate_changelog.generate(REPO_ROOT)
         # Repo has feat, fix, chore, docs, refactor, style commits
-        commit_types = ["## feat", "## fix", "## chore", "## docs", "## refactor", "## style"]
-        assert any(ct in output for ct in commit_types), (
-            f"Expected at least one commit type header, got: {output[:200]}"
+        h3_labels = [
+            "### Features",
+            "### Bug Fixes",
+            "### Chores",
+            "### Documentation",
+            "### Refactoring",
+            "### Style",
+        ]
+        assert any(label in output for label in h3_labels), (
+            f"Expected at least one H3 commit type header, got: {output[:200]}"
         )
 
     def test_has_feat_commits(self):

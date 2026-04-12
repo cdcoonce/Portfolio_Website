@@ -55,13 +55,21 @@ def _read_makefile_targets(repo_root: Path) -> list[tuple[str, str]]:
     if phony_match:
         phony_targets = phony_match.group(1).split()
 
-    # Parse target blocks: "target:\n\t<recipe>"
+    # Parse target blocks: "target:\n\t<recipe>" (targets with recipe lines)
     target_pattern = re.compile(r"^(\w[\w-]*):\s*\n((?:\t[^\n]*\n?)+)", re.MULTILINE)
     recipe_map: dict[str, str] = {}
     for match in target_pattern.finditer(text):
         name = match.group(1)
         first_recipe_line = match.group(2).strip().split("\n")[0].strip()
         recipe_map[name] = first_recipe_line
+
+    # Parse prerequisite-only targets: "target: dep1 dep2" with no recipe body
+    prereq_pattern = re.compile(r"^(\w[\w-]*):\s+(\S[^\n]+)$", re.MULTILINE)
+    for match in prereq_pattern.finditer(text):
+        name = match.group(1)
+        if name not in recipe_map and name != ".PHONY":
+            prereqs = match.group(2).strip()
+            recipe_map[name] = f"Runs: {prereqs}"
 
     # Use phony order if available, fall back to recipe_map order
     seen: set[str] = set()
@@ -82,8 +90,9 @@ def _read_makefile_targets(repo_root: Path) -> list[tuple[str, str]]:
 def generate(repo_root: Path) -> str:
     """Generate Contributing.md content block for the wiki.
 
-    Reads CLAUDE.md, package.json, pyproject.toml, and Makefile to produce
-    local setup steps, a make/npm targets table, and commit convention rules.
+    Produces local setup steps (standard project setup steps derived from
+    project conventions: npm install, uv sync, make test), a make/npm targets
+    table read from Makefile and package.json, and commit convention rules.
 
     Parameters
     ----------
@@ -130,7 +139,12 @@ def generate(repo_root: Path) -> str:
         lines.append("| Target | Command / Description |")
         lines.append("|---|---|")
         for name, recipe in make_targets:
-            recipe_str = f"`{recipe}`" if recipe else "—"
+            if not recipe:
+                recipe_str = "—"
+            elif recipe.startswith("Runs: "):
+                recipe_str = recipe
+            else:
+                recipe_str = f"`{recipe}`"
             lines.append(f"| `make {name}` | {recipe_str} |")
         lines.append("")
 

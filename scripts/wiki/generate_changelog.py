@@ -62,7 +62,7 @@ def _fetch_git_log(repo_root: Path, max_commits: int = 50) -> list[dict]:
                 "git",
                 "log",
                 f"--max-count={max_commits}",
-                "--format=%H|%s|%an|%ad",
+                "--format=%H\x1f%s\x1f%an\x1f%ad",
                 "--date=short",
             ],
             capture_output=True,
@@ -77,7 +77,7 @@ def _fetch_git_log(repo_root: Path, max_commits: int = 50) -> list[dict]:
     for line in result.stdout.strip().splitlines():
         if not line.strip():
             continue
-        parts = line.split("|", 3)
+        parts = line.split("\x1f", 3)
         if len(parts) < 4:
             continue
         sha, subject, author, date = parts[0], parts[1], parts[2], parts[3]
@@ -142,7 +142,6 @@ def generate(repo_root: Path) -> str:
         if not type_commits:
             continue
         label = _TYPE_LABELS.get(commit_type, commit_type.title())
-        lines.append(f"## {commit_type}\n")
         lines.append(f"### {label}\n")
         for c in type_commits:
             lines.append(f"- **{c['date']}** `{c['sha']}` — {c['body']}")
