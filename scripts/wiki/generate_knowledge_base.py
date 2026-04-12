@@ -66,6 +66,16 @@ def generate(repo_root: Path) -> str:
     context_dir = repo_root / "WebContent" / "context"
     lines: list[str] = []
 
+    lines.append("## Context File Pipeline\n")
+    lines.append("```mermaid")
+    lines.append("flowchart LR")
+    lines.append('    Files["WebContent/context/*.md"] --> Read["Read & parse files"]')
+    lines.append('    Read --> Inventory["File inventory table"]')
+    lines.append('    Inventory --> Wiki["Knowledge-Base.md"]')
+    lines.append('    Read --> WordCount["Word count per file"]')
+    lines.append('    WordCount --> Inventory')
+    lines.append("```\n")
+
     lines.append("## Knowledge Base Files\n")
     lines.append("These Markdown files are loaded into the Lambda chat agent's context window.\n")
 

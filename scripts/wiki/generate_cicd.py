@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import re
 from pathlib import Path
 
 
@@ -23,45 +22,6 @@ def _read_workflow(repo_root: Path) -> str:
     if not workflow_path.exists():
         return ""
     return workflow_path.read_text(encoding="utf-8")
-
-
-def _extract_steps(workflow_text: str) -> list[str]:
-    """Extract step names from a GitHub Actions workflow file.
-
-    Parameters
-    ----------
-    workflow_text : str
-        Raw YAML content.
-
-    Returns
-    -------
-    list[str]
-        List of step names in order of appearance.
-    """
-    # Match lines like:      - name: Step Name
-    pattern = re.compile(r"^\s+-\s+name:\s+(.+)$", re.MULTILINE)
-    return [m.group(1).strip() for m in pattern.finditer(workflow_text)]
-
-
-def _extract_jobs(workflow_text: str) -> list[str]:
-    """Extract job names from a GitHub Actions workflow file.
-
-    Parameters
-    ----------
-    workflow_text : str
-        Raw YAML content.
-
-    Returns
-    -------
-    list[str]
-        List of job identifiers.
-    """
-    pattern = re.compile(r"^(\w+):\s*$", re.MULTILINE)
-    # Filter out YAML top-level keys that are not jobs
-    not_jobs = {"on", "jobs", "name", "permissions", "steps", "with", "env", "run", "uses", "if", "needs"}
-    candidates = [m.group(1) for m in pattern.finditer(workflow_text)]
-    # jobs section typically follows 'jobs:' keyword — use a broader heuristic
-    return [c for c in candidates if c not in not_jobs]
 
 
 def generate(repo_root: Path) -> str:
@@ -105,7 +65,7 @@ def generate(repo_root: Path) -> str:
     lines.append('    Lint["Lint & Format\\n(Prettier · Stylelint · ESLint)"]')
     lines.append('    JSTests["JS unit tests\\n(Jest)"]')
     lines.append('    PyTests["Python tests\\n(pytest -m not slow)"]')
-    lines.append('    Check{{"All checks pass?"}}')
+    lines.append('    Check{"All checks pass?"}')
     lines.append('    Deploy["Deploy to gh-pages\\n(merge master → gh-pages)"]')
     lines.append('    Done["Site live on GitHub Pages"]')
     lines.append('    Fail["Pipeline fails\\n(PR blocked)"]')

@@ -15,6 +15,7 @@ from wiki.orchestrate import run
 from wiki import (
     generate_architecture,
     generate_frontend_modules,
+    generate_knowledge_base,
     generate_lambda,
     generate_cicd,
 )
@@ -132,6 +133,38 @@ class TestGenerateFrontendModulesDiagram:
         """Module inventory table is still present after Phase 3 changes."""
         output = generate_frontend_modules.generate(REPO_ROOT)
         assert "| Module |" in output or "Module Inventory" in output
+
+
+# ---------------------------------------------------------------------------
+# generate_knowledge_base
+# ---------------------------------------------------------------------------
+
+
+class TestGenerateKnowledgeBase:
+    """Tests for generate_knowledge_base.generate()."""
+
+    def test_knowledge_base_has_flowchart_lr(self):
+        """Output contains a flowchart LR compile pipeline diagram."""
+        output = generate_knowledge_base.generate(REPO_ROOT)
+        assert "flowchart LR" in output, "Expected flowchart LR diagram in Knowledge-Base output"
+
+    def test_knowledge_base_mermaid_block_properly_closed(self):
+        """The mermaid block opened for the pipeline diagram is properly closed."""
+        output = generate_knowledge_base.generate(REPO_ROOT)
+        opens = output.count(MERMAID_OPEN)
+        closes = sum(
+            1 for line in output.splitlines()
+            if line.strip() == MERMAID_CLOSE
+        )
+        assert opens == closes, (
+            f"Mermaid block mismatch: {opens} opens vs {closes} closes"
+        )
+
+    def test_knowledge_base_returns_string(self):
+        """generate() returns a non-empty string."""
+        output = generate_knowledge_base.generate(REPO_ROOT)
+        assert isinstance(output, str)
+        assert len(output) > 0
 
 
 # ---------------------------------------------------------------------------

@@ -140,8 +140,11 @@ def generate(repo_root: Path) -> str:
                 continue
             lines.append(f"    class {class_name} {{")
             for attr in attrs:
-                lines.append(f"        +{attr}")
+                visibility = "-" if attr.startswith("_") else "+"
+                lines.append(f"        {visibility}{attr}")
             for method in methods:
+                if method == "__init__":
+                    continue
                 lines.append(f"        +{method}()")
             lines.append("    }")
         # Add relationship
