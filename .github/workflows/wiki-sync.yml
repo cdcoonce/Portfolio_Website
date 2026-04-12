@@ -12,13 +12,12 @@ on:
       - "tests/**"
       - ".github/workflows/**"
 
-permissions:
-  contents: write
-
 jobs:
   sync-wiki:
     name: Regenerate and sync wiki
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -28,12 +27,11 @@ jobs:
       # --- Python setup ---
       - name: Install uv
         uses: astral-sh/setup-uv@v4
-
-      - name: Set up Python
-        run: uv python install 3.11
+        with:
+          python-version: "3.11.9"
 
       - name: Install Python dependencies
-        run: uv sync
+        run: uv sync --frozen
 
       # --- Regenerate wiki ---
       - name: Run wiki orchestrator
@@ -42,10 +40,13 @@ jobs:
       # --- Sync to GitHub Wiki ---
       - name: Clone wiki repo
         run: |
-          git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git wiki-repo
+          git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git wiki-repo \
+            || { echo "::error::Wiki repo not found. Initialize the GitHub Wiki by creating at least one page in the GitHub UI first."; exit 1; }
 
       - name: Copy wiki files
-        run: cp wiki/*.md wiki-repo/
+        run: |
+          rm -f wiki-repo/*.md
+          cp wiki/*.md wiki-repo/
 
       - name: Commit and push wiki
         run: |

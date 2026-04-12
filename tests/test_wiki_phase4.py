@@ -101,11 +101,12 @@ class TestPermissions:
     """Tests for workflow-level permissions."""
 
     def test_workflow_has_contents_write_permission(self, workflow: dict):
-        """Workflow declares permissions.contents == 'write'."""
-        permissions = workflow.get("permissions", {})
-        contents_perm = permissions.get("contents")
-        assert contents_perm == "write", (
-            f"Expected permissions.contents == 'write', got: {contents_perm}"
+        """sync-wiki job declares permissions.contents == 'write'."""
+        jobs = workflow["jobs"]
+        sync_job = jobs["sync-wiki"]
+        assert sync_job["permissions"]["contents"] == "write", (
+            f"Expected sync-wiki job permissions.contents == 'write', "
+            f"got: {sync_job.get('permissions', {}).get('contents')}"
         )
 
 
@@ -118,9 +119,9 @@ class TestSteps:
     """Tests for required workflow steps."""
 
     def test_workflow_uses_github_token(self, workflow_text: str):
-        """GITHUB_TOKEN appears in the workflow (used for wiki push auth)."""
-        assert "GITHUB_TOKEN" in workflow_text, (
-            "GITHUB_TOKEN must appear in the workflow for authentication"
+        """secrets.GITHUB_TOKEN appears in the workflow (used for wiki push auth)."""
+        assert "secrets.GITHUB_TOKEN" in workflow_text, (
+            "secrets.GITHUB_TOKEN must appear in the workflow for authentication"
         )
 
     def test_workflow_has_fetch_depth_zero(self, workflow_text: str):
@@ -145,4 +146,10 @@ class TestSteps:
         """Commit message contains 'chore(wiki): regenerate'."""
         assert "chore(wiki): regenerate" in workflow_text, (
             "Commit step must use message starting with 'chore(wiki): regenerate'"
+        )
+
+    def test_workflow_commit_references_sha(self, workflow_text: str):
+        """github.sha appears in the workflow (commit message interpolates the SHA)."""
+        assert "github.sha" in workflow_text, (
+            "Commit message must interpolate github.sha for traceability"
         )
