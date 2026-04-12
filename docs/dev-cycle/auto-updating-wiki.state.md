@@ -12,14 +12,18 @@ current_phase: issues
 | ---------- | -------------------------------------------------------- |
 | PRD Issue  | https://github.com/cdcoonce/Portfolio_Website/issues/115 |
 | Plan File  | docs/plans/auto-updating-wiki.md                         |
-| CEO Review | —                                                        |
+| CEO Review | complete — SCOPE EXPANSION approved 2026-04-11           |
 | PR         | —                                                        |
 
 ## Issues
 
-| #   | Title | URL | Status |
-| --- | ----- | --- | ------ |
-| —   | —     | —   | —      |
+| #   | Title                                                         | URL                                                      | Status |
+| --- | ------------------------------------------------------------- | -------------------------------------------------------- | ------ |
+| 116 | Phase 1 — generator foundation, orchestrator, sidebar, footer | https://github.com/cdcoonce/Portfolio_Website/issues/116 | open   |
+| 117 | Phase 2 — table/list generators and changelog                 | https://github.com/cdcoonce/Portfolio_Website/issues/117 | open   |
+| 118 | Phase 3 — mermaid diagram generators                          | https://github.com/cdcoonce/Portfolio_Website/issues/118 | open   |
+| 119 | Phase 4 — CI sync workflow                                    | https://github.com/cdcoonce/Portfolio_Website/issues/119 | open   |
+| 120 | Phase 5 — /update-wiki skill, ADL seed, readme trim           | https://github.com/cdcoonce/Portfolio_Website/issues/120 | open   |
 
 ## Log
 
