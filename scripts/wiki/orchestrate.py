@@ -219,19 +219,34 @@ def _write_footer(wiki_dir: Path, repo_root: Path) -> None:
 # ---------------------------------------------------------------------------
 
 
-def _get_generators() -> list[tuple[str, object]]:
-    """Return the list of registered (wiki_filename, generator_module) pairs.
+def _get_generators() -> list[tuple[str, object, bool]]:
+    """Return the list of registered (wiki_filename, generator_module, prose) triples.
 
     Returns
     -------
-    list[tuple[str, object]]
-        Each entry is (output filename without .md extension, module object).
+    list[tuple[str, object, bool]]
+        Each entry is (output filename without .md extension, module object,
+        whether to include a claude:prose block on first creation).
     """
     # Import here to avoid circular issues; makes mocking easy in tests too.
-    from wiki import generate_home  # noqa: PLC0415
+    from wiki import (  # noqa: PLC0415
+        generate_home,
+        generate_testing,
+        generate_css,
+        generate_knowledge_base,
+        generate_contributing,
+        generate_frontend_modules,
+        generate_changelog,
+    )
 
     return [
-        ("Home", generate_home),
+        ("Home", generate_home, False),
+        ("Testing", generate_testing, False),
+        ("CSS-Design-System", generate_css, False),
+        ("Knowledge-Base", generate_knowledge_base, False),
+        ("Contributing", generate_contributing, True),
+        ("Frontend-Modules", generate_frontend_modules, False),
+        ("Changelog", generate_changelog, False),
     ]
 
 
@@ -257,7 +272,7 @@ def run(repo_root: Path | None = None, wiki_dir: Path | None = None) -> None:
 
     wiki_dir.mkdir(parents=True, exist_ok=True)
 
-    for page_name, generator_module in _get_generators():
+    for page_name, generator_module, wants_prose in _get_generators():
         generated_content = generator_module.generate(repo_root)
         output_path = wiki_dir / f"{page_name}.md"
 
@@ -274,7 +289,7 @@ def run(repo_root: Path | None = None, wiki_dir: Path | None = None) -> None:
             if page_name == "Home":
                 updated = _build_fresh_home(generated_content)
             else:
-                updated = _build_fresh_page(page_name, generated_content, prose=True)
+                updated = _build_fresh_page(page_name, generated_content, prose=wants_prose)
 
         output_path.write_text(updated, encoding="utf-8")
 
