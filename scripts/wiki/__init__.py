@@ -7,4 +7,7 @@ from wiki import (  # noqa: F401
     generate_contributing,
     generate_frontend_modules,
     generate_changelog,
+    generate_architecture,
+    generate_lambda,
+    generate_cicd,
 )

@@ -237,6 +237,9 @@ def _get_generators() -> list[tuple[str, object, bool]]:
         generate_contributing,
         generate_frontend_modules,
         generate_changelog,
+        generate_architecture,
+        generate_lambda,
+        generate_cicd,
     )
 
     return [
@@ -247,6 +250,9 @@ def _get_generators() -> list[tuple[str, object, bool]]:
         ("Contributing", generate_contributing, True),
         ("Frontend-Modules", generate_frontend_modules, False),
         ("Changelog", generate_changelog, False),
+        ("Architecture", generate_architecture, True),
+        ("Lambda-Chat-Agent", generate_lambda, True),
+        ("CI-CD-Pipeline", generate_cicd, False),
     ]
 
 

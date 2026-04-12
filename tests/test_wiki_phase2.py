@@ -283,10 +283,10 @@ class TestGenerateFrontendModules:
             for name in ["initChat", "initFilter", "escapeHtml", "renderProjectCards"]
         )
 
-    def test_has_phase3_placeholder(self):
-        """Output contains the Phase 3 placeholder comment."""
+    def test_has_dependency_graph(self):
+        """Output contains the Phase 3 module dependency graph (graph LR)."""
         output = generate_frontend_modules.generate(REPO_ROOT)
-        assert "Phase 3" in output
+        assert "graph LR" in output, "Phase 3 diagram should be present instead of placeholder"
 
     def test_missing_js_dir(self, tmp_path):
         """generate() does not crash when WebContent/js/ is absent."""
