@@ -57,7 +57,7 @@ class TestTrigger:
         )
 
     def test_workflow_has_path_filters(self, workflow: dict):
-        """All 7 watched path patterns are present in on.push.paths."""
+        """All 8 watched path patterns are present in on.push.paths."""
         push = _get_push_trigger(workflow)
         paths = push.get("paths", [])
         expected = [
@@ -68,11 +68,21 @@ class TestTrigger:
             "__tests__/**",
             "tests/**",
             ".github/workflows/**",
+            "scripts/wiki/**",
         ]
         for pattern in expected:
             assert pattern in paths, (
                 f"Expected path pattern '{pattern}' not found in on.push.paths: {paths}"
             )
+
+    def test_workflow_has_scripts_wiki_path_trigger(self, workflow: dict):
+        """scripts/wiki/** is in on.push.paths so generator changes trigger CI."""
+        push = _get_push_trigger(workflow)
+        paths = push.get("paths", [])
+        assert "scripts/wiki/**" in paths, (
+            f"'scripts/wiki/**' must be in on.push.paths so that generator "
+            f"changes trigger the wiki sync workflow; got: {paths}"
+        )
 
     def test_workflow_readme_not_in_paths(self, workflow: dict):
         """README.md is NOT in path triggers (doc-only pushes must not fire)."""

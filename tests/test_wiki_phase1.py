@@ -137,6 +137,24 @@ class TestOrchestratorRun:
         assert "Architecture" in content
         assert "Dev Guide" in content
 
+    def test_sidebar_has_correct_lambda_and_cicd_links(self, tmp_path):
+        """_Sidebar.md uses correct page names for Lambda and CI-CD links."""
+        run(repo_root=REPO_ROOT, wiki_dir=tmp_path)
+        content = (tmp_path / "_Sidebar.md").read_text()
+        assert "[[Lambda-Chat-Agent]]" in content, (
+            "Sidebar must link to [[Lambda-Chat-Agent]], not [[Lambda]]"
+        )
+        assert "[[CI-CD-Pipeline]]" in content, (
+            "Sidebar must link to [[CI-CD-Pipeline]], not [[CI-CD]]"
+        )
+        # Regression guards: old broken links must not appear
+        assert "[[Lambda]]" not in content, (
+            "[[Lambda]] is a dead link — use [[Lambda-Chat-Agent]]"
+        )
+        assert "[[CI-CD]]" not in content, (
+            "[[CI-CD]] is a dead link — use [[CI-CD-Pipeline]]"
+        )
+
     def test_footer_has_date_and_sha(self, tmp_path):
         """_Footer.md contains 'Last regenerated:' with a date."""
         run(repo_root=REPO_ROOT, wiki_dir=tmp_path)

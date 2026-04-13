@@ -11,6 +11,7 @@ on:
       - "__tests__/**"
       - "tests/**"
       - ".github/workflows/**"
+      - "scripts/wiki/**"
 
 jobs:
   sync-wiki:

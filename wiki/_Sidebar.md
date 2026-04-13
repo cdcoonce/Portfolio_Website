@@ -8,8 +8,8 @@
 
 - [[Architecture]]
 - [[Frontend-Modules]]
-- [[Lambda]]
-- [[CI-CD]]
+- [[Lambda-Chat-Agent]]
+- [[CI-CD-Pipeline]]
 
 ## Dev Guide
 
