@@ -10,3 +10,6 @@ node_modules/
 
 # Ignore Lambda function (Python, not JS)
 lambda/
+
+# Ignore auto-generated wiki pages (managed by scripts/wiki/orchestrate.py)
+wiki/
