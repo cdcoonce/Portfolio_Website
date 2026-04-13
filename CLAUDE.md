@@ -124,6 +124,10 @@ Skills live in `.claude/skills/`. Each `SKILL.md` defines an invocable skill wit
 
 **Trigger when:** user wants to prevent destructive git operations, add git safety hooks, or block git push/reset in Claude Code.
 
+### `/update-wiki`
+
+**Trigger when:** user wants to update wiki prose, refresh onboarding narrative, rewrite architecture documentation, or types "/update-wiki" (with or without a page name argument).
+
 ### `/write-a-skill`
 
 **Trigger when:** user wants to create, write, or build a new Claude Code skill.

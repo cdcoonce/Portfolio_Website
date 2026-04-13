@@ -17,6 +17,9 @@ coverage/
 # Test artifacts
 tests/snapshots/
 
+# Visual brainstorming companion
+.superpowers/
+
 # Lambda deployment artifacts
 lambda/package/
 lambda/deployment*.zip
