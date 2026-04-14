@@ -161,3 +161,67 @@ breakpoints.
 - **Negative:** The hamburger navigation (mobile) and the full nav bar (desktop) are
   implemented as the same element with visibility toggled by CSS — this requires discipline
   to keep the two states in sync when adding new nav items.
+
+---
+
+## ADL-006: Wiki Pages Versioned with Code, Not Wiki-Only
+
+**Date:** 2026-04-12
+**Status:** Accepted
+
+**Context:** GitHub Wiki pages live in a separate `.wiki.git` repository that is not part of
+the main repo's pull request flow. Editing wiki pages directly in the GitHub UI means changes
+are invisible to CI, have no review process, and can silently drift from the code they document.
+The auto-updating wiki system generates `wiki/*.md` files from source code, but those files
+need to go somewhere before CI can sync them to GitHub Wiki.
+
+**Decision:** Commit all generated `wiki/*.md` files to the main repository alongside the
+generator scripts. The `wiki-sync.yml` CI workflow reads from `wiki/` in the main repo and
+pushes to the `.wiki.git` remote — the wiki repo is treated as a deployment target, not a
+source of truth. Prose sections (maintained by `/update-wiki`) are also committed to the main
+repo, making all wiki content reviewable via pull request.
+
+**Consequences:**
+
+- **Positive:** Wiki changes go through the same PR and CI process as code changes. Reviewers
+  can see wiki diffs alongside the code changes that prompted them.
+- **Positive:** `git log wiki/` gives a full audit trail of documentation history.
+- **Negative:** The `wiki/` directory adds ~15 Markdown files to the repo. Contributors must
+  remember not to edit GitHub Wiki pages directly — the next CI sync will overwrite them.
+- **Negative:** Generated pages committed to the repo can get out of date between CI runs.
+  Mitigated by the `scripts/wiki/**` path trigger in `wiki-sync.yml`.
+
+---
+
+## ADL-007: Marker-Based Wiki Regions (Generated vs Prose)
+
+**Date:** 2026-04-12
+**Status:** Accepted
+
+**Context:** Wiki pages need two kinds of content: auto-generated tables and diagrams (derived
+from source code, always current) and hand-written narrative prose (explains intent, rationale,
+and non-obvious design decisions). Mixing these in a single unstructured file means either the
+generator overwrites the prose or the prose author accidentally modifies the generated data.
+
+**Decision:** Define two non-overlapping HTML comment marker conventions:
+
+- `<!-- generated:start -->` … `<!-- generated:end -->`: owned by `orchestrate.py`. The
+  orchestrator splices new content into this region on every run using a regex substitution
+  with a lambda replacement (to prevent backreference expansion in content).
+- `<!-- claude:prose -->` … `<!-- claude:prose:end -->`: owned by the `/update-wiki` Claude
+  Code skill. Claude rewrites only the content between these markers.
+
+The two regions never overlap. Pages that have no hand-written narrative (e.g. `Changelog.md`)
+have no `claude:prose` markers. `Architecture-Decision-Log.md` is an exception: it has no
+generated regions and is entirely Claude-maintained.
+
+**Consequences:**
+
+- **Positive:** Generator runs are non-destructive — prose is never overwritten by `orchestrate.py`.
+- **Positive:** The `/update-wiki` skill can safely rewrite prose without reading or parsing
+  the generated tables.
+- **Negative:** Contributors must know not to add content outside both marker pairs on
+  generator-owned pages — such content would persist across runs but be visually isolated
+  from both regions, creating an ambiguous ownership zone.
+- **Negative:** Pages with both generated and prose regions have a fixed structure that
+  cannot be reordered without updating both the orchestrator and the skill's page registry.
