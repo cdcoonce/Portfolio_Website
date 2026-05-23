@@ -1,1 +1,1 @@
-{"generated_at":"2026-05-22T09:32:40Z","pipeline_run_id":"c7e46a62-c7a7-44ad-b7ef-47371c7609ef","date_range":{"start":"2026-01-19 00:00:00","end":"2026-05-21 00:00:00"},"asset_count":10,"row_counts":{"daily_performance":1110,"weather_performance":1040},"schema_version":"1.0"}
+{"generated_at":"2026-05-23T09:31:31Z","pipeline_run_id":"3f40b3fb-b1be-481a-a305-dc7c20a4b4be","date_range":{"start":"2026-01-19 00:00:00","end":"2026-05-22 00:00:00"},"asset_count":10,"row_counts":{"daily_performance":1120,"weather_performance":1050},"schema_version":"1.0"}
