@@ -2,7 +2,7 @@ name: Wiki Sync
 
 on:
   push:
-    branches: [master]
+    branches: [main]
     paths:
       - "WebContent/js/**"
       - "WebContent/css/**"

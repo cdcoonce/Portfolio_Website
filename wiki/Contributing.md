@@ -111,11 +111,11 @@ Every push to `master` and every pull request runs the `check` job in `.github/w
 4. **Jest** (`npm test`) — runs all JS unit tests.
 5. **pytest** (`uv run pytest -m "not slow"`) — runs Python unit, validation, and accessibility tests. The checkout uses `fetch-depth: 0` so the changelog generator (which calls `git log`) has full history.
 
-A push to `master` that passes CI also triggers the `deploy` job, which merges `master` into `gh-pages` for GitHub Pages hosting, and the `wiki-sync` job (in `wiki-sync.yml`) which regenerates and publishes all wiki pages.
+A push to `main` that passes CI also triggers the `deploy` job, which merges `main` into `gh-pages` for GitHub Pages hosting, and the `wiki-sync` job (in `wiki-sync.yml`) which regenerates and publishes all wiki pages.
 
 ### Knowledge Base and the Wiki
 
 The Lambda chat agent's knowledge base is built from the Markdown context files in `WebContent/context/`. When you update a context file (bio, skills, a project entry), you need to redeploy the Lambda to pick up the changes — the knowledge base is bundled at deploy time, not read at request time. Use the `/deploy` skill in Claude Code to rebuild and redeploy automatically.
 
-The wiki pages in `wiki/` are auto-generated from the source code by `scripts/wiki/orchestrate.py`. Generated sections (between `<!-- generated:start -->` and `<!-- generated:end -->`) are owned by the orchestrator and should never be edited manually — the next orchestrator run will overwrite them. Prose sections (between `<!-- claude:prose -->` and `<!-- claude:prose:end -->`) are maintained by the `/update-wiki` Claude Code skill.
+The wiki pages in `wiki/` are auto-generated from the source code by `scripts/wiki/orchestrate.py`. Generated sections (bounded by `generated:start` / `generated:end` HTML comment markers) are owned by the orchestrator and should never be edited manually — the next orchestrator run will overwrite them. Prose sections (bounded by `claude:prose` / `claude:prose:end` HTML comment markers) are maintained by the `/update-wiki` Claude Code skill.
 <!-- claude:prose:end -->
