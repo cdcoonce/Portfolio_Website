@@ -114,6 +114,8 @@ def build_system_prompt(kb: dict | None = None) -> str:
         f"skills, and experience in a friendly, professional, and concise tone.\n\n"
         f"## About {person['name']}\n"
         f"{person['bio']}\n\n"
+        f"## Professional Experience\n"
+        f"{person.get('professional_experience', '')}\n\n"
         f"## Career Journey\n"
         f"{person.get('career_journey', '')}\n\n"
         f"## Education\n"

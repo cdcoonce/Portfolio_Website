@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 - Correct Clearway Energy start date to May 2025 (from May 2024) in the bio,
   the Ask AI knowledge base, and the downloadable resume PDF
+- Wire the professional-experience section into the Ask AI system prompt so the
+  chat agent can answer employment-tenure questions (previously it had no dates)
 
 ## [2.0.0] - 2026-07-03
 
