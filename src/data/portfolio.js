@@ -90,10 +90,10 @@ export const skills = [
 ];
 
 export const metrics = [
-  { value: '6', label: 'Data projects shipped' },
-  { value: '1.8M+', label: 'Records analyzed' },
-  { value: '150+', label: 'Countries covered' },
-  { value: '270yr', label: 'CO₂ history modeled' },
+  { value: '7', label: 'Projects shipped' },
+  { value: '4+', label: 'Data pipelines built' },
+  { value: '6', label: 'Languages & tools' },
+  { value: '1.8M+', label: 'Records processed' },
 ];
 
 export const experience = [
