@@ -5,8 +5,8 @@ export default function Contact() {
   return (
     <div className="contact">
       <p className="contact__lead">
-        Interested in working together or have a question? Reach out below and I&rsquo;ll get
-        back to you.
+        Interested in working together or have a question? Reach out below and I&rsquo;ll get back
+        to you.
       </p>
       <div className="contact__actions">
         <Button as="a" href="mailto:CharlesCoonce@Gmail.com">

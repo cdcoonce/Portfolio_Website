@@ -2,6 +2,35 @@ import { useState } from 'react';
 import { testimonials } from '../../data/portfolio.js';
 import { initials, nextIndex, prevIndex } from '../../lib/carousel.js';
 
+/**
+ * Testimonial avatar. Shows a locally-hosted headshot when `photo` is set,
+ * otherwise the author's initials. When `linkedin` is set, the avatar becomes
+ * a link to that profile.
+ */
+function Avatar({ person }) {
+  const { author, photo, linkedin } = person;
+  const inner = photo ? (
+    <img className="testimonial-card__photo" src={photo} alt={author} />
+  ) : (
+    <span aria-hidden="true">{initials(author)}</span>
+  );
+
+  if (linkedin) {
+    return (
+      <a
+        className="testimonial-card__avatar testimonial-card__avatar--link"
+        href={linkedin}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`${author} on LinkedIn — opens in a new tab`}
+      >
+        {inner}
+      </a>
+    );
+  }
+  return <div className="testimonial-card__avatar">{inner}</div>;
+}
+
 /** Testimonials tab: single-quote carousel with segment dots + prev/next. */
 export default function Testimonials() {
   const [index, setIndex] = useState(0);
@@ -16,9 +45,7 @@ export default function Testimonials() {
         <blockquote className="testimonial-card__quote">{current.quote}</blockquote>
         <div className="testimonial-card__footer">
           <div className="testimonial-card__person">
-            <div className="testimonial-card__avatar" aria-hidden="true">
-              {initials(current.author)}
-            </div>
+            <Avatar person={current} />
             <div>
               <div className="testimonial-card__author">{current.author}</div>
               <div className="testimonial-card__meta">

@@ -5,10 +5,21 @@
  * shipped in /public/assets so we reuse the same source art.
  */
 
-/** @typedef {{ title: string, date: string, description: string, image: string, imageContain?: boolean, tags: string[], href: string }} Project */
+/** @typedef {{ title: string, date: string, description: string, image: string, imageContain?: boolean, tags: string[], href: string, featured?: boolean }} Project */
 
 /** @type {Project[]} */
 export const projects = [
+  {
+    title: 'AFK — Autonomous Coding-Agent System',
+    date: 'Jul 2026',
+    description:
+      'A sovereign, human-gated pipeline that files, executes, and merges coding work through autonomous agents — with a live-ops cockpit tracking PR outcomes, safety quarantines as signal (not failure), and API-equivalent cost per model tier.',
+    image: '/assets/projects/afk.png',
+    imageContain: false,
+    tags: ['Python', 'Data Pipelines', 'Analytics Dashboards'],
+    href: '/afk-cockpit/',
+    featured: true,
+  },
   {
     title: 'National Parks Dashboard',
     date: 'Sep 2024',
@@ -87,7 +98,7 @@ export const metrics = [
 
 export const experience = [
   {
-    period: '2024 — Present',
+    period: '2025 — Present',
     role: 'Analyst, Analytics Engineering',
     org: 'Clearway Energy',
     note: 'Build scalable data pipelines and decision-ready dashboards supporting renewable-energy operations and reporting.',
@@ -106,6 +117,18 @@ export const experience = [
   },
 ];
 
+/**
+ * @typedef {Object} Testimonial
+ * @property {string} quote
+ * @property {string} author
+ * @property {string} job
+ * @property {string} company
+ * @property {string} [linkedin] - Profile URL; when set, the avatar links to it.
+ * @property {string} [photo] - Locally-hosted headshot path (e.g. /assets/testimonials/aaron.jpg);
+ *   falls back to initials when absent. LinkedIn CDN URLs are NOT usable — they expire.
+ */
+
+/** @type {Testimonial[]} */
 export const testimonials = [
   {
     quote:
@@ -113,6 +136,8 @@ export const testimonials = [
     author: 'Aaron Wallen',
     job: 'Director of Business Analysis',
     company: 'OneAmerica Financial',
+    linkedin: '',
+    photo: '',
   },
   {
     quote:
@@ -120,6 +145,8 @@ export const testimonials = [
     author: 'Kevin Brennan',
     job: 'IT Business Planning Consultant',
     company: 'OneAmerica Financial',
+    linkedin: '',
+    photo: '',
   },
   {
     quote:
@@ -127,6 +154,8 @@ export const testimonials = [
     author: 'Katie Marks',
     job: 'Business Relationship Management Director',
     company: 'OneAmerica Financial',
+    linkedin: '',
+    photo: '',
   },
   {
     quote:
@@ -134,6 +163,8 @@ export const testimonials = [
     author: 'Chris McGowan',
     job: 'Training Director',
     company: 'Montana Electrical Training Center',
+    linkedin: '',
+    photo: '',
   },
 ];
 

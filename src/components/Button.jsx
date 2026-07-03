@@ -12,12 +12,7 @@ export default function Button({
   children,
   ...rest
 }) {
-  const classes = [
-    'btn',
-    `btn--${variant}`,
-    size === 'sm' ? 'btn--sm' : '',
-    className,
-  ]
+  const classes = ['btn', `btn--${variant}`, size === 'sm' ? 'btn--sm' : '', className]
     .filter(Boolean)
     .join(' ');
 

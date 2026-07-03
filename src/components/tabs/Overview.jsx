@@ -4,7 +4,7 @@ import { metrics, projects } from '../../data/portfolio.js';
 
 /** Overview tab: at-a-glance metrics + a featured project spotlight. */
 export default function Overview({ onSeeWork }) {
-  const featured = projects[0];
+  const featured = projects.find((p) => p.featured) ?? projects[0];
   return (
     <div className="overview">
       <div className="metrics">
@@ -19,12 +19,7 @@ export default function Overview({ onSeeWork }) {
       <div>
         <div className="eyebrow">Featured project</div>
         <div className="featured">
-          <img
-            className="featured__img"
-            src={featured.image}
-            alt={featured.title}
-            loading="lazy"
-          />
+          <img className="featured__img" src={featured.image} alt={featured.title} loading="lazy" />
           <div className="featured__body">
             <h3 className="featured__title">{featured.title}</h3>
             <p className="featured__desc">{featured.description}</p>

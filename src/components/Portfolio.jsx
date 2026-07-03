@@ -29,8 +29,8 @@ export default function Portfolio() {
           <h1 className="profile__name">Charles Coonce</h1>
           <p className="profile__role">Analyst · Analytics Engineering @ Clearway Energy</p>
           <p className="profile__bio">
-            I build scalable data pipelines, turn raw data into clear visual insight, and help
-            teams make informed decisions.
+            I build scalable data pipelines, turn raw data into clear visual insight, and help teams
+            make informed decisions.
           </p>
           <div className="profile__actions">
             <Button

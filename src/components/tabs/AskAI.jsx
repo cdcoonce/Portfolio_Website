@@ -124,10 +124,7 @@ export default function AskAI() {
 
         <div className="askai__messages" ref={scrollRef} aria-live="polite" role="log">
           {messages.map((m, i) => (
-            <div
-              className={`msg msg--${m.role}`}
-              key={`${m.role}-${i}`}
-            >
+            <div className={`msg msg--${m.role}`} key={`${m.role}-${i}`}>
               {m.role === 'assistant' && (
                 <div className="msg__avatar" aria-hidden="true">
                   ✦
