@@ -49,11 +49,11 @@ class TestTrigger:
     """Tests for the on.push trigger configuration."""
 
     def test_workflow_has_push_trigger(self, workflow: dict):
-        """Workflow triggers on push to master."""
+        """Workflow triggers on push to main."""
         push = _get_push_trigger(workflow)
         branches = push.get("branches", [])
-        assert "master" in branches, (
-            f"Expected 'master' in on.push.branches, got: {branches}"
+        assert "main" in branches, (
+            f"Expected 'main' in on.push.branches, got: {branches}"
         )
 
     def test_workflow_has_path_filters(self, workflow: dict):
