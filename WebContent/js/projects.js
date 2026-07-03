@@ -219,6 +219,17 @@ export const projects = [
     ],
     featured: true,
   },
+  {
+    id: 'afk-cockpit',
+    href: './afk-cockpit/',
+    title: 'AFK Cockpit',
+    date: '2026-07',
+    description:
+      'Live-ops dashboard for afk, an autonomous coding-agent pipeline, tracking PR outcomes, safety quarantines as a signal rather than a failure, and API-equivalent cost per model tier.',
+    image: './WebContent/assets/afk-cockpit/thumbnail.png',
+    imageAlt: 'AFK Cockpit dashboard',
+    tags: ['python', 'analytics-dashboard', 'data-pipelines'],
+  },
 ];
 
 /**

@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-C3MKQC8F23"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-C3MKQC8F23');
+    </script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Live metrics dashboard for afk, Charles Coonce's autonomous coding-agent pipeline: PR outcomes, safety quarantines, and cost per model tier."
+    />
+    <title>AFK Cockpit | Charles Coonce</title>
+    <link rel="icon" type="image/svg+xml" href="../WebContent/assets/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+<style>/* ==========================================================================
+   Colors — charleslikesdata
+   Monochromatic grayscale foundation + ONE restrained accent.
+   The accent (pale blue) is reserved strictly for interactive surfaces:
+   chat assistant bubbles, testimonials, highlighted cards. It is a
+   highlight, never a theme. Everything else is grayscale.
+   ========================================================================== */
+
+:root {
+  /* --- Base grayscale ramp --- */
+  --white: #ffffff;
+  --gray-50: #f9f9f9;   /* muted page surface */
+  --gray-100: #f0f0f0;  /* image fallback / faint fill */
+  --gray-200: #e0e0e0;  /* hairline borders (inputs, chat frame) */
+  --gray-300: #cccccc;  /* inactive dots */
+  --gray-500: #666666;  /* meta / counters */
+  --gray-600: #555555;  /* secondary text (body copy) */
+  --gray-800: #353535;  /* primary text, borders, dark fills */
+  --black: #000000;     /* deepest hover / press state */
+
+  /* --- The one accent: pale analytical blue --- */
+  --accent-blue-rgb: 235, 241, 248;
+  --accent-blue: rgb(var(--accent-blue-rgb));
+  --accent-blue-soft: rgba(var(--accent-blue-rgb), 0.4);
+
+  /* --- Semantic aliases: reference these in components --- */
+  --text-heading: var(--gray-800);
+  --text-primary: var(--gray-800);
+  --text-secondary: var(--gray-600);
+  --text-muted: var(--gray-500);
+  --text-on-dark: var(--white);
+
+  --surface-page: var(--white);
+  --surface-muted: var(--gray-50);
+  --surface-card: var(--white);
+  --surface-inverse: var(--gray-800);
+  --surface-inverse-hover: var(--black);
+  --surface-accent: var(--accent-blue-soft);
+
+  --border-strong: var(--gray-800);
+  --border-hairline: var(--gray-200);
+  --border-inactive: var(--gray-300);
+
+  --quote-mark: rgba(53, 53, 53, 0.2);
+}
+</style>
+<style>/* ==========================================================================
+   Typography — charleslikesdata
+   One family (Poppins), a tight weight range, and a restrained type scale.
+   Headings and emphasis lean on weight (600), not color.
+   ========================================================================== */
+
+:root {
+  /* --- Family --- */
+  --font-sans: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* --- Weights (Poppins ships 300/400/500/600 here) --- */
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+
+  /* --- Type scale (rem, matching the live site) --- */
+  --text-hero: 3rem;
+  --text-2xl: 1.75rem;
+  --text-xl: 1.5rem;
+  --text-lg: 1.25rem;
+  --text-md: 1rem;
+  --text-sm: 0.95rem;
+  --text-xs: 0.85rem;
+
+  /* --- Line heights --- */
+  --leading-tight: 1.2;
+  --leading-snug: 1.4;
+  --leading-normal: 1.5;
+}
+</style>
+<style>/* ==========================================================================
+   Spacing, radii, shadows, motion & layout — charleslikesdata
+   Generous whitespace, soft pill/rounded geometry, gentle shadows,
+   and quick, uniform transitions.
+   ========================================================================== */
+
+:root {
+  /* --- Spacing scale (rem) --- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* --- Corner radii --- */
+  --radius-sm: 2px;
+  --radius-md: 8px;
+  --radius-card: 10px;
+  --radius-pill: 2rem;
+  --radius-round: 50%;
+
+  /* --- Shadows (all low-opacity black, no color) --- */
+  --shadow-nav: 0 2px 4px rgba(0, 0, 0, 0.08);
+  --shadow-soft: 0 2px 10px rgba(0, 0, 0, 0.1);
+  --shadow-card: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-card-hover: 0 8px 12px rgba(0, 0, 0, 0.15);
+
+  /* --- Motion: quick, smooth, uniform --- */
+  --ease: ease;
+  --duration: 300ms;
+  --transition-base: 300ms ease;
+  --transition-transform: transform 300ms ease;
+
+  /* --- Layout containers --- */
+  --container-wide: 1700px;
+  --container-content: 1200px;
+  --container-narrow: 700px;
+  --nav-height: 60px;
+}
+</style>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f9f9f9; color: #353535; }
+  @keyframes livepulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.35; transform: scale(0.82); } }
+</style>
+  </head>
+  <body>
+<div data-screen-label="AFK Cockpit dashboard" style="font-family: 'Poppins', sans-serif; color: #353535; background: #f9f9f9; min-height: 100vh;">
+
+  <!-- ===== TOP BAR ===== -->
+  <header style="position: sticky; top: 0; z-index: 100; background: #ffffff; box-shadow: 0 2px 4px rgba(0,0,0,0.08); padding: 0.85rem 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
+    <div style="display: flex; align-items: baseline; gap: 0.9rem;">
+      <span style="font-weight: 600; font-size: 1.25rem; letter-spacing: -0.01em;">afk <span style="color:#9a9a9a; font-weight:500;">cockpit</span></span>
+      <span style="display:inline-flex; align-items:center; gap:0.4rem; font-size:0.75rem; color:#4f7d63; font-weight:600;"><span style="width:8px; height:8px; border-radius:50%; background:#4f7d63; display:inline-block; animation: livepulse 1.8s ease-in-out infinite;"></span>live</span>
+    </div>
+    <div style="display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap;">
+      <span style="font-size: 0.82rem; color: #666;">6 repos · 1,660 attempts · 108 merged · <span style="color:#888;">May 31 – Jul 1, 2026</span></span>
+      <a href="../index.html" style="font-size:0.8rem; color:#353535; text-decoration:none; border:1px solid #353535; border-radius:2rem; padding:0.35rem 0.9rem; font-weight:500;">← Portfolio</a>
+    </div>
+  </header>
+
+  <main style="max-width: 1240px; margin: 0 auto; padding: 1.75rem 2rem 4rem;">
+
+    <p style="font-size: 0.95rem; color: #555; margin: 0 0 1.5rem; max-width: 60rem; line-height: 1.5;">Autonomous-PR outcomes across the fleet. Cost is <strong style="font-weight:600;">API-equivalent</strong> (notional on a Pro subscription). Quarantines are a <strong style="font-weight:600;">safety signal</strong> — afk refused to ship — not failures.</p>
+
+    <!-- ===== LIVE STRIP ===== -->
+    <section style="background: rgba(235,241,248,0.55); border: 1px solid #dbe4ee; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 1.75rem;">
+      <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom: 1rem;">
+        <span style="width:8px; height:8px; border-radius:50%; background:#4f7d63; display:inline-block; animation: livepulse 1.8s ease-in-out infinite;"></span>
+        <span style="font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; font-weight:600; color:#5c6b7a;">Live snapshot · fleet now</span>
+      </div>
+      <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:1.25rem;">
+        <div>
+          <div style="font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; color:#7c8794; font-weight:600; margin-bottom:0.5rem;">In progress</div>
+          <div style="font-size:1.05rem; color:#353535; line-height:1.5;"><strong style="font-weight:600;">3</strong> features · <strong style="font-weight:600;">5</strong> afk:ready · <strong style="font-weight:600;">2</strong> in flight</div>
+        </div>
+        <div style="border-left:1px solid #d3dde8; padding-left:1.25rem;">
+          <div style="font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; color:#7c8794; font-weight:600; margin-bottom:0.5rem;">Gate · promote</div>
+          <div style="font-size:0.95rem; color:#353535; line-height:1.45;"><span style="font-family:ui-monospace,monospace;">#55</span> scout: dedup tuning</div>
+        </div>
+        <div style="border-left:1px solid #d3dde8; padding-left:1.25rem;">
+          <div style="font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; color:#7c8794; font-weight:600; margin-bottom:0.5rem;">Gate · merge</div>
+          <div style="font-size:0.95rem; color:#353535; line-height:1.45;"><span style="font-family:ui-monospace,monospace;">afk/staging → main</span> · packet ready</div>
+        </div>
+        <div style="border-left:1px solid #d3dde8; padding-left:1.25rem;">
+          <div style="font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; color:#7c8794; font-weight:600; margin-bottom:0.5rem;">Dependency frontier</div>
+          <div style="font-size:0.95rem; color:#353535; line-height:1.45;"><strong style="font-weight:600;">5</strong> ready · <strong style="font-weight:600; color:#b3873f;">1 blocked</strong> <span style="color:#888; font-family:ui-monospace,monospace; font-size:0.85em;">#47→#46</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== KPI CARDS ===== -->
+    <section style="display:grid; grid-template-columns: repeat(5, 1fr); gap:1rem; margin-bottom: 2rem;">
+      <div style="background:#fff; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.06); padding:1.25rem 1.35rem;">
+        <div style="display:flex; align-items:center; gap:0.4rem;"><span style="width:7px;height:7px;border-radius:50%;background:#4f7d63;"></span><span style="font-size:2rem; font-weight:600; line-height:1;">7%</span></div>
+        <div style="font-size:0.82rem; color:#555; margin-top:0.5rem; line-height:1.35;">landed rate</div>
+        <div style="font-size:0.72rem; color:#a0a0a0; margin-top:0.15rem;">n = 1,660 attempts</div>
+      </div>
+      <div style="background:#fff; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.06); padding:1.25rem 1.35rem;">
+        <div style="font-size:2rem; font-weight:600; line-height:1;">$5.17</div>
+        <div style="font-size:0.82rem; color:#555; margin-top:0.5rem; line-height:1.35;">API-equiv $ / merged PR</div>
+        <div style="font-size:0.72rem; color:#a0a0a0; margin-top:0.15rem;">n = 108 merged</div>
+      </div>
+      <div style="background:#fff; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.06); padding:1.25rem 1.35rem;">
+        <div style="display:flex; align-items:center; gap:0.4rem;"><span style="width:7px;height:7px;border-radius:50%;background:#b3873f;"></span><span style="font-size:2rem; font-weight:600; line-height:1;">4%</span></div>
+        <div style="font-size:0.82rem; color:#555; margin-top:0.5rem; line-height:1.35;">quarantine (safety) rate</div>
+        <div style="font-size:0.72rem; color:#a0a0a0; margin-top:0.15rem;">n = 1,660 attempts</div>
+      </div>
+      <div style="background:#fff; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.06); padding:1.25rem 1.35rem;">
+        <div style="font-size:2rem; font-weight:600; line-height:1;">2%</div>
+        <div style="font-size:0.82rem; color:#555; margin-top:0.5rem; line-height:1.35;">escalation rate</div>
+        <div style="font-size:0.72rem; color:#a0a0a0; margin-top:0.15rem;">n = 1,660 attempts</div>
+      </div>
+      <div style="background:#fff; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.06); padding:1.25rem 1.35rem;">
+        <div style="display:flex; align-items:center; gap:0.4rem;"><span style="width:7px;height:7px;border-radius:50%;background:#c9c9c9;"></span><span style="font-size:2rem; font-weight:600; line-height:1;">0%</span></div>
+        <div style="font-size:0.82rem; color:#555; margin-top:0.5rem; line-height:1.35;">rejected rate</div>
+        <div style="font-size:0.72rem; color:#a0a0a0; margin-top:0.15rem;">n = 689 proposals</div>
+      </div>
+    </section>
+
+    <!-- ===== ROW: FUNNEL + REPO ===== -->
+    <section style="display:grid; grid-template-columns: 1fr 1fr; gap:1.25rem; margin-bottom:1.25rem;">
+      <div style="background:#fff; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.06); padding:1.5rem 1.6rem;">
+        <div style="font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color:#999; font-weight:600; margin-bottom:0.25rem;">Pipeline</div>
+        <h2 style="font-size:1.15rem; font-weight:600; margin:0 0 1.25rem;">Stage funnel</h2>
+        <div style="display:flex;flex-direction:column;gap:0.62rem;">
+      <div style="display:grid;grid-template-columns:110px 1fr 42px;align-items:center;gap:0.7rem;">
+        <div style="font-size:0.78rem;color:#666;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">proposed</div>
+        <div style="background:#efefef;border-radius:2rem;height:9px;overflow:hidden;">
+          <div style="width:12.9518%;background:#353535;height:100%;border-radius:2rem;"></div>
+        </div>
+        <div style="font-size:0.78rem;font-weight:600;text-align:right;">215</div>
+      </div>
+      <div style="display:grid;grid-template-columns:110px 1fr 42px;align-items:center;gap:0.7rem;">
+        <div style="font-size:0.78rem;color:#666;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">promoted</div>
+        <div style="background:#efefef;border-radius:2rem;height:9px;overflow:hidden;">
+          <div style="width:22.1687%;background:#353535;height:100%;border-radius:2rem;"></div>
+        </div>
+        <div style="font-size:0.78rem;font-weight:600;text-align:right;">368</div>
+      </div>
+      <div style="display:grid;grid-template-columns:110px 1fr 42px;align-items:center;gap:0.7rem;">
+        <div style="font-size:0.78rem;color:#666;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">attempted</div>
+        <div style="background:#efefef;border-radius:2rem;height:9px;overflow:hidden;">
+          <div style="width:100.0000%;background:#353535;height:100%;border-radius:2rem;"></div>
+        </div>
+        <div style="font-size:0.78rem;font-weight:600;text-align:right;">1,660</div>
+      </div>
+      <div style="display:grid;grid-template-columns:110px 1fr 42px;align-items:center;gap:0.7rem;">
+        <div style="font-size:0.78rem;color:#666;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">passed gate</div>
+        <div style="background:#efefef;border-radius:2rem;height:9px;overflow:hidden;">
+          <div style="width:20.0602%;background:#353535;height:100%;border-radius:2rem;"></div>
+        </div>
+        <div style="font-size:0.78rem;font-weight:600;text-align:right;">333</div>
+      </div>
+      <div style="display:grid;grid-template-columns:110px 1fr 42px;align-items:center;gap:0.7rem;">
+        <div style="font-size:0.78rem;color:#666;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">published</div>
+        <div style="background:#efefef;border-radius:2rem;height:9px;overflow:hidden;">
+          <div style="width:6.9880%;background:#353535;height:100%;border-radius:2rem;"></div>
+        </div>
+        <div style="font-size:0.78rem;font-weight:600;text-align:right;">116</div>
+      </div>
+      <div style="display:grid;grid-template-columns:110px 1fr 42px;align-items:center;gap:0.7rem;">
+        <div style="font-size:0.78rem;color:#666;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">merged</div>
+        <div style="background:#efefef;border-radius:2rem;height:9px;overflow:hidden;">
+          <div style="width:6.5060%;background:#353535;height:100%;border-radius:2rem;"></div>
+        </div>
+        <div style="font-size:0.78rem;font-weight:600;text-align:right;">108</div>
+      </div>
+    </div>
+      </div>
+      <div style="background:#fff; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.06); padding:1.5rem 1.6rem;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+          <div>
+            <div style="font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color:#999; font-weight:600; margin-bottom:0.25rem;">By repository</div>
+            <h2 style="font-size:1.15rem; font-weight:600; margin:0 0 1.25rem;">Outcomes per repo</h2>
+          </div>
+          <div style="display:flex; gap:0.85rem; flex-wrap:wrap; font-size:0.72rem; color:#666;">
+            <span style="display:inline-flex; align-items:center; gap:0.35rem;"><span style="width:9px;height:9px;border-radius:2px;background:#4f7d63;"></span>landed</span>
+            <span style="display:inline-flex; align-items:center; gap:0.35rem;"><span style="width:9px;height:9px;border-radius:2px;background:#b3873f;"></span>quarantined</span>
+            <span style="display:inline-flex; align-items:center; gap:0.35rem;"><span style="width:9px;height:9px;border-radius:2px;background:#d5d5d5;"></span>other</span>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:0.7rem;">
+      <div style="display:grid;grid-template-columns:130px 1fr 74px;align-items:center;gap:0.7rem;">
+        <div style="font-size:0.78rem;color:#666;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Orbit-Wars</div>
+        <div style="display:flex;background:#efefef;border-radius:3px;height:14px;overflow:hidden;">
+          <div style="width:0.3901%;background:#b3873f;height:100%;"></div><div style="width:94.9285%;background:#d5d5d5;height:100%;"></div>
+        </div>
+        <div style="font-size:0.75rem;text-align:right;color:#666;">
+          <span style="font-weight:600;color:#353535;">733</span> · 0%
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:130px 1fr 74px;align-items:center;gap:0.7rem;">
+        <div style="font-size:0.78rem;color:#666;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">afk-agent-system</div>
+        <div style="display:flex;background:#efefef;border-radius:3px;height:14px;overflow:hidden;">
+          <div style="width:8.1925%;background:#4f7d63;height:100%;"></div><div style="width:6.8921%;background:#b3873f;height:100%;"></div><div style="width:84.9155%;background:#d5d5d5;height:100%;"></div>
+        </div>
+        <div style="font-size:0.75rem;text-align:right;color:#666;">
+          <span style="font-weight:600;color:#353535;">769</span> · 8%
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:130px 1fr 74px;align-items:center;gap:0.7rem;">
+        <div style="font-size:0.78rem;color:#666;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">afk-cockpit</div>
+        <div style="display:flex;background:#efefef;border-radius:3px;height:14px;overflow:hidden;">
+          <div style="width:2.6008%;background:#4f7d63;height:100%;"></div><div style="width:5.7217%;background:#d5d5d5;height:100%;"></div>
+        </div>
+        <div style="font-size:0.75rem;text-align:right;color:#666;">
+          <span style="font-weight:600;color:#353535;">64</span> · 31%
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:130px 1fr 74px;align-items:center;gap:0.7rem;">
+        <div style="font-size:0.78rem;color:#666;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">claude-workflow</div>
+        <div style="display:flex;background:#efefef;border-radius:3px;height:14px;overflow:hidden;">
+          <div style="width:1.5605%;background:#4f7d63;height:100%;"></div><div style="width:3.6411%;background:#d5d5d5;height:100%;"></div>
+        </div>
+        <div style="font-size:0.75rem;text-align:right;color:#666;">
+          <span style="font-weight:600;color:#353535;">40</span> · 30%
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:130px 1fr 74px;align-items:center;gap:0.7rem;">
+        <div style="font-size:0.78rem;color:#666;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">household-bms</div>
+        <div style="display:flex;background:#efefef;border-radius:3px;height:14px;overflow:hidden;">
+          <div style="width:1.6905%;background:#4f7d63;height:100%;"></div><div style="width:0.1300%;background:#b3873f;height:100%;"></div><div style="width:2.0806%;background:#d5d5d5;height:100%;"></div>
+        </div>
+        <div style="font-size:0.75rem;text-align:right;color:#666;">
+          <span style="font-weight:600;color:#353535;">30</span> · 43%
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:130px 1fr 74px;align-items:center;gap:0.7rem;">
+        <div style="font-size:0.78rem;color:#666;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">my-brain</div>
+        <div style="display:flex;background:#efefef;border-radius:3px;height:14px;overflow:hidden;">
+          <div style="width:1.4304%;background:#b3873f;height:100%;"></div><div style="width:1.6905%;background:#d5d5d5;height:100%;"></div>
+        </div>
+        <div style="font-size:0.75rem;text-align:right;color:#666;">
+          <span style="font-weight:600;color:#353535;">24</span> · 0%
+        </div>
+      </div>
+    </div>
+      </div>
+    </section>
+
+    <!-- ===== ROW: PROPOSAL + QUARANTINE ===== -->
+    <section style="display:grid; grid-template-columns: 1fr 1fr; gap:1.25rem; margin-bottom:1.25rem;">
+      <div style="background:#fff; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.06); padding:1.5rem 1.6rem;">
+        <div style="font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color:#999; font-weight:600; margin-bottom:0.25rem;">Producers</div>
+        <h2 style="font-size:1.15rem; font-weight:600; margin:0 0 1.25rem;">Proposal quality</h2>
+        <div style="display:flex;flex-direction:column;gap:0.62rem;">
+      <div style="display:grid;grid-template-columns:100px 1fr 42px;align-items:center;gap:0.7rem;">
+        <div style="font-size:0.78rem;color:#666;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">harvest</div>
+        <div style="background:#efefef;border-radius:2rem;height:9px;overflow:hidden;">
+          <div style="width:1.5000%;background:#353535;height:100%;border-radius:2rem;"></div>
+        </div>
+        <div style="font-size:0.78rem;font-weight:600;text-align:right;">5</div>
+      </div>
+      <div style="display:grid;grid-template-columns:100px 1fr 42px;align-items:center;gap:0.7rem;">
+        <div style="font-size:0.78rem;color:#666;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">mis-sized</div>
+        <div style="background:#efefef;border-radius:2rem;height:9px;overflow:hidden;">
+          <div style="width:10.0543%;background:#353535;height:100%;border-radius:2rem;"></div>
+        </div>
+        <div style="font-size:0.78rem;font-weight:600;text-align:right;">37</div>
+      </div>
+      <div style="display:grid;grid-template-columns:100px 1fr 42px;align-items:center;gap:0.7rem;">
+        <div style="font-size:0.78rem;color:#666;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">pending</div>
+        <div style="background:#efefef;border-radius:2rem;height:9px;overflow:hidden;">
+          <div style="width:75.5435%;background:#353535;height:100%;border-radius:2rem;"></div>
+        </div>
+        <div style="font-size:0.78rem;font-weight:600;text-align:right;">278</div>
+      </div>
+      <div style="display:grid;grid-template-columns:100px 1fr 42px;align-items:center;gap:0.7rem;">
+        <div style="font-size:0.78rem;color:#666;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">shipped</div>
+        <div style="background:#efefef;border-radius:2rem;height:9px;overflow:hidden;">
+          <div style="width:100.0000%;background:#353535;height:100%;border-radius:2rem;"></div>
+        </div>
+        <div style="font-size:0.78rem;font-weight:600;text-align:right;">368</div>
+      </div>
+      <div style="display:grid;grid-template-columns:100px 1fr 42px;align-items:center;gap:0.7rem;">
+        <div style="font-size:0.78rem;color:#666;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">superseded</div>
+        <div style="background:#efefef;border-radius:2rem;height:9px;overflow:hidden;">
+          <div style="width:1.5000%;background:#353535;height:100%;border-radius:2rem;"></div>
+        </div>
+        <div style="font-size:0.78rem;font-weight:600;text-align:right;">1</div>
+      </div>
+    </div>
+      </div>
+      <div style="background:#fff; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.06); padding:1.5rem 1.6rem;">
+        <div style="display:flex; justify-content:space-between; align-items:baseline;">
+          <div>
+            <div style="font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color:#b3873f; font-weight:600; margin-bottom:0.25rem;">Safety axis</div>
+            <h2 style="font-size:1.15rem; font-weight:600; margin:0 0 1.25rem;">Quarantine by category</h2>
+          </div>
+          <span style="font-size:0.8rem; color:#666;">68 total</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:0.62rem;">
+      <div style="display:grid;grid-template-columns:165px 1fr 42px;align-items:center;gap:0.7rem;">
+        <div style="font-size:0.78rem;color:#666;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">no-op</div>
+        <div style="background:#efefef;border-radius:2rem;height:9px;overflow:hidden;">
+          <div style="width:100.0000%;background:#b3873f;height:100%;border-radius:2rem;"></div>
+        </div>
+        <div style="font-size:0.78rem;font-weight:600;text-align:right;">22</div>
+      </div>
+      <div style="display:grid;grid-template-columns:165px 1fr 42px;align-items:center;gap:0.7rem;">
+        <div style="font-size:0.78rem;color:#666;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">other</div>
+        <div style="background:#efefef;border-radius:2rem;height:9px;overflow:hidden;">
+          <div style="width:40.9091%;background:#b3873f;height:100%;border-radius:2rem;"></div>
+        </div>
+        <div style="font-size:0.78rem;font-weight:600;text-align:right;">9</div>
+      </div>
+      <div style="display:grid;grid-template-columns:165px 1fr 42px;align-items:center;gap:0.7rem;">
+        <div style="font-size:0.78rem;color:#666;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">review</div>
+        <div style="background:#efefef;border-radius:2rem;height:9px;overflow:hidden;">
+          <div style="width:36.3636%;background:#b3873f;height:100%;border-radius:2rem;"></div>
+        </div>
+        <div style="font-size:0.78rem;font-weight:600;text-align:right;">8</div>
+      </div>
+      <div style="display:grid;grid-template-columns:165px 1fr 42px;align-items:center;gap:0.7rem;">
+        <div style="font-size:0.78rem;color:#666;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">build-crash</div>
+        <div style="background:#efefef;border-radius:2rem;height:9px;overflow:hidden;">
+          <div style="width:31.8182%;background:#b3873f;height:100%;border-radius:2rem;"></div>
+        </div>
+        <div style="font-size:0.78rem;font-weight:600;text-align:right;">7</div>
+      </div>
+      <div style="display:grid;grid-template-columns:165px 1fr 42px;align-items:center;gap:0.7rem;">
+        <div style="font-size:0.78rem;color:#666;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">setup-crash</div>
+        <div style="background:#efefef;border-radius:2rem;height:9px;overflow:hidden;">
+          <div style="width:18.1818%;background:#b3873f;height:100%;border-radius:2rem;"></div>
+        </div>
+        <div style="font-size:0.78rem;font-weight:600;text-align:right;">4</div>
+      </div>
+      <div style="display:grid;grid-template-columns:165px 1fr 42px;align-items:center;gap:0.7rem;">
+        <div style="font-size:0.78rem;color:#666;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">idle-timeout</div>
+        <div style="background:#efefef;border-radius:2rem;height:9px;overflow:hidden;">
+          <div style="width:18.1818%;background:#b3873f;height:100%;border-radius:2rem;"></div>
+        </div>
+        <div style="font-size:0.78rem;font-weight:600;text-align:right;">4</div>
+      </div>
+      <div style="display:grid;grid-template-columns:165px 1fr 42px;align-items:center;gap:0.7rem;">
+        <div style="font-size:0.78rem;color:#666;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">capability</div>
+        <div style="background:#efefef;border-radius:2rem;height:9px;overflow:hidden;">
+          <div style="width:18.1818%;background:#b3873f;height:100%;border-radius:2rem;"></div>
+        </div>
+        <div style="font-size:0.78rem;font-weight:600;text-align:right;">4</div>
+      </div>
+      <div style="display:grid;grid-template-columns:165px 1fr 42px;align-items:center;gap:0.7rem;">
+        <div style="font-size:0.78rem;color:#666;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">timeout</div>
+        <div style="background:#efefef;border-radius:2rem;height:9px;overflow:hidden;">
+          <div style="width:13.6364%;background:#b3873f;height:100%;border-radius:2rem;"></div>
+        </div>
+        <div style="font-size:0.78rem;font-weight:600;text-align:right;">3</div>
+      </div>
+      <div style="display:grid;grid-template-columns:165px 1fr 42px;align-items:center;gap:0.7rem;">
+        <div style="font-size:0.78rem;color:#666;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">deny-surface</div>
+        <div style="background:#efefef;border-radius:2rem;height:9px;overflow:hidden;">
+          <div style="width:9.0909%;background:#b3873f;height:100%;border-radius:2rem;"></div>
+        </div>
+        <div style="font-size:0.78rem;font-weight:600;text-align:right;">2</div>
+      </div>
+      <div style="display:grid;grid-template-columns:165px 1fr 42px;align-items:center;gap:0.7rem;">
+        <div style="font-size:0.78rem;color:#666;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">integration-conflict</div>
+        <div style="background:#efefef;border-radius:2rem;height:9px;overflow:hidden;">
+          <div style="width:4.5455%;background:#b3873f;height:100%;border-radius:2rem;"></div>
+        </div>
+        <div style="font-size:0.78rem;font-weight:600;text-align:right;">1</div>
+      </div>
+      <div style="display:grid;grid-template-columns:165px 1fr 42px;align-items:center;gap:0.7rem;">
+        <div style="font-size:0.78rem;color:#666;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">security</div>
+        <div style="background:#efefef;border-radius:2rem;height:9px;overflow:hidden;">
+          <div style="width:4.5455%;background:#b3873f;height:100%;border-radius:2rem;"></div>
+        </div>
+        <div style="font-size:0.78rem;font-weight:600;text-align:right;">1</div>
+      </div>
+      <div style="display:grid;grid-template-columns:165px 1fr 42px;align-items:center;gap:0.7rem;">
+        <div style="font-size:0.78rem;color:#666;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">test-conflict</div>
+        <div style="background:#efefef;border-radius:2rem;height:9px;overflow:hidden;">
+          <div style="width:4.5455%;background:#b3873f;height:100%;border-radius:2rem;"></div>
+        </div>
+        <div style="font-size:0.78rem;font-weight:600;text-align:right;">1</div>
+      </div>
+      <div style="display:grid;grid-template-columns:165px 1fr 42px;align-items:center;gap:0.7rem;">
+        <div style="font-size:0.78rem;color:#666;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">unrecoverable-signature</div>
+        <div style="background:#efefef;border-radius:2rem;height:9px;overflow:hidden;">
+          <div style="width:4.5455%;background:#b3873f;height:100%;border-radius:2rem;"></div>
+        </div>
+        <div style="font-size:0.78rem;font-weight:600;text-align:right;">1</div>
+      </div>
+      <div style="display:grid;grid-template-columns:165px 1fr 42px;align-items:center;gap:0.7rem;">
+        <div style="font-size:0.78rem;color:#666;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">coupling</div>
+        <div style="background:#efefef;border-radius:2rem;height:9px;overflow:hidden;">
+          <div style="width:4.5455%;background:#b3873f;height:100%;border-radius:2rem;"></div>
+        </div>
+        <div style="font-size:0.78rem;font-weight:600;text-align:right;">1</div>
+      </div>
+    </div>
+      </div>
+    </section>
+
+    <!-- ===== ROW: COST ===== -->
+    <section style="display:grid; grid-template-columns: 0.9fr 1.1fr; gap:1.25rem; margin-bottom:1.25rem;">
+      <div style="background:#fff; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.06); padding:1.5rem 1.6rem;">
+        <div style="font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color:#999; font-weight:600; margin-bottom:0.25rem;">Cost · API-equivalent</div>
+        <h2 style="font-size:1.15rem; font-weight:600; margin:0 0 0.35rem;">Spend by model tier</h2>
+        <div style="font-size:0.82rem; color:#666; margin-bottom:1.4rem;">$558.64 total across the window</div>
+        <div style="display:flex;flex-direction:column;gap:1rem;">
+      <div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:0.35rem;">
+          <span style="font-size:0.85rem;font-weight:600;">opus</span>
+          <span style="font-size:0.85rem;font-weight:600;">$74.97</span>
+        </div>
+        <div style="background:#efefef;border-radius:2rem;height:14px;overflow:hidden;">
+          <div style="width:15.5002%;background:#353535;height:100%;border-radius:2rem;"></div>
+        </div>
+      </div>
+      <div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:0.35rem;">
+          <span style="font-size:0.85rem;font-weight:600;">sonnet</span>
+          <span style="font-size:0.85rem;font-weight:600;">$483.67</span>
+        </div>
+        <div style="background:#efefef;border-radius:2rem;height:14px;overflow:hidden;">
+          <div style="width:100.0000%;background:#8fa8c4;height:100%;border-radius:2rem;"></div>
+        </div>
+      </div>
+    </div>
+        <div style="margin-top:1.5rem; padding-top:1.25rem; border-top:1px solid #eee; display:flex; gap:2rem;">
+          <div><div style="font-size:1.4rem; font-weight:600;">$0.29</div><div style="font-size:0.75rem; color:#888;">median / turn</div></div>
+          <div><div style="font-size:1.4rem; font-weight:600;">$0.49</div><div style="font-size:0.75rem; color:#888;">p90 / turn</div></div>
+          <div><div style="font-size:1.4rem; font-weight:600;">1,893</div><div style="font-size:0.75rem; color:#888;">turns logged</div></div>
+        </div>
+      </div>
+      <div style="background:#fff; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.06); padding:1.5rem 1.6rem;">
+        <div style="font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color:#999; font-weight:600; margin-bottom:0.25rem;">Cost dial</div>
+        <h2 style="font-size:1.15rem; font-weight:600; margin:0 0 1.25rem;">Per-turn cost distribution</h2>
+        <div>
+      <div style="display:flex;align-items:flex-end;gap:8px;height:170px;">
+        <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:0.35rem;height:100%;">
+          <div style="font-size:0.68rem;color:#999;">18</div>
+          <div style="width:100%;height:2.3560%;background:#c4d4e6;border-radius:3px 3px 0 0;"></div>
+        </div><div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:0.35rem;height:100%;">
+          <div style="font-size:0.68rem;color:#999;">148</div>
+          <div style="width:100%;height:19.3717%;background:#c4d4e6;border-radius:3px 3px 0 0;"></div>
+        </div><div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:0.35rem;height:100%;">
+          <div style="font-size:0.68rem;color:#999;">227</div>
+          <div style="width:100%;height:29.7120%;background:#c4d4e6;border-radius:3px 3px 0 0;"></div>
+        </div><div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:0.35rem;height:100%;">
+          <div style="font-size:0.68rem;color:#999;">222</div>
+          <div style="width:100%;height:29.0576%;background:#c4d4e6;border-radius:3px 3px 0 0;"></div>
+        </div><div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:0.35rem;height:100%;">
+          <div style="font-size:0.68rem;color:#999;">374</div>
+          <div style="width:100%;height:48.9529%;background:#c4d4e6;border-radius:3px 3px 0 0;"></div>
+        </div><div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:0.35rem;height:100%;">
+          <div style="font-size:0.68rem;color:#999;">764</div>
+          <div style="width:100%;height:100.0000%;background:#8fa8c4;border-radius:3px 3px 0 0;"></div>
+        </div><div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:0.35rem;height:100%;">
+          <div style="font-size:0.68rem;color:#999;">140</div>
+          <div style="width:100%;height:18.3246%;background:#8fa8c4;border-radius:3px 3px 0 0;"></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:0.45rem;">
+        <div style="flex:1;font-size:0.62rem;color:#aaa;text-align:center;"><$.05</div><div style="flex:1;font-size:0.62rem;color:#aaa;text-align:center;">.05–.10</div><div style="flex:1;font-size:0.62rem;color:#aaa;text-align:center;">.10–.15</div><div style="flex:1;font-size:0.62rem;color:#aaa;text-align:center;">.15–.20</div><div style="flex:1;font-size:0.62rem;color:#aaa;text-align:center;">.20–.30</div><div style="flex:1;font-size:0.62rem;color:#aaa;text-align:center;">.30–.50</div><div style="flex:1;font-size:0.62rem;color:#aaa;text-align:center;">$.50+</div>
+      </div>
+    </div>
+      </div>
+    </section>
+
+    <!-- ===== ROW: OPUS % + THROUGHPUT ===== -->
+    <section style="display:grid; grid-template-columns: 1fr 1fr; gap:1.25rem; margin-bottom:1.25rem;">
+      <div style="background:#fff; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.06); padding:1.5rem 1.6rem;">
+        <div style="font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color:#999; font-weight:600; margin-bottom:0.25rem;">Model mix</div>
+        <h2 style="font-size:1.15rem; font-weight:600; margin:0 0 1.25rem;">Opus share by day</h2>
+        <div>
+      <svg viewBox="0 0 560 150" preserveAspectRatio="none" style="width:100%;height:150px;display:block;">
+        <line x1="6" y1="6" x2="554" y2="6" stroke="#eee" stroke-width="1"></line>
+        <line x1="6" y1="75" x2="554" y2="75" stroke="#f4f4f4" stroke-width="1"></line>
+        <path d="M 6,144 L 6,6 L 24.896552,6 L 43.793103,6 L 62.689655,6 L 81.586207,6 L 100.482759,6 L 119.37931,13.314 L 138.275862,34.428 L 157.172414,24.492 L 176.068966,36.222 L 194.965517,22.008 L 213.862069,83.418 L 232.758621,30.15 L 251.655172,35.808 L 270.551724,25.182 L 289.448276,34.428 L 308.344828,33.6 L 327.241379,52.782 L 346.137931,34.014 L 365.034483,6 L 383.931034,24.63 L 402.827586,26.148 L 421.724138,18.558 L 440.62069,13.728 L 459.517241,17.73 L 478.413793,9.726 L 497.310345,6.69 L 516.206897,14.004 L 535.103448,6.552 L 554,10.968 L 554,144 Z" fill="rgba(196,212,230,0.35)"></path>
+        <polyline points="6,6 24.896552,6 43.793103,6 62.689655,6 81.586207,6 100.482759,6 119.37931,13.314 138.275862,34.428 157.172414,24.492 176.068966,36.222 194.965517,22.008 213.862069,83.418 232.758621,30.15 251.655172,35.808 270.551724,25.182 289.448276,34.428 308.344828,33.6 327.241379,52.782 346.137931,34.014 365.034483,6 383.931034,24.63 402.827586,26.148 421.724138,18.558 440.62069,13.728 459.517241,17.73 478.413793,9.726 497.310345,6.69 516.206897,14.004 535.103448,6.552 554,10.968" fill="none" stroke="#8fa8c4" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></polyline>
+      </svg>
+      <div style="display:flex;justify-content:space-between;font-size:0.62rem;color:#aaa;margin-top:0.3rem;">
+        <span>May 31</span><span>range: 44%–100%</span><span>Jul 1</span>
+      </div>
+    </div>
+      </div>
+      <div style="background:#fff; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.06); padding:1.5rem 1.6rem;">
+        <div style="display:flex; justify-content:space-between; align-items:baseline;">
+          <div>
+            <div style="font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color:#999; font-weight:600; margin-bottom:0.25rem;">Throughput</div>
+            <h2 style="font-size:1.15rem; font-weight:600; margin:0 0 1.25rem;">Slices per day</h2>
+          </div>
+          <span style="font-size:0.8rem; color:#666;">1,660 total</span>
+        </div>
+        <div>
+      <div style="display:flex;align-items:flex-end;gap:2px;height:150px;">
+        <div title="06-01: 9" style="flex:1;height:5.6250%;background:#353535;border-radius:2px 2px 0 0;min-width:3px;"></div><div title="06-03: 12" style="flex:1;height:7.5000%;background:#353535;border-radius:2px 2px 0 0;min-width:3px;"></div><div title="06-04: 19" style="flex:1;height:11.8750%;background:#353535;border-radius:2px 2px 0 0;min-width:3px;"></div><div title="06-05: 6" style="flex:1;height:3.7500%;background:#353535;border-radius:2px 2px 0 0;min-width:3px;"></div><div title="06-07: 76" style="flex:1;height:47.5000%;background:#353535;border-radius:2px 2px 0 0;min-width:3px;"></div><div title="06-08: 75" style="flex:1;height:46.8750%;background:#353535;border-radius:2px 2px 0 0;min-width:3px;"></div><div title="06-09: 97" style="flex:1;height:60.6250%;background:#353535;border-radius:2px 2px 0 0;min-width:3px;"></div><div title="06-10: 26" style="flex:1;height:16.2500%;background:#353535;border-radius:2px 2px 0 0;min-width:3px;"></div><div title="06-11: 2" style="flex:1;height:1.2500%;background:#353535;border-radius:2px 2px 0 0;min-width:3px;"></div><div title="06-12: 15" style="flex:1;height:9.3750%;background:#353535;border-radius:2px 2px 0 0;min-width:3px;"></div><div title="06-13: 5" style="flex:1;height:3.1250%;background:#353535;border-radius:2px 2px 0 0;min-width:3px;"></div><div title="06-14: 6" style="flex:1;height:3.7500%;background:#353535;border-radius:2px 2px 0 0;min-width:3px;"></div><div title="06-15: 4" style="flex:1;height:2.5000%;background:#353535;border-radius:2px 2px 0 0;min-width:3px;"></div><div title="06-16: 90" style="flex:1;height:56.2500%;background:#353535;border-radius:2px 2px 0 0;min-width:3px;"></div><div title="06-17: 95" style="flex:1;height:59.3750%;background:#353535;border-radius:2px 2px 0 0;min-width:3px;"></div><div title="06-18: 117" style="flex:1;height:73.1250%;background:#353535;border-radius:2px 2px 0 0;min-width:3px;"></div><div title="06-19: 71" style="flex:1;height:44.3750%;background:#353535;border-radius:2px 2px 0 0;min-width:3px;"></div><div title="06-20: 46" style="flex:1;height:28.7500%;background:#353535;border-radius:2px 2px 0 0;min-width:3px;"></div><div title="06-21: 44" style="flex:1;height:27.5000%;background:#353535;border-radius:2px 2px 0 0;min-width:3px;"></div><div title="06-22: 100" style="flex:1;height:62.5000%;background:#353535;border-radius:2px 2px 0 0;min-width:3px;"></div><div title="06-23: 33" style="flex:1;height:20.6250%;background:#353535;border-radius:2px 2px 0 0;min-width:3px;"></div><div title="06-24: 95" style="flex:1;height:59.3750%;background:#353535;border-radius:2px 2px 0 0;min-width:3px;"></div><div title="06-25: 91" style="flex:1;height:56.8750%;background:#353535;border-radius:2px 2px 0 0;min-width:3px;"></div><div title="06-26: 80" style="flex:1;height:50.0000%;background:#353535;border-radius:2px 2px 0 0;min-width:3px;"></div><div title="06-27: 6" style="flex:1;height:3.7500%;background:#353535;border-radius:2px 2px 0 0;min-width:3px;"></div><div title="06-28: 91" style="flex:1;height:56.8750%;background:#353535;border-radius:2px 2px 0 0;min-width:3px;"></div><div title="06-29: 132" style="flex:1;height:82.5000%;background:#353535;border-radius:2px 2px 0 0;min-width:3px;"></div><div title="06-30: 157" style="flex:1;height:98.1250%;background:#353535;border-radius:2px 2px 0 0;min-width:3px;"></div><div title="07-01: 60" style="flex:1;height:37.5000%;background:#353535;border-radius:2px 2px 0 0;min-width:3px;"></div>
+      </div>
+      <div style="display:flex;gap:2px;margin-top:0.4rem;">
+        <div style="flex:1;min-width:3px;font-size:0.6rem;color:#aaa;text-align:center;white-space:nowrap;">06-01</div><div style="flex:1;min-width:3px;font-size:0.6rem;color:#aaa;text-align:center;white-space:nowrap;"></div><div style="flex:1;min-width:3px;font-size:0.6rem;color:#aaa;text-align:center;white-space:nowrap;"></div><div style="flex:1;min-width:3px;font-size:0.6rem;color:#aaa;text-align:center;white-space:nowrap;"></div><div style="flex:1;min-width:3px;font-size:0.6rem;color:#aaa;text-align:center;white-space:nowrap;">06-07</div><div style="flex:1;min-width:3px;font-size:0.6rem;color:#aaa;text-align:center;white-space:nowrap;"></div><div style="flex:1;min-width:3px;font-size:0.6rem;color:#aaa;text-align:center;white-space:nowrap;"></div><div style="flex:1;min-width:3px;font-size:0.6rem;color:#aaa;text-align:center;white-space:nowrap;"></div><div style="flex:1;min-width:3px;font-size:0.6rem;color:#aaa;text-align:center;white-space:nowrap;">06-11</div><div style="flex:1;min-width:3px;font-size:0.6rem;color:#aaa;text-align:center;white-space:nowrap;"></div><div style="flex:1;min-width:3px;font-size:0.6rem;color:#aaa;text-align:center;white-space:nowrap;"></div><div style="flex:1;min-width:3px;font-size:0.6rem;color:#aaa;text-align:center;white-space:nowrap;"></div><div style="flex:1;min-width:3px;font-size:0.6rem;color:#aaa;text-align:center;white-space:nowrap;">06-15</div><div style="flex:1;min-width:3px;font-size:0.6rem;color:#aaa;text-align:center;white-space:nowrap;"></div><div style="flex:1;min-width:3px;font-size:0.6rem;color:#aaa;text-align:center;white-space:nowrap;"></div><div style="flex:1;min-width:3px;font-size:0.6rem;color:#aaa;text-align:center;white-space:nowrap;"></div><div style="flex:1;min-width:3px;font-size:0.6rem;color:#aaa;text-align:center;white-space:nowrap;">06-19</div><div style="flex:1;min-width:3px;font-size:0.6rem;color:#aaa;text-align:center;white-space:nowrap;"></div><div style="flex:1;min-width:3px;font-size:0.6rem;color:#aaa;text-align:center;white-space:nowrap;"></div><div style="flex:1;min-width:3px;font-size:0.6rem;color:#aaa;text-align:center;white-space:nowrap;"></div><div style="flex:1;min-width:3px;font-size:0.6rem;color:#aaa;text-align:center;white-space:nowrap;">06-23</div><div style="flex:1;min-width:3px;font-size:0.6rem;color:#aaa;text-align:center;white-space:nowrap;"></div><div style="flex:1;min-width:3px;font-size:0.6rem;color:#aaa;text-align:center;white-space:nowrap;"></div><div style="flex:1;min-width:3px;font-size:0.6rem;color:#aaa;text-align:center;white-space:nowrap;"></div><div style="flex:1;min-width:3px;font-size:0.6rem;color:#aaa;text-align:center;white-space:nowrap;">06-27</div><div style="flex:1;min-width:3px;font-size:0.6rem;color:#aaa;text-align:center;white-space:nowrap;"></div><div style="flex:1;min-width:3px;font-size:0.6rem;color:#aaa;text-align:center;white-space:nowrap;"></div><div style="flex:1;min-width:3px;font-size:0.6rem;color:#aaa;text-align:center;white-space:nowrap;"></div><div style="flex:1;min-width:3px;font-size:0.6rem;color:#aaa;text-align:center;white-space:nowrap;">07-01</div>
+      </div>
+    </div>
+      </div>
+    </section>
+
+    <!-- ===== ROW: TOKENS ===== -->
+    <section style="background:#fff; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.06); padding:1.5rem 1.6rem; margin-bottom:1.5rem;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:1rem;">
+        <div>
+          <div style="font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color:#999; font-weight:600; margin-bottom:0.25rem;">Context cost</div>
+          <h2 style="font-size:1.15rem; font-weight:600; margin:0 0 0.35rem;">Tokens by type, per day</h2>
+          <div style="font-size:0.82rem; color:#666;">5.08B tokens · <strong style="font-weight:600; color:#353535;">95.7% cache reads</strong> — the context is overwhelmingly cached</div>
+        </div>
+        <div style="display:flex; gap:0.85rem; flex-wrap:wrap; font-size:0.72rem; color:#666;">
+          <span style="display:inline-flex; align-items:center; gap:0.35rem;"><span style="width:9px;height:9px;border-radius:2px;background:#c4d4e6;"></span>cache read</span>
+          <span style="display:inline-flex; align-items:center; gap:0.35rem;"><span style="width:9px;height:9px;border-radius:2px;background:#8fa8c4;"></span>cache write</span>
+          <span style="display:inline-flex; align-items:center; gap:0.35rem;"><span style="width:9px;height:9px;border-radius:2px;background:#6b6b6b;"></span>input</span>
+          <span style="display:inline-flex; align-items:center; gap:0.35rem;"><span style="width:9px;height:9px;border-radius:2px;background:#353535;"></span>output</span>
+        </div>
+      </div>
+      <div style="margin-top:1.25rem;"><svg viewBox="0 0 1140 210" preserveAspectRatio="none" style="width:100%;height:210px;display:block;">
+      <path d="M 6,203.467321 L 44.896552,149.98006 L 83.793103,153.583478 L 122.689655,142.804558 L 161.586207,172.634594 L 200.482759,163.516379 L 239.37931,37.678747 L 278.275862,135.723057 L 317.172414,94.017408 L 356.068966,149.792056 L 394.965517,199.017883 L 433.862069,168.467163 L 472.758621,195.477132 L 511.655172,201.367938 L 550.551724,201.837949 L 589.448276,163.359709 L 628.344828,124.912803 L 667.241379,129.518911 L 706.137931,186.640924 L 745.034483,202.903307 L 783.931034,191.99905 L 822.827586,166.148441 L 861.724138,106.11236 L 900.62069,95.427441 L 939.517241,131.273619 L 978.413793,189.30432 L 1017.310345,9.791423 L 1056.206897,172.415256 L 1095.103448,164.769742 L 1134,194.505776 L 1134,204 1134,204 L 1095.103448,204 L 1056.206897,204 L 1017.310345,204 L 978.413793,204 L 939.517241,204 L 900.62069,204 L 861.724138,204 L 822.827586,204 L 783.931034,204 L 745.034483,204 L 706.137931,204 L 667.241379,204 L 628.344828,204 L 589.448276,204 L 550.551724,204 L 511.655172,204 L 472.758621,204 L 433.862069,204 L 394.965517,204 L 356.068966,204 L 317.172414,204 L 278.275862,204 L 239.37931,204 L 200.482759,204 L 161.586207,204 L 122.689655,204 L 83.793103,204 L 44.896552,204 L 6,204 Z" fill="#c4d4e6" opacity="0.85"></path>
+      <path d="M 6,203.247982 L 44.896552,148.100016 L 83.793103,152.236113 L 122.689655,140.767843 L 161.586207,171.537902 L 200.482759,161.636335 L 239.37931,32.069948 L 278.275862,133.811679 L 317.172414,90.006647 L 356.068966,147.504668 L 394.965517,198.673208 L 433.862069,166.618452 L 472.758621,195.007121 L 511.655172,201.179934 L 550.551724,201.618611 L 589.448276,161.322994 L 628.344828,121.998734 L 667.241379,126.761513 L 706.137931,185.450229 L 745.034483,202.809305 L 783.931034,190.871024 L 822.827586,164.174395 L 861.724138,102.414939 L 900.62069,92.544706 L 939.517241,130.239595 L 978.413793,188.646305 L 1017.310345,6.84602 L 1056.206897,170.691882 L 1095.103448,162.764361 L 1134,193.440418 L 1134,194.505776 1134,194.505776 L 1095.103448,164.769742 L 1056.206897,172.415256 L 1017.310345,9.791423 L 978.413793,189.30432 L 939.517241,131.273619 L 900.62069,95.427441 L 861.724138,106.11236 L 822.827586,166.148441 L 783.931034,191.99905 L 745.034483,202.903307 L 706.137931,186.640924 L 667.241379,129.518911 L 628.344828,124.912803 L 589.448276,163.359709 L 550.551724,201.837949 L 511.655172,201.367938 L 472.758621,195.477132 L 433.862069,168.467163 L 394.965517,199.017883 L 356.068966,149.792056 L 317.172414,94.017408 L 278.275862,135.723057 L 239.37931,37.678747 L 200.482759,163.516379 L 161.586207,172.634594 L 122.689655,142.804558 L 83.793103,153.583478 L 44.896552,149.98006 L 6,203.467321 Z" fill="#8fa8c4"></path>
+      <path d="M 6,203.247982 L 44.896552,148.006014 L 83.793103,152.110777 L 122.689655,140.51717 L 161.586207,171.475233 L 200.482759,161.510999 L 239.37931,31.505934 L 278.275862,133.498338 L 317.172414,89.473967 L 356.068966,147.253996 L 394.965517,198.61054 L 433.862069,166.430448 L 472.758621,194.944453 L 511.655172,201.117265 L 550.551724,201.587276 L 589.448276,160.915651 L 628.344828,121.622725 L 667.241379,126.291502 L 706.137931,185.324893 L 745.034483,202.777971 L 783.931034,190.714354 L 822.827586,164.049058 L 861.724138,102.258269 L 900.62069,92.388036 L 939.517241,130.176927 L 978.413793,188.614971 L 1017.310345,6.68935 L 1056.206897,170.535211 L 1095.103448,162.576357 L 1134,193.37775 L 1134,193.440418 1134,193.440418 L 1095.103448,162.764361 L 1056.206897,170.691882 L 1017.310345,6.84602 L 978.413793,188.646305 L 939.517241,130.239595 L 900.62069,92.544706 L 861.724138,102.414939 L 822.827586,164.174395 L 783.931034,190.871024 L 745.034483,202.809305 L 706.137931,185.450229 L 667.241379,126.761513 L 628.344828,121.998734 L 589.448276,161.322994 L 550.551724,201.618611 L 511.655172,201.179934 L 472.758621,195.007121 L 433.862069,166.618452 L 394.965517,198.673208 L 356.068966,147.504668 L 317.172414,90.006647 L 278.275862,133.811679 L 239.37931,32.069948 L 200.482759,161.636335 L 161.586207,171.537902 L 122.689655,140.767843 L 83.793103,152.236113 L 44.896552,148.100016 L 6,203.247982 Z" fill="#6b6b6b"></path>
+      <path d="M 6,203.185314 L 44.896552,147.661339 L 83.793103,151.860104 L 122.689655,140.20383 L 161.586207,171.318563 L 200.482759,161.29166 L 239.37931,30.597246 L 278.275862,132.934325 L 317.172414,88.72195 L 356.068966,146.783985 L 394.965517,198.547871 L 433.862069,166.085773 L 472.758621,194.819117 L 511.655172,201.054597 L 550.551724,201.555942 L 589.448276,160.414306 L 628.344828,121.090046 L 667.241379,125.570818 L 706.137931,185.168223 L 745.034483,202.746637 L 783.931034,190.557683 L 822.827586,163.704384 L 861.724138,101.600253 L 900.62069,91.886691 L 939.517241,129.863586 L 978.413793,188.4583 L 1017.310345,6 L 1056.206897,170.284539 L 1095.103448,162.357019 L 1134,193.189745 L 1134,193.37775 1134,193.37775 L 1095.103448,162.576357 L 1056.206897,170.535211 L 1017.310345,6.68935 L 978.413793,188.614971 L 939.517241,130.176927 L 900.62069,92.388036 L 861.724138,102.258269 L 822.827586,164.049058 L 783.931034,190.714354 L 745.034483,202.777971 L 706.137931,185.324893 L 667.241379,126.291502 L 628.344828,121.622725 L 589.448276,160.915651 L 550.551724,201.587276 L 511.655172,201.117265 L 472.758621,194.944453 L 433.862069,166.430448 L 394.965517,198.61054 L 356.068966,147.253996 L 317.172414,89.473967 L 278.275862,133.498338 L 239.37931,31.505934 L 200.482759,161.510999 L 161.586207,171.475233 L 122.689655,140.51717 L 83.793103,152.110777 L 44.896552,148.006014 L 6,203.247982 Z" fill="#353535"></path>
+    </svg></div>
+    </section>
+
+    <footer style="color:#999; font-size:0.78rem; line-height:1.5; padding-top:0.5rem;">
+      Generated by afk-cockpit · redesigned on the charleslikesdata system. Quarantines are a safety signal (afk refused to ship), not failures. Cost is API-equivalent (notional on a Pro subscription).
+    </footer>
+  </main>
+</div>
+  </body>
+</html>
