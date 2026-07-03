@@ -136,8 +136,8 @@ export const testimonials = [
     author: 'Aaron Wallen',
     job: 'Director of Business Analysis',
     company: 'OneAmerica Financial',
-    linkedin: '',
-    photo: '',
+    linkedin: 'https://www.linkedin.com/in/aaronwallen/',
+    photo: '/assets/testimonials/aaron-wallen.png',
   },
   {
     quote:
@@ -145,8 +145,8 @@ export const testimonials = [
     author: 'Kevin Brennan',
     job: 'IT Business Planning Consultant',
     company: 'OneAmerica Financial',
-    linkedin: '',
-    photo: '',
+    linkedin: 'https://www.linkedin.com/in/kpbrennan2/',
+    photo: '/assets/testimonials/kevin-brennan.jpeg',
   },
   {
     quote:
@@ -154,7 +154,7 @@ export const testimonials = [
     author: 'Katie Marks',
     job: 'Business Relationship Management Director',
     company: 'OneAmerica Financial',
-    linkedin: '',
+    linkedin: 'https://www.linkedin.com/in/katie-marks-88a408239/',
     photo: '',
   },
   {
@@ -163,8 +163,17 @@ export const testimonials = [
     author: 'Chris McGowan',
     job: 'Training Director',
     company: 'Montana Electrical Training Center',
-    linkedin: '',
-    photo: '',
+    linkedin: 'https://www.linkedin.com/in/chris-mcgowan-aa898389/',
+    photo: '/assets/testimonials/chris-mcgowan.jpeg',
+  },
+  {
+    quote:
+      'Working under pressure is an attribute most common with Charles. When things need to be done at the eleventh hour, he is the perfect fit for the job — a practical person who relates theory to real-life situations, and a professional with the absolute objective of recording success.',
+    author: 'Chris Allard',
+    job: 'Project Manager',
+    company: 'Mechanical Technologies Inc.',
+    linkedin: 'https://www.linkedin.com/in/chris-allard-1b618714/',
+    photo: '/assets/testimonials/chris-allard.jpeg',
   },
 ];
 
