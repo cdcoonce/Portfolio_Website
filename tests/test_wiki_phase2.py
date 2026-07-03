@@ -327,12 +327,12 @@ class TestGenerateChangelog:
     def test_has_feat_commits(self):
         """Output contains feat section (repo has feat commits)."""
         output = generate_changelog.generate(REPO_ROOT)
-        assert "feat" in output
+        assert "Features" in output
 
     def test_has_fix_commits(self):
         """Output contains fix section (repo has fix commits)."""
         output = generate_changelog.generate(REPO_ROOT)
-        assert "fix" in output
+        assert "Bug Fixes" in output
 
     def test_has_dates(self):
         """Output contains ISO date strings."""
