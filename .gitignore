@@ -3,6 +3,10 @@ Thumbs.db
 node_modules
 .vscode
 .idea
+
+# Astro build output
+dist/
+.astro/
 __pycache__/
 .pytest_cache/
 coverage/
