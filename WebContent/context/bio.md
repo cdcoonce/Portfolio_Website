@@ -20,7 +20,7 @@ He is currently pursuing a **Bachelor of Science in Data Science** with a focus 
 
 ## Professional Experience
 
-### Clearway Energy Group — Data Engineer I (May 2024 – Present)
+### Clearway Energy Group — Data Engineer I (May 2025 – Present)
 
 Charles started at Clearway Energy Group as an intern and was promoted to Data Engineer I, working on the asset and energy management team. His responsibilities include designing and implementing data pipelines using Dagster, dbt, Polars, and Snowflake to automate the ingestion, transformation, and validation of renewable energy asset data across solar, wind, and battery storage portfolios. He builds VER (Variable Energy Resource) data pipelines integrating with energy solution APIs for operational metrics and performance tracking, and develops financial and market reporting workflows in Hex and Snowflake that blend Intercontinental Exchange energy data and internal forward curves for forecasting and asset management.
 

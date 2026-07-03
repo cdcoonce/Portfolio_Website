@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [2.0.1] - 2026-07-03
+
+### Fixed
+
+- Correct Clearway Energy start date to May 2025 (from May 2024) in the bio,
+  the Ask AI knowledge base, and the downloadable resume PDF
+
 ## [2.0.0] - 2026-07-03
 
 Full redesign: the single-scroll site is replaced by a tabbed single-page
