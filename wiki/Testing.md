@@ -1,16 +1,16 @@
 # Testing
 
 <!-- generated:start -->
-## JavaScript Tests
+## Test Strategy
+
+The unit suite runs on **Jest** and covers the framework-free logic in `src/lib/*` — `carousel.js` (pure wrap-around index math + initials) and `chat.js` (rate limiting, assistant-markdown rendering, and the Lambda `sendMessage` client). These are the modules the React islands import, so testing them directly keeps the fast unit layer independent of the DOM. A Python/**Playwright** E2E suite under `tests/` targets the **retired vanilla DOM** and is **not run in CI** — porting it to the Astro + React UI is a tracked follow-up.
+
+## JavaScript Tests (Jest)
 
 | File | Type | Describe Blocks |
 |---|---|---|
-| `carousel.test.js` | Jest | CAROUSEL_CONFIG, getNextIndex, getPrevIndex, +3 more |
-| `chat.test.js` | Jest | Rate Limiting, Rate Limiting with injected storage, escapeHtml, +2 more |
-| `filter.test.js` | Jest | getFilteredVisibility, applyMaxVisible, getFeaturedVisibility, +3 more |
-| `projects.test.js` | Jest | projects data, tags derived registry, TAG_LABELS, +1 more |
-| `renderer.test.js` | Jest | createProjectCard, renderProjectCards, renderFilterButtons |
-| `utils.test.js` | Jest | getItemsToShow, isDesktop, formatProjectDate |
+| `portfolio-carousel.test.js` | Jest | carousel index math, initials |
+| `portfolio-chat.test.js` | Jest | rate limiting, renderAssistantMarkdown, sendMessage |
 
 ### Jest Configuration
 
@@ -19,6 +19,8 @@
 | `testEnvironment` | `jest-environment-jsdom` |
 
 ## Python Tests
+
+Wiki-generator tests (`tests/test_wiki_phase*.py`) run in CI. The Playwright E2E tests (`tests/test_*.py` for the site DOM) target the retired vanilla markup and are **pending a port** to the Astro + React UI — they are not part of the CI gate.
 
 | File | Location |
 |---|---|

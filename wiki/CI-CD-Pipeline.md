@@ -3,64 +3,78 @@
 <!-- generated:start -->
 ## CI/CD Pipeline
 
-The project uses GitHub Actions for continuous integration and deployment. Every push to `master` and every pull request targeting `master` triggers the Lint & Test job. On a successful push to `master`, the Deploy job merges the branch into `gh-pages` to publish the site.
+Delivery runs on GitHub Actions across **two branches, two hosts**. `dev` is **live staging** (Cloudflare Pages); `main` is **production** (GitHub Pages). Both build the Astro site (`npm run build` → `dist/`) and publish that output — the only difference is the host and the quality gate in front of it.
 
-### Pipeline Flowchart
+### Production Pipeline (`main` → GitHub Pages)
+
+`ci-cd.yml` runs on every push and pull request targeting `main`. The **check** job must pass before the **deploy** job publishes to the `gh-pages` branch (including `CNAME`), which GitHub Pages serves.
 
 ```mermaid
 flowchart TD
-    Push["Push / PR to master"]
+    Push["Push / PR to main"]
     Checkout["Checkout code"]
-    NodeSetup["Set up Node.js 20\n+ npm ci"]
-    PythonSetup["Set up Python 3.12\n(uv sync)"]
-    Playwright["Install Playwright\nbrowsers"]
-    Lint["Lint & Format\n(Prettier · Stylelint · ESLint)"]
+    NodeSetup["Set up Node.js 22\n+ npm ci"]
+    Prettier["Check formatting\n(Prettier)"]
+    LintCSS["Lint CSS\n(Stylelint)"]
+    LintJS["Lint JS\n(ESLint)"]
     JSTests["JS unit tests\n(Jest)"]
-    PyTests["Python tests\n(pytest -m not slow)"]
-    Check{"All checks pass?"}
-    Deploy["Deploy to gh-pages\n(merge master → gh-pages)"]
-    Done["Site live on GitHub Pages"]
-    Fail["Pipeline fails\n(PR blocked)"]
+    Build["Build site\n(astro build → dist/)"]
+    Check{"push to main?"}
+    Deploy["Publish dist/ → gh-pages\n(peaceiris/actions-gh-pages)"]
+    Done["Live on GitHub Pages\n(charleslikesdata.com)"]
+    PR["PR: checks only, no deploy"]
 
-    Push --> Checkout
-    Checkout --> NodeSetup
-    Checkout --> PythonSetup
-    NodeSetup --> Playwright
-    PythonSetup --> Playwright
-    Playwright --> Lint
-    Lint --> JSTests
-    JSTests --> PyTests
-    PyTests --> Check
-    Check -->|yes + push to master| Deploy
-    Check -->|no| Fail
-    Deploy --> Done
+    Push --> Checkout --> NodeSetup --> Prettier --> LintCSS --> LintJS --> JSTests --> Build --> Check
+    Check -->|yes| Deploy --> Done
+    Check -->|pull_request| PR
 ```
 
-### Branch Strategy
+### Staging Pipeline (`dev` → Cloudflare Pages)
+
+`deploy-staging.yml` runs on every push to `dev`. It builds the Astro site and deploys `dist/` to the Cloudflare Pages project `charleslikesdata-portfolio` via `wrangler`. The deploy self-skips until the `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` repo secrets are set, so early pushes don't fail red.
+
+```mermaid
+flowchart TD
+    DevPush["Push to dev"]
+    DevBuild["npm ci + astro build"]
+    SecretCheck{"Cloudflare secrets set?"}
+    Wrangler["wrangler pages deploy dist\n--project charleslikesdata-portfolio"]
+    Staging["Live staging\n(charleslikesdata-portfolio.pages.dev)"]
+    Skip["Skip deploy (log + exit 0)"]
+
+    DevPush --> DevBuild --> SecretCheck
+    SecretCheck -->|yes| Wrangler --> Staging
+    SecretCheck -->|no| Skip
+```
+
+### Branch & Promotion Model
+
+Feature work lands on `dev`, which auto-deploys to staging. Once verified, `dev` merges to `main`, which runs the full gate and promotes to production.
 
 ```mermaid
 gitGraph
-    commit id: "initial"
-    branch feature
-    checkout feature
-    commit id: "feat: work"
-    commit id: "fix: review"
-    checkout master
-    merge feature id: "PR merge"
-    commit id: "chore: follow-up"
+    commit id: "init"
+    branch dev
+    checkout dev
+    commit id: "feat: work (→ staging)"
+    commit id: "fix: review (→ staging)"
+    checkout main
+    merge dev id: "promote (→ production)"
 ```
 
 ## Trigger Matrix
 
-| Event | Branch | Jobs Triggered |
-|---|---|---|
-| `push` | `master` | Lint & Test, Deploy |
-| `pull_request` | `master` | Lint & Test only |
+| Event | Branch | Workflow | Result |
+|---|---|---|---|
+| `push` | `main` | `ci-cd.yml` | Lint + Test + Build, then deploy to GitHub Pages |
+| `pull_request` | `main` | `ci-cd.yml` | Lint + Test + Build only (no deploy) |
+| `push` | `dev` | `deploy-staging.yml` | Build + deploy to Cloudflare Pages (staging) |
 
 ## Workflow Files
 
-| File | Triggers |
-|---|---|
-| `.github/workflows/ci-cd.yml` | push, pull_request |
-| `.github/workflows/wiki-sync.yml` | push, pull_request |
+| File | Trigger | Purpose |
+|---|---|---|
+| `.github/workflows/ci-cd.yml` | push / PR → `main` | Lint, test, build; deploy production to `gh-pages` |
+| `.github/workflows/deploy-staging.yml` | push → `dev` | Build + deploy staging to Cloudflare Pages |
+| `.github/workflows/wiki-sync.yml` | push → `main` (relevant paths) | Regenerate and sync this wiki |
 <!-- generated:end -->

@@ -57,12 +57,15 @@ class TestTrigger:
         )
 
     def test_workflow_has_path_filters(self, workflow: dict):
-        """All 8 watched path patterns are present in on.push.paths."""
+        """All watched path patterns are present in on.push.paths.
+
+        The Astro rebuild replaced WebContent/js/** and WebContent/css/** with a
+        single src/** watch (Astro pages, layouts, components, lib, data, styles).
+        """
         push = _get_push_trigger(workflow)
         paths = push.get("paths", [])
         expected = [
-            "WebContent/js/**",
-            "WebContent/css/**",
+            "src/**",
             "WebContent/context/**",
             "lambda/**",
             "__tests__/**",

@@ -3,61 +3,79 @@
 <!-- generated:start -->
 ## System Architecture
 
-The portfolio is a static site served from GitHub Pages. Interactive features (filtering, carousel, chat) run in the browser via ES modules. The chat widget communicates with an AWS Lambda function that proxies requests to the Anthropic Claude API.
+The portfolio is an **Astro** app built with **static output** — every page is pre-rendered to plain HTML at build time (`npm run build` → `dist/`). Interactivity ships as **React islands** via `@astrojs/react`, so JavaScript is hydrated only where it's needed. The entire interactive UI is a single island: `src/pages/index.astro` mounts `<Portfolio client:load />`, a tabbed **single-page experience** that hydrates in the **browser** and swaps between the Overview, Work, Experience, Testimonials, Ask AI, and Contact sections with React state (no router, no page reloads). The **Ask AI** tab calls an AWS Lambda function that proxies to the Anthropic Claude API.
 
 ### System Components
 
 ```mermaid
 graph TD
-    Browser["Browser (GitHub Pages)"]
-    JSModules["JS Modules\n(main · filter · chat · renderer · carousel · projects · utils)"]
+    Astro["Astro build\n(static output → dist/)"]
+    Base["Base.astro layout\n(head · SEO · GA · fonts)"]
+    IndexPage["index.astro\n(<Portfolio client:load />)"]
+    Portfolio["Portfolio.jsx island\n(profile · tab bar · routing)"]
+    Tabs["Tab sections\n(Overview · Work · Experience · Testimonials · AskAI · Contact)"]
+    Lib["src/lib + src/data\n(carousel · chat · portfolio)"]
     Lambda["AWS Lambda\n(lambda_function.py)"]
     AnthropicAPI["Anthropic API\n(Claude Haiku)"]
-    KnowledgeBase["knowledge_base.json\n(portfolio context)"]
 
-    Browser -->|loads| JSModules
-    JSModules -->|POST /chat| Lambda
-    Lambda -->|reads| KnowledgeBase
+    Astro -->|renders| Base
+    Base -->|slots| IndexPage
+    IndexPage -->|hydrates| Portfolio
+    Portfolio -->|routes to| Tabs
+    Tabs -->|import| Lib
+    Tabs -->|Ask AI: POST /chat| Lambda
     Lambda -->|messages.create| AnthropicAPI
     AnthropicAPI -->|assistant text| Lambda
-    Lambda -->|JSON response| JSModules
-    JSModules -->|renders reply| Browser
+    Lambda -->|JSON response| Tabs
 ```
 
-### Chat Data Flow
+### Ask AI Data Flow
 
 ```mermaid
 graph TD
-    UserInput["User types message"]
-    RateCheck["Rate limit check\n(localStorage)"]
-    ChatModule["chat.js\nsendMessage()"]
+    UserInput["User types question"]
+    RateCheck["isRateLimited()\n(localStorage, 25/hour)"]
+    ChatLib["src/lib/chat.js\nsendMessage({messages})"]
     LambdaHandler["Lambda handler()\nparse + validate body"]
     ChatAgent["ChatAgent.reply()\nbuild prompt + call API"]
     AnthropicResponse["Anthropic Claude\nHaiku response"]
-    RenderReply["Render assistant reply\nto chat UI"]
+    RenderReply["renderAssistantMarkdown()\n→ chat panel"]
 
     UserInput --> RateCheck
-    RateCheck -->|within limit| ChatModule
+    RateCheck -->|within limit| ChatLib
     RateCheck -->|exceeded| RenderReply
-    ChatModule -->|POST JSON| LambdaHandler
+    ChatLib -->|POST JSON| LambdaHandler
     LambdaHandler --> ChatAgent
     ChatAgent --> AnthropicResponse
     AnthropicResponse --> ChatAgent
     ChatAgent -->|response text| LambdaHandler
-    LambdaHandler -->|200 JSON| ChatModule
-    ChatModule --> RenderReply
+    LambdaHandler -->|200 JSON| ChatLib
+    ChatLib --> RenderReply
 ```
 
-## Key Files
+## Source Layout
 
-| File | Role |
+| Path | Contents |
 |---|---|
-| `WebContent/js/main.js` | Application entry point — wires all modules |
-| `WebContent/js/chat.js` | Chat widget — rate limiting, XSS protection, Lambda calls |
-| `lambda/lambda_function.py` | AWS Lambda handler — ChatAgent, ChatRequest |
-| `lambda/knowledge_base.json` | Portfolio context for the LLM system prompt |
-| `index.html` | Main page — chat widget, projects, testimonials |
-| `projects.html` | Full projects listing |
+| `src/pages/` | Astro pages — `index.astro` (home), `404.astro` |
+| `src/layouts/` | `Base.astro` — `<head>`, SEO/Open Graph, Google Analytics, fonts |
+| `src/components/` | React islands — `Portfolio.jsx`, `Button.jsx`, `Tag.jsx`, `ProjectCard.jsx` |
+| `src/components/tabs/` | Tab sections — `Overview`, `Work`, `Experience`, `Testimonials`, `AskAI`, `Contact` |
+| `src/lib/` | Framework-free logic — `carousel.js` (index math), `chat.js` (Lambda client + rate limiting) |
+| `src/data/` | `portfolio.js` — projects, skills, metrics, experience, testimonials, navItems |
+| `src/styles/` | `tokens.css` (design tokens) + `global.css` (component styles) |
+| `lambda/` | AWS Lambda chat backend (unchanged) |
+
+## Deploy Model
+
+Two branches, two hosts. `dev` is **live staging**; `main` is **production**. Each push builds the Astro site and publishes the `dist/` output to a different host.
+
+| Branch | Trigger | Host | URL |
+|---|---|---|---|
+| `main` | push (after lint + test + build) | GitHub Pages (`gh-pages` branch) | charleslikesdata.com |
+| `dev` | push | Cloudflare Pages (`charleslikesdata-portfolio`) | charleslikesdata-portfolio.pages.dev |
+
+Promotion flows `dev → main`: work lands on `dev` (auto-deployed to staging), then merges to `main` for production. See the CI/CD Pipeline page for the workflow details.
 <!-- generated:end -->
 
 <!-- claude:prose -->

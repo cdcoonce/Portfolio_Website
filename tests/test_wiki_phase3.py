@@ -97,13 +97,13 @@ class TestGenerateArchitecture:
 
 
 class TestGenerateFrontendModulesDiagram:
-    """Tests for the Phase 3 module dependency graph in generate_frontend_modules."""
+    """Tests for the component-tree diagram in generate_frontend_modules."""
 
-    def test_generate_frontend_modules_has_graph_lr(self):
-        """Output contains a mermaid graph LR dependency diagram."""
+    def test_generate_frontend_modules_has_graph_td(self):
+        """Output contains a mermaid graph TD component-tree diagram."""
         output = generate_frontend_modules.generate(REPO_ROOT)
         assert MERMAID_OPEN in output, "Expected ```mermaid opening"
-        assert "graph LR" in output, "Expected graph LR diagram type"
+        assert "graph TD" in output, "Expected graph TD diagram type"
 
     def test_frontend_modules_mermaid_blocks_properly_closed(self):
         """Each mermaid open has a corresponding close."""
@@ -117,22 +117,22 @@ class TestGenerateFrontendModulesDiagram:
             f"Mermaid block mismatch: {opens} opens vs {closes} closes"
         )
 
-    def test_frontend_modules_diagram_references_main(self):
-        """Dependency graph mentions main.js (known entry point)."""
+    def test_frontend_modules_diagram_references_portfolio(self):
+        """Component tree mentions the Portfolio root island."""
         output = generate_frontend_modules.generate(REPO_ROOT)
-        assert "main" in output.lower()
+        assert "Portfolio" in output
 
     def test_frontend_modules_no_phase3_placeholder(self):
-        """Phase 3 placeholder comment is replaced by actual diagram."""
+        """No leftover placeholder text; the actual diagram is emitted."""
         output = generate_frontend_modules.generate(REPO_ROOT)
         assert "Phase 3: module dependency graph will be inserted here" not in output, (
             "Placeholder comment should be replaced by the actual diagram"
         )
 
     def test_frontend_modules_still_has_table(self):
-        """Module inventory table is still present after Phase 3 changes."""
+        """Inventory tables are present."""
         output = generate_frontend_modules.generate(REPO_ROOT)
-        assert "| Module |" in output or "Module Inventory" in output
+        assert "React Components" in output or "Logic & Data Modules" in output
 
 
 # ---------------------------------------------------------------------------

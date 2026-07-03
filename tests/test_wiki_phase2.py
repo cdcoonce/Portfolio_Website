@@ -64,10 +64,10 @@ class TestGenerateTesting:
         # pyproject.toml has slow, a11y, e2e, validation markers
         assert "slow" in output or "a11y" in output or "e2e" in output
 
-    def test_has_filter_test_file(self):
-        """Output contains filter.test.js (known file)."""
+    def test_lists_lib_test_files(self):
+        """Output references the src/lib unit-test files (carousel, chat)."""
         output = generate_testing.generate(REPO_ROOT)
-        assert "filter" in output
+        assert "portfolio-carousel" in output or "portfolio-chat" in output
 
 
 # ---------------------------------------------------------------------------
@@ -89,25 +89,25 @@ class TestGenerateCSS:
         output = generate_css.generate(REPO_ROOT)
         assert "--" in output, "Expected CSS custom property with -- prefix"
 
-    def test_has_custom_property_table_header(self):
-        """Output contains a table with custom property columns."""
+    def test_has_token_table_header(self):
+        """Output contains a table with token columns."""
         output = generate_css.generate(REPO_ROOT)
-        assert "Property" in output or "property" in output
+        assert "Token" in output or "Value" in output
 
     def test_extracts_known_property(self):
-        """Output contains --color-text-primary (known property from style.css)."""
+        """Output contains a known design token from src/styles/tokens.css."""
         output = generate_css.generate(REPO_ROOT)
-        assert "--color-text-primary" in output
+        assert "--text-primary" in output or "--accent-blue" in output
 
     def test_has_media_queries_section(self):
-        """Output contains media query breakpoints table."""
+        """Output contains a media query breakpoints section."""
         output = generate_css.generate(REPO_ROOT)
         assert "media" in output.lower() or "breakpoint" in output.lower()
 
     def test_has_known_breakpoint(self):
-        """Output contains 1250px or 700px (known breakpoints from mediaqueries.css)."""
+        """Output contains a known breakpoint from src/styles/global.css (mobile-first)."""
         output = generate_css.generate(REPO_ROOT)
-        assert "1250" in output or "700" in output
+        assert "700" in output or "800" in output
 
     def test_missing_css_files(self, tmp_path):
         """generate() does not crash when CSS files are absent."""
@@ -259,37 +259,37 @@ class TestGenerateFrontendModules:
         output = generate_frontend_modules.generate(REPO_ROOT)
         assert "|" in output
 
-    def test_lists_js_files(self):
-        """Output contains at least one .js file from WebContent/js/."""
+    def test_lists_source_files(self):
+        """Output references src/ source files (components and lib modules)."""
         output = generate_frontend_modules.generate(REPO_ROOT)
-        assert ".js" in output
+        assert ".jsx" in output and ".js" in output
 
-    def test_has_filter_module(self):
-        """Output contains filter.js (known module)."""
+    def test_has_portfolio_island(self):
+        """Output contains the root Portfolio island."""
         output = generate_frontend_modules.generate(REPO_ROOT)
-        assert "filter" in output
+        assert "Portfolio" in output
 
     def test_has_chat_module(self):
-        """Output contains chat.js (known module)."""
+        """Output contains the src/lib/chat.js module."""
         output = generate_frontend_modules.generate(REPO_ROOT)
         assert "chat" in output
 
     def test_has_exports(self):
-        """Output contains at least one export reference."""
+        """Output contains at least one real export reference from src/lib or src/data."""
         output = generate_frontend_modules.generate(REPO_ROOT)
-        # Known exports: initChat, initFilter, escapeHtml, etc.
+        # Known exports: sendMessage/isRateLimited (chat), nextIndex (carousel), navItems (data).
         assert any(
             name in output
-            for name in ["initChat", "initFilter", "escapeHtml", "renderProjectCards"]
+            for name in ["sendMessage", "isRateLimited", "nextIndex", "navItems"]
         )
 
-    def test_has_dependency_graph(self):
-        """Output contains the Phase 3 module dependency graph (graph LR)."""
+    def test_has_component_tree(self):
+        """Output contains the React component tree diagram (graph TD)."""
         output = generate_frontend_modules.generate(REPO_ROOT)
-        assert "graph LR" in output, "Phase 3 diagram should be present instead of placeholder"
+        assert "graph TD" in output, "Component tree diagram should be present"
 
-    def test_missing_js_dir(self, tmp_path):
-        """generate() does not crash when WebContent/js/ is absent."""
+    def test_missing_src_dir(self, tmp_path):
+        """generate() does not crash when src/ is absent."""
         output = generate_frontend_modules.generate(tmp_path)
         assert isinstance(output, str)
 
@@ -347,7 +347,11 @@ class TestGenerateChangelog:
         assert output.count("##") >= 1, "Expected at least one ## section header"
 
     def test_shows_commit_subjects(self):
-        """Output includes actual commit subject text."""
+        """Output includes dated commit entries with SHA + subject text."""
+        import re
+
         output = generate_changelog.generate(REPO_ROOT)
-        # Known commit from Phase 1
-        assert "wiki" in output.lower() or "phase" in output.lower() or "filter" in output.lower()
+        # Each entry is rendered as: - **YYYY-MM-DD** `sha` — subject
+        assert re.search(r"\*\*\d{4}-\d{2}-\d{2}\*\* `[0-9a-f]+` — \S", output), (
+            "Expected at least one dated commit entry in the changelog"
+        )

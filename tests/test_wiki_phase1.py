@@ -209,10 +209,12 @@ class TestGenerateHome:
         assert len(output) > 0
 
     def test_generate_home_includes_version(self):
-        """Output includes a version number from package.json."""
+        """Output includes the version number from package.json."""
+        import json
+
         output = generate(REPO_ROOT)
-        # package.json has version 1.5.0
-        assert "1.5.0" in output
+        version = json.loads((REPO_ROOT / "package.json").read_text())["version"]
+        assert version in output
 
     def test_generate_home_has_python_version(self):
         """Output references Python version requirement from pyproject.toml."""

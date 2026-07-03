@@ -3,6 +3,8 @@
 <!-- generated:start -->
 ## Local Setup
 
+This is an **Astro** site (static output) with **React islands**. It needs **Node.js 22**. Python (via [uv](https://github.com/astral-sh/uv)) is only required for the wiki-generation tooling under `scripts/wiki/`.
+
 1. **Clone the repository**
    ```
    git clone https://github.com/cdcoonce/Portfolio_Website.git
@@ -14,14 +16,24 @@
    npm install
    ```
 
-3. **Install Python dependencies** (requires [uv](https://github.com/astral-sh/uv))
+3. **Start the Astro dev server**
    ```
-   uv sync
+   npm run dev
    ```
 
-4. **Run all tests**
+4. **Build the static site** (output → `dist/`)
    ```
-   make test
+   npm run build
+   ```
+
+5. **Run the JS unit tests**
+   ```
+   npm test
+   ```
+
+6. **(Wiki tooling only) Install Python dependencies**
+   ```
+   uv sync
    ```
 
 ## Make Targets
@@ -41,11 +53,16 @@
 
 | Script | Command |
 |---|---|
+| `npm run dev` | `astro dev` |
+| `npm run start` | `astro dev` |
+| `npm run build` | `astro build` |
+| `npm run preview` | `astro preview` |
+| `npm run astro` | `astro` |
 | `npm run test` | `NODE_OPTIONS='--experimental-vm-modules' jest` |
 | `npm run test:watch` | `NODE_OPTIONS='--experimental-vm-modules' jest --watch` |
 | `npm run test:coverage` | `NODE_OPTIONS='--experimental-vm-modules' jest --coverage` |
-| `npm run lint:css` | `stylelint 'WebContent/css/**/*.css'` |
-| `npm run lint:js` | `eslint 'WebContent/js/**/*.js'` |
+| `npm run lint:css` | `stylelint 'src/**/*.css'` |
+| `npm run lint:js` | `eslint 'src/**/*.js' '__tests__/**/*.js'` |
 | `npm run lint` | `npm run lint:css && npm run lint:js` |
 | `npm run serve` | `python3 -m http.server 8000` |
 | `npm run format` | `prettier --write "**/*.{html,css,js,md,json}"` |

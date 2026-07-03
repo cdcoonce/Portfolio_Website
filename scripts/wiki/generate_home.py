@@ -114,22 +114,32 @@ def generate(repo_root: Path) -> str:
     python_version = _extract_python_version(pyproject)
     python_deps = _extract_python_deps(pyproject)
     dev_deps = pkg.get("devDependencies", {})
+    deps = pkg.get("dependencies", {})
 
     # --- Tech stack table ---
+    astro_version = deps.get("astro", "unknown").lstrip("^~")
+    react_version = deps.get("react", "unknown").lstrip("^~")
     jest_version = dev_deps.get("jest", "unknown").lstrip("^~")
     eslint_version = dev_deps.get("eslint", "unknown").lstrip("^~")
     prettier_version = dev_deps.get("prettier", "unknown").lstrip("^~")
 
     lines: list[str] = []
     lines.append(f"## {project_name} v{project_version}\n")
+    lines.append(
+        "Charles Coonce's personal portfolio site — an **Astro** (static output) app with "
+        "**React islands**, deployed to GitHub Pages (production) and Cloudflare Pages "
+        "(staging). Live at [charleslikesdata.com](https://charleslikesdata.com).\n"
+    )
     lines.append("### Tech Stack\n")
     lines.append("| Language / Tool | Version / Notes |")
     lines.append("|---|---|")
-    lines.append(f"| Node.js | see `.nvmrc` or system Node |")
-    lines.append(f"| Python | `{python_version}` |")
+    lines.append(f"| Astro (framework, static output) | `{astro_version}` |")
+    lines.append(f"| React (islands via `@astrojs/react`) | `{react_version}` |")
+    lines.append(f"| Node.js | 22 (see CI workflows) |")
     lines.append(f"| Jest (JS test runner) | `{jest_version}` |")
     lines.append(f"| ESLint | `{eslint_version}` |")
     lines.append(f"| Prettier | `{prettier_version}` |")
+    lines.append(f"| Python | `{python_version}` (wiki tooling) |")
     lines.append(f"| uv (Python package manager) | see `pyproject.toml` |")
 
     if python_deps:
@@ -138,14 +148,16 @@ def generate(repo_root: Path) -> str:
 
     lines.append("")
 
-    # --- Test commands ---
-    lines.append("### Test Commands\n")
+    # --- Dev & test commands ---
+    lines.append("### Dev & Test Commands\n")
     lines.append("| Command | Description |")
     lines.append("|---|---|")
-    lines.append("| `npm test` | Run JavaScript test suite (Jest) |")
+    lines.append("| `npm run dev` | Start the Astro dev server |")
+    lines.append("| `npm run build` | Build the static site to `dist/` |")
+    lines.append("| `npm run preview` | Preview the built site locally |")
+    lines.append("| `npm test` | Run the JS unit suite (Jest — `src/lib/*`) |")
     lines.append("| `npm run test:coverage` | JS tests with coverage report |")
-    lines.append("| `uv run pytest` | Run Python test suite |")
-    lines.append("| `uv run pytest --cov=src --cov-report=term-missing` | Python tests with coverage |")
+    lines.append("| `npm run lint` | Stylelint (CSS) + ESLint (JS) |")
     lines.append("")
 
     # --- npm scripts ---
