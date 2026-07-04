@@ -78,12 +78,11 @@ export default function Overview() {
             </div>
             {current.links?.length ? (
               <div className="featured__cta-group">
-                {current.links.map((link, i) => (
+                {current.links.map((link) => (
                   <Button
                     key={link.href}
                     size="sm"
                     href={link.href}
-                    variant={i === 0 ? 'primary' : 'ghost'}
                     {...(isExternal(link.href)
                       ? { target: '_blank', rel: 'noopener noreferrer' }
                       : {})}
