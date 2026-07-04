@@ -76,14 +76,32 @@ export default function Overview() {
                 <Tag key={t}>{t}</Tag>
               ))}
             </div>
-            <Button
-              size="sm"
-              href={current.href}
-              className="featured__cta"
-              {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-            >
-              {current.ctaLabel ?? 'View repository'}
-            </Button>
+            {current.links?.length ? (
+              <div className="featured__cta-group">
+                {current.links.map((link, i) => (
+                  <Button
+                    key={link.href}
+                    size="sm"
+                    href={link.href}
+                    variant={i === 0 ? 'primary' : 'ghost'}
+                    {...(isExternal(link.href)
+                      ? { target: '_blank', rel: 'noopener noreferrer' }
+                      : {})}
+                  >
+                    {link.label}
+                  </Button>
+                ))}
+              </div>
+            ) : (
+              <Button
+                size="sm"
+                href={current.href}
+                className="featured__cta"
+                {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+              >
+                {current.ctaLabel ?? 'View repository'}
+              </Button>
+            )}
           </div>
         </div>
       </div>
