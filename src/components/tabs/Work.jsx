@@ -5,9 +5,11 @@ import { projects } from '../../data/portfolio.js';
 export default function Work() {
   return (
     <div className="work-grid">
-      {projects.map((p) => (
-        <ProjectCard key={p.title} project={p} />
-      ))}
+      {projects
+        .filter((p) => !p.hideFromGallery)
+        .map((p) => (
+          <ProjectCard key={p.title} project={p} />
+        ))}
     </div>
   );
 }

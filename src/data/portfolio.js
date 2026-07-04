@@ -5,7 +5,7 @@
  * shipped in /public/assets so we reuse the same source art.
  */
 
-/** @typedef {{ title: string, date: string, description: string, image: string, imageContain?: boolean, tags: string[], href: string, featured?: boolean }} Project */
+/** @typedef {{ title: string, date: string, description: string, image: string, imageContain?: boolean, tags: string[], href: string, featured?: boolean, hideFromGallery?: boolean }} Project */
 
 /** @type {Project[]} */
 export const projects = [
@@ -18,6 +18,17 @@ export const projects = [
     imageContain: false,
     tags: ['Python', 'Data Pipelines', 'Analytics Dashboards'],
     href: '/afk-cockpit/',
+    featured: true,
+  },
+  {
+    title: 'claude-workflow — Claude Code Plugin',
+    date: 'Jul 2026',
+    description:
+      'A templated Claude Code plugin that auto-installs development skills, domain agents, methodology docs, and hooks into any project — collapsing repeated manual setup into one command, with 10 project presets and a 93-test suite.',
+    image: '/assets/projects/claude-workflow.svg',
+    imageContain: false,
+    tags: ['Python', 'AI Tooling'],
+    href: 'https://github.com/cdcoonce/claude-workflow',
     featured: true,
   },
   {
@@ -34,11 +45,24 @@ export const projects = [
     title: 'Oura Ring Health Pipeline',
     date: 'Mar 2026',
     description:
-      'ELT pipeline extracting Oura data via API into Snowflake, transformed with dbt and orchestrated by Dagster with daily partitions.',
+      'A self-hosted ELT pipeline pulling daily Oura Ring health metrics via OAuth2 into Snowflake, transformed through 15 dbt models and orchestrated by Dagster across daily, weekly, and monthly schedules.',
     image: '/assets/projects/oura-pipeline.svg',
-    imageContain: true,
+    imageContain: false,
     tags: ['Python', 'ETL/ELT', 'Data Pipelines'],
     href: 'https://github.com/cdcoonce/Oura-Pipeline',
+    featured: true,
+  },
+  {
+    title: 'my-brain — Second-Brain Knowledge System',
+    date: 'Jul 2026',
+    description:
+      'A graph-first Obsidian vault wired to a Claude Code automation layer — 397 interlinked notes and ~4,500 wikilinks across 11 life domains, auto-committed and synced across two machines by a session hook, with 84 custom skills, agents, and hooks doing the upkeep.',
+    image: '/assets/projects/my-brain.svg',
+    imageContain: false,
+    tags: ['Obsidian', 'AI Tooling'],
+    href: '',
+    featured: true,
+    hideFromGallery: true,
   },
   {
     title: 'Housing Affordability & Commute',
@@ -90,7 +114,7 @@ export const skills = [
 ];
 
 export const metrics = [
-  { value: '7', label: 'Projects shipped' },
+  { value: '8', label: 'Projects shipped' },
   { value: '4+', label: 'Data pipelines built' },
   { value: '6', label: 'Languages & tools' },
   { value: '1.8M+', label: 'Records processed' },

@@ -1,0 +1,55 @@
+<svg viewBox="0 0 720 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="my-brain second-brain cockpit: 397 notes, 4500 wikilinks, 84 skills and hooks, 11 domains" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <rect width="720" height="560" fill="#ffffff"/>
+
+  <circle cx="44" cy="66" r="5" fill="#4f7a4f"/>
+  <text x="58" y="71" font-size="13" font-weight="600" letter-spacing="1.5" fill="#9a9a95">MY-BRAIN · SECOND BRAIN</text>
+  <rect x="574" y="52" width="106" height="30" rx="15" fill="none" stroke="#e4e4e0"/>
+  <text x="627" y="72" font-size="13" font-weight="500" fill="#6a6a66" text-anchor="middle">Obsidian</text>
+
+  <text x="40" y="130" font-size="27" font-weight="700" fill="#1f1f1f">A knowledge graph that thinks with me</text>
+  <text x="40" y="160" font-size="15" fill="#8a8a86">Graph-first Obsidian vault + Claude Code automation, auto-synced across 2 machines.</text>
+
+  <rect x="40" y="196" width="148" height="112" rx="14" fill="#f6f6f4"/>
+  <text x="114" y="258" font-size="36" font-weight="700" fill="#1f1f1f" text-anchor="middle">397</text>
+  <text x="114" y="286" font-size="12.5" fill="#8a8a86" text-anchor="middle">Notes</text>
+
+  <rect x="204" y="196" width="148" height="112" rx="14" fill="#f6f6f4"/>
+  <text x="278" y="258" font-size="36" font-weight="700" fill="#2f6f5f" text-anchor="middle">4.5K</text>
+  <text x="278" y="286" font-size="12.5" fill="#8a8a86" text-anchor="middle">Wikilinks</text>
+
+  <rect x="368" y="196" width="148" height="112" rx="14" fill="#f6f6f4"/>
+  <text x="442" y="258" font-size="36" font-weight="700" fill="#1f1f1f" text-anchor="middle">84</text>
+  <text x="442" y="286" font-size="12.5" fill="#8a8a86" text-anchor="middle">Skills &amp; hooks</text>
+
+  <rect x="532" y="196" width="148" height="112" rx="14" fill="#f6f6f4"/>
+  <text x="606" y="258" font-size="36" font-weight="700" fill="#1f1f1f" text-anchor="middle">11</text>
+  <text x="606" y="286" font-size="12.5" fill="#8a8a86" text-anchor="middle">Domains</text>
+
+  <text x="40" y="356" font-size="12" font-weight="600" letter-spacing="1.2" fill="#9a9a95">NOTES BY DOMAIN</text>
+  <g font-size="13.5">
+    <text x="40" y="384" fill="#3a3a3a">work</text>
+    <rect x="180" y="375" width="410" height="10" rx="5" fill="#eeeeea"/>
+    <rect x="180" y="375" width="410" height="10" rx="5" fill="#2f6f5f"/>
+    <text x="660" y="384" fill="#6a6a66" text-anchor="end" font-weight="600">103</text>
+
+    <text x="40" y="412" fill="#3a3a3a">personal</text>
+    <rect x="180" y="403" width="410" height="10" rx="5" fill="#eeeeea"/>
+    <rect x="180" y="403" width="314" height="10" rx="5" fill="#2f6f5f"/>
+    <text x="660" y="412" fill="#6a6a66" text-anchor="end" font-weight="600">79</text>
+
+    <text x="40" y="440" fill="#3a3a3a">thinking</text>
+    <rect x="180" y="431" width="410" height="10" rx="5" fill="#eeeeea"/>
+    <rect x="180" y="431" width="231" height="10" rx="5" fill="#2f6f5f"/>
+    <text x="660" y="440" fill="#6a6a66" text-anchor="end" font-weight="600">58</text>
+
+    <text x="40" y="468" fill="#3a3a3a">org</text>
+    <rect x="180" y="459" width="410" height="10" rx="5" fill="#eeeeea"/>
+    <rect x="180" y="459" width="191" height="10" rx="5" fill="#b0872f"/>
+    <text x="660" y="468" fill="#6a6a66" text-anchor="end" font-weight="600">48</text>
+
+    <text x="40" y="496" fill="#3a3a3a">reference</text>
+    <rect x="180" y="487" width="410" height="10" rx="5" fill="#eeeeea"/>
+    <rect x="180" y="487" width="167" height="10" rx="5" fill="#2f6f5f"/>
+    <text x="660" y="496" fill="#6a6a66" text-anchor="end" font-weight="600">42</text>
+  </g>
+</svg>

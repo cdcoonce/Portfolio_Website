@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [2.1.0] - 2026-07-03
+
+### Added
+
+- Rotate the Overview "Featured project" spotlight through four projects
+  (AFK, claude-workflow, Oura Ring pipeline, my-brain vault) via a manual
+  carousel with dots + prev/next arrows (no auto-rotate); AFK is the default slide
+- `claude-workflow` project card, promote the Oura Ring pipeline to featured, and
+  add the `my-brain` second-brain vault as a featured-only card
+- Cockpit-style SVG hero mockups for claude-workflow, the Oura pipeline, and the
+  my-brain vault, with each project's real KPIs baked in (skills/presets/tests/
+  commits; API-sources/models/schedules/test-modules; notes/wikilinks/skills/domains)
+- `featuredProjects()` selector in `src/lib/featured.js` with unit tests
+- `hideFromGallery` project flag so a project can be featured without appearing as
+  a clickable Work-gallery card (used by my-brain, whose repo is private)
+
+### Changed
+
+- Bump the "Projects shipped" metric 7 → 8
+- Replace the 176 KB `oura-pipeline.svg` raster asset with a 3.6 KB vector mockup
+
 ## [2.0.1] - 2026-07-03
 
 ### Fixed

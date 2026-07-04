@@ -322,6 +322,36 @@ a {
   margin-top: 0.35rem;
 }
 
+.featured-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.featured-head .eyebrow {
+  margin-bottom: 0;
+}
+
+.featured-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.featured-nav__dots {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.featured-nav__arrows {
+  display: flex;
+  gap: var(--space-2);
+}
+
 .featured {
   display: grid;
   grid-template-columns: 1fr;

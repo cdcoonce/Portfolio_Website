@@ -1,10 +1,17 @@
+import { useState } from 'react';
 import Button from '../Button.jsx';
 import Tag from '../Tag.jsx';
 import { metrics, projects } from '../../data/portfolio.js';
+import { featuredProjects } from '../../lib/featured.js';
+import { nextIndex, prevIndex } from '../../lib/carousel.js';
 
-/** Overview tab: at-a-glance metrics + a featured project spotlight. */
+/** Overview tab: at-a-glance metrics + a rotating featured-project spotlight. */
 export default function Overview({ onSeeWork }) {
-  const featured = projects.find((p) => p.featured) ?? projects[0];
+  const featured = featuredProjects(projects);
+  const [index, setIndex] = useState(0);
+  const current = featured[index] ?? projects[0];
+  const hasMultiple = featured.length > 1;
+
   return (
     <div className="overview">
       <div className="metrics">
@@ -17,14 +24,47 @@ export default function Overview({ onSeeWork }) {
       </div>
 
       <div>
-        <div className="eyebrow">Featured project</div>
+        <div className="featured-head">
+          <div className="eyebrow">Featured project</div>
+          {hasMultiple && (
+            <div className="featured-nav">
+              <div className="featured-nav__dots">
+                {featured.map((p, i) => (
+                  <button
+                    key={p.title}
+                    className={`dot${i === index ? ' dot--active' : ''}`}
+                    aria-label={`Show ${p.title}`}
+                    aria-current={i === index}
+                    onClick={() => setIndex(i)}
+                  />
+                ))}
+              </div>
+              <div className="featured-nav__arrows">
+                <button
+                  className="arrow-btn"
+                  aria-label="Previous featured project"
+                  onClick={() => setIndex((i) => prevIndex(i, featured.length))}
+                >
+                  ❮
+                </button>
+                <button
+                  className="arrow-btn"
+                  aria-label="Next featured project"
+                  onClick={() => setIndex((i) => nextIndex(i, featured.length))}
+                >
+                  ❯
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
         <div className="featured">
-          <img className="featured__img" src={featured.image} alt={featured.title} loading="lazy" />
+          <img className="featured__img" src={current.image} alt={current.title} loading="lazy" />
           <div className="featured__body">
-            <h3 className="featured__title">{featured.title}</h3>
-            <p className="featured__desc">{featured.description}</p>
+            <h3 className="featured__title">{current.title}</h3>
+            <p className="featured__desc">{current.description}</p>
             <div className="featured__tags">
-              {featured.tags.slice(0, 2).map((t) => (
+              {current.tags.slice(0, 2).map((t) => (
                 <Tag key={t}>{t}</Tag>
               ))}
             </div>
