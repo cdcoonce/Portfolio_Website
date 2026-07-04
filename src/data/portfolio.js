@@ -61,7 +61,7 @@ export const projects = [
     image: '/assets/projects/my-brain.svg',
     imageContain: false,
     tags: ['Obsidian', 'AI Tooling'],
-    href: 'https://github.com/cdcoonce/second-brain-template',
+    href: 'https://github.com/cdcoonce/second-brain',
     featured: true,
     hideFromGallery: true,
     ctaLabel: 'Use this template',
