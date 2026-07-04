@@ -261,6 +261,17 @@ export const metrics = [
   { value: '1.8M+', label: 'Records processed' },
 ];
 
+export const contactMethods = [
+  { label: 'Email', value: 'CharlesCoonce@Gmail.com', href: 'mailto:CharlesCoonce@Gmail.com' },
+  {
+    label: 'LinkedIn',
+    value: '/in/charlesdcoonce',
+    href: 'https://www.linkedin.com/in/charlesdcoonce/',
+  },
+  { label: 'GitHub', value: '/cdcoonce', href: 'https://github.com/cdcoonce' },
+  { label: 'Resume', value: 'Download PDF', href: '/assets/CharlesCoonce_Resume.pdf' },
+];
+
 export const experience = [
   {
     period: '2025 — Present',
