@@ -3,10 +3,10 @@ import Cockpit from './Cockpit.jsx';
 
 /** Project card: image header, date, title, description, tag row. Links out. */
 export default function ProjectCard({ project }) {
-  const { title, date, description, image, imageContain, slug, tags, href } = project;
+  const { title, date, description, image, imageContain, slug, tags, href, featured } = project;
   return (
     <a
-      className="project-card"
+      className={`project-card${featured ? ' project-card--featured' : ''}`}
       href={href}
       target="_blank"
       rel="noopener noreferrer"

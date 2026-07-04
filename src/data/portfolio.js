@@ -66,7 +66,7 @@ export const projects = [
     title: 'Housing Affordability & Commute',
     date: 'Dec 2025',
     description:
-      'Integrates housing price, income, and commute data across U.S. metros to model affordability tradeoffs with ETL, regression, and statistical visualization.',
+      'DAT 490 capstone: a reproducible pipeline integrating ACS income, Zillow rent, and OpenStreetMap transit data across four U.S. metros to model rent-burden and commute tradeoffs with ETL, regression, and spatial visualization.',
     image: '/assets/projects/housing-commute.png',
     imageContain: false,
     tags: ['Python', 'Machine Learning', 'Data Visualization'],
@@ -102,20 +102,174 @@ export const projects = [
     tags: ['Python', 'ETL/ELT', 'Data Visualization'],
     href: 'https://github.com/cdcoonce/Electricity_Consumption_Analysis',
   },
+  {
+    title: 'Weather-Adjusted Generation Analytics',
+    date: 'May 2026',
+    description:
+      'A production-grade ELT pipeline for weather-normalized renewable-asset performance — dlt ingestion into Snowflake, dbt transformations through a semantic layer, and Polars analytics, all orchestrated by Dagster.',
+    slug: 'waga',
+    tags: ['Python', 'ETL/ELT', 'Data Pipelines'],
+    href: 'https://github.com/cdcoonce/Weather-Adjusted-Generation-Analytics',
+    featured: true,
+  },
+  {
+    title: 'Ames Housing Model Comparison',
+    date: 'Oct 2025',
+    description:
+      'Compares Linear Regression, k-Nearest Neighbors, and a TensorFlow neural network on the Ames Housing dataset, with preprocessing pipelines, cross-validation, and bias–variance visualization.',
+    image: '/assets/projects/ames-housing.png',
+    imageContain: true,
+    tags: ['Python', 'Machine Learning'],
+    href: 'https://github.com/cdcoonce/Ames_Housing_Model_Comparison',
+  },
+  {
+    title: 'Spaceship Titanic Classification',
+    date: 'May 2025',
+    description:
+      'Builds and evaluates binary classification models for the Spaceship Titanic Kaggle competition, optimizing ROC-AUC and precision–recall tradeoffs with ensemble methods.',
+    image: '/assets/projects/spaceship-titanic.png',
+    imageContain: true,
+    tags: ['Python', 'Machine Learning'],
+    href: 'https://github.com/cdcoonce/Spaceship_Titanic',
+  },
+  {
+    title: 'Restaurant Order Analysis',
+    date: 'Mar 2025',
+    description:
+      'Uses SQL joins and aggregations to analyze restaurant order data, revealing peak ordering windows, top menu items, and revenue concentration by category.',
+    image: '/assets/projects/restaurant-orders.png',
+    imageContain: true,
+    tags: ['SQL', 'Business Intelligence'],
+    href: 'https://github.com/cdcoonce/Restaurant_Order_Analysis',
+  },
+  {
+    title: 'Motor Vehicle Thefts',
+    date: 'Mar 2025',
+    description:
+      "Combines SQL and Excel to analyze motor vehicle theft patterns by make, model year, location, and time of day across New Zealand's national dataset.",
+    image: '/assets/projects/motor-vehicle-thefts.png',
+    imageContain: false,
+    tags: ['SQL', 'Excel', 'Data Visualization'],
+    href: 'https://github.com/cdcoonce/Motor_Vehicle_Thefts',
+  },
+  {
+    title: 'Baby Names Analysis',
+    date: 'Mar 2025',
+    description:
+      'Queries 140 years of U.S. baby name data with SQL to track generational naming trends, pop-culture influences, and regional popularity shifts.',
+    image: '/assets/projects/baby-names.png',
+    imageContain: true,
+    tags: ['SQL', 'Statistical Analysis'],
+    href: 'https://github.com/cdcoonce/Baby_Names_Analysis',
+  },
+  {
+    title: 'Manufacturing Downtime Analysis',
+    date: 'Feb 2025',
+    description:
+      'Identifies root causes of production downtime with an Excel BI dashboard tracking machine failures, shift patterns, and operator performance metrics.',
+    image: '/assets/projects/manufacturing-downtime.png',
+    imageContain: true,
+    tags: ['Excel', 'Business Intelligence', 'Analytics Dashboards'],
+    href: 'https://github.com/cdcoonce/Manufacturing_Downtime_Analysis',
+  },
+  {
+    title: 'NYC Collision Analysis',
+    date: 'Feb 2025',
+    description:
+      'Analyzes 1.8M+ NYC traffic collisions in Excel to surface the most dangerous contributing factors, high-risk boroughs, and peak collision time windows.',
+    image: '/assets/projects/nyc-collision.png',
+    imageContain: false,
+    tags: ['Excel', 'Business Intelligence', 'Data Visualization'],
+    href: 'https://github.com/cdcoonce/NYC_Traffic_Accidents',
+  },
+  {
+    title: 'AirBnB Listing Analysis',
+    date: 'Feb 2025',
+    description:
+      'Analyzes Airbnb listing data with Python to uncover pricing drivers, occupancy patterns, and neighborhood-level revenue trends across major markets.',
+    image: '/assets/projects/airbnb.png',
+    imageContain: false,
+    tags: ['Python', 'ETL/ELT', 'Statistical Analysis'],
+    href: 'https://github.com/cdcoonce/Airbnb_Listing_Analysis',
+  },
+  {
+    title: 'Sleep Deprivation Analysis',
+    date: 'Feb 2025',
+    description:
+      'Investigates the relationship between sleep deprivation and high-stress reaction times using Python, identifying statistically significant performance thresholds.',
+    image: '/assets/projects/sleep-deprivation.png',
+    imageContain: false,
+    tags: ['Python', 'Statistical Analysis'],
+    href: 'https://github.com/cdcoonce/Sleep_Deprivation',
+  },
+  {
+    title: 'Data Archive',
+    date: 'Dec 2024',
+    description:
+      'Automates extraction and archiving of Google Analytics data with Python, preserving historical web metrics in a structured, queryable format for long-term analysis.',
+    image: '/assets/projects/data-archive.png',
+    imageContain: true,
+    tags: ['Python', 'ETL/ELT', 'Data Pipelines'],
+    href: 'https://github.com/cdcoonce/Google_Analytics_Data_Archive',
+  },
+  {
+    title: 'World Happiness Dashboard',
+    date: 'Sep 2024',
+    description:
+      'Interactive Shiny dashboard exploring World Happiness Report data, letting users compare GDP, social support, and freedom scores across 150+ countries.',
+    image: '/assets/projects/world-happiness.png',
+    imageContain: false,
+    tags: ['R', 'Shiny', 'Analytics Dashboards'],
+    href: 'https://iuq9gs-charles-coonce.shinyapps.io/whrcharlescoonce/',
+  },
+  {
+    title: 'National Parks Analysis',
+    date: 'Aug 2024',
+    description:
+      "Explores 20+ years of NPS visitation data with R, uncovering seasonal trends, regional disparities, and the pandemic's measurable impact on park attendance.",
+    image: '/assets/projects/national-parks-analysis.png',
+    imageContain: false,
+    tags: ['R', 'Data Visualization', 'Statistical Analysis'],
+    href: 'https://github.com/cdcoonce/National_Parks_Project/wiki',
+  },
+  {
+    title: 'Portfolio Website',
+    date: 'Aug 2024',
+    description:
+      'Responsive personal portfolio built with vanilla HTML, CSS, and JavaScript, featuring a filterable project gallery, testimonial carousel, and mobile-friendly navigation.',
+    image: '/assets/projects/portfolio-website.png',
+    imageContain: true,
+    tags: ['HTML', 'CSS', 'JavaScript'],
+    href: 'https://github.com/cdcoonce/Portfolio_Website',
+  },
 ];
 
 export const skills = [
   { name: 'Languages', tags: ['Python', 'SQL', 'R'] },
   { name: 'Techniques', tags: ['ETL/ELT', 'Machine Learning', 'Statistical Analysis'] },
   { name: 'Tools & Platforms', tags: ['Tableau', 'Excel', 'Shiny'] },
-  { name: 'Focus Areas', tags: ['Data Visualization', 'Analytics Dashboards', 'Data Pipelines'] },
+  {
+    name: 'Focus Areas',
+    tags: ['Data Visualization', 'Analytics Dashboards', 'Data Pipelines', 'Business Intelligence'],
+  },
 ];
 
 export const metrics = [
-  { value: '8', label: 'Projects shipped' },
-  { value: '4+', label: 'Data pipelines built' },
+  { value: '20+', label: 'Projects shipped' },
+  { value: '5+', label: 'Data pipelines built' },
   { value: '6', label: 'Languages & tools' },
   { value: '1.8M+', label: 'Records processed' },
+];
+
+export const contactMethods = [
+  { label: 'Email', value: 'CharlesCoonce@Gmail.com', href: 'mailto:CharlesCoonce@Gmail.com' },
+  {
+    label: 'LinkedIn',
+    value: '/in/charlesdcoonce',
+    href: 'https://www.linkedin.com/in/charlesdcoonce/',
+  },
+  { label: 'GitHub', value: '/cdcoonce', href: 'https://github.com/cdcoonce' },
+  { label: 'Resume', value: 'Download PDF', href: '/assets/CharlesCoonce_Resume.pdf' },
 ];
 
 export const experience = [
