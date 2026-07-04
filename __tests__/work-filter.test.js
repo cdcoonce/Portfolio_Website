@@ -1,8 +1,22 @@
-import { WORK_FILTERS, matchesFilter, matchesQuery, filterProjects, countFor } from '../src/lib/work-filter.js';
+import {
+  WORK_FILTERS,
+  matchesFilter,
+  matchesQuery,
+  filterProjects,
+  countFor,
+} from '../src/lib/work-filter.js';
 
 const sample = [
-  { title: 'Oura Pipeline', description: 'ELT into Snowflake', tags: ['Python', 'ETL/ELT', 'Data Pipelines'] },
-  { title: 'Global CO2', description: 'Tableau dashboard', tags: ['Tableau', 'Analytics Dashboards'] },
+  {
+    title: 'Oura Pipeline',
+    description: 'ELT into Snowflake',
+    tags: ['Python', 'ETL/ELT', 'Data Pipelines'],
+  },
+  {
+    title: 'Global CO2',
+    description: 'Tableau dashboard',
+    tags: ['Tableau', 'Analytics Dashboards'],
+  },
   { title: 'Baby Names', description: 'SQL trends', tags: ['SQL', 'Statistical Analysis'] },
   { title: 'claude-workflow', description: 'plugin', tags: ['Python', 'AI Tooling'] },
 ];

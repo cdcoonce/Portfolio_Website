@@ -49,7 +49,8 @@ export const matchesFilter = (project, filterKey) => {
 export const matchesQuery = (project, query) => {
   const q = (query || '').trim().toLowerCase();
   if (!q) return true;
-  const haystack = `${project.title} ${project.description} ${project.tags.join(' ')}`.toLowerCase();
+  const haystack =
+    `${project.title} ${project.description} ${project.tags.join(' ')}`.toLowerCase();
   return haystack.includes(q);
 };
 
