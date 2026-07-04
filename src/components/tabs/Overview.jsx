@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Button from '../Button.jsx';
 import Tag from '../Tag.jsx';
+import Cockpit from '../Cockpit.jsx';
 import { metrics, projects } from '../../data/portfolio.js';
 import { featuredProjects } from '../../lib/featured.js';
 import { nextIndex, prevIndex } from '../../lib/carousel.js';
@@ -62,7 +63,11 @@ export default function Overview() {
           )}
         </div>
         <div className="featured">
-          <img className="featured__img" src={current.image} alt={current.title} loading="lazy" />
+          {current.slug ? (
+            <Cockpit slug={current.slug} className="featured__cockpit" />
+          ) : (
+            <img className="featured__img" src={current.image} alt={current.title} loading="lazy" />
+          )}
           <div className="featured__body">
             <h3 className="featured__title">{current.title}</h3>
             <p className="featured__desc">{current.description}</p>

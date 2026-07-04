@@ -5,7 +5,7 @@
  * shipped in /public/assets so we reuse the same source art.
  */
 
-/** @typedef {{ title: string, date: string, description: string, image: string, imageContain?: boolean, tags: string[], href: string, featured?: boolean, hideFromGallery?: boolean, ctaLabel?: string }} Project */
+/** @typedef {{ title: string, date: string, description: string, image?: string, imageContain?: boolean, slug?: string, tags: string[], href: string, featured?: boolean, hideFromGallery?: boolean, ctaLabel?: string }} Project */
 
 /** @type {Project[]} */
 export const projects = [
@@ -14,8 +14,7 @@ export const projects = [
     date: 'Jul 2026',
     description:
       'A sovereign, human-gated pipeline that files, executes, and merges coding work through autonomous agents — with a live-ops cockpit tracking PR outcomes, safety quarantines as signal (not failure), and API-equivalent cost per model tier.',
-    image: '/assets/projects/afk.svg',
-    imageContain: false,
+    slug: 'afk',
     tags: ['Python', 'Data Pipelines', 'Analytics Dashboards'],
     href: '/afk-cockpit/',
     featured: true,
@@ -26,8 +25,7 @@ export const projects = [
     date: 'Jul 2026',
     description:
       'A templated Claude Code plugin that auto-installs development skills, domain agents, methodology docs, and hooks into any project — collapsing repeated manual setup into one command, with 10 project presets and a 93-test suite.',
-    image: '/assets/projects/claude-workflow.svg',
-    imageContain: false,
+    slug: 'claude-workflow',
     tags: ['Python', 'AI Tooling'],
     href: 'https://github.com/cdcoonce/claude-workflow',
     featured: true,
@@ -47,8 +45,7 @@ export const projects = [
     date: 'Mar 2026',
     description:
       'A self-hosted ELT pipeline pulling daily Oura Ring health metrics via OAuth2 into Snowflake, transformed through 15 dbt models and orchestrated by Dagster across daily, weekly, and monthly schedules.',
-    image: '/assets/projects/oura-pipeline.svg',
-    imageContain: false,
+    slug: 'oura',
     tags: ['Python', 'ETL/ELT', 'Data Pipelines'],
     href: 'https://github.com/cdcoonce/Oura-Pipeline',
     featured: true,
@@ -58,8 +55,7 @@ export const projects = [
     date: 'Jul 2026',
     description:
       'A graph-first Obsidian vault wired to a Claude Code automation layer — 397 interlinked notes and ~4,500 wikilinks across 11 life domains, auto-committed and synced across two machines by a session hook, with 84 custom skills, agents, and hooks doing the upkeep.',
-    image: '/assets/projects/my-brain.svg',
-    imageContain: false,
+    slug: 'my-brain',
     tags: ['Obsidian', 'AI Tooling'],
     href: 'https://github.com/cdcoonce/second-brain',
     featured: true,

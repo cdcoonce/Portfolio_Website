@@ -1,8 +1,9 @@
 import Tag from './Tag.jsx';
+import Cockpit from './Cockpit.jsx';
 
 /** Project card: image header, date, title, description, tag row. Links out. */
 export default function ProjectCard({ project }) {
-  const { title, date, description, image, imageContain, tags, href } = project;
+  const { title, date, description, image, imageContain, slug, tags, href } = project;
   return (
     <a
       className="project-card"
@@ -12,12 +13,16 @@ export default function ProjectCard({ project }) {
       aria-label={`${title} — opens in a new tab`}
     >
       <div className="project-card__media">
-        <img
-          className={`project-card__img${imageContain ? ' project-card__img--contain' : ''}`}
-          src={image}
-          alt={title}
-          loading="lazy"
-        />
+        {slug ? (
+          <Cockpit slug={slug} className="project-card__cockpit" />
+        ) : (
+          <img
+            className={`project-card__img${imageContain ? ' project-card__img--contain' : ''}`}
+            src={image}
+            alt={title}
+            loading="lazy"
+          />
+        )}
       </div>
       <div className="project-card__body">
         <span className="project-card__date">{date}</span>

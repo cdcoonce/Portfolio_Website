@@ -35,6 +35,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - Replace afk's raster hero (afk.png) with a vector cockpit mockup matching the
   other featured cards (merged PRs / cost-per-PR / attempts / repos + an
   attempts-by-repo chart); the interactive cockpit stays as the CTA destination
+- Make the four project cockpits data-driven: collapse the hand-authored SVG
+  files into a single `<Cockpit>` component that renders from `src/data/metrics.json`
+  (bar widths derived from values). Updating a KPI is now a one-line JSON edit, and
+  both the featured hero and the Work-gallery thumbnail render from the same source
 
 ## [2.0.1] - 2026-07-03
 
