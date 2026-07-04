@@ -109,7 +109,7 @@ export const projects = [
       'A production-grade ELT pipeline for weather-normalized renewable-asset performance — dlt ingestion into Snowflake, dbt transformations through a semantic layer, and Polars analytics, all orchestrated by Dagster.',
     slug: 'waga',
     tags: ['Python', 'ETL/ELT', 'Data Pipelines'],
-    href: 'https://github.com/cdcoonce/Weather-Adjusted-Generation-Analytics',
+    href: 'https://waga-dashboard.pages.dev',
     featured: true,
   },
   {
