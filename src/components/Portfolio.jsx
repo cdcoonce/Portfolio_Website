@@ -31,7 +31,7 @@ export default function Portfolio() {
             Analyst · Analytics Engineer · Solutions Architect @ Clearway Energy
           </p>
           <p className="profile__bio">
-            I build scalable data pipelines, turn raw data into clear visual insight, and help teams
+            I build scalable data pipelines, turn raw data into clear visual insights, and help teams
             make informed decisions.
           </p>
           <div className="profile__actions">
