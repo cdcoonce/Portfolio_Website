@@ -246,11 +246,31 @@ export const projects = [
 
 export const skills = [
   { name: 'Languages', tags: ['Python', 'SQL', 'R'] },
-  { name: 'Techniques', tags: ['ETL/ELT', 'Machine Learning', 'Statistical Analysis'] },
-  { name: 'Tools & Platforms', tags: ['Tableau', 'Excel', 'Shiny'] },
+  {
+    name: 'Data Engineering',
+    tags: ['dbt', 'Dagster', 'Polars', 'Snowflake', 'DuckDB', 'dlt', 'ETL/ELT', 'Data Modeling'],
+  },
+  {
+    name: 'Tools & Platforms',
+    tags: [
+      'Hex',
+      'Streamlit',
+      'Snowflake Cortex',
+      'Tableau',
+      'Git',
+      'GitHub Actions',
+      'AWS Lambda',
+    ],
+  },
   {
     name: 'Focus Areas',
-    tags: ['Data Visualization', 'Analytics Dashboards', 'Data Pipelines', 'Business Intelligence'],
+    tags: [
+      'Data Pipelines',
+      'Analytics Dashboards',
+      'Data Visualization',
+      'Business Intelligence',
+      'Machine Learning',
+    ],
   },
 ];
 
@@ -275,7 +295,7 @@ export const contactMethods = [
 export const experience = [
   {
     period: '2025 — Present',
-    role: 'Analyst, Analytics Engineering',
+    role: 'Analyst, Analytics Engineer, Solutions Architect',
     org: 'Clearway Energy',
     note: 'Build scalable data pipelines and decision-ready dashboards supporting renewable-energy operations and reporting.',
   },
