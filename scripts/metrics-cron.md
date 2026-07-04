@@ -32,21 +32,21 @@ current value and logs a warning — it never writes garbage over good data.
 
 ```bash
 # 1. install the agent
-cp scripts/com.cdcoonce.portfolio-metrics.plist ~/Library/LaunchAgents/
+cp scripts/com.charleslikesdata.portfolio-metrics.plist ~/Library/LaunchAgents/
 
-# 2. load it (runs Mondays 08:30; RunAtLoad is off, so nothing fires now)
-launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.cdcoonce.portfolio-metrics.plist
+# 2. load it (runs Sundays 09:00; RunAtLoad is off, so nothing fires now)
+launchctl load ~/Library/LaunchAgents/com.charleslikesdata.portfolio-metrics.plist
 
 # run once now to confirm it works end-to-end:
-launchctl kickstart -k gui/$(id -u)/com.cdcoonce.portfolio-metrics
-tail -n 40 ~/Library/Logs/portfolio-metrics.log
+launchctl start com.charleslikesdata.portfolio-metrics
+tail -n 40 /tmp/portfolio-metrics.log
 ```
 
 Pause / remove:
 
 ```bash
-launchctl bootout gui/$(id -u)/com.cdcoonce.portfolio-metrics
-rm ~/Library/LaunchAgents/com.cdcoonce.portfolio-metrics.plist
+launchctl unload ~/Library/LaunchAgents/com.charleslikesdata.portfolio-metrics.plist
+rm ~/Library/LaunchAgents/com.charleslikesdata.portfolio-metrics.plist
 ```
 
 The `--commit` step only ever stages `src/data/metrics.json`, so a scheduled run
