@@ -14,7 +14,7 @@ export const projects = [
     date: 'Jul 2026',
     description:
       'A sovereign, human-gated pipeline that files, executes, and merges coding work through autonomous agents — with a live-ops cockpit tracking PR outcomes, safety quarantines as signal (not failure), and API-equivalent cost per model tier.',
-    image: '/assets/projects/afk.png',
+    image: '/assets/projects/afk.svg',
     imageContain: false,
     tags: ['Python', 'Data Pipelines', 'Analytics Dashboards'],
     href: '/afk-cockpit/',

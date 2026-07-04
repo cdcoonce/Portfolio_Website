@@ -32,6 +32,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   of a generic in-card "See all work" button; external links open in a new tab
 - Replace the decorative preset bars on the claude-workflow mockup with real,
   labeled chips for the 5 project presets and 5 personas
+- Replace afk's raster hero (afk.png) with a vector cockpit mockup matching the
+  other featured cards (merged PRs / cost-per-PR / attempts / repos + an
+  attempts-by-repo chart); the interactive cockpit stays as the CTA destination
 
 ## [2.0.1] - 2026-07-03
 
