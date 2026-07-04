@@ -22,9 +22,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - `featuredProjects()` selector in `src/lib/featured.js` with unit tests
 - `hideFromGallery` project flag so a project can be featured without appearing as
   a clickable Work-gallery card (used by my-brain, whose repo is private)
+- `scripts/collect-metrics.py`: recomputes every featured-card KPI from its source
+  repo (git + filesystem for the public/local repos, HTML parse for the afk cockpit),
+  rewrites `metrics.json`, and preserves the hand-written copy. Per-project isolation
+  (a broken source keeps its old numbers + logs) and a dry-run default
 
 ### Changed
 
+- Adopt live source-of-truth KPI counts (via the collector): claude-workflow
+  skills 20 → 22 and tests 93 → 163, Oura test-modules 11 → 15; drop hardcoded
+  counts from the featured-card descriptions so the tiles are the single source
 - Bump the "Projects shipped" metric 7 → 8
 - Replace the 176 KB `oura-pipeline.svg` raster asset with a 3.6 KB vector mockup
 - Featured-card CTA now links to each project's repository/artifact (per-project

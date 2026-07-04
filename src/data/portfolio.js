@@ -24,7 +24,7 @@ export const projects = [
     title: 'claude-workflow — Claude Code Plugin',
     date: 'Jul 2026',
     description:
-      'A templated Claude Code plugin that auto-installs development skills, domain agents, methodology docs, and hooks into any project — collapsing repeated manual setup into one command, with 10 project presets and a 93-test suite.',
+      'A templated Claude Code plugin that auto-installs development skills, domain agents, methodology docs, and hooks into any project — collapsing repeated manual setup into a single command, with project presets and personas for every workflow.',
     slug: 'claude-workflow',
     tags: ['Python', 'AI Tooling'],
     href: 'https://github.com/cdcoonce/claude-workflow',
@@ -44,7 +44,7 @@ export const projects = [
     title: 'Oura Ring Health Pipeline',
     date: 'Mar 2026',
     description:
-      'A self-hosted ELT pipeline pulling daily Oura Ring health metrics via OAuth2 into Snowflake, transformed through 15 dbt models and orchestrated by Dagster across daily, weekly, and monthly schedules.',
+      'A self-hosted ELT pipeline pulling daily Oura Ring health metrics via OAuth2 into Snowflake, transformed with dbt and orchestrated by Dagster across daily, weekly, and monthly schedules.',
     slug: 'oura',
     tags: ['Python', 'ETL/ELT', 'Data Pipelines'],
     href: 'https://github.com/cdcoonce/Oura-Pipeline',
@@ -54,7 +54,7 @@ export const projects = [
     title: 'my-brain — Second-Brain Knowledge System',
     date: 'Jul 2026',
     description:
-      'A graph-first Obsidian vault wired to a Claude Code automation layer — 397 interlinked notes and ~4,500 wikilinks across 11 life domains, auto-committed and synced across two machines by a session hook, with 84 custom skills, agents, and hooks doing the upkeep.',
+      'A graph-first Obsidian vault wired to a Claude Code automation layer — interlinked notes and wikilinks spanning every life domain, auto-committed and synced across two machines by a session hook, with custom skills, agents, and hooks doing the upkeep.',
     slug: 'my-brain',
     tags: ['Obsidian', 'AI Tooling'],
     href: 'https://github.com/cdcoonce/second-brain',
