@@ -39,8 +39,7 @@
           },
           {
             "label": "afk-cockpit",
-            "value": 64,
-            "accent": "gold"
+            "value": 64
           },
           {
             "label": "claude-workflow",
@@ -146,8 +145,7 @@
           },
           {
             "label": "Marts · fact tables",
-            "value": 2,
-            "accent": "gold"
+            "value": 2
           }
         ]
       },
@@ -204,8 +202,7 @@
           },
           {
             "label": "org",
-            "value": 48,
-            "accent": "gold"
+            "value": 48
           },
           {
             "label": "reference",
