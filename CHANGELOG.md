@@ -27,6 +27,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 - Bump the "Projects shipped" metric 7 → 8
 - Replace the 176 KB `oura-pipeline.svg` raster asset with a 3.6 KB vector mockup
+- Featured-card CTA now links to each project's repository/artifact (per-project
+  `ctaLabel`: "View live cockpit", "View repository", "Use this template") instead
+  of a generic in-card "See all work" button; external links open in a new tab
+- Replace the decorative preset bars on the claude-workflow mockup with real,
+  labeled chips for the 5 project presets and 5 personas
 
 ## [2.0.1] - 2026-07-03
 

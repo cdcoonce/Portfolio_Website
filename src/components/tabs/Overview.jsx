@@ -5,12 +5,15 @@ import { metrics, projects } from '../../data/portfolio.js';
 import { featuredProjects } from '../../lib/featured.js';
 import { nextIndex, prevIndex } from '../../lib/carousel.js';
 
+const isExternal = (href) => /^https?:\/\//.test(href || '');
+
 /** Overview tab: at-a-glance metrics + a rotating featured-project spotlight. */
-export default function Overview({ onSeeWork }) {
+export default function Overview() {
   const featured = featuredProjects(projects);
   const [index, setIndex] = useState(0);
   const current = featured[index] ?? projects[0];
   const hasMultiple = featured.length > 1;
+  const external = isExternal(current.href);
 
   return (
     <div className="overview">
@@ -68,8 +71,13 @@ export default function Overview({ onSeeWork }) {
                 <Tag key={t}>{t}</Tag>
               ))}
             </div>
-            <Button size="sm" onClick={onSeeWork} className="featured__cta">
-              See all work
+            <Button
+              size="sm"
+              href={current.href}
+              className="featured__cta"
+              {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+            >
+              {current.ctaLabel ?? 'View repository'}
             </Button>
           </div>
         </div>

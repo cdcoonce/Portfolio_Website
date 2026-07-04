@@ -30,27 +30,31 @@
     <text x="606" y="286" font-size="12.5" fill="#8a8a86" text-anchor="middle">Commits</text>
   </g>
 
-  <!-- presets bar list -->
-  <text x="40" y="356" font-size="12" font-weight="600" letter-spacing="1.2" fill="#9a9a95">PROJECT PRESETS</text>
-  <g font-size="13.5" fill="#3a3a3a">
-    <text x="40" y="392">python-api</text>
-    <rect x="220" y="384" width="420" height="9" rx="4.5" fill="#eeeeea"/>
-    <rect x="220" y="384" width="360" height="9" rx="4.5" fill="#2f6f5f"/>
-
-    <text x="40" y="420">data-pipeline</text>
-    <rect x="220" y="412" width="420" height="9" rx="4.5" fill="#eeeeea"/>
-    <rect x="220" y="412" width="404" height="9" rx="4.5" fill="#2f6f5f"/>
-
-    <text x="40" y="448">full-stack</text>
-    <rect x="220" y="440" width="420" height="9" rx="4.5" fill="#eeeeea"/>
-    <rect x="220" y="440" width="298" height="9" rx="4.5" fill="#2f6f5f"/>
-
-    <text x="40" y="476">claude-tooling</text>
-    <rect x="220" y="468" width="420" height="9" rx="4.5" fill="#eeeeea"/>
-    <rect x="220" y="468" width="336" height="9" rx="4.5" fill="#b0872f"/>
-
-    <text x="40" y="504">analysis</text>
-    <rect x="220" y="496" width="420" height="9" rx="4.5" fill="#eeeeea"/>
-    <rect x="220" y="496" width="252" height="9" rx="4.5" fill="#2f6f5f"/>
+  <!-- preset chips -->
+  <text x="40" y="352" font-size="12" font-weight="600" letter-spacing="1.2" fill="#9a9a95">PROJECT PRESETS</text>
+  <g font-size="12" fill="#6a6a66">
+    <rect x="40" y="362" width="92" height="30" rx="15" fill="#f6f6f4"/>
+    <text x="86" y="381" text-anchor="middle">python-api</text>
+    <rect x="142" y="362" width="112" height="30" rx="15" fill="#f6f6f4"/>
+    <text x="198" y="381" text-anchor="middle">data-pipeline</text>
+    <rect x="264" y="362" width="92" height="30" rx="15" fill="#f6f6f4"/>
+    <text x="310" y="381" text-anchor="middle">full-stack</text>
+    <rect x="366" y="362" width="120" height="30" rx="15" fill="#f6f6f4"/>
+    <text x="426" y="381" text-anchor="middle">claude-tooling</text>
+    <rect x="496" y="362" width="80" height="30" rx="15" fill="#f6f6f4"/>
+    <text x="536" y="381" text-anchor="middle">analysis</text>
+  </g>
+  <text x="40" y="424" font-size="12" font-weight="600" letter-spacing="1.2" fill="#9a9a95">PERSONAS</text>
+  <g font-size="12" fill="#6a6a66">
+    <rect x="40" y="434" width="128" height="30" rx="15" fill="#f6f6f4"/>
+    <text x="104" y="453" text-anchor="middle">pair-programmer</text>
+    <rect x="178" y="434" width="72" height="30" rx="15" fill="#f6f6f4"/>
+    <text x="214" y="453" text-anchor="middle">ship-it</text>
+    <rect x="260" y="434" width="122" height="30" rx="15" fill="#f6f6f4"/>
+    <text x="321" y="453" text-anchor="middle">staff-eng-deep</text>
+    <rect x="392" y="434" width="126" height="30" rx="15" fill="#f6f6f4"/>
+    <text x="455" y="453" text-anchor="middle">terse-staff-eng</text>
+    <rect x="528" y="434" width="134" height="30" rx="15" fill="#f6f6f4"/>
+    <text x="595" y="453" text-anchor="middle">thinking-partner</text>
   </g>
 </svg>

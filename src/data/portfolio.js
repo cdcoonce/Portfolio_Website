@@ -5,7 +5,7 @@
  * shipped in /public/assets so we reuse the same source art.
  */
 
-/** @typedef {{ title: string, date: string, description: string, image: string, imageContain?: boolean, tags: string[], href: string, featured?: boolean, hideFromGallery?: boolean }} Project */
+/** @typedef {{ title: string, date: string, description: string, image: string, imageContain?: boolean, tags: string[], href: string, featured?: boolean, hideFromGallery?: boolean, ctaLabel?: string }} Project */
 
 /** @type {Project[]} */
 export const projects = [
@@ -19,6 +19,7 @@ export const projects = [
     tags: ['Python', 'Data Pipelines', 'Analytics Dashboards'],
     href: '/afk-cockpit/',
     featured: true,
+    ctaLabel: 'View live cockpit',
   },
   {
     title: 'claude-workflow — Claude Code Plugin',
@@ -60,9 +61,10 @@ export const projects = [
     image: '/assets/projects/my-brain.svg',
     imageContain: false,
     tags: ['Obsidian', 'AI Tooling'],
-    href: '',
+    href: 'https://github.com/cdcoonce/second-brain-template',
     featured: true,
     hideFromGallery: true,
+    ctaLabel: 'Use this template',
   },
   {
     title: 'Housing Affordability & Commute',
