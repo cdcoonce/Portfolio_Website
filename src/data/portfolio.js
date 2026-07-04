@@ -277,7 +277,7 @@ export const skills = [
 export const metrics = [
   { value: '20+', label: 'Projects shipped' },
   { value: '5+', label: 'Data pipelines built' },
-  { value: '6', label: 'Languages & tools' },
+  { value: '18', label: 'Languages & tools' },
   { value: '1.8M+', label: 'Records processed' },
 ];
 
