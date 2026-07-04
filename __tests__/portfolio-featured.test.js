@@ -19,3 +19,24 @@ describe('featuredProjects', () => {
     expect(featuredProjects(sample)).toEqual([{ featured: true }]);
   });
 });
+
+describe('WAGA card links', () => {
+  const waga = projects.find((p) => p.slug === 'waga');
+
+  test('exposes both a Dashboard and a Repository link', () => {
+    expect(waga).toBeDefined();
+    expect(waga.links).toEqual([
+      { label: 'View Dashboard', href: 'https://waga-dashboard.pages.dev' },
+      {
+        label: 'View Repository',
+        href: 'https://github.com/cdcoonce/Weather-Adjusted-Generation-Analytics',
+      },
+    ]);
+  });
+
+  test('every link is an absolute URL', () => {
+    for (const link of waga.links) {
+      expect(link.href).toMatch(/^https?:\/\//);
+    }
+  });
+});

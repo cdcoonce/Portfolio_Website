@@ -5,7 +5,8 @@
  * shipped in /public/assets so we reuse the same source art.
  */
 
-/** @typedef {{ title: string, date: string, description: string, image?: string, imageContain?: boolean, slug?: string, tags: string[], href: string, featured?: boolean, hideFromGallery?: boolean, ctaLabel?: string }} Project */
+/** @typedef {{ label: string, href: string }} ProjectLink */
+/** @typedef {{ title: string, date: string, description: string, image?: string, imageContain?: boolean, slug?: string, tags: string[], href: string, featured?: boolean, hideFromGallery?: boolean, ctaLabel?: string, links?: ProjectLink[] }} Project */
 
 /** @type {Project[]} */
 export const projects = [
@@ -111,6 +112,13 @@ export const projects = [
     tags: ['Python', 'ETL/ELT', 'Data Pipelines'],
     href: 'https://waga-dashboard.pages.dev',
     featured: true,
+    links: [
+      { label: 'View Dashboard', href: 'https://waga-dashboard.pages.dev' },
+      {
+        label: 'View Repository',
+        href: 'https://github.com/cdcoonce/Weather-Adjusted-Generation-Analytics',
+      },
+    ],
   },
   {
     title: 'Ames Housing Model Comparison',
