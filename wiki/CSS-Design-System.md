@@ -1,27 +1,128 @@
 # CSS-Design-System
 
 <!-- generated:start -->
-## CSS Custom Properties
+## Design Tokens
 
-| Property | Value |
+The token layer (`src/styles/tokens.css`) is a small design system ported from a Claude Design kit: **Poppins** as the type family, a grayscale ramp plus a single pale-blue analytical accent, pill geometry, and consistent spacing / radii / shadow scales. Component styles in `src/styles/global.css` reference these variables rather than hard-coded values.
+
+### Color — grayscale
+
+| Token | Value |
 |---|---|
-| `--color-text-primary` | `#353535` |
-| `--color-text-secondary` | `rgb(85, 85, 85)` |
-| `--color-bg-white` | `#fff` |
-| `--color-bg-light` | `#f9f9f9` |
-| `--color-bg-card-highlight` | `rgba(235, 241, 248, 0.4)` |
-| `--color-accent-dark` | `rgb(53, 53, 53)` |
-| `--color-accent-black` | `rgb(0, 0, 0)` |
-| `--color-border` | `rgb(53, 53, 53)` |
-| `--color-shadow` | `rgba(0, 0, 0, 0.1)` |
-| `--color-dot-inactive` | `#ccc` |
-| `--color-counter` | `#666` |
-| `--color-quote` | `rgba(53, 53, 53, 0.2)` |
+| `--white` | `#fff` |
+| `--gray-50` | `#f9f9f9` |
+| `--gray-100` | `#f0f0f0` |
+| `--gray-200` | `#e0e0e0` |
+| `--gray-300` | `#ccc` |
+| `--gray-500` | `#666` |
+| `--gray-600` | `#555` |
+| `--gray-800` | `#353535` |
+| `--black` | `#000` |
+
+### Color — accent
+
+| Token | Value |
+|---|---|
+| `--accent-blue-rgb` | `235, 241, 248` |
+| `--accent-blue` | `rgb(var(--accent-blue-rgb))` |
+| `--accent-blue-soft` | `rgba(var(--accent-blue-rgb), 0.4)` |
+
+### Color — semantic
+
+| Token | Value |
+|---|---|
+| `--text-heading` | `var(--gray-800)` |
+| `--text-primary` | `var(--gray-800)` |
+| `--text-secondary` | `var(--gray-600)` |
+| `--text-muted` | `var(--gray-500)` |
+| `--text-on-dark` | `var(--white)` |
+| `--surface-page` | `var(--white)` |
+| `--surface-muted` | `var(--gray-50)` |
+| `--surface-card` | `var(--white)` |
+| `--surface-inverse` | `var(--gray-800)` |
+| `--surface-inverse-hover` | `var(--black)` |
+| `--surface-accent` | `var(--accent-blue-soft)` |
+| `--border-strong` | `var(--gray-800)` |
+| `--border-hairline` | `var(--gray-200)` |
+| `--border-inactive` | `var(--gray-300)` |
+| `--quote-mark` | `rgba(53, 53, 53, 0.2)` |
+| `--text-hero` | `3rem` |
+| `--text-2xl` | `1.75rem` |
+| `--text-xl` | `1.5rem` |
+| `--text-lg` | `1.25rem` |
+| `--text-md` | `1rem` |
+| `--text-sm` | `0.95rem` |
+| `--text-xs` | `0.85rem` |
+
+### Typography
+
+| Token | Value |
+|---|---|
+| `--font-sans` | `'Poppins', -apple-system, blinkmacsystemfont, 'Segoe UI', sans-serif` |
+| `--weight-light` | `300` |
+| `--weight-regular` | `400` |
+| `--weight-medium` | `500` |
+| `--weight-semibold` | `600` |
+| `--leading-tight` | `1.2` |
+| `--leading-snug` | `1.4` |
+| `--leading-normal` | `1.5` |
+
+### Spacing
+
+| Token | Value |
+|---|---|
+| `--space-1` | `0.25rem` |
+| `--space-2` | `0.5rem` |
+| `--space-3` | `0.75rem` |
+| `--space-4` | `1rem` |
+| `--space-6` | `1.5rem` |
+| `--space-8` | `2rem` |
+| `--space-12` | `3rem` |
+| `--space-16` | `4rem` |
+
+### Radii
+
+| Token | Value |
+|---|---|
+| `--radius-sm` | `2px` |
+| `--radius-md` | `8px` |
+| `--radius-card` | `10px` |
+| `--radius-pill` | `2rem` |
+| `--radius-round` | `50%` |
+
+### Shadow
+
+| Token | Value |
+|---|---|
+| `--shadow-nav` | `0 2px 4px rgba(0, 0, 0, 0.08)` |
+| `--shadow-soft` | `0 2px 10px rgba(0, 0, 0, 0.1)` |
+| `--shadow-card` | `0 4px 6px rgba(0, 0, 0, 0.1)` |
+| `--shadow-card-hover` | `0 8px 12px rgba(0, 0, 0, 0.15)` |
+
+### Motion
+
+| Token | Value |
+|---|---|
+| `--transition-base` | `300ms ease` |
+
+### Layout
+
+| Token | Value |
+|---|---|
+| `--container-wide` | `1160px` |
+| `--container-content` | `1000px` |
+| `--container-narrow` | `700px` |
 
 ## Breakpoints
 
+`global.css` is **mobile-first**: base styles target small screens and `@media (min-width: …)` queries scale the layout up.
+
 | Condition | Value | Description |
 |---|---|---|
-| `max-width` | `1250px` | Large desktop → tablet/desktop transition |
-| `max-width` | `700px` | Tablet portrait / large mobile |
+| `min-width` | `700px` | Tablet — centered tab bar, aligned profile |
+| `min-width` | `620px` | Large mobile / small tablet — wider grids |
+| `min-width` | `800px` | Desktop — multi-column featured/experience layouts |
+| `min-width` | `640px` | Large mobile / small tablet — wider grids |
+| `min-width` | `720px` | Tablet — centered tab bar, aligned profile |
+| `prefers-reduced-motion` | `reduce` | Accessibility — disable animations when motion is reduced |
 <!-- generated:end -->

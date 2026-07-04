@@ -113,11 +113,22 @@ def generate(repo_root: Path) -> str:
     """
     lines: list[str] = []
 
+    lines.append("## Test Strategy\n")
+    lines.append(
+        "The unit suite runs on **Jest** and covers the framework-free logic in `src/lib/*` — "
+        "`carousel.js` (pure wrap-around index math + initials) and `chat.js` (rate limiting, "
+        "assistant-markdown rendering, and the Lambda `sendMessage` client). These are the "
+        "modules the React islands import, so testing them directly keeps the fast unit layer "
+        "independent of the DOM. A Python/**Playwright** E2E suite under `tests/` targets the "
+        "**retired vanilla DOM** and is **not run in CI** — porting it to the Astro + React UI "
+        "is a tracked follow-up.\n"
+    )
+
     # --- JS test files ---
     js_test_dir = repo_root / "__tests__"
     js_tests = sorted(js_test_dir.glob("*.test.js")) if js_test_dir.exists() else []
 
-    lines.append("## JavaScript Tests\n")
+    lines.append("## JavaScript Tests (Jest)\n")
     lines.append("| File | Type | Describe Blocks |")
     lines.append("|---|---|---|")
     for test_file in js_tests:
@@ -149,6 +160,11 @@ def generate(repo_root: Path) -> str:
         py_tests += sorted(lambda_test_dir.glob("test_*.py"))
 
     lines.append("## Python Tests\n")
+    lines.append(
+        "Wiki-generator tests (`tests/test_wiki_phase*.py`) run in CI. The Playwright E2E "
+        "tests (`tests/test_*.py` for the site DOM) target the retired vanilla markup and are "
+        "**pending a port** to the Astro + React UI — they are not part of the CI gate.\n"
+    )
     lines.append("| File | Location |")
     lines.append("|---|---|")
     for test_file in py_tests:

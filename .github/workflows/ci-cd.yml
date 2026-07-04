@@ -11,35 +11,21 @@ permissions:
 
 jobs:
   check:
-    name: Lint & Test
+    name: Lint, Test & Build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # --- Node.js setup ---
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
 
-      - name: Install Node dependencies
+      - name: Install dependencies
         run: npm ci
-
-      # --- Python setup ---
-      - name: Install uv
-        uses: astral-sh/setup-uv@v4
-
-      - name: Set up Python
-        run: uv python install 3.12
-
-      - name: Install Python dependencies
-        run: uv sync
-
-      - name: Install Playwright browsers
-        run: uv run playwright install --with-deps chromium
 
       # --- Linting ---
       - name: Check formatting (Prettier)
@@ -55,8 +41,9 @@ jobs:
       - name: Run JS unit tests (Jest)
         run: npm test
 
-      - name: Run Python tests (validation, a11y, e2e)
-        run: uv run pytest -m "not slow"
+      # --- Build the Astro site (also the deploy artifact source) ---
+      - name: Build site (Astro)
+        run: npm run build
 
   deploy:
     name: Deploy to gh-pages
@@ -67,17 +54,23 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          fetch-depth: 0
+          node-version: '22'
+          cache: 'npm'
 
-      - name: Configure Git
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Merge main into gh-pages
-        run: |
-          git fetch origin
-          git checkout -B gh-pages origin/gh-pages
-          git merge origin/main --no-edit
-          git push origin gh-pages
+      - name: Build site (Astro)
+        run: npm run build
+
+      # Publishes the built dist/ (including CNAME) to the gh-pages branch,
+      # which GitHub Pages serves. Replaces the previous main->gh-pages mirror.
+      - name: Publish dist to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist

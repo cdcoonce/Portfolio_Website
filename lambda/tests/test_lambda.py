@@ -104,6 +104,13 @@ class TestBuildSystemPrompt:
         assert "SQL" in prompt
         assert "Tableau" in prompt
 
+    def test_system_prompt_contains_professional_experience(self):
+        from lambda_function import build_system_prompt
+        prompt = build_system_prompt()
+        assert "Professional Experience" in prompt
+        assert "Clearway Energy Group" in prompt
+        assert "May 2025 – Present" in prompt
+
     def test_system_prompt_contains_project_titles(self):
         from lambda_function import build_system_prompt
         prompt = build_system_prompt()

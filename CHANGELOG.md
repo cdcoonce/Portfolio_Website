@@ -7,6 +7,84 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [2.1.0] - 2026-07-03
+
+### Added
+
+- Rotate the Overview "Featured project" spotlight through four projects
+  (AFK, claude-workflow, Oura Ring pipeline, my-brain vault) via a manual
+  carousel with dots + prev/next arrows (no auto-rotate); AFK is the default slide
+- `claude-workflow` project card, promote the Oura Ring pipeline to featured, and
+  add the `my-brain` second-brain vault as a featured-only card
+- Cockpit-style SVG hero mockups for claude-workflow, the Oura pipeline, and the
+  my-brain vault, with each project's real KPIs baked in (skills/presets/tests/
+  commits; API-sources/models/schedules/test-modules; notes/wikilinks/skills/domains)
+- `featuredProjects()` selector in `src/lib/featured.js` with unit tests
+- `hideFromGallery` project flag so a project can be featured without appearing as
+  a clickable Work-gallery card (used by my-brain, whose repo is private)
+- `scripts/collect-metrics.py`: recomputes every featured-card KPI from its source
+  repo (git + filesystem for the public/local repos, HTML parse for the afk cockpit),
+  rewrites `metrics.json`, and preserves the hand-written copy. Per-project isolation
+  (a broken source keeps its old numbers + logs) and a dry-run default
+
+### Changed
+
+- Adopt live source-of-truth KPI counts (via the collector): claude-workflow
+  skills 20 → 22 and tests 93 → 163, Oura test-modules 11 → 15; drop hardcoded
+  counts from the featured-card descriptions so the tiles are the single source
+- Bump the "Projects shipped" metric 7 → 8
+- Replace the 176 KB `oura-pipeline.svg` raster asset with a 3.6 KB vector mockup
+- Featured-card CTA now links to each project's repository/artifact (per-project
+  `ctaLabel`: "View live cockpit", "View repository", "Use this template") instead
+  of a generic in-card "See all work" button; external links open in a new tab
+- Replace the decorative preset bars on the claude-workflow mockup with real,
+  labeled chips for the 5 project presets and 5 personas
+- Replace afk's raster hero (afk.png) with a vector cockpit mockup matching the
+  other featured cards (merged PRs / cost-per-PR / attempts / repos + an
+  attempts-by-repo chart); the interactive cockpit stays as the CTA destination
+- Make the four project cockpits data-driven: collapse the hand-authored SVG
+  files into a single `<Cockpit>` component that renders from `src/data/metrics.json`
+  (bar widths derived from values). Updating a KPI is now a one-line JSON edit, and
+  both the featured hero and the Work-gallery thumbnail render from the same source
+
+## [2.0.1] - 2026-07-03
+
+### Fixed
+
+- Correct Clearway Energy start date to May 2025 (from May 2024) in the bio,
+  the Ask AI knowledge base, and the downloadable resume PDF
+- Wire the professional-experience section into the Ask AI system prompt so the
+  chat agent can answer employment-tenure questions (previously it had no dates)
+
+## [2.0.0] - 2026-07-03
+
+Full redesign: the single-scroll site is replaced by a tabbed single-page
+portfolio built on **Astro + React islands**, implemented from the Claude
+Design comp (`Charles Coonce Portfolio.dc.html`).
+
+### Added
+
+- Astro project (`src/`, `public/`) with React islands (`@astrojs/react`) for the interactive layer
+- Design tokens ported from the design system into `src/styles/tokens.css` (Poppins, grayscale + one pale-blue accent, pill geometry)
+- Tabbed layout with six sections: Overview, Work, Experience, Testimonials, Ask AI, Contact
+- Reusable components: `Button`, `Tag`, `ProjectCard`, plus per-tab components
+- Overview tab: at-a-glance metrics + featured-project spotlight
+- Experience tab: role timeline + categorized skills
+- Testimonials tab: single-quote carousel with segment dots and prev/next
+- Ask AI tab: suggested-topic sidebar + chat wired to the existing Lambda assistant (`src/lib/chat.js`), with the previous 25-question/hour rate limiting preserved
+- Jest unit tests for the new pure logic (`src/lib/carousel.js`, `src/lib/chat.js`)
+- Open Graph / Twitter card meta and a canonical URL in the base layout
+
+### Changed
+
+- Deploy pipeline now builds the Astro site and publishes `dist/` (including `CNAME`) to `gh-pages`, replacing the previous `main` → `gh-pages` file mirror
+- CI `check` job now runs lint + Jest + `astro build` (Node only)
+
+### Notes
+
+- The previous vanilla site files (`index.html`, `WebContent/css`, `WebContent/js`, `projects.html`) remain in the repo but are no longer the deployed site; they can be removed in a follow-up once this is confirmed.
+- The Python/Playwright E2E suite (`tests/`) targeted the retired DOM and is not run in CI; porting it to the Astro site is a tracked follow-up.
+
 ## [1.5.0] - 2026-03-01
 
 ### Added

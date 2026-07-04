@@ -16,3 +16,7 @@ wiki/
 
 # Ignore generated Panel/Pyodide dashboard build artifacts
 dashboard/
+
+# Astro build output + generated types
+dist/
+.astro/

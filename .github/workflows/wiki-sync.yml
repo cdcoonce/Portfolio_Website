@@ -4,8 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - "WebContent/js/**"
-      - "WebContent/css/**"
+      - "src/**"
       - "WebContent/context/**"
       - "lambda/**"
       - "__tests__/**"

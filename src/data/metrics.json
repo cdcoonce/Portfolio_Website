@@ -1,0 +1,205 @@
+{
+  "_comment": "Per-project cockpit metrics for the Overview featured cards. Keyed by project slug. Hand-maintained today; a scheduled collector will overwrite this from the source repos (see scripts/collect-metrics). Bar widths are derived from values at render time — only edit numbers here, never pixels.",
+  "afk": {
+    "eyebrow": "AFK · AUTONOMOUS AGENTS",
+    "pill": "Python",
+    "headline": "Autonomous PRs, human-gated",
+    "subtitle": "Files, runs & merges coding work across a repo fleet — quarantines are a safety signal.",
+    "tiles": [
+      {
+        "value": "108",
+        "label": "Merged PRs"
+      },
+      {
+        "value": "$5.17",
+        "label": "Cost / PR",
+        "accent": true
+      },
+      {
+        "value": "1,660",
+        "label": "Attempts"
+      },
+      {
+        "value": "6",
+        "label": "Repos"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "bars",
+        "title": "ATTEMPTS BY REPO",
+        "items": [
+          {
+            "label": "afk-agent-system",
+            "value": 769
+          },
+          {
+            "label": "Orbit-Wars",
+            "value": 733
+          },
+          {
+            "label": "afk-cockpit",
+            "value": 64
+          },
+          {
+            "label": "claude-workflow",
+            "value": 40
+          },
+          {
+            "label": "household-bms",
+            "value": 30
+          },
+          {
+            "label": "my-brain",
+            "value": 24
+          }
+        ]
+      }
+    ]
+  },
+  "claude-workflow": {
+    "eyebrow": "CLAUDE-WORKFLOW · PLUGIN",
+    "pill": "Python",
+    "headline": "One-command Claude Code setup",
+    "subtitle": "Auto-installs skills, domain agents, methodology docs & hooks into any project.",
+    "tiles": [
+      {
+        "value": "22",
+        "label": "Skills"
+      },
+      {
+        "value": "10",
+        "label": "Presets"
+      },
+      {
+        "value": "163",
+        "label": "Tests",
+        "accent": true
+      },
+      {
+        "value": "227",
+        "label": "Commits"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "chips",
+        "title": "PROJECT PRESETS",
+        "items": ["analysis", "claude-tooling", "data-pipeline", "full-stack", "python-api"]
+      },
+      {
+        "type": "chips",
+        "title": "PERSONAS",
+        "items": [
+          "pair-programmer",
+          "ship-it",
+          "staff-eng-deep",
+          "terse-staff-eng",
+          "thinking-partner"
+        ]
+      }
+    ]
+  },
+  "oura": {
+    "eyebrow": "OURA RING PIPELINE · ELT",
+    "pill": "Snowflake",
+    "headline": "Daily health metrics, modeled",
+    "subtitle": "OAuth2 extract into Snowflake, transformed with dbt, orchestrated by Dagster.",
+    "tiles": [
+      {
+        "value": "13",
+        "label": "API sources"
+      },
+      {
+        "value": "15",
+        "label": "dbt models",
+        "accent": true
+      },
+      {
+        "value": "3",
+        "label": "Schedules"
+      },
+      {
+        "value": "15",
+        "label": "Test modules"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "bars",
+        "title": "PIPELINE STAGES",
+        "items": [
+          {
+            "label": "Extract · raw endpoints",
+            "value": 13
+          },
+          {
+            "label": "Stage · dbt views",
+            "value": 13
+          },
+          {
+            "label": "Marts · fact tables",
+            "value": 2
+          }
+        ]
+      },
+      {
+        "type": "chips",
+        "items": ["Daily · incremental", "Weekly report", "Monthly report"]
+      }
+    ]
+  },
+  "my-brain": {
+    "eyebrow": "MY-BRAIN · SECOND BRAIN",
+    "pill": "Obsidian",
+    "headline": "A knowledge graph that thinks with me",
+    "subtitle": "Graph-first Obsidian vault + Claude Code automation, auto-synced across 2 machines.",
+    "tiles": [
+      {
+        "value": "397",
+        "label": "Notes"
+      },
+      {
+        "value": "4.5K",
+        "label": "Wikilinks",
+        "accent": true
+      },
+      {
+        "value": "84",
+        "label": "Skills & hooks"
+      },
+      {
+        "value": "11",
+        "label": "Domains"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "bars",
+        "title": "NOTES BY DOMAIN",
+        "items": [
+          {
+            "label": "work",
+            "value": 103
+          },
+          {
+            "label": "personal",
+            "value": 79
+          },
+          {
+            "label": "thinking",
+            "value": 58
+          },
+          {
+            "label": "org",
+            "value": 48
+          },
+          {
+            "label": "reference",
+            "value": 42
+          }
+        ]
+      }
+    ]
+  }
+}

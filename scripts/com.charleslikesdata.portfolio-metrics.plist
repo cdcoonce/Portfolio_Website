@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Weekly refresh of the featured-card KPIs.
+
+  Runs scripts/collect-metrics.py --write --commit every Sunday at 09:00,
+  recomputing the numbers from the source repos and (when there are changes)
+  committing + pushing metrics.json. GitHub Pages rebuilds on push.
+
+  IMPORTANT: the collector commits on whatever branch the portfolio working
+  tree is on. Activate this only once the featured-card work is merged to your
+  deploy branch, so the weekly push updates the live site.
+
+  Install:
+    cp scripts/com.charleslikesdata.portfolio-metrics.plist ~/Library/LaunchAgents/
+    launchctl load ~/Library/LaunchAgents/com.charleslikesdata.portfolio-metrics.plist
+  Run once now:  launchctl start com.charleslikesdata.portfolio-metrics
+  Disable:       launchctl unload ~/Library/LaunchAgents/com.charleslikesdata.portfolio-metrics.plist
+  Logs:          /tmp/portfolio-metrics.log
+-->
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>com.charleslikesdata.portfolio-metrics</string>
+    <key>ProgramArguments</key>
+    <array>
+      <string>/bin/zsh</string>
+      <string>-lc</string>
+      <string>cd "$HOME/Developer/GitHub/PortfolioWebsite" &amp;&amp; python3 scripts/collect-metrics.py --write --commit</string>
+    </array>
+    <key>StartCalendarInterval</key>
+    <dict>
+      <key>Weekday</key>
+      <integer>0</integer>
+      <key>Hour</key>
+      <integer>9</integer>
+      <key>Minute</key>
+      <integer>0</integer>
+    </dict>
+    <key>RunAtLoad</key>
+    <false/>
+    <key>StandardOutPath</key>
+    <string>/tmp/portfolio-metrics.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/portfolio-metrics.log</string>
+  </dict>
+</plist>

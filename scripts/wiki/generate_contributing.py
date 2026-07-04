@@ -111,6 +111,11 @@ def generate(repo_root: Path) -> str:
 
     # --- Local setup steps ---
     lines.append("## Local Setup\n")
+    lines.append(
+        "This is an **Astro** site (static output) with **React islands**. It needs "
+        "**Node.js 22**. Python (via [uv](https://github.com/astral-sh/uv)) is only required "
+        "for the wiki-generation tooling under `scripts/wiki/`.\n"
+    )
     lines.append("1. **Clone the repository**")
     lines.append("   ```")
     lines.append("   git clone https://github.com/cdcoonce/Portfolio_Website.git")
@@ -122,14 +127,24 @@ def generate(repo_root: Path) -> str:
     lines.append("   npm install")
     lines.append("   ```")
     lines.append("")
-    lines.append("3. **Install Python dependencies** (requires [uv](https://github.com/astral-sh/uv))")
+    lines.append("3. **Start the Astro dev server**")
     lines.append("   ```")
-    lines.append("   uv sync")
+    lines.append("   npm run dev")
     lines.append("   ```")
     lines.append("")
-    lines.append("4. **Run all tests**")
+    lines.append("4. **Build the static site** (output → `dist/`)")
     lines.append("   ```")
-    lines.append("   make test")
+    lines.append("   npm run build")
+    lines.append("   ```")
+    lines.append("")
+    lines.append("5. **Run the JS unit tests**")
+    lines.append("   ```")
+    lines.append("   npm test")
+    lines.append("   ```")
+    lines.append("")
+    lines.append("6. **(Wiki tooling only) Install Python dependencies**")
+    lines.append("   ```")
+    lines.append("   uv sync")
     lines.append("   ```")
     lines.append("")
 
