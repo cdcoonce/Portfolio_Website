@@ -85,13 +85,7 @@
       {
         "type": "chips",
         "title": "PROJECT PRESETS",
-        "items": [
-          "analysis",
-          "claude-tooling",
-          "data-pipeline",
-          "full-stack",
-          "python-api"
-        ]
+        "items": ["analysis", "claude-tooling", "data-pipeline", "full-stack", "python-api"]
       },
       {
         "type": "chips",
@@ -151,11 +145,7 @@
       },
       {
         "type": "chips",
-        "items": [
-          "Daily · incremental",
-          "Weekly report",
-          "Monthly report"
-        ]
+        "items": ["Daily · incremental", "Weekly report", "Monthly report"]
       }
     ]
   },

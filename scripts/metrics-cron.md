@@ -5,12 +5,12 @@ The four featured "cockpit" cards on the Overview tab render from
 is recomputed from its source repo by
 [`scripts/collect-metrics.py`](./collect-metrics.py):
 
-| Card | Source | What's read |
-| --- | --- | --- |
-| afk | `./afk-cockpit/index.html` | header stats, cost tile, per-repo attempts (scraped; repo is private) |
-| claude-workflow | `~/Developer/GitHub/claude-workflow` | skills, presets, `def test_` count, commits, preset/persona lists |
-| oura | `~/Developer/GitHub/oura-pipeline` | API sources, dbt models, schedules, test modules, pipeline stages |
-| my-brain | `~/Developer/GitHub/my-brain` | notes, wikilinks, skills+hooks, domains, notes-by-domain |
+| Card            | Source                               | What's read                                                           |
+| --------------- | ------------------------------------ | --------------------------------------------------------------------- |
+| afk             | `./afk-cockpit/index.html`           | header stats, cost tile, per-repo attempts (scraped; repo is private) |
+| claude-workflow | `~/Developer/GitHub/claude-workflow` | skills, presets, `def test_` count, commits, preset/persona lists     |
+| oura            | `~/Developer/GitHub/oura-pipeline`   | API sources, dbt models, schedules, test modules, pipeline stages     |
+| my-brain        | `~/Developer/GitHub/my-brain`        | notes, wikilinks, skills+hooks, domains, notes-by-domain              |
 
 Run it by hand anytime:
 
