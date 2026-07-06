@@ -1,11 +1,17 @@
 name: Sync dev with main
 
-# Keep `dev` from drifting behind `main`. `main` receives direct pushes from the
-# afk-cockpit dashboard publish (a generated snapshot — main-direct by policy, it
-# must stay fresh on production) as well as normal dev->main promotions. Every
-# such push is merged straight back into `dev` so the integration branch always
-# contains everything on production. A merge conflict here fails loudly, which is
-# the signal that dev has un-promoted work touching the same file.
+# Keep `dev` from drifting behind `main` WITHOUT disturbing un-promoted work.
+#
+# `main` takes direct pushes from the afk-cockpit dashboard publish (a generated
+# snapshot — main-direct by policy, it must stay fresh on production) plus normal
+# dev->main promotions. This job fast-forwards `dev` up to `main` ONLY when `dev`
+# is strictly behind (no un-promoted commits). When `dev` is ahead of or diverged
+# from `main` (someone has WIP on dev), it skips: force-merging production's data
+# snapshot into an active branch every 30 min would pile up merge commits and
+# conflict-storm on any dev edit to the dashboard file. A diverged dev is
+# reconciled by the human at the next dev->main promotion, where a normal merge
+# keeps main's latest snapshot (dev didn't touch that file). Fast-forward-only =
+# never rewrites or merges, so it can't lose work or corrupt either branch.
 on:
   push:
     branches: [main]
@@ -19,19 +25,21 @@ concurrency:
 
 jobs:
   sync:
-    name: Merge main into dev
+    name: Fast-forward dev to main (when behind)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
         with:
           ref: dev
           fetch-depth: 0
-      - name: Merge main into dev and push
+      - name: Fast-forward dev to main when dev is strictly behind
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git fetch origin main
-          # Fast-forward when dev has no un-promoted work; otherwise a merge commit
-          # brings production's snapshot onto dev on top of that work.
-          git merge --no-edit origin/main
-          git push origin dev
+          if git merge-base --is-ancestor HEAD origin/main; then
+            git merge --ff-only origin/main
+            git push origin HEAD:dev
+            echo "dev fast-forwarded to $(git rev-parse --short origin/main)."
+          else
+            echo "dev is ahead of / diverged from main — skipping auto-sync."
+            echo "It will reconcile at the next dev->main promotion."
+          fi
