@@ -105,11 +105,11 @@ export const projects = [
   },
   {
     title: 'Weather-Adjusted Generation Analytics',
-    date: 'May 2026',
+    date: 'Jul 2026',
     description:
-      'A production-grade ELT pipeline for weather-normalized renewable-asset performance — dlt ingestion into Snowflake, dbt transformations through a semantic layer, and Polars analytics, all orchestrated by Dagster.',
+      'A weather-driven ELT pipeline for a mixed generation fleet — wind, solar, battery, and gas — fed by real hourly Open-Meteo weather, with dlt ingestion into Snowflake, contracted dbt marts, and a Polars physics engine, all orchestrated by Dagster.',
     slug: 'waga',
-    tags: ['Python', 'ETL/ELT', 'Data Pipelines'],
+    tags: ['Python', 'ETL/ELT', 'Data Pipelines', 'Analytics Dashboards'],
     href: 'https://waga-dashboard.pages.dev',
     featured: true,
     links: [
