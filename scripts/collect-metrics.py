@@ -32,7 +32,7 @@ VAULT = GITHUB / "my-brain"
 CW = GITHUB / "claude-workflow"
 OURA = GITHUB / "oura-pipeline"
 PORTFOLIO = GITHUB / "PortfolioWebsite"
-AFK_HTML = PORTFOLIO / "afk-cockpit" / "index.html"
+AFK_HTML = PORTFOLIO / "public" / "afk-cockpit" / "index.html"
 METRICS = PORTFOLIO / "src" / "data" / "metrics.json"
 
 # Dirs excluded from the notes/wikilink counts — matches the reference `find`
@@ -172,34 +172,42 @@ def collect_oura(proj: dict, changes: list) -> None:
 def collect_afk(proj: dict, changes: list) -> None:
     html = AFK_HTML.read_text(encoding="utf-8", errors="ignore")
 
-    header = re.search(r"([\d,]+)\s*repos.{0,6}?([\d,]+)\s*attempts.{0,6}?([\d,]+)\s*merged", html)
+    # Post afk-cockpit#115 re-grain: header reads "N repos · N runs · N issues · N merged".
+    # "issues" (distinct issues attempted) is the count the per-repo bars sum to,
+    # so that's what maps to the card's "Attempts" tile — not the raw run count.
+    header = re.search(
+        r"([\d,]+)\s*repos.{0,20}?[\d,]+\s*runs.{0,20}?([\d,]+)\s*issues.{0,20}?([\d,]+)\s*merged",
+        html, re.DOTALL,
+    )
     if header:
-        repos, attempts, merged = (int(g.replace(",", "")) for g in header.groups())
+        repos, issues, merged = (int(g.replace(",", "")) for g in header.groups())
         set_tile(proj, "Merged PRs", str(merged), changes, "afk merged")
-        set_tile(proj, "Attempts", fmt_comma(attempts), changes, "afk attempts")
+        set_tile(proj, "Attempts", fmt_comma(issues), changes, "afk attempts")
         set_tile(proj, "Repos", str(repos), changes, "afk repos")
     else:
         log.warning("  afk header line not found — keeping merged/attempts/repos")
 
-    tiles = re.findall(r"font-size:\s*2rem;\s*font-weight:\s*600;\s*line-height:\s*1\">\s*([^<]+?)\s*<", html)
-    cost = next((v for v in tiles if v.startswith("$")), None)
-    if cost:
+    cost_match = re.search(r'API-equiv \$ / merged PR.{0,80}?\$([\d.,]+)', html, re.DOTALL) or \
+        re.search(r'<span class="kpi-value">(\$[\d.,]+)</span>\s*</div>\s*<div class="kpi-label">API-equiv \$ / merged PR', html)
+    if not cost_match:
+        cost_match = re.search(r'<span class="kpi-value">\$([\d.,]+)</span>[^%]{0,120}?API-equiv \$ / merged PR', html, re.DOTALL)
+    if cost_match:
+        val = cost_match.group(1)
+        cost = val if val.startswith("$") else f"${val}"
         set_tile(proj, "Cost / PR", cost, changes, "afk cost")
     else:
         log.warning("  afk cost tile not found — keeping existing")
 
-    # Per-repo bars: each repo name is followed (further down the markup) by its
-    # count span. Pair name -> first #353535 span with no *other* repo name in
-    # between, so it's robust to the gap size and never bleeds across repos.
+    # Per-repo bars: "By repository" rows — <div class="repo-label">NAME</div> ...
+    # <div class="repo-total"><strong>NUM</strong> · PCT%</div>. NUM is the total
+    # attempted-issues count for that repo (matches the header's "issues" grain).
     bars = block(proj, "bars", "ATTEMPTS BY REPO")
     if bars:
-        names = "|".join(re.escape(i["label"]) for i in bars["items"])
-        pair = re.compile(
-            rf"({names})(?:(?!{names}).)*?font-weight:\s*600;\s*color:\s*#353535\">(\d+)", re.DOTALL
+        row = re.compile(
+            r'<div class="repo-label">([^<]+)</div>.*?<div class="repo-total"><strong>(\d+)</strong>',
+            re.DOTALL,
         )
-        found: dict[str, int] = {}
-        for m in pair.finditer(html):
-            found.setdefault(m.group(1), int(m.group(2)))
+        found = {name: int(count) for name, count in row.findall(html)}
         for item in bars["items"]:
             if item["label"] in found:
                 set_bar(bars, item["label"], found[item["label"]], changes, f"afk/{item['label']}")

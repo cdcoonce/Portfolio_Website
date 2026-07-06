@@ -7,16 +7,16 @@
     "subtitle": "Files, runs & merges coding work across a repo fleet — quarantines are a safety signal.",
     "tiles": [
       {
-        "value": "108",
+        "value": "498",
         "label": "Merged PRs"
       },
       {
-        "value": "$5.17",
+        "value": "$3.58",
         "label": "Cost / PR",
         "accent": true
       },
       {
-        "value": "1,660",
+        "value": "574",
         "label": "Attempts"
       },
       {
@@ -31,27 +31,27 @@
         "items": [
           {
             "label": "afk-agent-system",
-            "value": 769
+            "value": 297
           },
           {
             "label": "Orbit-Wars",
-            "value": 733
+            "value": 51
           },
           {
             "label": "afk-cockpit",
-            "value": 64
+            "value": 93
           },
           {
             "label": "claude-workflow",
-            "value": 40
+            "value": 75
           },
           {
             "label": "household-bms",
-            "value": 30
+            "value": 48
           },
           {
             "label": "my-brain",
-            "value": 24
+            "value": 10
           }
         ]
       }
@@ -72,12 +72,12 @@
         "label": "Presets"
       },
       {
-        "value": "163",
+        "value": "231",
         "label": "Tests",
         "accent": true
       },
       {
-        "value": "227",
+        "value": "364",
         "label": "Commits"
       }
     ],
@@ -85,7 +85,13 @@
       {
         "type": "chips",
         "title": "PROJECT PRESETS",
-        "items": ["analysis", "claude-tooling", "data-pipeline", "full-stack", "python-api"]
+        "items": [
+          "analysis",
+          "claude-tooling",
+          "data-pipeline",
+          "full-stack",
+          "python-api"
+        ]
       },
       {
         "type": "chips",
@@ -145,7 +151,11 @@
       },
       {
         "type": "chips",
-        "items": ["Daily · incremental", "Weekly report", "Monthly report"]
+        "items": [
+          "Daily · incremental",
+          "Weekly report",
+          "Monthly report"
+        ]
       }
     ]
   },
@@ -194,7 +204,11 @@
       },
       {
         "type": "chips",
-        "items": ["Snowflake warehouse", "dbt semantic layer", "Polars analytics"]
+        "items": [
+          "Snowflake warehouse",
+          "dbt semantic layer",
+          "Polars analytics"
+        ]
       }
     ]
   },
@@ -205,16 +219,16 @@
     "subtitle": "Graph-first Obsidian vault + Claude Code automation, auto-synced across 2 machines.",
     "tiles": [
       {
-        "value": "397",
+        "value": "410",
         "label": "Notes"
       },
       {
-        "value": "4.5K",
+        "value": "4.7K",
         "label": "Wikilinks",
         "accent": true
       },
       {
-        "value": "84",
+        "value": "86",
         "label": "Skills & hooks"
       },
       {
@@ -233,19 +247,19 @@
           },
           {
             "label": "personal",
-            "value": 79
+            "value": 83
           },
           {
             "label": "thinking",
-            "value": 58
+            "value": 63
           },
           {
             "label": "org",
-            "value": 48
+            "value": 49
           },
           {
             "label": "reference",
-            "value": 42
+            "value": 44
           }
         ]
       }
