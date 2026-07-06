@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [2.1.2] - 2026-07-06
+
+### Added
+
+- `collect_waga` collector in `scripts/collect-metrics.py` so the
+  Weather-Adjusted Generation Analytics card's KPIs auto-recompute from the
+  WAGA repo (technologies + fleet-asset count and capacity-by-technology from
+  `fleet.py`, contracted-mart count from `marts.yml`, test count from `tests/`)
+  instead of being hand-maintained.
+
+### Changed
+
+- Relabel the WAGA "unit tests" tile to "tests" (156 total `def test_`, the
+  statically-computable count the collector reports).
+
 ## [2.1.1] - 2026-07-06
 
 ### Changed

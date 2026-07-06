@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Recompute the featured-card KPIs in src/data/metrics.json from source repos.
 
-All four project sources live locally on this Mac (including the private ones),
+All the project sources live locally on this Mac (including the private ones),
 so this is the only place every number is computable. The script rewrites the
 numeric values and the preset/persona lists while preserving the hand-written
 copy (eyebrows, headlines, subtitles, tile/bar labels) and the card structure.
@@ -31,6 +31,7 @@ GITHUB = Path.home() / "Developer" / "GitHub"
 VAULT = GITHUB / "my-brain"
 CW = GITHUB / "claude-workflow"
 OURA = GITHUB / "oura-pipeline"
+WAGA = GITHUB / "Weather_Adjusted_Generation_Analytics"
 PORTFOLIO = GITHUB / "PortfolioWebsite"
 AFK_HTML = PORTFOLIO / "public" / "afk-cockpit" / "index.html"
 METRICS = PORTFOLIO / "src" / "data" / "metrics.json"
@@ -169,6 +170,44 @@ def collect_oura(proj: dict, changes: list) -> None:
         set_bar(bars, "Marts · fact tables", marts, changes, "oura/marts")
 
 
+def collect_waga(proj: dict, changes: list) -> None:
+    fleet_src = (WAGA / "src" / "weather_analytics" / "mock_data" / "fleet.py").read_text(
+        encoding="utf-8", errors="ignore"
+    )
+    # FLEET factory calls, e.g. `_wind("ASSET_001", "Roscoe Ridge", 150.0, ...)`.
+    # The leading string arg distinguishes the calls from the `def _wind(...)`
+    # factory definitions (whose first arg is a bare identifier).
+    calls = re.findall(
+        r'_(wind|solar|battery|gas)\(\s*"[^"]+",\s*"[^"]+",\s*([\d.]+)', fleet_src
+    )
+    cap_by_type: dict[str, float] = {}
+    for kind, capacity_mw in calls:
+        cap_by_type[kind] = cap_by_type.get(kind, 0.0) + float(capacity_mw)
+
+    marts_yml = (
+        WAGA / "dbt" / "renewable_dbt" / "models" / "marts" / "marts.yml"
+    ).read_text(encoding="utf-8", errors="ignore")
+    contracted = len(re.findall(r"enforced:\s*true", marts_yml))
+    tests = sum(
+        len(re.findall(r"def test_", p.read_text(encoding="utf-8", errors="ignore")))
+        for p in (WAGA / "tests").rglob("*.py")
+    )
+
+    set_tile(proj, "technologies", str(len(cap_by_type)), changes, "waga technologies")
+    set_tile(proj, "fleet assets", str(len(calls)), changes, "waga fleet-assets")
+    set_tile(proj, "contracted marts", str(contracted), changes, "waga contracted-marts")
+    set_tile(proj, "tests", str(tests), changes, "waga tests")
+
+    bars = block(proj, "bars", "CAPACITY BY TECHNOLOGY (MW)")
+    if bars:
+        for item in bars["items"]:
+            kind = item["label"].lower()
+            if kind in cap_by_type:
+                set_bar(bars, item["label"], round(cap_by_type[kind]), changes, f"waga/{kind}")
+            else:
+                log.warning("  waga technology %r not matched — keeping existing", item["label"])
+
+
 def collect_afk(proj: dict, changes: list) -> None:
     html = AFK_HTML.read_text(encoding="utf-8", errors="ignore")
 
@@ -229,6 +268,7 @@ COLLECTORS = {
     "afk": collect_afk,
     "claude-workflow": collect_claude_workflow,
     "oura": collect_oura,
+    "waga": collect_waga,
     "my-brain": collect_my_brain,
 }
 
