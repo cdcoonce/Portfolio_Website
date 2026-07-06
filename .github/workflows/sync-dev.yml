@@ -1,0 +1,37 @@
+name: Sync dev with main
+
+# Keep `dev` from drifting behind `main`. `main` receives direct pushes from the
+# afk-cockpit dashboard publish (a generated snapshot — main-direct by policy, it
+# must stay fresh on production) as well as normal dev->main promotions. Every
+# such push is merged straight back into `dev` so the integration branch always
+# contains everything on production. A merge conflict here fails loudly, which is
+# the signal that dev has un-promoted work touching the same file.
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-dev
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: Merge main into dev
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: dev
+          fetch-depth: 0
+      - name: Merge main into dev and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main
+          # Fast-forward when dev has no un-promoted work; otherwise a merge commit
+          # brings production's snapshot onto dev on top of that work.
+          git merge --no-edit origin/main
+          git push origin dev
