@@ -1,2674 +1,792 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <!-- Google tag (gtag.js) -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>afk cockpit</title>
+    <link rel="icon" href="../favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+    />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-C3MKQC8F23"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);
       }
-      gtag('js', new Date());
-      gtag('config', 'G-C3MKQC8F23');
+      gtag("js", new Date());
+      gtag("config", "G-C3MKQC8F23");
     </script>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Live metrics dashboard for afk, Charles Coonce's autonomous coding-agent pipeline: PR outcomes, safety quarantines, and cost per model tier."
-    />
-    <title>AFK Cockpit | Charles Coonce</title>
-    <link rel="icon" type="image/svg+xml" href="../WebContent/assets/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    
+    
     <style>
-      /* ==========================================================================
-   Colors — charleslikesdata
-   Monochromatic grayscale foundation + ONE restrained accent.
-   The accent (pale blue) is reserved strictly for interactive surfaces:
-   chat assistant bubbles, testimonials, highlighted cards. It is a
-   highlight, never a theme. Everything else is grayscale.
-   ========================================================================== */
-
       :root {
-        /* --- Base grayscale ramp --- */
-        --white: #ffffff;
-        --gray-50: #f9f9f9; /* muted page surface */
-        --gray-100: #f0f0f0; /* image fallback / faint fill */
-        --gray-200: #e0e0e0; /* hairline borders (inputs, chat frame) */
-        --gray-300: #cccccc; /* inactive dots */
-        --gray-500: #666666; /* meta / counters */
-        --gray-600: #555555; /* secondary text (body copy) */
-        --gray-800: #353535; /* primary text, borders, dark fills */
-        --black: #000000; /* deepest hover / press state */
-
-        /* --- The one accent: pale analytical blue --- */
-        --accent-blue-rgb: 235, 241, 248;
-        --accent-blue: rgb(var(--accent-blue-rgb));
-        --accent-blue-soft: rgba(var(--accent-blue-rgb), 0.4);
-
-        /* --- Semantic aliases: reference these in components --- */
-        --text-heading: var(--gray-800);
-        --text-primary: var(--gray-800);
-        --text-secondary: var(--gray-600);
-        --text-muted: var(--gray-500);
-        --text-on-dark: var(--white);
-
-        --surface-page: var(--white);
-        --surface-muted: var(--gray-50);
-        --surface-card: var(--white);
-        --surface-inverse: var(--gray-800);
-        --surface-inverse-hover: var(--black);
-        --surface-accent: var(--accent-blue-soft);
-
-        --border-strong: var(--gray-800);
-        --border-hairline: var(--gray-200);
-        --border-inactive: var(--gray-300);
-
-        --quote-mark: rgba(53, 53, 53, 0.2);
+        --ink: #353535;
+        --soft: #6b6b6b;
+        --track: #efefef;
+        --label: #666666;
+        --muted: #999999;
+        --faint: #a0a0a0;
+        --green: #4f7d63;
+        --amber: #b3873f;
+        --gray: #d5d5d5;
+        --accent: #c4d4e6;
+        --accent2: #8fa8c4;
+        --page: #f9f9f9;
+        --card-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
       }
-    </style>
-    <style>
-      /* ==========================================================================
-   Typography — charleslikesdata
-   One family (Poppins), a tight weight range, and a restrained type scale.
-   Headings and emphasis lean on weight (600), not color.
-   ========================================================================== */
-
-      :root {
-        /* --- Family --- */
-        --font-sans: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-
-        /* --- Weights (Poppins ships 300/400/500/600 here) --- */
-        --weight-light: 300;
-        --weight-regular: 400;
-        --weight-medium: 500;
-        --weight-semibold: 600;
-
-        /* --- Type scale (rem, matching the live site) --- */
-        --text-hero: 3rem;
-        --text-2xl: 1.75rem;
-        --text-xl: 1.5rem;
-        --text-lg: 1.25rem;
-        --text-md: 1rem;
-        --text-sm: 0.95rem;
-        --text-xs: 0.85rem;
-
-        /* --- Line heights --- */
-        --leading-tight: 1.2;
-        --leading-snug: 1.4;
-        --leading-normal: 1.5;
-      }
-    </style>
-    <style>
-      /* ==========================================================================
-   Spacing, radii, shadows, motion & layout — charleslikesdata
-   Generous whitespace, soft pill/rounded geometry, gentle shadows,
-   and quick, uniform transitions.
-   ========================================================================== */
-
-      :root {
-        /* --- Spacing scale (rem) --- */
-        --space-1: 0.25rem;
-        --space-2: 0.5rem;
-        --space-3: 0.75rem;
-        --space-4: 1rem;
-        --space-6: 1.5rem;
-        --space-8: 2rem;
-        --space-12: 3rem;
-        --space-16: 4rem;
-
-        /* --- Corner radii --- */
-        --radius-sm: 2px;
-        --radius-md: 8px;
-        --radius-card: 10px;
-        --radius-pill: 2rem;
-        --radius-round: 50%;
-
-        /* --- Shadows (all low-opacity black, no color) --- */
-        --shadow-nav: 0 2px 4px rgba(0, 0, 0, 0.08);
-        --shadow-soft: 0 2px 10px rgba(0, 0, 0, 0.1);
-        --shadow-card: 0 4px 6px rgba(0, 0, 0, 0.1);
-        --shadow-card-hover: 0 8px 12px rgba(0, 0, 0, 0.15);
-
-        /* --- Motion: quick, smooth, uniform --- */
-        --ease: ease;
-        --duration: 300ms;
-        --transition-base: 300ms ease;
-        --transition-transform: transform 300ms ease;
-
-        /* --- Layout containers --- */
-        --container-wide: 1700px;
-        --container-content: 1200px;
-        --container-narrow: 700px;
-        --nav-height: 60px;
-      }
-    </style>
-    <style>
-      * {
-        box-sizing: border-box;
-      }
+      * { box-sizing: border-box; }
       body {
         margin: 0;
-        font-family:
-          'Poppins',
-          -apple-system,
-          BlinkMacSystemFont,
-          'Segoe UI',
-          sans-serif;
-        background: #f9f9f9;
-        color: #353535;
+        font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: var(--page);
+        color: var(--ink);
       }
-      @keyframes livepulse {
-        0%,
-        100% {
-          opacity: 1;
-          transform: scale(1);
-        }
-        50% {
-          opacity: 0.35;
-          transform: scale(0.82);
-        }
+      .dot { display: inline-block; border-radius: 50%; }
+      
+
+      /* ===== top bar ===== */
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: #ffffff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+        padding: 0.85rem 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+      .wordmark { display: flex; align-items: baseline; gap: 0.9rem; }
+      .wordmark .name { font-weight: 600; font-size: 1.25rem; letter-spacing: -0.01em; }
+      .wordmark .sub { color: #9a9a9a; font-weight: 500; }
+      .back-link { color: var(--soft); text-decoration: none; font-size: 0.85rem; font-weight: 500; }
+      .back-link:hover { text-decoration: underline; }
+      .live-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.75rem;
+        color: var(--green);
+        font-weight: 600;
+      }
+      .live-badge .dot { width: 8px; height: 8px; background: var(--green); }
+      .topbar-stats { font-size: 0.82rem; color: var(--label); }
+      .topbar-stats .muted { color: #888888; }
+
+      /* ===== page ===== */
+      main {
+        max-width: 1240px;
+        margin: 0 auto;
+        padding: 1.75rem 2rem 4rem;
+      }
+      .intro { font-size: 0.95rem; color: var(--soft); margin: 0 0 1.5rem; max-width: 60rem; line-height: 1.5; }
+
+      /* ===== live snapshot strip ===== */
+      .live-strip {
+        background: rgba(235, 241, 248, 0.55);
+        border: 1px solid #dbe4ee;
+        border-radius: 12px;
+        padding: 1.25rem 1.5rem;
+        margin-bottom: 1.75rem;
+      }
+      .live-strip-head {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: #5c6b7a;
+      }
+      .live-strip-placeholder {
+        color: var(--muted);
+        font-style: italic;
+        font-size: 0.85rem;
+        padding: 0.5rem 0;
+      }
+
+      /* ===== KPI cards ===== */
+      .kpi-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+      .kpi-card { background: #fff; border-radius: 10px; box-shadow: var(--card-shadow); padding: 1.25rem 1.35rem; }
+      .kpi-top { display: flex; align-items: center; gap: 0.4rem; }
+      .kpi-top .dot { width: 7px; height: 7px; }
+      .kpi-value { font-size: 2rem; font-weight: 600; line-height: 1; }
+      .kpi-label { font-size: 0.82rem; color: var(--soft); margin-top: 0.5rem; line-height: 1.35; }
+      .kpi-n { font-size: 0.72rem; color: var(--faint); margin-top: 0.15rem; }
+
+      /* ===== panel chrome ===== */
+      .row { display: grid; gap: 1.25rem; margin-bottom: 1.25rem; }
+      .row-2 { grid-template-columns: 1fr 1fr; }
+      .row-cost { grid-template-columns: 0.9fr 1.1fr; }
+      .panel { background: #fff; border-radius: 10px; box-shadow: var(--card-shadow); padding: 1.5rem 1.6rem; }
+      .panel-eyebrow { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: #999999; font-weight: 600; margin-bottom: 0.25rem; }
+      .panel-eyebrow.amber { color: var(--amber); }
+      .panel h2 { font-size: 1.15rem; font-weight: 600; margin: 0 0 1.25rem; }
+      .panel-head { display: flex; justify-content: space-between; align-items: flex-start; }
+      .panel-badge { font-size: 0.8rem; color: var(--label); white-space: nowrap; }
+
+      .legend { display: flex; gap: 0.85rem; flex-wrap: wrap; font-size: 0.72rem; color: var(--label); }
+      .legend-item { display: inline-flex; align-items: center; gap: 0.35rem; }
+      .legend-swatch { width: 9px; height: 9px; border-radius: 2px; display: inline-block; }
+
+      .nodata { color: var(--muted); font-style: italic; padding: 2rem; border: 1px dashed #cccccc; border-radius: 8px; text-align: center; }
+
+      /* ===== horizontal bars (funnel / proposal / quarantine) ===== */
+      .hbars { display: flex; flex-direction: column; gap: 0.62rem; }
+      .hbar-row { display: grid; grid-template-columns: var(--label-w, 150px) 1fr 46px; align-items: center; gap: 0.7rem; }
+      .hbar-label { font-size: 0.78rem; color: var(--label); text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .hbar-track { background: var(--track); border-radius: 2rem; height: 9px; overflow: hidden; }
+      .hbar-fill { background: var(--ink); height: 100%; border-radius: 2rem; }
+      .hbar-fill.amber { background: var(--amber); }
+      .hbar-value { font-size: 0.78rem; font-weight: 600; text-align: right; }
+      .hbars.funnel .hbar-row { grid-template-columns: var(--label-w, 150px) 1fr 46px minmax(110px, auto); }
+      .hbar-conv { font-size: 0.72rem; color: var(--label); text-align: left; white-space: nowrap; }
+
+      /* ===== repo stacked rows ===== */
+      .repo-rows { display: flex; flex-direction: column; gap: 0.7rem; }
+      .repo-row { display: grid; grid-template-columns: 130px 1fr 84px; align-items: center; gap: 0.7rem; }
+      .repo-label { font-size: 0.78rem; color: var(--label); text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .repo-track { display: flex; background: var(--track); border-radius: 3px; height: 14px; overflow: hidden; }
+      .repo-seg.landed { background: var(--green); }
+      .repo-seg.quarantined { background: var(--amber); }
+      .repo-seg.other { background: var(--gray); }
+      .repo-total { font-size: 0.75rem; text-align: right; color: var(--label); }
+      .repo-total strong { font-weight: 600; color: var(--ink); }
+
+      /* ===== tier bars ===== */
+      .tier-bars { display: flex; flex-direction: column; gap: 1rem; }
+      .tier-head { display: flex; justify-content: space-between; margin-bottom: 0.35rem; font-size: 0.85rem; font-weight: 600; }
+      .tier-track { background: var(--track); border-radius: 2rem; height: 14px; overflow: hidden; }
+      .tier-fill { background: var(--ink); height: 100%; border-radius: 2rem; }
+      .tier-fill.accent2 { background: var(--accent2); }
+      .tier-row.orchestrator { padding-top: 0.85rem; border-top: 1px dashed var(--track); }
+      .tier-fill.orchestrator { background: var(--soft); }
+      .cost-sub { font-size: 0.82rem; color: var(--label); margin-bottom: 1.4rem; }
+      .cost-caption { font-size: 0.72rem; color: #999999; margin-bottom: 0.5rem; }
+      .cost-stats { margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid #eeeeee; display: flex; gap: 2rem; }
+      .cost-stat-value { font-size: 1.4rem; font-weight: 600; }
+      .cost-stat-label { font-size: 0.75rem; color: #888888; }
+      .cost-whole-machine { font-size: 0.72rem; color: #999999; margin-top: 0.75rem; }
+
+      /* ===== vertical columns (slices/day, per-turn hist) ===== */
+      .vcols-bars { display: flex; align-items: flex-end; gap: 2px; height: 150px; }
+      .vcol { flex: 1; border-radius: 2px 2px 0 0; min-width: 3px; background: var(--ink); }
+      .vcols-labels { display: flex; gap: 2px; margin-top: 0.4rem; }
+      .vcols-labels span { flex: 1; min-width: 3px; font-size: 0.6rem; color: #aaaaaa; text-align: center; white-space: nowrap; }
+
+      .perturn-bars { display: flex; align-items: flex-end; gap: 8px; height: 170px; }
+      .perturn-col { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 0.35rem; height: 100%; }
+      .perturn-value { font-size: 0.68rem; color: #999999; }
+      .perturn-bar { width: 100%; border-radius: 3px 3px 0 0; background: var(--accent); }
+      .perturn-bar.accent2 { background: var(--accent2); }
+      .perturn-labels { display: flex; gap: 8px; margin-top: 0.45rem; }
+      .perturn-labels span { flex: 1; font-size: 0.62rem; color: #aaaaaa; text-align: center; }
+
+      /* ===== svg charts ===== */
+      .svg-chart svg { width: 100%; display: block; }
+      .svg-caption { display: flex; justify-content: space-between; font-size: 0.62rem; color: #aaaaaa; margin-top: 0.3rem; }
+
+      .token-head { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; }
+      .token-sub { font-size: 0.82rem; color: var(--label); }
+      .token-sub strong { font-weight: 600; color: var(--ink); }
+
+      footer {
+        color: var(--muted);
+        font-size: 0.78rem;
+        line-height: 1.5;
+        padding-top: 0.5rem;
+        max-width: 1240px;
+        margin: 0 auto;
+        padding-left: 2rem;
+        padding-right: 2rem;
       }
     </style>
   </head>
   <body>
-    <div
-      data-screen-label="AFK Cockpit dashboard"
-      style="
-        font-family: 'Poppins', sans-serif;
-        color: #353535;
-        background: #f9f9f9;
-        min-height: 100vh;
-      "
-    >
-      <!-- ===== TOP BAR ===== -->
-      <header
-        style="
-          position: sticky;
-          top: 0;
-          z-index: 100;
-          background: #ffffff;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-          padding: 0.85rem 2rem;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 1rem;
-          flex-wrap: wrap;
-        "
-      >
-        <div style="display: flex; align-items: baseline; gap: 0.9rem">
-          <span style="font-weight: 600; font-size: 1.25rem; letter-spacing: -0.01em"
-            >afk <span style="color: #9a9a9a; font-weight: 500">cockpit</span></span
-          >
-          <span
-            style="
-              display: inline-flex;
-              align-items: center;
-              gap: 0.4rem;
-              font-size: 0.75rem;
-              color: #4f7d63;
-              font-weight: 600;
-            "
-            ><span
-              style="
-                width: 8px;
-                height: 8px;
-                border-radius: 50%;
-                background: #4f7d63;
-                display: inline-block;
-                animation: livepulse 1.8s ease-in-out infinite;
-              "
-            ></span
-            >live</span
-          >
+    <header class="topbar">
+      <div class="wordmark">
+        <a class="back-link" href="../index.html">&larr; charleslikesdata.com</a>
+        <span class="name">afk <span class="sub">cockpit</span></span>
+        
+      </div>
+      <div class="topbar-stats">
+        6 repos ·
+        705 runs ·
+        571 issues ·
+        497 merged ·
+        <span class="muted">data through —</span>
+      </div>
+    </header>
+
+    <main>
+      <p class="intro">
+        Autonomous-PR outcomes across the fleet. Cost is
+        <strong>API-equivalent</strong> (notional on a Pro subscription).
+        Quarantines are a <strong>safety signal</strong> — afk refused to
+        ship — not failures.
+      </p>
+
+      <section class="live-strip">
+        <div class="live-strip-head">Fleet state · not yet wired up</div>
+        <div class="live-strip-placeholder">
+          Live gate/promote/merge and dependency-frontier state isn't ingested
+          yet — this panel is a placeholder for a future feature, not a
+          fabricated number.
         </div>
-        <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap">
-          <span style="font-size: 0.82rem; color: #666"
-            >6 repos · 1,660 attempts · 108 merged ·
-            <span style="color: #888">May 31 – Jul 1, 2026</span></span
-          >
-          <a
-            href="../index.html"
-            style="
-              font-size: 0.8rem;
-              color: #353535;
-              text-decoration: none;
-              border: 1px solid #353535;
-              border-radius: 2rem;
-              padding: 0.35rem 0.9rem;
-              font-weight: 500;
-            "
-            >← Portfolio</a
-          >
+      </section>
+
+      <section class="kpi-grid">
+        
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="dot" style="background: #4f7d63"></span>
+            <span class="kpi-value">99%</span>
+          </div>
+          <div class="kpi-label">landed rate</div>
+          <div class="kpi-n">n = 502 gate-passed</div>
+          
         </div>
-      </header>
-
-      <main style="max-width: 1240px; margin: 0 auto; padding: 1.75rem 2rem 4rem">
-        <p
-          style="
-            font-size: 0.95rem;
-            color: #555;
-            margin: 0 0 1.5rem;
-            max-width: 60rem;
-            line-height: 1.5;
-          "
-        >
-          Autonomous-PR outcomes across the fleet. Cost is
-          <strong style="font-weight: 600">API-equivalent</strong> (notional on a Pro subscription).
-          Quarantines are a <strong style="font-weight: 600">safety signal</strong> — afk refused to
-          ship — not failures.
-        </p>
-
-        <!-- ===== LIVE STRIP ===== -->
-        <section
-          style="
-            background: rgba(235, 241, 248, 0.55);
-            border: 1px solid #dbe4ee;
-            border-radius: 12px;
-            padding: 1.25rem 1.5rem;
-            margin-bottom: 1.75rem;
-          "
-        >
-          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem">
-            <span
-              style="
-                width: 8px;
-                height: 8px;
-                border-radius: 50%;
-                background: #4f7d63;
-                display: inline-block;
-                animation: livepulse 1.8s ease-in-out infinite;
-              "
-            ></span>
-            <span
-              style="
-                font-size: 0.72rem;
-                letter-spacing: 0.12em;
-                text-transform: uppercase;
-                font-weight: 600;
-                color: #5c6b7a;
-              "
-              >Live snapshot · fleet now</span
-            >
+        
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="dot" style="background: #4f7d63"></span>
+            <span class="kpi-value">99%</span>
           </div>
-          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem">
+          <div class="kpi-label">landed rate (executor repos)</div>
+          <div class="kpi-n">n = 5 exec repos</div>
+          <div class="kpi-n">excludes my-brain (10 quar)</div>
+        </div>
+        
+        <div class="kpi-card">
+          <div class="kpi-top">
+            
+            <span class="kpi-value">$3.53</span>
+          </div>
+          <div class="kpi-label">API-equiv $ / merged PR</div>
+          <div class="kpi-n">n = 497 merged</div>
+          <div class="kpi-n">fully loaded: includes failed runs, quarantines, and scout overhead</div>
+        </div>
+        
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="dot" style="background: #b3873f"></span>
+            <span class="kpi-value">37%</span>
+          </div>
+          <div class="kpi-label">quarantine (safety) rate</div>
+          <div class="kpi-n">n = 571 issues</div>
+          
+        </div>
+        
+        <div class="kpi-card">
+          <div class="kpi-top">
+            
+            <span class="kpi-value">21%</span>
+          </div>
+          <div class="kpi-label">escalation rate</div>
+          <div class="kpi-n">n = 705 runs</div>
+          
+        </div>
+        
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="dot" style="background: #d5d5d5"></span>
+            <span class="kpi-value">0%</span>
+          </div>
+          <div class="kpi-label">rejected rate</div>
+          <div class="kpi-n">n = 842 proposals</div>
+          
+        </div>
+        
+      </section>
+
+      <section class="row row-2">
+        <div class="panel">
+          <div class="panel-eyebrow">Pipeline</div>
+          <h2>Stage funnel</h2>
+          
+          <div class="hbars funnel" style="--label-w: 110px">
+            
+            <div class="hbar-row">
+              <div class="hbar-label">proposed</div>
+              <div class="hbar-track"><div class="hbar-fill" style="width: 100.0%"></div></div>
+              <div class="hbar-value">842</div>
+              <div class="hbar-conv"></div>
+            </div>
+            
+            <div class="hbar-row">
+              <div class="hbar-label">promoted</div>
+              <div class="hbar-track"><div class="hbar-fill" style="width: 69.0023752969121%"></div></div>
+              <div class="hbar-value">581</div>
+              <div class="hbar-conv">69% of proposed</div>
+            </div>
+            
+            <div class="hbar-row">
+              <div class="hbar-label">attempted</div>
+              <div class="hbar-track"><div class="hbar-fill" style="width: 67.81472684085512%"></div></div>
+              <div class="hbar-value">571</div>
+              <div class="hbar-conv">98% of promoted</div>
+            </div>
+            
+            <div class="hbar-row">
+              <div class="hbar-label">passed gate</div>
+              <div class="hbar-track"><div class="hbar-fill" style="width: 59.61995249406176%"></div></div>
+              <div class="hbar-value">502</div>
+              <div class="hbar-conv">88% of attempted</div>
+            </div>
+            
+            <div class="hbar-row">
+              <div class="hbar-label">published</div>
+              <div class="hbar-track"><div class="hbar-fill" style="width: 59.14489311163895%"></div></div>
+              <div class="hbar-value">498</div>
+              <div class="hbar-conv">99% of passed gate</div>
+            </div>
+            
+            <div class="hbar-row">
+              <div class="hbar-label">merged</div>
+              <div class="hbar-track"><div class="hbar-fill" style="width: 59.026128266033254%"></div></div>
+              <div class="hbar-value">497</div>
+              <div class="hbar-conv">100% of published</div>
+            </div>
+            
+          </div>
+          
+        </div>
+        <div class="panel">
+          <div class="panel-head">
             <div>
-              <div
-                style="
-                  font-size: 0.72rem;
-                  letter-spacing: 0.08em;
-                  text-transform: uppercase;
-                  color: #7c8794;
-                  font-weight: 600;
-                  margin-bottom: 0.5rem;
-                "
-              >
-                In progress
-              </div>
-              <div style="font-size: 1.05rem; color: #353535; line-height: 1.5">
-                <strong style="font-weight: 600">3</strong> features ·
-                <strong style="font-weight: 600">5</strong> afk:ready ·
-                <strong style="font-weight: 600">2</strong> in flight
-              </div>
+              <div class="panel-eyebrow">By repository</div>
+              <h2>Outcomes per repo</h2>
             </div>
-            <div style="border-left: 1px solid #d3dde8; padding-left: 1.25rem">
-              <div
-                style="
-                  font-size: 0.72rem;
-                  letter-spacing: 0.08em;
-                  text-transform: uppercase;
-                  color: #7c8794;
-                  font-weight: 600;
-                  margin-bottom: 0.5rem;
-                "
-              >
-                Gate · promote
-              </div>
-              <div style="font-size: 0.95rem; color: #353535; line-height: 1.45">
-                <span style="font-family: ui-monospace, monospace">#55</span> scout: dedup tuning
-              </div>
-            </div>
-            <div style="border-left: 1px solid #d3dde8; padding-left: 1.25rem">
-              <div
-                style="
-                  font-size: 0.72rem;
-                  letter-spacing: 0.08em;
-                  text-transform: uppercase;
-                  color: #7c8794;
-                  font-weight: 600;
-                  margin-bottom: 0.5rem;
-                "
-              >
-                Gate · merge
-              </div>
-              <div style="font-size: 0.95rem; color: #353535; line-height: 1.45">
-                <span style="font-family: ui-monospace, monospace">afk/staging → main</span> ·
-                packet ready
-              </div>
-            </div>
-            <div style="border-left: 1px solid #d3dde8; padding-left: 1.25rem">
-              <div
-                style="
-                  font-size: 0.72rem;
-                  letter-spacing: 0.08em;
-                  text-transform: uppercase;
-                  color: #7c8794;
-                  font-weight: 600;
-                  margin-bottom: 0.5rem;
-                "
-              >
-                Dependency frontier
-              </div>
-              <div style="font-size: 0.95rem; color: #353535; line-height: 1.45">
-                <strong style="font-weight: 600">5</strong> ready ·
-                <strong style="font-weight: 600; color: #b3873f">1 blocked</strong>
-                <span style="color: #888; font-family: ui-monospace, monospace; font-size: 0.85em"
-                  >#47→#46</span
-                >
-              </div>
+            <div class="legend">
+              <span class="legend-item"><span class="legend-swatch" style="background: var(--green)"></span>landed</span>
+              <span class="legend-item"><span class="legend-swatch" style="background: var(--amber)"></span>quarantined</span>
+              <span class="legend-item"><span class="legend-swatch" style="background: var(--gray)"></span>other</span>
             </div>
           </div>
-        </section>
+          
+          <div class="repo-rows">
+            
+            <div class="repo-row">
+              <div class="repo-label">Orbit-Wars</div>
+              <div class="repo-track">
+                <div class="repo-seg landed" style="width: 96.07843137254902%"></div>
+                <div class="repo-seg quarantined" style="width: 1.9607843137254901%"></div>
+                <div class="repo-seg other" style="width: 1.9607843137254901%"></div>
+              </div>
+              <div class="repo-total"><strong>51</strong> · 98%</div>
+            </div>
+            
+            <div class="repo-row">
+              <div class="repo-label">afk-agent-system</div>
+              <div class="repo-track">
+                <div class="repo-seg landed" style="width: 87.41496598639455%"></div>
+                <div class="repo-seg quarantined" style="width: 11.904761904761903%"></div>
+                <div class="repo-seg other" style="width: 0.6802721088435374%"></div>
+              </div>
+              <div class="repo-total"><strong>294</strong> · 99%</div>
+            </div>
+            
+            <div class="repo-row">
+              <div class="repo-label">afk-cockpit</div>
+              <div class="repo-track">
+                <div class="repo-seg landed" style="width: 93.54838709677419%"></div>
+                <div class="repo-seg quarantined" style="width: 5.376344086021505%"></div>
+                <div class="repo-seg other" style="width: 1.0752688172043012%"></div>
+              </div>
+              <div class="repo-total"><strong>93</strong> · 99%</div>
+            </div>
+            
+            <div class="repo-row">
+              <div class="repo-label">claude-workflow</div>
+              <div class="repo-track">
+                <div class="repo-seg landed" style="width: 78.66666666666666%"></div>
+                <div class="repo-seg quarantined" style="width: 20.0%"></div>
+                <div class="repo-seg other" style="width: 1.3333333333333335%"></div>
+              </div>
+              <div class="repo-total"><strong>75</strong> · 98%</div>
+            </div>
+            
+            <div class="repo-row">
+              <div class="repo-label">household-bms</div>
+              <div class="repo-track">
+                <div class="repo-seg landed" style="width: 93.75%"></div>
+                <div class="repo-seg quarantined" style="width: 6.25%"></div>
+                
+              </div>
+              <div class="repo-total"><strong>48</strong> · 100%</div>
+            </div>
+            
+            <div class="repo-row">
+              <div class="repo-label">my-brain</div>
+              <div class="repo-track">
+                
+                <div class="repo-seg quarantined" style="width: 100.0%"></div>
+                
+              </div>
+              <div class="repo-total"><strong>10</strong> · 0%</div>
+            </div>
+            
+          </div>
+          
+        </div>
+      </section>
 
-        <!-- ===== KPI CARDS ===== -->
-        <section
-          style="
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 1rem;
-            margin-bottom: 2rem;
-          "
-        >
-          <div
-            style="
-              background: #fff;
-              border-radius: 10px;
-              box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-              padding: 1.25rem 1.35rem;
-            "
-          >
-            <div style="display: flex; align-items: center; gap: 0.4rem">
-              <span style="width: 7px; height: 7px; border-radius: 50%; background: #4f7d63"></span
-              ><span style="font-size: 2rem; font-weight: 600; line-height: 1">7%</span>
+      <section class="row row-2">
+        <div class="panel">
+          <div class="panel-eyebrow">Producers</div>
+          <h2>Proposal quality</h2>
+          
+          <div class="hbars" style="--label-w: 100px">
+            
+            <div class="hbar-row">
+              <div class="hbar-label">dropped</div>
+              <div class="hbar-track"><div class="hbar-fill" style="width: 22.030981067125648%"></div></div>
+              <div class="hbar-value">128</div>
             </div>
-            <div style="font-size: 0.82rem; color: #555; margin-top: 0.5rem; line-height: 1.35">
-              landed rate
+            
+            <div class="hbar-row">
+              <div class="hbar-label">harvest</div>
+              <div class="hbar-track"><div class="hbar-fill" style="width: 1.5%"></div></div>
+              <div class="hbar-value">5</div>
             </div>
-            <div style="font-size: 0.72rem; color: #a0a0a0; margin-top: 0.15rem">
-              n = 1,660 attempts
+            
+            <div class="hbar-row">
+              <div class="hbar-label">mis-sized</div>
+              <div class="hbar-track"><div class="hbar-fill" style="width: 5.335628227194492%"></div></div>
+              <div class="hbar-value">31</div>
             </div>
+            
+            <div class="hbar-row">
+              <div class="hbar-label">pending</div>
+              <div class="hbar-track"><div class="hbar-fill" style="width: 16.351118760757316%"></div></div>
+              <div class="hbar-value">95</div>
+            </div>
+            
+            <div class="hbar-row">
+              <div class="hbar-label">rejected</div>
+              <div class="hbar-track"><div class="hbar-fill" style="width: 1.5%"></div></div>
+              <div class="hbar-value">1</div>
+            </div>
+            
+            <div class="hbar-row">
+              <div class="hbar-label">shipped</div>
+              <div class="hbar-track"><div class="hbar-fill" style="width: 100.0%"></div></div>
+              <div class="hbar-value">581</div>
+            </div>
+            
+            <div class="hbar-row">
+              <div class="hbar-label">superseded</div>
+              <div class="hbar-track"><div class="hbar-fill" style="width: 1.5%"></div></div>
+              <div class="hbar-value">1</div>
+            </div>
+            
           </div>
-          <div
-            style="
-              background: #fff;
-              border-radius: 10px;
-              box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-              padding: 1.25rem 1.35rem;
-            "
-          >
-            <div style="font-size: 2rem; font-weight: 600; line-height: 1">$5.17</div>
-            <div style="font-size: 0.82rem; color: #555; margin-top: 0.5rem; line-height: 1.35">
-              API-equiv $ / merged PR
-            </div>
-            <div style="font-size: 0.72rem; color: #a0a0a0; margin-top: 0.15rem">
-              n = 108 merged
-            </div>
-          </div>
-          <div
-            style="
-              background: #fff;
-              border-radius: 10px;
-              box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-              padding: 1.25rem 1.35rem;
-            "
-          >
-            <div style="display: flex; align-items: center; gap: 0.4rem">
-              <span style="width: 7px; height: 7px; border-radius: 50%; background: #b3873f"></span
-              ><span style="font-size: 2rem; font-weight: 600; line-height: 1">4%</span>
-            </div>
-            <div style="font-size: 0.82rem; color: #555; margin-top: 0.5rem; line-height: 1.35">
-              quarantine (safety) rate
-            </div>
-            <div style="font-size: 0.72rem; color: #a0a0a0; margin-top: 0.15rem">
-              n = 1,660 attempts
-            </div>
-          </div>
-          <div
-            style="
-              background: #fff;
-              border-radius: 10px;
-              box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-              padding: 1.25rem 1.35rem;
-            "
-          >
-            <div style="font-size: 2rem; font-weight: 600; line-height: 1">2%</div>
-            <div style="font-size: 0.82rem; color: #555; margin-top: 0.5rem; line-height: 1.35">
-              escalation rate
-            </div>
-            <div style="font-size: 0.72rem; color: #a0a0a0; margin-top: 0.15rem">
-              n = 1,660 attempts
-            </div>
-          </div>
-          <div
-            style="
-              background: #fff;
-              border-radius: 10px;
-              box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-              padding: 1.25rem 1.35rem;
-            "
-          >
-            <div style="display: flex; align-items: center; gap: 0.4rem">
-              <span style="width: 7px; height: 7px; border-radius: 50%; background: #c9c9c9"></span
-              ><span style="font-size: 2rem; font-weight: 600; line-height: 1">0%</span>
-            </div>
-            <div style="font-size: 0.82rem; color: #555; margin-top: 0.5rem; line-height: 1.35">
-              rejected rate
-            </div>
-            <div style="font-size: 0.72rem; color: #a0a0a0; margin-top: 0.15rem">
-              n = 689 proposals
-            </div>
-          </div>
-        </section>
-
-        <!-- ===== ROW: FUNNEL + REPO ===== -->
-        <section
-          style="
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.25rem;
-            margin-bottom: 1.25rem;
-          "
-        >
-          <div
-            style="
-              background: #fff;
-              border-radius: 10px;
-              box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-              padding: 1.5rem 1.6rem;
-            "
-          >
-            <div
-              style="
-                font-size: 0.72rem;
-                letter-spacing: 0.1em;
-                text-transform: uppercase;
-                color: #999;
-                font-weight: 600;
-                margin-bottom: 0.25rem;
-              "
-            >
-              Pipeline
-            </div>
-            <h2 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 1.25rem">Stage funnel</h2>
-            <div style="display: flex; flex-direction: column; gap: 0.62rem">
-              <div
-                style="
-                  display: grid;
-                  grid-template-columns: 110px 1fr 42px;
-                  align-items: center;
-                  gap: 0.7rem;
-                "
-              >
-                <div
-                  style="
-                    font-size: 0.78rem;
-                    color: #666;
-                    text-align: right;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  "
-                >
-                  proposed
-                </div>
-                <div
-                  style="background: #efefef; border-radius: 2rem; height: 9px; overflow: hidden"
-                >
-                  <div
-                    style="width: 12.9518%; background: #353535; height: 100%; border-radius: 2rem"
-                  ></div>
-                </div>
-                <div style="font-size: 0.78rem; font-weight: 600; text-align: right">215</div>
-              </div>
-              <div
-                style="
-                  display: grid;
-                  grid-template-columns: 110px 1fr 42px;
-                  align-items: center;
-                  gap: 0.7rem;
-                "
-              >
-                <div
-                  style="
-                    font-size: 0.78rem;
-                    color: #666;
-                    text-align: right;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  "
-                >
-                  promoted
-                </div>
-                <div
-                  style="background: #efefef; border-radius: 2rem; height: 9px; overflow: hidden"
-                >
-                  <div
-                    style="width: 22.1687%; background: #353535; height: 100%; border-radius: 2rem"
-                  ></div>
-                </div>
-                <div style="font-size: 0.78rem; font-weight: 600; text-align: right">368</div>
-              </div>
-              <div
-                style="
-                  display: grid;
-                  grid-template-columns: 110px 1fr 42px;
-                  align-items: center;
-                  gap: 0.7rem;
-                "
-              >
-                <div
-                  style="
-                    font-size: 0.78rem;
-                    color: #666;
-                    text-align: right;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  "
-                >
-                  attempted
-                </div>
-                <div
-                  style="background: #efefef; border-radius: 2rem; height: 9px; overflow: hidden"
-                >
-                  <div
-                    style="width: 100%; background: #353535; height: 100%; border-radius: 2rem"
-                  ></div>
-                </div>
-                <div style="font-size: 0.78rem; font-weight: 600; text-align: right">1,660</div>
-              </div>
-              <div
-                style="
-                  display: grid;
-                  grid-template-columns: 110px 1fr 42px;
-                  align-items: center;
-                  gap: 0.7rem;
-                "
-              >
-                <div
-                  style="
-                    font-size: 0.78rem;
-                    color: #666;
-                    text-align: right;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  "
-                >
-                  passed gate
-                </div>
-                <div
-                  style="background: #efefef; border-radius: 2rem; height: 9px; overflow: hidden"
-                >
-                  <div
-                    style="width: 20.0602%; background: #353535; height: 100%; border-radius: 2rem"
-                  ></div>
-                </div>
-                <div style="font-size: 0.78rem; font-weight: 600; text-align: right">333</div>
-              </div>
-              <div
-                style="
-                  display: grid;
-                  grid-template-columns: 110px 1fr 42px;
-                  align-items: center;
-                  gap: 0.7rem;
-                "
-              >
-                <div
-                  style="
-                    font-size: 0.78rem;
-                    color: #666;
-                    text-align: right;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  "
-                >
-                  published
-                </div>
-                <div
-                  style="background: #efefef; border-radius: 2rem; height: 9px; overflow: hidden"
-                >
-                  <div
-                    style="width: 6.988%; background: #353535; height: 100%; border-radius: 2rem"
-                  ></div>
-                </div>
-                <div style="font-size: 0.78rem; font-weight: 600; text-align: right">116</div>
-              </div>
-              <div
-                style="
-                  display: grid;
-                  grid-template-columns: 110px 1fr 42px;
-                  align-items: center;
-                  gap: 0.7rem;
-                "
-              >
-                <div
-                  style="
-                    font-size: 0.78rem;
-                    color: #666;
-                    text-align: right;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  "
-                >
-                  merged
-                </div>
-                <div
-                  style="background: #efefef; border-radius: 2rem; height: 9px; overflow: hidden"
-                >
-                  <div
-                    style="width: 6.506%; background: #353535; height: 100%; border-radius: 2rem"
-                  ></div>
-                </div>
-                <div style="font-size: 0.78rem; font-weight: 600; text-align: right">108</div>
-              </div>
-            </div>
-          </div>
-          <div
-            style="
-              background: #fff;
-              border-radius: 10px;
-              box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-              padding: 1.5rem 1.6rem;
-            "
-          >
-            <div style="display: flex; justify-content: space-between; align-items: flex-start">
-              <div>
-                <div
-                  style="
-                    font-size: 0.72rem;
-                    letter-spacing: 0.1em;
-                    text-transform: uppercase;
-                    color: #999;
-                    font-weight: 600;
-                    margin-bottom: 0.25rem;
-                  "
-                >
-                  By repository
-                </div>
-                <h2 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 1.25rem">
-                  Outcomes per repo
-                </h2>
-              </div>
-              <div
-                style="
-                  display: flex;
-                  gap: 0.85rem;
-                  flex-wrap: wrap;
-                  font-size: 0.72rem;
-                  color: #666;
-                "
-              >
-                <span style="display: inline-flex; align-items: center; gap: 0.35rem"
-                  ><span
-                    style="width: 9px; height: 9px; border-radius: 2px; background: #4f7d63"
-                  ></span
-                  >landed</span
-                >
-                <span style="display: inline-flex; align-items: center; gap: 0.35rem"
-                  ><span
-                    style="width: 9px; height: 9px; border-radius: 2px; background: #b3873f"
-                  ></span
-                  >quarantined</span
-                >
-                <span style="display: inline-flex; align-items: center; gap: 0.35rem"
-                  ><span
-                    style="width: 9px; height: 9px; border-radius: 2px; background: #d5d5d5"
-                  ></span
-                  >other</span
-                >
-              </div>
-            </div>
-            <div style="display: flex; flex-direction: column; gap: 0.7rem">
-              <div
-                style="
-                  display: grid;
-                  grid-template-columns: 130px 1fr 74px;
-                  align-items: center;
-                  gap: 0.7rem;
-                "
-              >
-                <div
-                  style="
-                    font-size: 0.78rem;
-                    color: #666;
-                    text-align: right;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  "
-                >
-                  Orbit-Wars
-                </div>
-                <div
-                  style="
-                    display: flex;
-                    background: #efefef;
-                    border-radius: 3px;
-                    height: 14px;
-                    overflow: hidden;
-                  "
-                >
-                  <div style="width: 0.3901%; background: #b3873f; height: 100%"></div>
-                  <div style="width: 94.9285%; background: #d5d5d5; height: 100%"></div>
-                </div>
-                <div style="font-size: 0.75rem; text-align: right; color: #666">
-                  <span style="font-weight: 600; color: #353535">733</span> · 0%
-                </div>
-              </div>
-              <div
-                style="
-                  display: grid;
-                  grid-template-columns: 130px 1fr 74px;
-                  align-items: center;
-                  gap: 0.7rem;
-                "
-              >
-                <div
-                  style="
-                    font-size: 0.78rem;
-                    color: #666;
-                    text-align: right;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  "
-                >
-                  afk-agent-system
-                </div>
-                <div
-                  style="
-                    display: flex;
-                    background: #efefef;
-                    border-radius: 3px;
-                    height: 14px;
-                    overflow: hidden;
-                  "
-                >
-                  <div style="width: 8.1925%; background: #4f7d63; height: 100%"></div>
-                  <div style="width: 6.8921%; background: #b3873f; height: 100%"></div>
-                  <div style="width: 84.9155%; background: #d5d5d5; height: 100%"></div>
-                </div>
-                <div style="font-size: 0.75rem; text-align: right; color: #666">
-                  <span style="font-weight: 600; color: #353535">769</span> · 8%
-                </div>
-              </div>
-              <div
-                style="
-                  display: grid;
-                  grid-template-columns: 130px 1fr 74px;
-                  align-items: center;
-                  gap: 0.7rem;
-                "
-              >
-                <div
-                  style="
-                    font-size: 0.78rem;
-                    color: #666;
-                    text-align: right;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  "
-                >
-                  afk-cockpit
-                </div>
-                <div
-                  style="
-                    display: flex;
-                    background: #efefef;
-                    border-radius: 3px;
-                    height: 14px;
-                    overflow: hidden;
-                  "
-                >
-                  <div style="width: 2.6008%; background: #4f7d63; height: 100%"></div>
-                  <div style="width: 5.7217%; background: #d5d5d5; height: 100%"></div>
-                </div>
-                <div style="font-size: 0.75rem; text-align: right; color: #666">
-                  <span style="font-weight: 600; color: #353535">64</span> · 31%
-                </div>
-              </div>
-              <div
-                style="
-                  display: grid;
-                  grid-template-columns: 130px 1fr 74px;
-                  align-items: center;
-                  gap: 0.7rem;
-                "
-              >
-                <div
-                  style="
-                    font-size: 0.78rem;
-                    color: #666;
-                    text-align: right;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  "
-                >
-                  claude-workflow
-                </div>
-                <div
-                  style="
-                    display: flex;
-                    background: #efefef;
-                    border-radius: 3px;
-                    height: 14px;
-                    overflow: hidden;
-                  "
-                >
-                  <div style="width: 1.5605%; background: #4f7d63; height: 100%"></div>
-                  <div style="width: 3.6411%; background: #d5d5d5; height: 100%"></div>
-                </div>
-                <div style="font-size: 0.75rem; text-align: right; color: #666">
-                  <span style="font-weight: 600; color: #353535">40</span> · 30%
-                </div>
-              </div>
-              <div
-                style="
-                  display: grid;
-                  grid-template-columns: 130px 1fr 74px;
-                  align-items: center;
-                  gap: 0.7rem;
-                "
-              >
-                <div
-                  style="
-                    font-size: 0.78rem;
-                    color: #666;
-                    text-align: right;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  "
-                >
-                  household-bms
-                </div>
-                <div
-                  style="
-                    display: flex;
-                    background: #efefef;
-                    border-radius: 3px;
-                    height: 14px;
-                    overflow: hidden;
-                  "
-                >
-                  <div style="width: 1.6905%; background: #4f7d63; height: 100%"></div>
-                  <div style="width: 0.13%; background: #b3873f; height: 100%"></div>
-                  <div style="width: 2.0806%; background: #d5d5d5; height: 100%"></div>
-                </div>
-                <div style="font-size: 0.75rem; text-align: right; color: #666">
-                  <span style="font-weight: 600; color: #353535">30</span> · 43%
-                </div>
-              </div>
-              <div
-                style="
-                  display: grid;
-                  grid-template-columns: 130px 1fr 74px;
-                  align-items: center;
-                  gap: 0.7rem;
-                "
-              >
-                <div
-                  style="
-                    font-size: 0.78rem;
-                    color: #666;
-                    text-align: right;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  "
-                >
-                  my-brain
-                </div>
-                <div
-                  style="
-                    display: flex;
-                    background: #efefef;
-                    border-radius: 3px;
-                    height: 14px;
-                    overflow: hidden;
-                  "
-                >
-                  <div style="width: 1.4304%; background: #b3873f; height: 100%"></div>
-                  <div style="width: 1.6905%; background: #d5d5d5; height: 100%"></div>
-                </div>
-                <div style="font-size: 0.75rem; text-align: right; color: #666">
-                  <span style="font-weight: 600; color: #353535">24</span> · 0%
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ===== ROW: PROPOSAL + QUARANTINE ===== -->
-        <section
-          style="
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.25rem;
-            margin-bottom: 1.25rem;
-          "
-        >
-          <div
-            style="
-              background: #fff;
-              border-radius: 10px;
-              box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-              padding: 1.5rem 1.6rem;
-            "
-          >
-            <div
-              style="
-                font-size: 0.72rem;
-                letter-spacing: 0.1em;
-                text-transform: uppercase;
-                color: #999;
-                font-weight: 600;
-                margin-bottom: 0.25rem;
-              "
-            >
-              Producers
-            </div>
-            <h2 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 1.25rem">
-              Proposal quality
-            </h2>
-            <div style="display: flex; flex-direction: column; gap: 0.62rem">
-              <div
-                style="
-                  display: grid;
-                  grid-template-columns: 100px 1fr 42px;
-                  align-items: center;
-                  gap: 0.7rem;
-                "
-              >
-                <div
-                  style="
-                    font-size: 0.78rem;
-                    color: #666;
-                    text-align: right;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  "
-                >
-                  harvest
-                </div>
-                <div
-                  style="background: #efefef; border-radius: 2rem; height: 9px; overflow: hidden"
-                >
-                  <div
-                    style="width: 1.5%; background: #353535; height: 100%; border-radius: 2rem"
-                  ></div>
-                </div>
-                <div style="font-size: 0.78rem; font-weight: 600; text-align: right">5</div>
-              </div>
-              <div
-                style="
-                  display: grid;
-                  grid-template-columns: 100px 1fr 42px;
-                  align-items: center;
-                  gap: 0.7rem;
-                "
-              >
-                <div
-                  style="
-                    font-size: 0.78rem;
-                    color: #666;
-                    text-align: right;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  "
-                >
-                  mis-sized
-                </div>
-                <div
-                  style="background: #efefef; border-radius: 2rem; height: 9px; overflow: hidden"
-                >
-                  <div
-                    style="width: 10.0543%; background: #353535; height: 100%; border-radius: 2rem"
-                  ></div>
-                </div>
-                <div style="font-size: 0.78rem; font-weight: 600; text-align: right">37</div>
-              </div>
-              <div
-                style="
-                  display: grid;
-                  grid-template-columns: 100px 1fr 42px;
-                  align-items: center;
-                  gap: 0.7rem;
-                "
-              >
-                <div
-                  style="
-                    font-size: 0.78rem;
-                    color: #666;
-                    text-align: right;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  "
-                >
-                  pending
-                </div>
-                <div
-                  style="background: #efefef; border-radius: 2rem; height: 9px; overflow: hidden"
-                >
-                  <div
-                    style="width: 75.5435%; background: #353535; height: 100%; border-radius: 2rem"
-                  ></div>
-                </div>
-                <div style="font-size: 0.78rem; font-weight: 600; text-align: right">278</div>
-              </div>
-              <div
-                style="
-                  display: grid;
-                  grid-template-columns: 100px 1fr 42px;
-                  align-items: center;
-                  gap: 0.7rem;
-                "
-              >
-                <div
-                  style="
-                    font-size: 0.78rem;
-                    color: #666;
-                    text-align: right;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  "
-                >
-                  shipped
-                </div>
-                <div
-                  style="background: #efefef; border-radius: 2rem; height: 9px; overflow: hidden"
-                >
-                  <div
-                    style="width: 100%; background: #353535; height: 100%; border-radius: 2rem"
-                  ></div>
-                </div>
-                <div style="font-size: 0.78rem; font-weight: 600; text-align: right">368</div>
-              </div>
-              <div
-                style="
-                  display: grid;
-                  grid-template-columns: 100px 1fr 42px;
-                  align-items: center;
-                  gap: 0.7rem;
-                "
-              >
-                <div
-                  style="
-                    font-size: 0.78rem;
-                    color: #666;
-                    text-align: right;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  "
-                >
-                  superseded
-                </div>
-                <div
-                  style="background: #efefef; border-radius: 2rem; height: 9px; overflow: hidden"
-                >
-                  <div
-                    style="width: 1.5%; background: #353535; height: 100%; border-radius: 2rem"
-                  ></div>
-                </div>
-                <div style="font-size: 0.78rem; font-weight: 600; text-align: right">1</div>
-              </div>
-            </div>
-          </div>
-          <div
-            style="
-              background: #fff;
-              border-radius: 10px;
-              box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-              padding: 1.5rem 1.6rem;
-            "
-          >
-            <div style="display: flex; justify-content: space-between; align-items: baseline">
-              <div>
-                <div
-                  style="
-                    font-size: 0.72rem;
-                    letter-spacing: 0.1em;
-                    text-transform: uppercase;
-                    color: #b3873f;
-                    font-weight: 600;
-                    margin-bottom: 0.25rem;
-                  "
-                >
-                  Safety axis
-                </div>
-                <h2 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 1.25rem">
-                  Quarantine by category
-                </h2>
-              </div>
-              <span style="font-size: 0.8rem; color: #666">68 total</span>
-            </div>
-            <div style="display: flex; flex-direction: column; gap: 0.62rem">
-              <div
-                style="
-                  display: grid;
-                  grid-template-columns: 165px 1fr 42px;
-                  align-items: center;
-                  gap: 0.7rem;
-                "
-              >
-                <div
-                  style="
-                    font-size: 0.78rem;
-                    color: #666;
-                    text-align: right;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  "
-                >
-                  no-op
-                </div>
-                <div
-                  style="background: #efefef; border-radius: 2rem; height: 9px; overflow: hidden"
-                >
-                  <div
-                    style="width: 100%; background: #b3873f; height: 100%; border-radius: 2rem"
-                  ></div>
-                </div>
-                <div style="font-size: 0.78rem; font-weight: 600; text-align: right">22</div>
-              </div>
-              <div
-                style="
-                  display: grid;
-                  grid-template-columns: 165px 1fr 42px;
-                  align-items: center;
-                  gap: 0.7rem;
-                "
-              >
-                <div
-                  style="
-                    font-size: 0.78rem;
-                    color: #666;
-                    text-align: right;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  "
-                >
-                  other
-                </div>
-                <div
-                  style="background: #efefef; border-radius: 2rem; height: 9px; overflow: hidden"
-                >
-                  <div
-                    style="width: 40.9091%; background: #b3873f; height: 100%; border-radius: 2rem"
-                  ></div>
-                </div>
-                <div style="font-size: 0.78rem; font-weight: 600; text-align: right">9</div>
-              </div>
-              <div
-                style="
-                  display: grid;
-                  grid-template-columns: 165px 1fr 42px;
-                  align-items: center;
-                  gap: 0.7rem;
-                "
-              >
-                <div
-                  style="
-                    font-size: 0.78rem;
-                    color: #666;
-                    text-align: right;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  "
-                >
-                  review
-                </div>
-                <div
-                  style="background: #efefef; border-radius: 2rem; height: 9px; overflow: hidden"
-                >
-                  <div
-                    style="width: 36.3636%; background: #b3873f; height: 100%; border-radius: 2rem"
-                  ></div>
-                </div>
-                <div style="font-size: 0.78rem; font-weight: 600; text-align: right">8</div>
-              </div>
-              <div
-                style="
-                  display: grid;
-                  grid-template-columns: 165px 1fr 42px;
-                  align-items: center;
-                  gap: 0.7rem;
-                "
-              >
-                <div
-                  style="
-                    font-size: 0.78rem;
-                    color: #666;
-                    text-align: right;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  "
-                >
-                  build-crash
-                </div>
-                <div
-                  style="background: #efefef; border-radius: 2rem; height: 9px; overflow: hidden"
-                >
-                  <div
-                    style="width: 31.8182%; background: #b3873f; height: 100%; border-radius: 2rem"
-                  ></div>
-                </div>
-                <div style="font-size: 0.78rem; font-weight: 600; text-align: right">7</div>
-              </div>
-              <div
-                style="
-                  display: grid;
-                  grid-template-columns: 165px 1fr 42px;
-                  align-items: center;
-                  gap: 0.7rem;
-                "
-              >
-                <div
-                  style="
-                    font-size: 0.78rem;
-                    color: #666;
-                    text-align: right;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  "
-                >
-                  setup-crash
-                </div>
-                <div
-                  style="background: #efefef; border-radius: 2rem; height: 9px; overflow: hidden"
-                >
-                  <div
-                    style="width: 18.1818%; background: #b3873f; height: 100%; border-radius: 2rem"
-                  ></div>
-                </div>
-                <div style="font-size: 0.78rem; font-weight: 600; text-align: right">4</div>
-              </div>
-              <div
-                style="
-                  display: grid;
-                  grid-template-columns: 165px 1fr 42px;
-                  align-items: center;
-                  gap: 0.7rem;
-                "
-              >
-                <div
-                  style="
-                    font-size: 0.78rem;
-                    color: #666;
-                    text-align: right;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  "
-                >
-                  idle-timeout
-                </div>
-                <div
-                  style="background: #efefef; border-radius: 2rem; height: 9px; overflow: hidden"
-                >
-                  <div
-                    style="width: 18.1818%; background: #b3873f; height: 100%; border-radius: 2rem"
-                  ></div>
-                </div>
-                <div style="font-size: 0.78rem; font-weight: 600; text-align: right">4</div>
-              </div>
-              <div
-                style="
-                  display: grid;
-                  grid-template-columns: 165px 1fr 42px;
-                  align-items: center;
-                  gap: 0.7rem;
-                "
-              >
-                <div
-                  style="
-                    font-size: 0.78rem;
-                    color: #666;
-                    text-align: right;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  "
-                >
-                  capability
-                </div>
-                <div
-                  style="background: #efefef; border-radius: 2rem; height: 9px; overflow: hidden"
-                >
-                  <div
-                    style="width: 18.1818%; background: #b3873f; height: 100%; border-radius: 2rem"
-                  ></div>
-                </div>
-                <div style="font-size: 0.78rem; font-weight: 600; text-align: right">4</div>
-              </div>
-              <div
-                style="
-                  display: grid;
-                  grid-template-columns: 165px 1fr 42px;
-                  align-items: center;
-                  gap: 0.7rem;
-                "
-              >
-                <div
-                  style="
-                    font-size: 0.78rem;
-                    color: #666;
-                    text-align: right;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  "
-                >
-                  timeout
-                </div>
-                <div
-                  style="background: #efefef; border-radius: 2rem; height: 9px; overflow: hidden"
-                >
-                  <div
-                    style="width: 13.6364%; background: #b3873f; height: 100%; border-radius: 2rem"
-                  ></div>
-                </div>
-                <div style="font-size: 0.78rem; font-weight: 600; text-align: right">3</div>
-              </div>
-              <div
-                style="
-                  display: grid;
-                  grid-template-columns: 165px 1fr 42px;
-                  align-items: center;
-                  gap: 0.7rem;
-                "
-              >
-                <div
-                  style="
-                    font-size: 0.78rem;
-                    color: #666;
-                    text-align: right;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  "
-                >
-                  deny-surface
-                </div>
-                <div
-                  style="background: #efefef; border-radius: 2rem; height: 9px; overflow: hidden"
-                >
-                  <div
-                    style="width: 9.0909%; background: #b3873f; height: 100%; border-radius: 2rem"
-                  ></div>
-                </div>
-                <div style="font-size: 0.78rem; font-weight: 600; text-align: right">2</div>
-              </div>
-              <div
-                style="
-                  display: grid;
-                  grid-template-columns: 165px 1fr 42px;
-                  align-items: center;
-                  gap: 0.7rem;
-                "
-              >
-                <div
-                  style="
-                    font-size: 0.78rem;
-                    color: #666;
-                    text-align: right;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  "
-                >
-                  integration-conflict
-                </div>
-                <div
-                  style="background: #efefef; border-radius: 2rem; height: 9px; overflow: hidden"
-                >
-                  <div
-                    style="width: 4.5455%; background: #b3873f; height: 100%; border-radius: 2rem"
-                  ></div>
-                </div>
-                <div style="font-size: 0.78rem; font-weight: 600; text-align: right">1</div>
-              </div>
-              <div
-                style="
-                  display: grid;
-                  grid-template-columns: 165px 1fr 42px;
-                  align-items: center;
-                  gap: 0.7rem;
-                "
-              >
-                <div
-                  style="
-                    font-size: 0.78rem;
-                    color: #666;
-                    text-align: right;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  "
-                >
-                  security
-                </div>
-                <div
-                  style="background: #efefef; border-radius: 2rem; height: 9px; overflow: hidden"
-                >
-                  <div
-                    style="width: 4.5455%; background: #b3873f; height: 100%; border-radius: 2rem"
-                  ></div>
-                </div>
-                <div style="font-size: 0.78rem; font-weight: 600; text-align: right">1</div>
-              </div>
-              <div
-                style="
-                  display: grid;
-                  grid-template-columns: 165px 1fr 42px;
-                  align-items: center;
-                  gap: 0.7rem;
-                "
-              >
-                <div
-                  style="
-                    font-size: 0.78rem;
-                    color: #666;
-                    text-align: right;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  "
-                >
-                  test-conflict
-                </div>
-                <div
-                  style="background: #efefef; border-radius: 2rem; height: 9px; overflow: hidden"
-                >
-                  <div
-                    style="width: 4.5455%; background: #b3873f; height: 100%; border-radius: 2rem"
-                  ></div>
-                </div>
-                <div style="font-size: 0.78rem; font-weight: 600; text-align: right">1</div>
-              </div>
-              <div
-                style="
-                  display: grid;
-                  grid-template-columns: 165px 1fr 42px;
-                  align-items: center;
-                  gap: 0.7rem;
-                "
-              >
-                <div
-                  style="
-                    font-size: 0.78rem;
-                    color: #666;
-                    text-align: right;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  "
-                >
-                  unrecoverable-signature
-                </div>
-                <div
-                  style="background: #efefef; border-radius: 2rem; height: 9px; overflow: hidden"
-                >
-                  <div
-                    style="width: 4.5455%; background: #b3873f; height: 100%; border-radius: 2rem"
-                  ></div>
-                </div>
-                <div style="font-size: 0.78rem; font-weight: 600; text-align: right">1</div>
-              </div>
-              <div
-                style="
-                  display: grid;
-                  grid-template-columns: 165px 1fr 42px;
-                  align-items: center;
-                  gap: 0.7rem;
-                "
-              >
-                <div
-                  style="
-                    font-size: 0.78rem;
-                    color: #666;
-                    text-align: right;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  "
-                >
-                  coupling
-                </div>
-                <div
-                  style="background: #efefef; border-radius: 2rem; height: 9px; overflow: hidden"
-                >
-                  <div
-                    style="width: 4.5455%; background: #b3873f; height: 100%; border-radius: 2rem"
-                  ></div>
-                </div>
-                <div style="font-size: 0.78rem; font-weight: 600; text-align: right">1</div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ===== ROW: COST ===== -->
-        <section
-          style="
-            display: grid;
-            grid-template-columns: 0.9fr 1.1fr;
-            gap: 1.25rem;
-            margin-bottom: 1.25rem;
-          "
-        >
-          <div
-            style="
-              background: #fff;
-              border-radius: 10px;
-              box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-              padding: 1.5rem 1.6rem;
-            "
-          >
-            <div
-              style="
-                font-size: 0.72rem;
-                letter-spacing: 0.1em;
-                text-transform: uppercase;
-                color: #999;
-                font-weight: 600;
-                margin-bottom: 0.25rem;
-              "
-            >
-              Cost · API-equivalent
-            </div>
-            <h2 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 0.35rem">
-              Spend by model tier
-            </h2>
-            <div style="font-size: 0.82rem; color: #666; margin-bottom: 1.4rem">
-              $558.64 total across the window
-            </div>
-            <div style="display: flex; flex-direction: column; gap: 1rem">
-              <div>
-                <div style="display: flex; justify-content: space-between; margin-bottom: 0.35rem">
-                  <span style="font-size: 0.85rem; font-weight: 600">opus</span>
-                  <span style="font-size: 0.85rem; font-weight: 600">$74.97</span>
-                </div>
-                <div
-                  style="background: #efefef; border-radius: 2rem; height: 14px; overflow: hidden"
-                >
-                  <div
-                    style="width: 15.5002%; background: #353535; height: 100%; border-radius: 2rem"
-                  ></div>
-                </div>
-              </div>
-              <div>
-                <div style="display: flex; justify-content: space-between; margin-bottom: 0.35rem">
-                  <span style="font-size: 0.85rem; font-weight: 600">sonnet</span>
-                  <span style="font-size: 0.85rem; font-weight: 600">$483.67</span>
-                </div>
-                <div
-                  style="background: #efefef; border-radius: 2rem; height: 14px; overflow: hidden"
-                >
-                  <div
-                    style="width: 100%; background: #8fa8c4; height: 100%; border-radius: 2rem"
-                  ></div>
-                </div>
-              </div>
-            </div>
-            <div
-              style="
-                margin-top: 1.5rem;
-                padding-top: 1.25rem;
-                border-top: 1px solid #eee;
-                display: flex;
-                gap: 2rem;
-              "
-            >
-              <div>
-                <div style="font-size: 1.4rem; font-weight: 600">$0.29</div>
-                <div style="font-size: 0.75rem; color: #888">median / turn</div>
-              </div>
-              <div>
-                <div style="font-size: 1.4rem; font-weight: 600">$0.49</div>
-                <div style="font-size: 0.75rem; color: #888">p90 / turn</div>
-              </div>
-              <div>
-                <div style="font-size: 1.4rem; font-weight: 600">1,893</div>
-                <div style="font-size: 0.75rem; color: #888">turns logged</div>
-              </div>
-            </div>
-          </div>
-          <div
-            style="
-              background: #fff;
-              border-radius: 10px;
-              box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-              padding: 1.5rem 1.6rem;
-            "
-          >
-            <div
-              style="
-                font-size: 0.72rem;
-                letter-spacing: 0.1em;
-                text-transform: uppercase;
-                color: #999;
-                font-weight: 600;
-                margin-bottom: 0.25rem;
-              "
-            >
-              Cost dial
-            </div>
-            <h2 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 1.25rem">
-              Per-turn cost distribution
-            </h2>
+          
+        </div>
+        <div class="panel">
+          <div class="panel-head">
             <div>
-              <div style="display: flex; align-items: flex-end; gap: 8px; height: 170px">
-                <div
-                  style="
-                    flex: 1;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: flex-end;
-                    align-items: center;
-                    gap: 0.35rem;
-                    height: 100%;
-                  "
-                >
-                  <div style="font-size: 0.68rem; color: #999">18</div>
-                  <div
-                    style="
-                      width: 100%;
-                      height: 2.356%;
-                      background: #c4d4e6;
-                      border-radius: 3px 3px 0 0;
-                    "
-                  ></div>
-                </div>
-                <div
-                  style="
-                    flex: 1;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: flex-end;
-                    align-items: center;
-                    gap: 0.35rem;
-                    height: 100%;
-                  "
-                >
-                  <div style="font-size: 0.68rem; color: #999">148</div>
-                  <div
-                    style="
-                      width: 100%;
-                      height: 19.3717%;
-                      background: #c4d4e6;
-                      border-radius: 3px 3px 0 0;
-                    "
-                  ></div>
-                </div>
-                <div
-                  style="
-                    flex: 1;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: flex-end;
-                    align-items: center;
-                    gap: 0.35rem;
-                    height: 100%;
-                  "
-                >
-                  <div style="font-size: 0.68rem; color: #999">227</div>
-                  <div
-                    style="
-                      width: 100%;
-                      height: 29.712%;
-                      background: #c4d4e6;
-                      border-radius: 3px 3px 0 0;
-                    "
-                  ></div>
-                </div>
-                <div
-                  style="
-                    flex: 1;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: flex-end;
-                    align-items: center;
-                    gap: 0.35rem;
-                    height: 100%;
-                  "
-                >
-                  <div style="font-size: 0.68rem; color: #999">222</div>
-                  <div
-                    style="
-                      width: 100%;
-                      height: 29.0576%;
-                      background: #c4d4e6;
-                      border-radius: 3px 3px 0 0;
-                    "
-                  ></div>
-                </div>
-                <div
-                  style="
-                    flex: 1;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: flex-end;
-                    align-items: center;
-                    gap: 0.35rem;
-                    height: 100%;
-                  "
-                >
-                  <div style="font-size: 0.68rem; color: #999">374</div>
-                  <div
-                    style="
-                      width: 100%;
-                      height: 48.9529%;
-                      background: #c4d4e6;
-                      border-radius: 3px 3px 0 0;
-                    "
-                  ></div>
-                </div>
-                <div
-                  style="
-                    flex: 1;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: flex-end;
-                    align-items: center;
-                    gap: 0.35rem;
-                    height: 100%;
-                  "
-                >
-                  <div style="font-size: 0.68rem; color: #999">764</div>
-                  <div
-                    style="
-                      width: 100%;
-                      height: 100%;
-                      background: #8fa8c4;
-                      border-radius: 3px 3px 0 0;
-                    "
-                  ></div>
-                </div>
-                <div
-                  style="
-                    flex: 1;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: flex-end;
-                    align-items: center;
-                    gap: 0.35rem;
-                    height: 100%;
-                  "
-                >
-                  <div style="font-size: 0.68rem; color: #999">140</div>
-                  <div
-                    style="
-                      width: 100%;
-                      height: 18.3246%;
-                      background: #8fa8c4;
-                      border-radius: 3px 3px 0 0;
-                    "
-                  ></div>
-                </div>
-              </div>
-              <div style="display: flex; gap: 8px; margin-top: 0.45rem">
-                <div style="flex: 1; font-size: 0.62rem; color: #aaa; text-align: center">
-                  <$.05
-                </div>
-                <div style="flex: 1; font-size: 0.62rem; color: #aaa; text-align: center">
-                  .05–.10
-                </div>
-                <div style="flex: 1; font-size: 0.62rem; color: #aaa; text-align: center">
-                  .10–.15
-                </div>
-                <div style="flex: 1; font-size: 0.62rem; color: #aaa; text-align: center">
-                  .15–.20
-                </div>
-                <div style="flex: 1; font-size: 0.62rem; color: #aaa; text-align: center">
-                  .20–.30
-                </div>
-                <div style="flex: 1; font-size: 0.62rem; color: #aaa; text-align: center">
-                  .30–.50
-                </div>
-                <div style="flex: 1; font-size: 0.62rem; color: #aaa; text-align: center">
-                  $.50+
-                </div>
-              </div>
+              <div class="panel-eyebrow amber">Safety axis</div>
+              <h2>Quarantine by category</h2>
             </div>
+            <span class="panel-badge">209 total</span>
           </div>
-        </section>
+          
+          <div class="hbars" style="--label-w: 165px">
+            
+            <div class="hbar-row">
+              <div class="hbar-label">other</div>
+              <div class="hbar-track"><div class="hbar-fill amber" style="width: 100.0%"></div></div>
+              <div class="hbar-value">77</div>
+            </div>
+            
+            <div class="hbar-row">
+              <div class="hbar-label">no-op</div>
+              <div class="hbar-track"><div class="hbar-fill amber" style="width: 46.75324675324675%"></div></div>
+              <div class="hbar-value">36</div>
+            </div>
+            
+            <div class="hbar-row">
+              <div class="hbar-label">build-crash</div>
+              <div class="hbar-track"><div class="hbar-fill amber" style="width: 20.77922077922078%"></div></div>
+              <div class="hbar-value">16</div>
+            </div>
+            
+            <div class="hbar-row">
+              <div class="hbar-label">capability</div>
+              <div class="hbar-track"><div class="hbar-fill amber" style="width: 20.77922077922078%"></div></div>
+              <div class="hbar-value">16</div>
+            </div>
+            
+            <div class="hbar-row">
+              <div class="hbar-label">integration-conflict</div>
+              <div class="hbar-track"><div class="hbar-fill amber" style="width: 18.181818181818183%"></div></div>
+              <div class="hbar-value">14</div>
+            </div>
+            
+            <div class="hbar-row">
+              <div class="hbar-label">review</div>
+              <div class="hbar-track"><div class="hbar-fill amber" style="width: 15.584415584415584%"></div></div>
+              <div class="hbar-value">12</div>
+            </div>
+            
+            <div class="hbar-row">
+              <div class="hbar-label">setup-crash</div>
+              <div class="hbar-track"><div class="hbar-fill amber" style="width: 12.987012987012985%"></div></div>
+              <div class="hbar-value">10</div>
+            </div>
+            
+            <div class="hbar-row">
+              <div class="hbar-label">test-conflict</div>
+              <div class="hbar-track"><div class="hbar-fill amber" style="width: 7.792207792207792%"></div></div>
+              <div class="hbar-value">6</div>
+            </div>
+            
+            <div class="hbar-row">
+              <div class="hbar-label">deny-surface</div>
+              <div class="hbar-track"><div class="hbar-fill amber" style="width: 6.493506493506493%"></div></div>
+              <div class="hbar-value">5</div>
+            </div>
+            
+            <div class="hbar-row">
+              <div class="hbar-label">idle-timeout</div>
+              <div class="hbar-track"><div class="hbar-fill amber" style="width: 5.194805194805195%"></div></div>
+              <div class="hbar-value">4</div>
+            </div>
+            
+            <div class="hbar-row">
+              <div class="hbar-label">timeout</div>
+              <div class="hbar-track"><div class="hbar-fill amber" style="width: 5.194805194805195%"></div></div>
+              <div class="hbar-value">4</div>
+            </div>
+            
+            <div class="hbar-row">
+              <div class="hbar-label">scope</div>
+              <div class="hbar-track"><div class="hbar-fill amber" style="width: 3.896103896103896%"></div></div>
+              <div class="hbar-value">3</div>
+            </div>
+            
+            <div class="hbar-row">
+              <div class="hbar-label">coupling</div>
+              <div class="hbar-track"><div class="hbar-fill amber" style="width: 2.5974025974025974%"></div></div>
+              <div class="hbar-value">2</div>
+            </div>
+            
+            <div class="hbar-row">
+              <div class="hbar-label">unrecoverable-signature</div>
+              <div class="hbar-track"><div class="hbar-fill amber" style="width: 2.5974025974025974%"></div></div>
+              <div class="hbar-value">2</div>
+            </div>
+            
+            <div class="hbar-row">
+              <div class="hbar-label">flaky-test</div>
+              <div class="hbar-track"><div class="hbar-fill amber" style="width: 1.5%"></div></div>
+              <div class="hbar-value">1</div>
+            </div>
+            
+            <div class="hbar-row">
+              <div class="hbar-label">security</div>
+              <div class="hbar-track"><div class="hbar-fill amber" style="width: 1.5%"></div></div>
+              <div class="hbar-value">1</div>
+            </div>
+            
+          </div>
+          
+        </div>
+      </section>
 
-        <!-- ===== ROW: OPUS % + THROUGHPUT ===== -->
-        <section
-          style="
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.25rem;
-            margin-bottom: 1.25rem;
-          "
-        >
-          <div
-            style="
-              background: #fff;
-              border-radius: 10px;
-              box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-              padding: 1.5rem 1.6rem;
-            "
-          >
-            <div
-              style="
-                font-size: 0.72rem;
-                letter-spacing: 0.1em;
-                text-transform: uppercase;
-                color: #999;
-                font-weight: 600;
-                margin-bottom: 0.25rem;
-              "
-            >
-              Model mix
-            </div>
-            <h2 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 1.25rem">
-              Opus share by day
-            </h2>
+      <section class="row row-2">
+        <div class="panel">
+          <div class="panel-head">
             <div>
-              <svg
-                viewBox="0 0 560 150"
-                preserveAspectRatio="none"
-                style="width: 100%; height: 150px; display: block"
-              >
-                <line x1="6" y1="6" x2="554" y2="6" stroke="#eee" stroke-width="1"></line>
-                <line x1="6" y1="75" x2="554" y2="75" stroke="#f4f4f4" stroke-width="1"></line>
-                <path
-                  d="M 6,144 L 6,6 L 24.896552,6 L 43.793103,6 L 62.689655,6 L 81.586207,6 L 100.482759,6 L 119.37931,13.314 L 138.275862,34.428 L 157.172414,24.492 L 176.068966,36.222 L 194.965517,22.008 L 213.862069,83.418 L 232.758621,30.15 L 251.655172,35.808 L 270.551724,25.182 L 289.448276,34.428 L 308.344828,33.6 L 327.241379,52.782 L 346.137931,34.014 L 365.034483,6 L 383.931034,24.63 L 402.827586,26.148 L 421.724138,18.558 L 440.62069,13.728 L 459.517241,17.73 L 478.413793,9.726 L 497.310345,6.69 L 516.206897,14.004 L 535.103448,6.552 L 554,10.968 L 554,144 Z"
-                  fill="rgba(196,212,230,0.35)"
-                ></path>
-                <polyline
-                  points="6,6 24.896552,6 43.793103,6 62.689655,6 81.586207,6 100.482759,6 119.37931,13.314 138.275862,34.428 157.172414,24.492 176.068966,36.222 194.965517,22.008 213.862069,83.418 232.758621,30.15 251.655172,35.808 270.551724,25.182 289.448276,34.428 308.344828,33.6 327.241379,52.782 346.137931,34.014 365.034483,6 383.931034,24.63 402.827586,26.148 421.724138,18.558 440.62069,13.728 459.517241,17.73 478.413793,9.726 497.310345,6.69 516.206897,14.004 535.103448,6.552 554,10.968"
-                  fill="none"
-                  stroke="#8fa8c4"
-                  stroke-width="2"
-                  stroke-linejoin="round"
-                  stroke-linecap="round"
-                ></polyline>
-              </svg>
-              <div
-                style="
-                  display: flex;
-                  justify-content: space-between;
-                  font-size: 0.62rem;
-                  color: #aaa;
-                  margin-top: 0.3rem;
-                "
-              >
-                <span>May 31</span><span>range: 44%–100%</span><span>Jul 1</span>
-              </div>
+              <div class="panel-eyebrow">Retries &amp; recovery</div>
+              <h2>Runs per issue</h2>
+            </div>
+            <span class="panel-badge">1.23 avg runs/issue</span>
+          </div>
+          
+          <div>
+            <div class="vcols-bars">
+              
+              <div class="vcol" style="height: 100.0%" title="1 run(s): 456 issues"></div>
+              
+              <div class="vcol" style="height: 21.710526315789476%" title="2 run(s): 99 issues"></div>
+              
+              <div class="vcol" style="height: 3.070175438596491%" title="3 run(s): 14 issues"></div>
+              
+              <div class="vcol" style="height: 1%" title="4 run(s): 1 issues"></div>
+              
+              <div class="vcol" style="height: 1%" title="5 run(s): 1 issues"></div>
+              
+            </div>
+            <div class="vcols-labels">
+              <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
             </div>
           </div>
-          <div
-            style="
-              background: #fff;
-              border-radius: 10px;
-              box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-              padding: 1.5rem 1.6rem;
-            "
-          >
-            <div style="display: flex; justify-content: space-between; align-items: baseline">
-              <div>
-                <div
-                  style="
-                    font-size: 0.72rem;
-                    letter-spacing: 0.1em;
-                    text-transform: uppercase;
-                    color: #999;
-                    font-weight: 600;
-                    margin-bottom: 0.25rem;
-                  "
-                >
-                  Throughput
-                </div>
-                <h2 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 1.25rem">
-                  Slices per day
-                </h2>
-              </div>
-              <span style="font-size: 0.8rem; color: #666">1,660 total</span>
-            </div>
-            <div>
-              <div style="display: flex; align-items: flex-end; gap: 2px; height: 150px">
-                <div
-                  title="06-01: 9"
-                  style="
-                    flex: 1;
-                    height: 5.625%;
-                    background: #353535;
-                    border-radius: 2px 2px 0 0;
-                    min-width: 3px;
-                  "
-                ></div>
-                <div
-                  title="06-03: 12"
-                  style="
-                    flex: 1;
-                    height: 7.5%;
-                    background: #353535;
-                    border-radius: 2px 2px 0 0;
-                    min-width: 3px;
-                  "
-                ></div>
-                <div
-                  title="06-04: 19"
-                  style="
-                    flex: 1;
-                    height: 11.875%;
-                    background: #353535;
-                    border-radius: 2px 2px 0 0;
-                    min-width: 3px;
-                  "
-                ></div>
-                <div
-                  title="06-05: 6"
-                  style="
-                    flex: 1;
-                    height: 3.75%;
-                    background: #353535;
-                    border-radius: 2px 2px 0 0;
-                    min-width: 3px;
-                  "
-                ></div>
-                <div
-                  title="06-07: 76"
-                  style="
-                    flex: 1;
-                    height: 47.5%;
-                    background: #353535;
-                    border-radius: 2px 2px 0 0;
-                    min-width: 3px;
-                  "
-                ></div>
-                <div
-                  title="06-08: 75"
-                  style="
-                    flex: 1;
-                    height: 46.875%;
-                    background: #353535;
-                    border-radius: 2px 2px 0 0;
-                    min-width: 3px;
-                  "
-                ></div>
-                <div
-                  title="06-09: 97"
-                  style="
-                    flex: 1;
-                    height: 60.625%;
-                    background: #353535;
-                    border-radius: 2px 2px 0 0;
-                    min-width: 3px;
-                  "
-                ></div>
-                <div
-                  title="06-10: 26"
-                  style="
-                    flex: 1;
-                    height: 16.25%;
-                    background: #353535;
-                    border-radius: 2px 2px 0 0;
-                    min-width: 3px;
-                  "
-                ></div>
-                <div
-                  title="06-11: 2"
-                  style="
-                    flex: 1;
-                    height: 1.25%;
-                    background: #353535;
-                    border-radius: 2px 2px 0 0;
-                    min-width: 3px;
-                  "
-                ></div>
-                <div
-                  title="06-12: 15"
-                  style="
-                    flex: 1;
-                    height: 9.375%;
-                    background: #353535;
-                    border-radius: 2px 2px 0 0;
-                    min-width: 3px;
-                  "
-                ></div>
-                <div
-                  title="06-13: 5"
-                  style="
-                    flex: 1;
-                    height: 3.125%;
-                    background: #353535;
-                    border-radius: 2px 2px 0 0;
-                    min-width: 3px;
-                  "
-                ></div>
-                <div
-                  title="06-14: 6"
-                  style="
-                    flex: 1;
-                    height: 3.75%;
-                    background: #353535;
-                    border-radius: 2px 2px 0 0;
-                    min-width: 3px;
-                  "
-                ></div>
-                <div
-                  title="06-15: 4"
-                  style="
-                    flex: 1;
-                    height: 2.5%;
-                    background: #353535;
-                    border-radius: 2px 2px 0 0;
-                    min-width: 3px;
-                  "
-                ></div>
-                <div
-                  title="06-16: 90"
-                  style="
-                    flex: 1;
-                    height: 56.25%;
-                    background: #353535;
-                    border-radius: 2px 2px 0 0;
-                    min-width: 3px;
-                  "
-                ></div>
-                <div
-                  title="06-17: 95"
-                  style="
-                    flex: 1;
-                    height: 59.375%;
-                    background: #353535;
-                    border-radius: 2px 2px 0 0;
-                    min-width: 3px;
-                  "
-                ></div>
-                <div
-                  title="06-18: 117"
-                  style="
-                    flex: 1;
-                    height: 73.125%;
-                    background: #353535;
-                    border-radius: 2px 2px 0 0;
-                    min-width: 3px;
-                  "
-                ></div>
-                <div
-                  title="06-19: 71"
-                  style="
-                    flex: 1;
-                    height: 44.375%;
-                    background: #353535;
-                    border-radius: 2px 2px 0 0;
-                    min-width: 3px;
-                  "
-                ></div>
-                <div
-                  title="06-20: 46"
-                  style="
-                    flex: 1;
-                    height: 28.75%;
-                    background: #353535;
-                    border-radius: 2px 2px 0 0;
-                    min-width: 3px;
-                  "
-                ></div>
-                <div
-                  title="06-21: 44"
-                  style="
-                    flex: 1;
-                    height: 27.5%;
-                    background: #353535;
-                    border-radius: 2px 2px 0 0;
-                    min-width: 3px;
-                  "
-                ></div>
-                <div
-                  title="06-22: 100"
-                  style="
-                    flex: 1;
-                    height: 62.5%;
-                    background: #353535;
-                    border-radius: 2px 2px 0 0;
-                    min-width: 3px;
-                  "
-                ></div>
-                <div
-                  title="06-23: 33"
-                  style="
-                    flex: 1;
-                    height: 20.625%;
-                    background: #353535;
-                    border-radius: 2px 2px 0 0;
-                    min-width: 3px;
-                  "
-                ></div>
-                <div
-                  title="06-24: 95"
-                  style="
-                    flex: 1;
-                    height: 59.375%;
-                    background: #353535;
-                    border-radius: 2px 2px 0 0;
-                    min-width: 3px;
-                  "
-                ></div>
-                <div
-                  title="06-25: 91"
-                  style="
-                    flex: 1;
-                    height: 56.875%;
-                    background: #353535;
-                    border-radius: 2px 2px 0 0;
-                    min-width: 3px;
-                  "
-                ></div>
-                <div
-                  title="06-26: 80"
-                  style="
-                    flex: 1;
-                    height: 50%;
-                    background: #353535;
-                    border-radius: 2px 2px 0 0;
-                    min-width: 3px;
-                  "
-                ></div>
-                <div
-                  title="06-27: 6"
-                  style="
-                    flex: 1;
-                    height: 3.75%;
-                    background: #353535;
-                    border-radius: 2px 2px 0 0;
-                    min-width: 3px;
-                  "
-                ></div>
-                <div
-                  title="06-28: 91"
-                  style="
-                    flex: 1;
-                    height: 56.875%;
-                    background: #353535;
-                    border-radius: 2px 2px 0 0;
-                    min-width: 3px;
-                  "
-                ></div>
-                <div
-                  title="06-29: 132"
-                  style="
-                    flex: 1;
-                    height: 82.5%;
-                    background: #353535;
-                    border-radius: 2px 2px 0 0;
-                    min-width: 3px;
-                  "
-                ></div>
-                <div
-                  title="06-30: 157"
-                  style="
-                    flex: 1;
-                    height: 98.125%;
-                    background: #353535;
-                    border-radius: 2px 2px 0 0;
-                    min-width: 3px;
-                  "
-                ></div>
-                <div
-                  title="07-01: 60"
-                  style="
-                    flex: 1;
-                    height: 37.5%;
-                    background: #353535;
-                    border-radius: 2px 2px 0 0;
-                    min-width: 3px;
-                  "
-                ></div>
-              </div>
-              <div style="display: flex; gap: 2px; margin-top: 0.4rem">
-                <div
-                  style="
-                    flex: 1;
-                    min-width: 3px;
-                    font-size: 0.6rem;
-                    color: #aaa;
-                    text-align: center;
-                    white-space: nowrap;
-                  "
-                >
-                  06-01
-                </div>
-                <div
-                  style="
-                    flex: 1;
-                    min-width: 3px;
-                    font-size: 0.6rem;
-                    color: #aaa;
-                    text-align: center;
-                    white-space: nowrap;
-                  "
-                ></div>
-                <div
-                  style="
-                    flex: 1;
-                    min-width: 3px;
-                    font-size: 0.6rem;
-                    color: #aaa;
-                    text-align: center;
-                    white-space: nowrap;
-                  "
-                ></div>
-                <div
-                  style="
-                    flex: 1;
-                    min-width: 3px;
-                    font-size: 0.6rem;
-                    color: #aaa;
-                    text-align: center;
-                    white-space: nowrap;
-                  "
-                ></div>
-                <div
-                  style="
-                    flex: 1;
-                    min-width: 3px;
-                    font-size: 0.6rem;
-                    color: #aaa;
-                    text-align: center;
-                    white-space: nowrap;
-                  "
-                >
-                  06-07
-                </div>
-                <div
-                  style="
-                    flex: 1;
-                    min-width: 3px;
-                    font-size: 0.6rem;
-                    color: #aaa;
-                    text-align: center;
-                    white-space: nowrap;
-                  "
-                ></div>
-                <div
-                  style="
-                    flex: 1;
-                    min-width: 3px;
-                    font-size: 0.6rem;
-                    color: #aaa;
-                    text-align: center;
-                    white-space: nowrap;
-                  "
-                ></div>
-                <div
-                  style="
-                    flex: 1;
-                    min-width: 3px;
-                    font-size: 0.6rem;
-                    color: #aaa;
-                    text-align: center;
-                    white-space: nowrap;
-                  "
-                ></div>
-                <div
-                  style="
-                    flex: 1;
-                    min-width: 3px;
-                    font-size: 0.6rem;
-                    color: #aaa;
-                    text-align: center;
-                    white-space: nowrap;
-                  "
-                >
-                  06-11
-                </div>
-                <div
-                  style="
-                    flex: 1;
-                    min-width: 3px;
-                    font-size: 0.6rem;
-                    color: #aaa;
-                    text-align: center;
-                    white-space: nowrap;
-                  "
-                ></div>
-                <div
-                  style="
-                    flex: 1;
-                    min-width: 3px;
-                    font-size: 0.6rem;
-                    color: #aaa;
-                    text-align: center;
-                    white-space: nowrap;
-                  "
-                ></div>
-                <div
-                  style="
-                    flex: 1;
-                    min-width: 3px;
-                    font-size: 0.6rem;
-                    color: #aaa;
-                    text-align: center;
-                    white-space: nowrap;
-                  "
-                ></div>
-                <div
-                  style="
-                    flex: 1;
-                    min-width: 3px;
-                    font-size: 0.6rem;
-                    color: #aaa;
-                    text-align: center;
-                    white-space: nowrap;
-                  "
-                >
-                  06-15
-                </div>
-                <div
-                  style="
-                    flex: 1;
-                    min-width: 3px;
-                    font-size: 0.6rem;
-                    color: #aaa;
-                    text-align: center;
-                    white-space: nowrap;
-                  "
-                ></div>
-                <div
-                  style="
-                    flex: 1;
-                    min-width: 3px;
-                    font-size: 0.6rem;
-                    color: #aaa;
-                    text-align: center;
-                    white-space: nowrap;
-                  "
-                ></div>
-                <div
-                  style="
-                    flex: 1;
-                    min-width: 3px;
-                    font-size: 0.6rem;
-                    color: #aaa;
-                    text-align: center;
-                    white-space: nowrap;
-                  "
-                ></div>
-                <div
-                  style="
-                    flex: 1;
-                    min-width: 3px;
-                    font-size: 0.6rem;
-                    color: #aaa;
-                    text-align: center;
-                    white-space: nowrap;
-                  "
-                >
-                  06-19
-                </div>
-                <div
-                  style="
-                    flex: 1;
-                    min-width: 3px;
-                    font-size: 0.6rem;
-                    color: #aaa;
-                    text-align: center;
-                    white-space: nowrap;
-                  "
-                ></div>
-                <div
-                  style="
-                    flex: 1;
-                    min-width: 3px;
-                    font-size: 0.6rem;
-                    color: #aaa;
-                    text-align: center;
-                    white-space: nowrap;
-                  "
-                ></div>
-                <div
-                  style="
-                    flex: 1;
-                    min-width: 3px;
-                    font-size: 0.6rem;
-                    color: #aaa;
-                    text-align: center;
-                    white-space: nowrap;
-                  "
-                ></div>
-                <div
-                  style="
-                    flex: 1;
-                    min-width: 3px;
-                    font-size: 0.6rem;
-                    color: #aaa;
-                    text-align: center;
-                    white-space: nowrap;
-                  "
-                >
-                  06-23
-                </div>
-                <div
-                  style="
-                    flex: 1;
-                    min-width: 3px;
-                    font-size: 0.6rem;
-                    color: #aaa;
-                    text-align: center;
-                    white-space: nowrap;
-                  "
-                ></div>
-                <div
-                  style="
-                    flex: 1;
-                    min-width: 3px;
-                    font-size: 0.6rem;
-                    color: #aaa;
-                    text-align: center;
-                    white-space: nowrap;
-                  "
-                ></div>
-                <div
-                  style="
-                    flex: 1;
-                    min-width: 3px;
-                    font-size: 0.6rem;
-                    color: #aaa;
-                    text-align: center;
-                    white-space: nowrap;
-                  "
-                ></div>
-                <div
-                  style="
-                    flex: 1;
-                    min-width: 3px;
-                    font-size: 0.6rem;
-                    color: #aaa;
-                    text-align: center;
-                    white-space: nowrap;
-                  "
-                >
-                  06-27
-                </div>
-                <div
-                  style="
-                    flex: 1;
-                    min-width: 3px;
-                    font-size: 0.6rem;
-                    color: #aaa;
-                    text-align: center;
-                    white-space: nowrap;
-                  "
-                ></div>
-                <div
-                  style="
-                    flex: 1;
-                    min-width: 3px;
-                    font-size: 0.6rem;
-                    color: #aaa;
-                    text-align: center;
-                    white-space: nowrap;
-                  "
-                ></div>
-                <div
-                  style="
-                    flex: 1;
-                    min-width: 3px;
-                    font-size: 0.6rem;
-                    color: #aaa;
-                    text-align: center;
-                    white-space: nowrap;
-                  "
-                ></div>
-                <div
-                  style="
-                    flex: 1;
-                    min-width: 3px;
-                    font-size: 0.6rem;
-                    color: #aaa;
-                    text-align: center;
-                    white-space: nowrap;
-                  "
-                >
-                  07-01
-                </div>
-              </div>
-            </div>
+          
+        </div>
+        <div class="panel">
+          <div class="panel-eyebrow">Retries &amp; recovery</div>
+          <h2 style="margin-bottom: 0.35rem">Quarantine → retry rescue</h2>
+          <div class="cost-sub">retry rescues 58% of first-run quarantines · 98% of those actually retried</div>
+          <div class="cost-stats" style="margin-top: 1.25rem">
+            <div><div class="cost-stat-value">71%</div><div class="cost-stat-label">first-try pass rate</div></div>
+            <div><div class="cost-stat-value">17%</div><div class="cost-stat-label">final-state quarantine (issues)</div></div>
+            <div><div class="cost-stat-value">30%</div><div class="cost-stat-label">quarantine rate (runs)</div></div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <!-- ===== ROW: TOKENS ===== -->
-        <section
-          style="
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-            padding: 1.5rem 1.6rem;
-            margin-bottom: 1.5rem;
-          "
-        >
-          <div
-            style="
-              display: flex;
-              justify-content: space-between;
-              align-items: flex-start;
-              flex-wrap: wrap;
-              gap: 1rem;
-            "
-          >
-            <div>
-              <div
-                style="
-                  font-size: 0.72rem;
-                  letter-spacing: 0.1em;
-                  text-transform: uppercase;
-                  color: #999;
-                  font-weight: 600;
-                  margin-bottom: 0.25rem;
-                "
-              >
-                Context cost
-              </div>
-              <h2 style="font-size: 1.15rem; font-weight: 600; margin: 0 0 0.35rem">
-                Tokens by type, per day
-              </h2>
-              <div style="font-size: 0.82rem; color: #666">
-                5.08B tokens ·
-                <strong style="font-weight: 600; color: #353535">95.7% cache reads</strong> — the
-                context is overwhelmingly cached
-              </div>
+      <section class="row row-cost">
+        <div class="panel">
+          <div class="panel-eyebrow">Cost · API-equivalent</div>
+          <div class="cost-caption">fleet telemetry · per attempt · —</div>
+          <h2 style="margin-bottom: 0.35rem">Spend by model tier</h2>
+          <div class="cost-sub">$1,613.76 total across the window</div>
+          
+          <div class="tier-bars">
+            
+            <div class="tier-row ">
+              <div class="tier-head"><span>sonnet</span><span>$814.41 · avg $1.28/attempt · n=637 attempts</span></div>
+              <div class="tier-track"><div class="tier-fill  " style="width: 100.0%"></div></div>
             </div>
-            <div
-              style="display: flex; gap: 0.85rem; flex-wrap: wrap; font-size: 0.72rem; color: #666"
-            >
-              <span style="display: inline-flex; align-items: center; gap: 0.35rem"
-                ><span
-                  style="width: 9px; height: 9px; border-radius: 2px; background: #c4d4e6"
-                ></span
-                >cache read</span
-              >
-              <span style="display: inline-flex; align-items: center; gap: 0.35rem"
-                ><span
-                  style="width: 9px; height: 9px; border-radius: 2px; background: #8fa8c4"
-                ></span
-                >cache write</span
-              >
-              <span style="display: inline-flex; align-items: center; gap: 0.35rem"
-                ><span
-                  style="width: 9px; height: 9px; border-radius: 2px; background: #6b6b6b"
-                ></span
-                >input</span
-              >
-              <span style="display: inline-flex; align-items: center; gap: 0.35rem"
-                ><span
-                  style="width: 9px; height: 9px; border-radius: 2px; background: #353535"
-                ></span
-                >output</span
-              >
+            
+            <div class="tier-row ">
+              <div class="tier-head"><span>untiered</span><span>$674.64 · avg $1.69/attempt · n=399 attempts</span></div>
+              <div class="tier-track"><div class="tier-fill accent2 " style="width: 82.8373211948691%"></div></div>
+            </div>
+            
+            <div class="tier-row ">
+              <div class="tier-head"><span>opus</span><span>$124.71 · avg $2.35/attempt · n=53 attempts</span></div>
+              <div class="tier-track"><div class="tier-fill  " style="width: 15.312272482912775%"></div></div>
+            </div>
+            
+            <div class="tier-row orchestrator">
+              <div class="tier-head"><span>orchestrator / scout ops</span><span>$142.27</span></div>
+              <div class="tier-track"><div class="tier-fill  orchestrator" style="width: 100%"></div></div>
+            </div>
+            
+          </div>
+          
+          <div class="cost-caption" style="margin-top: 1.5rem">Claude Code transcripts, afk worktrees only · per API call · —</div>
+          <div class="cost-stats">
+            <div><div class="cost-stat-value">$0.03</div><div class="cost-stat-label">median / call</div></div>
+            <div><div class="cost-stat-value">$0.08</div><div class="cost-stat-label">p90 / call</div></div>
+            <div><div class="cost-stat-value">47,376</div><div class="cost-stat-label">calls logged</div></div>
+          </div>
+          <div class="cost-whole-machine">whole machine, all projects: $6,268.80 across 68,955 calls</div>
+        </div>
+        <div class="panel">
+          <div class="panel-eyebrow">Cost dial</div>
+          <h2>Per-API-call cost distribution</h2>
+          
+          <div>
+            <div class="perturn-bars">
+              
+              <div class="perturn-col">
+                <div class="perturn-value">37376</div>
+                <div class="perturn-bar " style="height: 100.0%"></div>
+              </div>
+              
+              <div class="perturn-col">
+                <div class="perturn-value">7470</div>
+                <div class="perturn-bar " style="height: 19.986087328767123%"></div>
+              </div>
+              
+              <div class="perturn-col">
+                <div class="perturn-value">2007</div>
+                <div class="perturn-bar " style="height: 5.369755993150685%"></div>
+              </div>
+              
+              <div class="perturn-col">
+                <div class="perturn-value">365</div>
+                <div class="perturn-bar " style="height: 2%"></div>
+              </div>
+              
+              <div class="perturn-col">
+                <div class="perturn-value">126</div>
+                <div class="perturn-bar " style="height: 2%"></div>
+              </div>
+              
+              <div class="perturn-col">
+                <div class="perturn-value">30</div>
+                <div class="perturn-bar accent2" style="height: 2%"></div>
+              </div>
+              
+              <div class="perturn-col">
+                <div class="perturn-value">2</div>
+                <div class="perturn-bar accent2" style="height: 2%"></div>
+              </div>
+              
+            </div>
+            <div class="perturn-labels">
+              <span><$.05</span><span>.05–.10</span><span>.10–.15</span><span>.15–.20</span><span>.20–.30</span><span>.30–.50</span><span>$.50+</span>
             </div>
           </div>
-          <div style="margin-top: 1.25rem">
-            <svg
-              viewBox="0 0 1140 210"
-              preserveAspectRatio="none"
-              style="width: 100%; height: 210px; display: block"
-            >
-              <path
-                d="M 6,203.467321 L 44.896552,149.98006 L 83.793103,153.583478 L 122.689655,142.804558 L 161.586207,172.634594 L 200.482759,163.516379 L 239.37931,37.678747 L 278.275862,135.723057 L 317.172414,94.017408 L 356.068966,149.792056 L 394.965517,199.017883 L 433.862069,168.467163 L 472.758621,195.477132 L 511.655172,201.367938 L 550.551724,201.837949 L 589.448276,163.359709 L 628.344828,124.912803 L 667.241379,129.518911 L 706.137931,186.640924 L 745.034483,202.903307 L 783.931034,191.99905 L 822.827586,166.148441 L 861.724138,106.11236 L 900.62069,95.427441 L 939.517241,131.273619 L 978.413793,189.30432 L 1017.310345,9.791423 L 1056.206897,172.415256 L 1095.103448,164.769742 L 1134,194.505776 L 1134,204 1134,204 L 1095.103448,204 L 1056.206897,204 L 1017.310345,204 L 978.413793,204 L 939.517241,204 L 900.62069,204 L 861.724138,204 L 822.827586,204 L 783.931034,204 L 745.034483,204 L 706.137931,204 L 667.241379,204 L 628.344828,204 L 589.448276,204 L 550.551724,204 L 511.655172,204 L 472.758621,204 L 433.862069,204 L 394.965517,204 L 356.068966,204 L 317.172414,204 L 278.275862,204 L 239.37931,204 L 200.482759,204 L 161.586207,204 L 122.689655,204 L 83.793103,204 L 44.896552,204 L 6,204 Z"
-                fill="#c4d4e6"
-                opacity="0.85"
-              ></path>
-              <path
-                d="M 6,203.247982 L 44.896552,148.100016 L 83.793103,152.236113 L 122.689655,140.767843 L 161.586207,171.537902 L 200.482759,161.636335 L 239.37931,32.069948 L 278.275862,133.811679 L 317.172414,90.006647 L 356.068966,147.504668 L 394.965517,198.673208 L 433.862069,166.618452 L 472.758621,195.007121 L 511.655172,201.179934 L 550.551724,201.618611 L 589.448276,161.322994 L 628.344828,121.998734 L 667.241379,126.761513 L 706.137931,185.450229 L 745.034483,202.809305 L 783.931034,190.871024 L 822.827586,164.174395 L 861.724138,102.414939 L 900.62069,92.544706 L 939.517241,130.239595 L 978.413793,188.646305 L 1017.310345,6.84602 L 1056.206897,170.691882 L 1095.103448,162.764361 L 1134,193.440418 L 1134,194.505776 1134,194.505776 L 1095.103448,164.769742 L 1056.206897,172.415256 L 1017.310345,9.791423 L 978.413793,189.30432 L 939.517241,131.273619 L 900.62069,95.427441 L 861.724138,106.11236 L 822.827586,166.148441 L 783.931034,191.99905 L 745.034483,202.903307 L 706.137931,186.640924 L 667.241379,129.518911 L 628.344828,124.912803 L 589.448276,163.359709 L 550.551724,201.837949 L 511.655172,201.367938 L 472.758621,195.477132 L 433.862069,168.467163 L 394.965517,199.017883 L 356.068966,149.792056 L 317.172414,94.017408 L 278.275862,135.723057 L 239.37931,37.678747 L 200.482759,163.516379 L 161.586207,172.634594 L 122.689655,142.804558 L 83.793103,153.583478 L 44.896552,149.98006 L 6,203.467321 Z"
-                fill="#8fa8c4"
-              ></path>
-              <path
-                d="M 6,203.247982 L 44.896552,148.006014 L 83.793103,152.110777 L 122.689655,140.51717 L 161.586207,171.475233 L 200.482759,161.510999 L 239.37931,31.505934 L 278.275862,133.498338 L 317.172414,89.473967 L 356.068966,147.253996 L 394.965517,198.61054 L 433.862069,166.430448 L 472.758621,194.944453 L 511.655172,201.117265 L 550.551724,201.587276 L 589.448276,160.915651 L 628.344828,121.622725 L 667.241379,126.291502 L 706.137931,185.324893 L 745.034483,202.777971 L 783.931034,190.714354 L 822.827586,164.049058 L 861.724138,102.258269 L 900.62069,92.388036 L 939.517241,130.176927 L 978.413793,188.614971 L 1017.310345,6.68935 L 1056.206897,170.535211 L 1095.103448,162.576357 L 1134,193.37775 L 1134,193.440418 1134,193.440418 L 1095.103448,162.764361 L 1056.206897,170.691882 L 1017.310345,6.84602 L 978.413793,188.646305 L 939.517241,130.239595 L 900.62069,92.544706 L 861.724138,102.414939 L 822.827586,164.174395 L 783.931034,190.871024 L 745.034483,202.809305 L 706.137931,185.450229 L 667.241379,126.761513 L 628.344828,121.998734 L 589.448276,161.322994 L 550.551724,201.618611 L 511.655172,201.179934 L 472.758621,195.007121 L 433.862069,166.618452 L 394.965517,198.673208 L 356.068966,147.504668 L 317.172414,90.006647 L 278.275862,133.811679 L 239.37931,32.069948 L 200.482759,161.636335 L 161.586207,171.537902 L 122.689655,140.767843 L 83.793103,152.236113 L 44.896552,148.100016 L 6,203.247982 Z"
-                fill="#6b6b6b"
-              ></path>
-              <path
-                d="M 6,203.185314 L 44.896552,147.661339 L 83.793103,151.860104 L 122.689655,140.20383 L 161.586207,171.318563 L 200.482759,161.29166 L 239.37931,30.597246 L 278.275862,132.934325 L 317.172414,88.72195 L 356.068966,146.783985 L 394.965517,198.547871 L 433.862069,166.085773 L 472.758621,194.819117 L 511.655172,201.054597 L 550.551724,201.555942 L 589.448276,160.414306 L 628.344828,121.090046 L 667.241379,125.570818 L 706.137931,185.168223 L 745.034483,202.746637 L 783.931034,190.557683 L 822.827586,163.704384 L 861.724138,101.600253 L 900.62069,91.886691 L 939.517241,129.863586 L 978.413793,188.4583 L 1017.310345,6 L 1056.206897,170.284539 L 1095.103448,162.357019 L 1134,193.189745 L 1134,193.37775 1134,193.37775 L 1095.103448,162.576357 L 1056.206897,170.535211 L 1017.310345,6.68935 L 978.413793,188.614971 L 939.517241,130.176927 L 900.62069,92.388036 L 861.724138,102.258269 L 822.827586,164.049058 L 783.931034,190.714354 L 745.034483,202.777971 L 706.137931,185.324893 L 667.241379,126.291502 L 628.344828,121.622725 L 589.448276,160.915651 L 550.551724,201.587276 L 511.655172,201.117265 L 472.758621,194.944453 L 433.862069,166.430448 L 394.965517,198.61054 L 356.068966,147.253996 L 317.172414,89.473967 L 278.275862,133.498338 L 239.37931,31.505934 L 200.482759,161.510999 L 161.586207,171.475233 L 122.689655,140.51717 L 83.793103,152.110777 L 44.896552,148.006014 L 6,203.247982 Z"
-                fill="#353535"
-              ></path>
-            </svg>
-          </div>
-        </section>
+          
+        </div>
+      </section>
 
-        <footer style="color: #999; font-size: 0.78rem; line-height: 1.5; padding-top: 0.5rem">
-          Generated by afk-cockpit · redesigned on the charleslikesdata system. Quarantines are a
-          safety signal (afk refused to ship), not failures. Cost is API-equivalent (notional on a
-          Pro subscription).
-        </footer>
-      </main>
-    </div>
+      <section class="row row-2">
+        <div class="panel">
+          <div class="panel-eyebrow">Model mix</div>
+          <h2>Opus share by day</h2>
+          
+          <div class="nodata">no data yet</div>
+          
+        </div>
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <div class="panel-eyebrow">Throughput</div>
+              <h2>Slices per day</h2>
+            </div>
+            <span class="panel-badge">705 runs</span>
+          </div>
+          
+          <div class="nodata">no data yet</div>
+          
+        </div>
+      </section>
+
+      <section class="panel" style="margin-bottom: 1.5rem">
+        <div class="token-head">
+          <div>
+            <div class="panel-eyebrow">Context cost</div>
+            <h2 style="margin-bottom: 0.35rem">Tokens by type, per day</h2>
+            
+          </div>
+          <div class="legend">
+            <span class="legend-item"><span class="legend-swatch" style="background: var(--accent)"></span>cache read</span>
+            <span class="legend-item"><span class="legend-swatch" style="background: var(--accent2)"></span>cache write</span>
+            <span class="legend-item"><span class="legend-swatch" style="background: var(--soft)"></span>input</span>
+            <span class="legend-item"><span class="legend-swatch" style="background: var(--ink)"></span>output</span>
+          </div>
+        </div>
+        
+        <div class="nodata">no data yet</div>
+        
+      </section>
+    </main>
+
+    <footer>
+      Generated by afk-cockpit. Quarantines are a safety signal (afk refused
+      to ship), not failures. Cost is API-equivalent (notional on a Pro
+      subscription).
+      
+      
+      built 2026-07-06 02:10 UTC · data through —
+    </footer>
   </body>
 </html>
