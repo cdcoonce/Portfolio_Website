@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [2.1.1] - 2026-07-06
+
+### Changed
+- Refreshed the Weather-Adjusted Generation Analytics project card to reflect
+  the mixed-technology fleet (wind, solar, battery, gas) driven by real hourly
+  Open-Meteo weather: updated description, on-card metrics (4 technologies /
+  12 assets / 3 contracted marts / capacity-by-technology), and added the
+  "Analytics Dashboards" tag.
+
 ## [2.1.0] - 2026-07-03
 
 ### Added

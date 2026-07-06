@@ -160,54 +160,58 @@
     ]
   },
   "waga": {
-    "eyebrow": "WEATHER-ADJUSTED GENERATION · ELT",
+    "eyebrow": "MIXED-FLEET GENERATION · ELT",
     "pill": "Snowflake",
-    "headline": "Renewable output, weather-normalized",
-    "subtitle": "dlt ingestion into Snowflake, transformed with dbt through a semantic layer, orchestrated by Dagster.",
+    "headline": "Wind, solar, battery & gas — weather-driven",
+    "subtitle": "Real hourly Open-Meteo weather drives a physics-based fleet; dlt into Snowflake, contracted dbt marts, orchestrated by Dagster.",
     "tiles": [
       {
-        "value": "2",
-        "label": "dlt sources"
-      },
-      {
-        "value": "8",
-        "label": "dbt models",
+        "value": "4",
+        "label": "technologies",
         "accent": true
       },
       {
-        "value": "2",
-        "label": "Perf marts"
+        "value": "12",
+        "label": "fleet assets"
       },
       {
-        "value": "4",
-        "label": "Test modules"
+        "value": "3",
+        "label": "contracted marts"
+      },
+      {
+        "value": "146",
+        "label": "unit tests"
       }
     ],
     "blocks": [
       {
         "type": "bars",
-        "title": "PIPELINE STAGES",
+        "title": "CAPACITY BY TECHNOLOGY (MW)",
         "items": [
           {
-            "label": "Extract · dlt sources",
-            "value": 2
+            "label": "Wind",
+            "value": 450
           },
           {
-            "label": "Transform · dbt models",
-            "value": 8
+            "label": "Solar",
+            "value": 270
           },
           {
-            "label": "Marts · perf tables",
-            "value": 2
+            "label": "Gas",
+            "value": 290
+          },
+          {
+            "label": "Battery",
+            "value": 160
           }
         ]
       },
       {
         "type": "chips",
         "items": [
-          "Snowflake warehouse",
-          "dbt semantic layer",
-          "Polars analytics"
+          "Open-Meteo ERA5 weather",
+          "dbt contracts",
+          "Polars physics engine"
         ]
       }
     ]
