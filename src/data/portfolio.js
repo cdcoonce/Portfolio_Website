@@ -72,9 +72,10 @@ export const projects = [
     imageContain: false,
     slug: 'housing',
     tags: ['Python', 'Data Pipelines', 'Machine Learning', 'Data Visualization'],
-    href: 'https://github.com/cdcoonce/housing-commute-analysis',
+    href: 'https://housing-commute-explorer.pages.dev',
     featured: true,
     links: [
+      { label: 'View Explorer', href: 'https://housing-commute-explorer.pages.dev' },
       {
         label: 'View Repository',
         href: 'https://github.com/cdcoonce/housing-commute-analysis',

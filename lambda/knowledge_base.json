@@ -190,7 +190,7 @@
         "**Testing & CI:** pytest (288 tests), GitHub Actions, Ruff",
         "**Environment management:** uv"
       ],
-      "url": "https://github.com/cdcoonce/housing-commute-analysis",
+      "url": "https://housing-commute-explorer.pages.dev",
       "skills_demonstrated": [
         "Data Engineering & Pipelines",
         "Panel Econometrics & Statistical Inference",

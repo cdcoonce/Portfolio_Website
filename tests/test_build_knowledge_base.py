@@ -192,7 +192,7 @@ class TestLoadProject:
         assert project["featured"] is True
         assert len(project["summary"]) > 0
         assert len(project["technologies"]) > 0
-        assert "github.com" in project["url"]
+        assert project["url"].startswith("https://")
         assert len(project["skills_demonstrated"]) > 0
 
     def test_in_progress_project(self):

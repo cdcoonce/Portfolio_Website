@@ -79,8 +79,10 @@ Mapping census tract-level data to ZCTA boundaries required GeoPandas spatial jo
 
 ## Links
 
+- **Interactive explorer:** https://housing-commute-explorer.pages.dev — per-metro event studies, two-phase coefficients, and bootstrap-survival badges for RQ4
 - **GitHub:** https://github.com/cdcoonce/housing-commute-analysis
 - **Full findings:** https://github.com/cdcoonce/housing-commute-analysis/blob/main/docs/findings.md
+- **Working paper (PDF):** https://github.com/cdcoonce/housing-commute-analysis/blob/main/docs/paper/covid-commute-gradient-repricing.pdf
 
 ## Skills Demonstrated
 
