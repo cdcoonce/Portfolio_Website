@@ -37,17 +37,21 @@ export default function Testimonials() {
   const current = testimonials[index];
 
   return (
-    <div className="testimonials">
+    <div className="testimonials" data-testid="testimonials">
       <div className="testimonial-card">
         <div className="testimonial-card__mark" aria-hidden="true">
           &ldquo;
         </div>
-        <blockquote className="testimonial-card__quote">{current.quote}</blockquote>
+        <blockquote className="testimonial-card__quote" data-testid="testimonial-quote">
+          {current.quote}
+        </blockquote>
         <div className="testimonial-card__footer">
           <div className="testimonial-card__person">
             <Avatar person={current} />
             <div>
-              <div className="testimonial-card__author">{current.author}</div>
+              <div className="testimonial-card__author" data-testid="testimonial-author">
+                {current.author}
+              </div>
               <div className="testimonial-card__meta">
                 {current.job}, {current.company}
               </div>

@@ -5,7 +5,7 @@ const isExternal = (href) => /^https?:\/\//.test(href || '');
 /** Contact tab: low-key ways to reach out — card grid, no job-seeking framing. */
 export default function Contact() {
   return (
-    <div className="contact">
+    <div className="contact" data-testid="contact">
       <div className="contact__intro">
         <h2 className="contact__title">Get in touch</h2>
         <p className="contact__lead">
@@ -19,6 +19,7 @@ export default function Contact() {
             key={c.label}
             className="contact-card"
             href={c.href}
+            data-testid="contact-card"
             {...(isExternal(c.href) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
           >
             <div>

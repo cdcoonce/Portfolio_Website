@@ -11,6 +11,7 @@ export default function ProjectCard({ project }) {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`${title} — opens in a new tab`}
+      data-testid="project-card"
     >
       <div className="project-card__media">
         {slug ? (

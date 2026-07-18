@@ -23,7 +23,7 @@ export default function Work() {
   };
 
   return (
-    <div className="work">
+    <div className="work" data-testid="work">
       <aside className="work-rail">
         <div className="work-search">
           <span className="work-search__icon" aria-hidden="true">
@@ -36,6 +36,7 @@ export default function Work() {
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search work…"
             aria-label="Search work"
+            data-testid="work-search"
           />
         </div>
         <div>
@@ -49,6 +50,7 @@ export default function Work() {
                   className={`rail-item${active ? ' rail-item--active' : ''}`}
                   aria-pressed={active}
                   onClick={() => setFilter(f.key)}
+                  data-testid={`rail-${f.key}`}
                 >
                   <span>{f.label}</span>
                   <span className="rail-item__count">{countFor(gallery, f.key)}</span>
@@ -60,18 +62,20 @@ export default function Work() {
       </aside>
 
       <div className="work-main">
-        <div className="work-count">{countLabel}</div>
+        <div className="work-count" data-testid="work-count">
+          {countLabel}
+        </div>
         {filtered.length > 0 ? (
-          <div className="work-grid">
+          <div className="work-grid" data-testid="work-grid">
             {filtered.map((p) => (
               <ProjectCard key={p.title} project={p} />
             ))}
           </div>
         ) : (
-          <div className="work-empty">
+          <div className="work-empty" data-testid="work-empty">
             <div className="work-empty__title">No projects match your search</div>
             <div className="work-empty__hint">Try a different keyword or clear the filters.</div>
-            <Button variant="ghost" size="sm" onClick={clear}>
+            <Button variant="ghost" size="sm" onClick={clear} data-testid="work-clear">
               Clear filters
             </Button>
           </div>

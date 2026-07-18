@@ -17,10 +17,10 @@ export default function Overview() {
   const external = isExternal(current.href);
 
   return (
-    <div className="overview">
-      <div className="metrics">
+    <div className="overview" data-testid="overview">
+      <div className="metrics" data-testid="metrics">
         {metrics.map((m) => (
-          <div className="metric" key={m.label}>
+          <div className="metric" key={m.label} data-testid="metric">
             <div className="metric__value">{m.value}</div>
             <div className="metric__label">{m.label}</div>
           </div>
@@ -62,7 +62,7 @@ export default function Overview() {
             </div>
           )}
         </div>
-        <div className="featured">
+        <div className="featured" data-testid="featured">
           {current.slug ? (
             <Cockpit slug={current.slug} className="featured__cockpit" />
           ) : (

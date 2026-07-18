@@ -45,10 +45,51 @@ jobs:
       - name: Build site (Astro)
         run: npm run build
 
+  e2e:
+    name: E2E (Playwright)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Build the static site once; the pytest fixtures serve dist/ directly
+      # (E2E_SKIP_BUILD=1 tells them not to rebuild).
+      - name: Build site (Astro)
+        run: npm run build
+
+      - name: Set up uv (Python 3.11)
+        uses: astral-sh/setup-uv@v4
+        with:
+          python-version: '3.11.9'
+
+      - name: Install Python test deps
+        run: uv sync --frozen
+
+      - name: Install Playwright browser
+        run: uv run playwright install --with-deps chromium
+
+      # DOM/browser suite only: e2e (tab switching, carousels, chat, gallery),
+      # validation (built-HTML SEO/semantics), a11y (axe). Excludes `slow`
+      # (external link checks + visual snapshots) for deterministic CI runs.
+      - name: Run E2E suite against built dist
+        env:
+          E2E_SKIP_BUILD: '1'
+        run: uv run pytest tests/ -m "e2e or validation or a11y" -p no:cacheprovider
+
   deploy:
     name: Deploy to gh-pages
     runs-on: ubuntu-latest
-    needs: check
+    needs: [check, e2e]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     permissions:
       contents: write
