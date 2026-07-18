@@ -18,6 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - Compressed the mobile profile hero — smaller avatar, `clamp()`-scaled name,
   tighter spacing — so navigation and project proof surface without a
   full-screen scroll.
+- Collapsed the hero role to a single `Analytics Engineer @ Clearway Energy`
+  title (was `Analyst · Analytics Engineer · Solutions Architect`) so the
+  headline matches the data/analytics-engineering work the Work grid proves.
+  The Experience-tab timeline keeps the full factual role.
 
 ### Added
 
