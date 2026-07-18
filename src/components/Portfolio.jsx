@@ -13,8 +13,8 @@ export default function Portfolio() {
   const [view, setView] = useState('overview');
 
   return (
-    <div className="portfolio">
-      <header className="profile">
+    <div className="portfolio" data-testid="portfolio">
+      <header className="profile" data-testid="profile">
         <div className="profile__avatar-ring">
           <img
             className="profile__avatar"
@@ -31,8 +31,8 @@ export default function Portfolio() {
             Analyst · Analytics Engineer · Solutions Architect @ Clearway Energy
           </p>
           <p className="profile__bio">
-            I build scalable data pipelines, turn raw data into clear visual insights, and help teams
-            make informed decisions.
+            I build scalable data pipelines, turn raw data into clear visual insights, and help
+            teams make informed decisions.
           </p>
           <div className="profile__actions">
             <Button
@@ -69,20 +69,21 @@ export default function Portfolio() {
         </div>
       </header>
 
-      <nav className="tabbar" aria-label="Portfolio sections">
+      <nav className="tabbar" aria-label="Portfolio sections" data-testid="tabbar">
         {navItems.map((n) => (
           <button
             key={n.key}
             className={`tabbar__tab${view === n.key ? ' tabbar__tab--active' : ''}`}
             aria-current={view === n.key ? 'page' : undefined}
             onClick={() => setView(n.key)}
+            data-testid={`tab-${n.key}`}
           >
             {n.label}
           </button>
         ))}
       </nav>
 
-      <div className="tabpanel">
+      <div className="tabpanel" data-testid="tabpanel">
         {view === 'overview' && <Overview onSeeWork={() => setView('work')} />}
         {view === 'work' && <Work />}
         {view === 'experience' && <Experience />}
@@ -91,7 +92,7 @@ export default function Portfolio() {
         {view === 'contact' && <Contact />}
       </div>
 
-      <footer className="site-footer">
+      <footer className="site-footer" data-testid="site-footer">
         <p>Copyright © 2026 Charles Coonce. All Rights Reserved.</p>
       </footer>
     </div>

@@ -85,7 +85,7 @@ export default function AskAI() {
   };
 
   return (
-    <div className="askai">
+    <div className="askai" data-testid="askai">
       <aside className="askai__sidebar">
         <div className="askai__sidebar-title">Suggested topics</div>
         {presetGroups.map((g) => (
@@ -98,6 +98,7 @@ export default function AskAI() {
                   className="askai__preset"
                   onClick={() => ask(label)}
                   disabled={locked}
+                  data-testid="askai-preset"
                 >
                   {label}
                 </button>
@@ -122,9 +123,19 @@ export default function AskAI() {
           </span>
         </div>
 
-        <div className="askai__messages" ref={scrollRef} aria-live="polite" role="log">
+        <div
+          className="askai__messages"
+          ref={scrollRef}
+          aria-live="polite"
+          role="log"
+          data-testid="askai-messages"
+        >
           {messages.map((m, i) => (
-            <div className={`msg msg--${m.role}`} key={`${m.role}-${i}`}>
+            <div
+              className={`msg msg--${m.role}`}
+              key={`${m.role}-${i}`}
+              data-testid={`msg-${m.role}`}
+            >
               {m.role === 'assistant' && (
                 <div className="msg__avatar" aria-hidden="true">
                   ✦
@@ -141,7 +152,7 @@ export default function AskAI() {
             </div>
           ))}
           {typing && (
-            <div className="msg msg--assistant">
+            <div className="msg msg--assistant" data-testid="askai-typing">
               <div className="msg__avatar" aria-hidden="true">
                 ✦
               </div>
@@ -166,12 +177,13 @@ export default function AskAI() {
               maxLength={1000}
               autoComplete="off"
               disabled={locked}
+              data-testid="askai-input"
             />
-            <Button size="sm" onClick={() => ask(draft)} disabled={locked}>
+            <Button size="sm" onClick={() => ask(draft)} disabled={locked} data-testid="askai-send">
               Send
             </Button>
           </div>
-          <p className="askai__hint">
+          <p className="askai__hint" data-testid="askai-hint">
             {notice || 'Press Enter to send · answers from my live assistant.'}
           </p>
         </div>
