@@ -187,8 +187,8 @@ class TestLoadProject:
         filepath = CONTEXT_DIR / "housing-affordability.md"
         project = load_project(filepath)
         assert project["title"] == "Housing Affordability & Commute Trade-Off Analysis"
-        assert project["type"] == "Capstone Project — Arizona State University"
-        assert project["status"] == "Complete"
+        assert project["type"].startswith("Independent Research")
+        assert project["status"] == "Active"
         assert project["featured"] is True
         assert len(project["summary"]) > 0
         assert len(project["technologies"]) > 0

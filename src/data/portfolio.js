@@ -65,13 +65,25 @@ export const projects = [
   },
   {
     title: 'Housing Affordability & Commute',
-    date: 'Dec 2025',
+    date: 'Jul 2026',
     description:
-      'DAT 490 capstone: a reproducible pipeline integrating ACS income, Zillow rent, and OpenStreetMap transit data across four U.S. metros to model rent-burden and commute tradeoffs with ETL, regression, and spatial visualization.',
+      'A nine-metro econometric study of the housing-commute trade-off — a reproducible pipeline joining Census ACS, Zillow rents, OpenStreetMap transit, and LODES employment data into ZCTA panels, culminating in a fixed-effects analysis showing COVID repriced rents toward the periphery and never reversed course.',
     image: '/assets/projects/housing-commute.png',
     imageContain: false,
-    tags: ['Python', 'Machine Learning', 'Data Visualization'],
+    slug: 'housing',
+    tags: ['Python', 'Data Pipelines', 'Machine Learning', 'Data Visualization'],
     href: 'https://github.com/cdcoonce/housing-commute-analysis',
+    featured: true,
+    links: [
+      {
+        label: 'View Repository',
+        href: 'https://github.com/cdcoonce/housing-commute-analysis',
+      },
+      {
+        label: 'Read the Findings',
+        href: 'https://github.com/cdcoonce/housing-commute-analysis/blob/main/docs/findings.md',
+      },
+    ],
   },
   {
     title: 'Wine Quality Analysis',

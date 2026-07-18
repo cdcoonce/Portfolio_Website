@@ -202,6 +202,68 @@
       }
     ]
   },
+  "housing": {
+    "eyebrow": "HOUSING × COMMUTE · ECONOMETRICS",
+    "pill": "Python",
+    "headline": "Did COVID reprice the commute?",
+    "subtitle": "Nine metros, ZCTA grain: ACS + Zillow + OSM + LODES → panel fixed-effects with honesty rails.",
+    "tiles": [
+      {
+        "value": "9",
+        "label": "Metros"
+      },
+      {
+        "value": "103K",
+        "label": "Panel rows",
+        "accent": true
+      },
+      {
+        "value": "138",
+        "label": "Months of rents"
+      },
+      {
+        "value": "288",
+        "label": "Tests"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "bars",
+        "title": "RQ4 IDENTIFYING ZCTAS · TOP 5 OF 9 METROS",
+        "items": [
+          {
+            "label": "Los Angeles",
+            "value": 121
+          },
+          {
+            "label": "Phoenix",
+            "value": 92
+          },
+          {
+            "label": "Atlanta",
+            "value": 86
+          },
+          {
+            "label": "Dallas-Fort Worth",
+            "value": 80
+          },
+          {
+            "label": "Miami",
+            "value": 73
+          }
+        ]
+      },
+      {
+        "type": "chips",
+        "items": [
+          "Two-way fixed effects",
+          "Event-study pre-trends",
+          "Wild cluster bootstrap",
+          "Renter-weighted robustness"
+        ]
+      }
+    ]
+  },
   "my-brain": {
     "eyebrow": "MY-BRAIN · SECOND BRAIN",
     "pill": "Obsidian",
