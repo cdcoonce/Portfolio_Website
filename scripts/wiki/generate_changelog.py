@@ -104,23 +104,31 @@ def _fetch_git_log(repo_root: Path, max_commits: int = 50) -> list[dict]:
     return commits
 
 
-def generate(repo_root: Path) -> str:
+def generate(repo_root: Path, commits: list[dict] | None = None) -> str:
     """Generate Changelog.md content block for the wiki.
 
-    Calls git log, parses conventional commit messages, groups by type,
-    and returns a Markdown changelog showing the last 50 commits.
+    Parses conventional commit records, groups them by type, and returns a
+    Markdown changelog. When ``commits`` is not supplied, the last 50 commits
+    are read from ``git log``; passing an explicit list lets callers (and
+    tests) exercise the grouping/rendering logic deterministically without
+    depending on live repository history.
 
     Parameters
     ----------
     repo_root : Path
         Absolute path to the repository root.
+    commits : list[dict] | None, optional
+        Pre-built commit records (keys: ``sha``, ``subject``, ``body``,
+        ``author``, ``date``, ``type``). Defaults to ``None``, which fetches
+        the last 50 commits from ``git log``.
 
     Returns
     -------
     str
         Markdown string suitable for insertion into the generated block.
     """
-    commits = _fetch_git_log(repo_root, max_commits=50)
+    if commits is None:
+        commits = _fetch_git_log(repo_root, max_commits=50)
     lines: list[str] = []
 
     if not commits:

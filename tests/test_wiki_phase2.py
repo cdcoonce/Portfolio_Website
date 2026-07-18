@@ -325,14 +325,46 @@ class TestGenerateChangelog:
         )
 
     def test_has_feat_commits(self):
-        """Output contains feat section (repo has feat commits)."""
-        output = generate_changelog.generate(REPO_ROOT)
-        assert "Features" in output
+        """A feat commit is rendered under the Features section.
+
+        Drives the generator with a synthetic commit list so the grouping
+        logic is asserted deterministically, independent of the live 50-commit
+        git window (which may contain only chore/content commits).
+        """
+        commits = [
+            {
+                "sha": "abc12345",
+                "subject": "feat(carousel): add keyboard navigation",
+                "body": "add keyboard navigation",
+                "author": "Test Author",
+                "date": "2026-01-01",
+                "type": "feat",
+            }
+        ]
+        output = generate_changelog.generate(REPO_ROOT, commits=commits)
+        assert "### Features" in output
+        assert "add keyboard navigation" in output
 
     def test_has_fix_commits(self):
-        """Output contains fix section (repo has fix commits)."""
-        output = generate_changelog.generate(REPO_ROOT)
-        assert "Bug Fixes" in output
+        """A fix commit is rendered under the Bug Fixes section.
+
+        Drives the generator with a synthetic commit list so the grouping
+        logic is asserted deterministically, independent of the live 50-commit
+        git window (which may contain only chore/content commits).
+        """
+        commits = [
+            {
+                "sha": "def67890",
+                "subject": "fix(chat): handle empty response payload",
+                "body": "handle empty response payload",
+                "author": "Test Author",
+                "date": "2026-01-02",
+                "type": "fix",
+            }
+        ]
+        output = generate_changelog.generate(REPO_ROOT, commits=commits)
+        assert "### Bug Fixes" in output
+        assert "handle empty response payload" in output
 
     def test_has_dates(self):
         """Output contains ISO date strings."""
