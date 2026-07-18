@@ -23,7 +23,6 @@ NAV_LABELS = ["Overview", "Work", "Experience", "Testimonials", "Ask AI", "Conta
 GALLERY_COUNT = 22
 # WORK_FILTERS = "all" + 7 categories.
 WORK_FILTER_COUNT = 8
-METRIC_COUNT = 4
 SKILL_CATEGORY_COUNT = 4
 EXPERIENCE_ROW_COUNT = 3
 CONTACT_CARD_COUNT = 4

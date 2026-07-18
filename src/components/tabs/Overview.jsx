@@ -2,14 +2,19 @@ import { useState } from 'react';
 import Button from '../Button.jsx';
 import Tag from '../Tag.jsx';
 import Cockpit from '../Cockpit.jsx';
-import { metrics, projects } from '../../data/portfolio.js';
+import { projects } from '../../data/portfolio.js';
 import { featuredProjects } from '../../lib/featured.js';
 import { nextIndex, prevIndex } from '../../lib/carousel.js';
 
 const isExternal = (href) => /^https?:\/\//.test(href || '');
+const galleryCount = projects.filter((p) => !p.hideFromGallery).length;
 
-/** Overview tab: at-a-glance metrics + a rotating featured-project spotlight. */
-export default function Overview() {
+/**
+ * Overview tab: leads with a rotating featured-project spotlight (evidence-grade
+ * cockpit metrics), then a CTA into the full Work grid.
+ * @param {{ onSeeWork?: () => void }} props
+ */
+export default function Overview({ onSeeWork }) {
   const featured = featuredProjects(projects);
   const [index, setIndex] = useState(0);
   const current = featured[index] ?? projects[0];
@@ -18,15 +23,6 @@ export default function Overview() {
 
   return (
     <div className="overview" data-testid="overview">
-      <div className="metrics" data-testid="metrics">
-        {metrics.map((m) => (
-          <div className="metric" key={m.label} data-testid="metric">
-            <div className="metric__value">{m.value}</div>
-            <div className="metric__label">{m.label}</div>
-          </div>
-        ))}
-      </div>
-
       <div>
         <div className="featured-head">
           <div className="eyebrow">Featured project</div>
@@ -103,6 +99,17 @@ export default function Overview() {
             )}
           </div>
         </div>
+      </div>
+
+      <div className="overview__more">
+        <Button
+          variant="ghost"
+          onClick={onSeeWork}
+          className="overview__see-work"
+          data-testid="overview-see-work"
+        >
+          See all {galleryCount} projects &rarr;
+        </Button>
       </div>
     </div>
   );
