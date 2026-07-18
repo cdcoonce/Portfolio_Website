@@ -43,8 +43,8 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-12);
-  padding: var(--space-16) var(--space-4) var(--space-8);
+  gap: var(--space-6);
+  padding: var(--space-8) var(--space-4) var(--space-6);
   flex-wrap: wrap;
   text-align: center;
 }
@@ -57,8 +57,8 @@ a {
 }
 
 .profile__avatar {
-  width: 156px;
-  height: 156px;
+  width: 116px;
+  height: 116px;
   border-radius: var(--radius-round);
   object-fit: cover;
 }
@@ -75,7 +75,7 @@ a {
 }
 
 .profile__name {
-  font-size: 2.75rem;
+  font-size: clamp(2rem, 7vw, 2.75rem);
   font-weight: var(--weight-semibold);
   color: var(--text-heading);
   margin: 0.1rem 0 0.4rem;
@@ -126,7 +126,14 @@ a {
 
 @media (min-width: 700px) {
   .profile {
+    gap: var(--space-12);
+    padding: var(--space-16) var(--space-4) var(--space-8);
     text-align: left;
+  }
+
+  .profile__avatar {
+    width: 156px;
+    height: 156px;
   }
 
   .profile__actions {
@@ -223,6 +230,10 @@ a {
   border-bottom: 1px solid var(--border-hairline);
   overflow-x: auto;
   scrollbar-width: none;
+
+  /* Right-edge fade signals the tab row scrolls on narrow screens, so Ask AI
+     and Contact aren't silently clipped off-screen. Removed once tabs fit. */
+  mask-image: linear-gradient(to right, #000 84%, transparent);
 }
 
 .tabbar::-webkit-scrollbar {
@@ -260,6 +271,7 @@ a {
   .tabbar {
     justify-content: center;
     gap: 2.25rem;
+    mask-image: none;
   }
 }
 
@@ -296,30 +308,9 @@ a {
   gap: var(--space-8);
 }
 
-.metrics {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-4);
-}
-
-.metric {
-  background: var(--surface-muted);
-  border-radius: var(--radius-card);
-  padding: 1.4rem 1.5rem;
-  text-align: center;
-}
-
-.metric__value {
-  font-size: 2rem;
-  font-weight: var(--weight-semibold);
-  color: var(--text-heading);
-  line-height: 1;
-}
-
-.metric__label {
-  font-size: var(--text-xs);
-  color: var(--text-muted);
-  margin-top: 0.35rem;
+.overview__more {
+  display: flex;
+  justify-content: center;
 }
 
 .featured-head {
@@ -416,12 +407,6 @@ a {
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-top: var(--space-2);
-}
-
-@media (min-width: 620px) {
-  .metrics {
-    grid-template-columns: repeat(4, 1fr);
-  }
 }
 
 @media (min-width: 800px) {

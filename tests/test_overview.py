@@ -1,23 +1,17 @@
-"""Overview tab: metrics grid + featured-project spotlight carousel.
+"""Overview tab: featured-project spotlight carousel + see-all-work CTA.
 
 The Overview panel is the active tab on load (no switch needed), rendered as
-static HTML that Astro then hydrates. It shows a fixed grid of metric tiles and
-a rotating spotlight whose current slide is either a Cockpit <svg> or an <img>.
-Project titles are intentionally not hard-asserted — the data may reorder — so
-these tests exercise structure, counts, and carousel wiring instead.
+static HTML that Astro then hydrates. It leads with a rotating spotlight whose
+current slide is either a Cockpit <svg> or an <img>, then a CTA into the Work
+grid. Project titles are intentionally not hard-asserted — the data may reorder
+— so these tests exercise structure, counts, and carousel wiring instead.
 """
 
 import pytest
 
-from helpers import FEATURED_COUNT, METRIC_COUNT, switch_tab
+from helpers import FEATURED_COUNT, switch_tab
 
 pytestmark = pytest.mark.e2e
-
-
-def test_metrics_grid_present(page):
-    metrics = page.locator('[data-testid="metrics"]')
-    assert metrics.is_visible()
-    assert page.locator('[data-testid="metric"]').count() == METRIC_COUNT
 
 
 def test_featured_spotlight_renders(page):
@@ -65,5 +59,13 @@ def test_returning_to_overview_still_renders(page):
     # Overview unmounts when another tab is active; switching back re-mounts it.
     switch_tab(page, "work")
     switch_tab(page, "overview")
-    assert page.locator('[data-testid="metrics"]').is_visible()
     assert page.locator('[data-testid="featured"]').is_visible()
+
+
+def test_see_all_work_cta_switches_to_work(page):
+    # The Overview CTA is the promoted path into the full project grid.
+    cta = page.locator('[data-testid="overview-see-work"]')
+    assert cta.is_visible()
+    cta.click()
+    assert page.locator('[data-testid="work"]').is_visible()
+    assert page.locator('[data-testid="overview"]').count() == 0

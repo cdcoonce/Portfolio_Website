@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [2.2.0] - 2026-07-18
+
+### Changed
+
+- Overview now leads with the featured-project spotlight (evidence-grade cockpit
+  metrics) instead of the at-a-glance stat tiles. Removed the `20+ / 5+ / 18 /
+1.8M+` vanity metric strip and its `metrics` data export so the default view
+  opens on demonstrated proof (e.g. AFK's 498 merged PRs, $3.58 / PR).
+- Compressed the mobile profile hero — smaller avatar, `clamp()`-scaled name,
+  tighter spacing — so navigation and project proof surface without a
+  full-screen scroll.
+
+### Added
+
+- "See all N projects" call-to-action on the Overview tab that routes into the
+  Work grid, wiring the previously-unused `onSeeWork` handoff.
+- Right-edge fade affordance on the mobile tab bar so the horizontally
+  scrollable tabs (Ask AI, Contact) are no longer silently clipped off-screen.
+
 ## [2.1.2] - 2026-07-06
 
 ### Added
