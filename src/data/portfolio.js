@@ -52,11 +52,11 @@ export const projects = [
     featured: true,
   },
   {
-    title: 'my-brain — Second-Brain Knowledge System',
+    title: 'The Vault — Second Brain Knowledge System',
     date: 'Jul 2026',
     description:
       'A graph-first Obsidian vault wired to a Claude Code automation layer — interlinked notes and wikilinks spanning every life domain, auto-committed and synced across two machines by a session hook, with custom skills, agents, and hooks doing the upkeep.',
-    slug: 'my-brain',
+    slug: 'the-vault',
     tags: ['Obsidian', 'AI Tooling'],
     href: 'https://github.com/cdcoonce/second-brain',
     featured: true,

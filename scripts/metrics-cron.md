@@ -10,7 +10,7 @@ is recomputed from its source repo by
 | afk             | `./afk-cockpit/index.html`           | header stats, cost tile, per-repo attempts (scraped; repo is private) |
 | claude-workflow | `~/Developer/GitHub/claude-workflow` | skills, presets, `def test_` count, commits, preset/persona lists     |
 | oura            | `~/Developer/GitHub/oura-pipeline`   | API sources, dbt models, schedules, test modules, pipeline stages     |
-| my-brain        | `~/Developer/GitHub/my-brain`        | notes, wikilinks, skills+hooks, domains, notes-by-domain              |
+| the-vault       | `~/Developer/GitHub/the-vault`       | notes, wikilinks, skills+hooks, domains, notes-by-domain              |
 
 Run it by hand anytime:
 
