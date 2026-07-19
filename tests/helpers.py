@@ -19,7 +19,7 @@ TAB_ROOT = {
 NAV_KEYS = ["overview", "work", "experience", "testimonials", "ai", "contact"]
 NAV_LABELS = ["Overview", "Work", "Experience", "Testimonials", "Ask AI", "Contact"]
 
-# projects[] minus the single hideFromGallery entry (my-brain).
+# projects[] minus the single hideFromGallery entry (the-vault).
 GALLERY_COUNT = 22
 # WORK_FILTERS = "all" + 7 categories.
 WORK_FILTER_COUNT = 8

@@ -50,7 +50,7 @@
             "value": 48
           },
           {
-            "label": "my-brain",
+            "label": "the-vault",
             "value": 10
           }
         ]
@@ -264,8 +264,8 @@
       }
     ]
   },
-  "my-brain": {
-    "eyebrow": "MY-BRAIN · SECOND BRAIN",
+  "the-vault": {
+    "eyebrow": "THE VAULT · SECOND BRAIN",
     "pill": "Obsidian",
     "headline": "A knowledge graph that thinks with me",
     "subtitle": "Graph-first Obsidian vault + Claude Code automation, auto-synced across 2 machines.",

@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [2.2.1] - 2026-07-19
+
+### Changed
+
+- Renamed the second-brain featured project from `my-brain` to **The Vault —
+  Second Brain Knowledge System** (title, slug `the-vault`, and cockpit-card
+  eyebrow) to match the repo/vault rename. The card still links to the public
+  `second-brain` template via its "Use this template" CTA.
+- Pointed the metrics collector (`scripts/collect-metrics.py`) at
+  `~/Developer/GitHub/the-vault` (was `my-brain`) so the auto-refreshed KPI card
+  keeps reading a valid source after the local folder rename.
+
 ## [2.2.0] - 2026-07-18
 
 ### Changed

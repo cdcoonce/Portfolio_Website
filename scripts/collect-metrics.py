@@ -28,7 +28,7 @@ from pathlib import Path
 log = logging.getLogger("collect-metrics")
 
 GITHUB = Path.home() / "Developer" / "GitHub"
-VAULT = GITHUB / "my-brain"
+VAULT = GITHUB / "the-vault"
 CW = GITHUB / "claude-workflow"
 OURA = GITHUB / "oura-pipeline"
 WAGA = GITHUB / "Weather_Adjusted_Generation_Analytics"
@@ -107,24 +107,24 @@ def set_bar(blk: dict, label: str, value: int, changes: list, name: str) -> None
 # --------------------------------------------------------------------------- #
 # per-project collectors — each mutates `proj` and appends (name, old, new)
 # --------------------------------------------------------------------------- #
-def collect_my_brain(proj: dict, changes: list) -> None:
+def collect_the_vault(proj: dict, changes: list) -> None:
     notes = count_notes(VAULT)
     wikilinks = sum(len(WIKILINK.findall(p.read_text(encoding="utf-8", errors="ignore")))
                     for p in iter_notes(VAULT))
     skills_hooks = sum(count_files(VAULT / ".claude" / d) for d in ("commands", "agents", "scripts"))
     domains = sum(1 for p in VAULT.iterdir() if p.is_dir() and not p.name.startswith("."))
 
-    set_tile(proj, "Notes", str(notes), changes, "my-brain notes")
-    set_tile(proj, "Wikilinks", fmt_k(wikilinks), changes, "my-brain wikilinks")
-    set_tile(proj, "Skills & hooks", str(skills_hooks), changes, "my-brain skills&hooks")
-    set_tile(proj, "Domains", str(domains), changes, "my-brain domains")
+    set_tile(proj, "Notes", str(notes), changes, "the-vault notes")
+    set_tile(proj, "Wikilinks", fmt_k(wikilinks), changes, "the-vault wikilinks")
+    set_tile(proj, "Skills & hooks", str(skills_hooks), changes, "the-vault skills&hooks")
+    set_tile(proj, "Domains", str(domains), changes, "the-vault domains")
 
     bars = block(proj, "bars", "NOTES BY DOMAIN")
     if bars:
         for item in bars["items"]:
             d = VAULT / item["label"]
             if d.is_dir():
-                set_bar(bars, item["label"], count_notes(d), changes, f"my-brain/{item['label']}")
+                set_bar(bars, item["label"], count_notes(d), changes, f"the-vault/{item['label']}")
 
 
 def collect_claude_workflow(proj: dict, changes: list) -> None:
@@ -269,7 +269,7 @@ COLLECTORS = {
     "claude-workflow": collect_claude_workflow,
     "oura": collect_oura,
     "waga": collect_waga,
-    "my-brain": collect_my_brain,
+    "the-vault": collect_the_vault,
 }
 
 
