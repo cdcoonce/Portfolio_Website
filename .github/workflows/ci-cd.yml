@@ -163,7 +163,7 @@ jobs:
         run: uv run pytest tests/ -m "e2e or validation or a11y or ci" -p no:cacheprovider
 
   deploy:
-    name: Deploy to gh-pages
+    name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
     needs: [classify, check, e2e]
     # `always()` is REQUIRED: on a snapshot-only push, `check` and `e2e` are
@@ -181,9 +181,17 @@ jobs:
       && needs.e2e.result != 'failure'
       && needs.e2e.result != 'cancelled'
     permissions:
-      contents: write
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v5
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
 
       - name: Set up Node.js
         uses: actions/setup-node@v5
@@ -197,10 +205,37 @@ jobs:
       - name: Build site (Astro)
         run: npm run build
 
-      # Publishes the built dist/ (including CNAME) to the gh-pages branch,
-      # which GitHub Pages serves. Replaces the previous main->gh-pages mirror.
-      - name: Publish dist to gh-pages
-        uses: peaceiris/actions-gh-pages@v4
+      # public/CNAME -> dist/CNAME. With Actions-native Pages the custom domain
+      # lives in the repo's Pages settings, but the CNAME file in the artifact
+      # is what the previous branch-based flow relied on and it stays correct
+      # either way. Assert it: losing it silently drops charleslikesdata.com
+      # back to the github.io host, and a portfolio on the wrong domain is a
+      # failure nobody gets paged for.
+      - name: Assert CNAME survived the build
+        run: |
+          set -euo pipefail
+          test -f dist/CNAME
+          echo "dist/CNAME -> $(cat dist/CNAME)"
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          path: ./dist
+
+      # Replaces peaceiris/actions-gh-pages -> gh-pages branch -> GitHub's
+      # implicit "pages build and deployment" workflow. That implicit builder
+      # is not defined in this repo, so its poll timeout could not be tuned --
+      # which is how GitHub's Pages deployment lag surfaced here as hard
+      # failures rather than slow successes. Deploying natively removes the
+      # branch hop entirely and makes the timeout a knob we control.
+      #
+      # REQUIRES the repo's Pages source set to "GitHub Actions"
+      # (build_type=workflow). This job fails until that flip happens.
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          # Default is 600000 (10 min). Pages deployment lag is a recurring,
+          # published incident class; wait it out rather than aborting a
+          # deployment that is still in progress.
+          timeout: 1800000
