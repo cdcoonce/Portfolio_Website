@@ -21,5 +21,6 @@ markers = [
     "a11y: accessibility tests",
     "e2e: end-to-end browser tests",
     "validation: HTML/CSS validation tests",
+    "ci: CI/CD workflow logic tests (no browser required)",
 ]
 addopts = "-v --tb=short"
