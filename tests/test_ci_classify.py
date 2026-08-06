@@ -227,10 +227,28 @@ class TestDeployGateWiring:
             "or ci" in run or '-m "ci' in run for run in runs
         ), f"no pytest invocation selects the `ci` marker: {runs}"
 
-    def test_deploy_only_publishes_from_main_pushes(self, jobs):
+    def test_deploy_only_publishes_from_main(self, jobs):
         condition = " ".join(jobs["deploy"]["if"].split())
         assert "github.event_name == 'push'" in condition
         assert "github.ref == 'refs/heads/main'" in condition
+
+    def test_manual_dispatch_can_actually_deploy(self, jobs):
+        """A dispatch trigger that cannot deploy is a trap, not an escape hatch.
+
+        `workflow_dispatch` exists so `main` can be republished without an
+        empty commit. If the deploy gate only admits `push`, a dispatch runs
+        the full suite and then silently skips the deploy -- which looks like
+        success and publishes nothing.
+        """
+        workflow = yaml.safe_load(WORKFLOW.read_text())
+        assert "workflow_dispatch" in workflow[True], (
+            "workflow_dispatch trigger missing"
+        )
+        condition = " ".join(jobs["deploy"]["if"].split())
+        assert "github.event_name == 'workflow_dispatch'" in condition, (
+            "deploy admits push but not workflow_dispatch: a manual run would "
+            f"validate and then skip publishing. Condition: {condition}"
+        )
 
 
 def test_generated_path_matches_the_workflow():
