@@ -9,10 +9,81 @@ on:
 permissions:
   contents: read
 
+# Never run two deploys of the same ref at once. `cancel-in-progress: false` is
+# deliberate: cancelling a half-published Pages deployment is worse than queuing.
+concurrency:
+  group: ci-deploy-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
+  # The afk-cockpit launchd publisher (com.cdcoonce.afk-cockpit-publish, ~every
+  # 31 min) pushes straight to main, rewriting 3 lines of a single generated
+  # file. Running lint + Jest + a full Playwright browser install to validate a
+  # data refresh costs ~48 full pipelines/day and turns every transient GitHub
+  # Actions blip into a red run. Classify the push first; validate only real
+  # source changes. The snapshot still deploys — it has to stay fresh in prod.
+  classify:
+    name: Classify changed paths
+    runs-on: ubuntu-latest
+    outputs:
+      code_changed: ${{ steps.classify.outputs.code_changed }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Detect whether anything beyond the generated snapshot changed
+        id: classify
+        env:
+          EVENT: ${{ github.event_name }}
+          BEFORE: ${{ github.event.before }}
+          SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+
+          # Written verbatim by afk_cockpit/publish.py; nothing else touches it.
+          GENERATED='public/afk-cockpit/index.html'
+
+          emit() {
+            echo "code_changed=$1" >> "$GITHUB_OUTPUT"
+            echo "code_changed=$1"
+          }
+
+          # Fail OPEN. Any push we cannot diff with certainty gets the full
+          # suite; the cost of a wrong guess must be a wasted run, never an
+          # unvalidated deploy.
+          if [ "$EVENT" != 'push' ]; then
+            echo 'Not a push event — running full validation.'; emit true; exit 0
+          fi
+          if [ -z "${BEFORE:-}" ] || [ "$BEFORE" = '0000000000000000000000000000000000000000' ]; then
+            echo 'No usable before-SHA (new branch or force-push) — running full validation.'
+            emit true; exit 0
+          fi
+          if ! git cat-file -e "${BEFORE}^{commit}" 2>/dev/null; then
+            echo "Before-SHA ${BEFORE} unreachable (history rewritten) — running full validation."
+            emit true; exit 0
+          fi
+
+          changed="$(git diff --name-only "$BEFORE" "$SHA" --)"
+          echo 'Changed files:'; printf '%s\n' "$changed" | sed 's/^/  /'
+
+          if [ -z "$changed" ]; then
+            echo 'Empty diff — running full validation.'; emit true; exit 0
+          fi
+
+          other="$(printf '%s\n' "$changed" | grep -Fxv "$GENERATED" || true)"
+          if [ -n "$other" ]; then
+            echo 'Source files changed — running full validation.'; emit true
+          else
+            echo 'Generated snapshot only — skipping lint/test/e2e, deploying directly.'
+            emit false
+          fi
+
   check:
     name: Lint, Test & Build
     runs-on: ubuntu-latest
+    needs: classify
+    if: needs.classify.outputs.code_changed == 'true'
     steps:
       - uses: actions/checkout@v5
         with:
@@ -48,6 +119,8 @@ jobs:
   e2e:
     name: E2E (Playwright)
     runs-on: ubuntu-latest
+    needs: classify
+    if: needs.classify.outputs.code_changed == 'true'
     steps:
       - uses: actions/checkout@v5
         with:
@@ -81,20 +154,44 @@ jobs:
       # DOM/browser suite only: e2e (tab switching, carousels, chat, gallery),
       # validation (built-HTML SEO/semantics), a11y (axe). Excludes `slow`
       # (external link checks + visual snapshots) for deterministic CI runs.
+      # `ci` rides along here rather than in `check`: it needs no browser, but
+      # this job already has uv + deps installed, so it costs nothing extra.
+      # It must be selected explicitly — an unmarked test would never run.
       - name: Run E2E suite against built dist
         env:
           E2E_SKIP_BUILD: '1'
-        run: uv run pytest tests/ -m "e2e or validation or a11y" -p no:cacheprovider
+        run: uv run pytest tests/ -m "e2e or validation or a11y or ci" -p no:cacheprovider
 
   deploy:
-    name: Deploy to gh-pages
+    name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
-    needs: [check, e2e]
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [classify, check, e2e]
+    # `always()` is REQUIRED: on a snapshot-only push, `check` and `e2e` are
+    # skipped, and a skipped dependency would otherwise skip `deploy` too. But
+    # `always()` alone would also deploy through a RED suite, so every failure
+    # mode is re-asserted explicitly below. 'skipped' is the only non-success
+    # dependency state allowed through.
+    if: >-
+      always()
+      && github.event_name == 'push'
+      && github.ref == 'refs/heads/main'
+      && needs.classify.result == 'success'
+      && needs.check.result != 'failure'
+      && needs.check.result != 'cancelled'
+      && needs.e2e.result != 'failure'
+      && needs.e2e.result != 'cancelled'
     permissions:
-      contents: write
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v5
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
 
       - name: Set up Node.js
         uses: actions/setup-node@v5
@@ -108,10 +205,37 @@ jobs:
       - name: Build site (Astro)
         run: npm run build
 
-      # Publishes the built dist/ (including CNAME) to the gh-pages branch,
-      # which GitHub Pages serves. Replaces the previous main->gh-pages mirror.
-      - name: Publish dist to gh-pages
-        uses: peaceiris/actions-gh-pages@v4
+      # public/CNAME -> dist/CNAME. With Actions-native Pages the custom domain
+      # lives in the repo's Pages settings, but the CNAME file in the artifact
+      # is what the previous branch-based flow relied on and it stays correct
+      # either way. Assert it: losing it silently drops charleslikesdata.com
+      # back to the github.io host, and a portfolio on the wrong domain is a
+      # failure nobody gets paged for.
+      - name: Assert CNAME survived the build
+        run: |
+          set -euo pipefail
+          test -f dist/CNAME
+          echo "dist/CNAME -> $(cat dist/CNAME)"
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          path: ./dist
+
+      # Replaces peaceiris/actions-gh-pages -> gh-pages branch -> GitHub's
+      # implicit "pages build and deployment" workflow. That implicit builder
+      # is not defined in this repo, so its poll timeout could not be tuned --
+      # which is how GitHub's Pages deployment lag surfaced here as hard
+      # failures rather than slow successes. Deploying natively removes the
+      # branch hop entirely and makes the timeout a knob we control.
+      #
+      # REQUIRES the repo's Pages source set to "GitHub Actions"
+      # (build_type=workflow). This job fails until that flip happens.
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          # Default is 600000 (10 min). Pages deployment lag is a recurring,
+          # published incident class; wait it out rather than aborting a
+          # deployment that is still in progress.
+          timeout: 1800000
