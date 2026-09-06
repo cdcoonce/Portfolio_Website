@@ -16,7 +16,9 @@ It was in that leadership role that Charles had a pivotal moment. Facing a decis
 
 Charles holds a **Bachelor of Arts in Telecommunications** from **Indiana University** (2011). Motivated to transition into data, he completed the **Google Data Analytics Professional Certificate** in January 2023, which reignited his academic curiosity and provided a foundation in analytical thinking.
 
-He is currently pursuing a **Bachelor of Science in Data Science** with a focus on Business Analytics and a minor in Human Systems Engineering at **Arizona State University**, expected December 2025. Charles made the **Dean's List in Spring 2025**, reflecting his renewed academic focus and commitment to the field.
+He earned a **Bachelor of Science in Data Science** with a focus on Business Analytics and a minor in Human Systems Engineering from **Arizona State University** in December 2025, and was named to the **Dean's List in Spring 2025**.
+
+He is currently pursuing a **Master of Science in Data Science, Analytics and Engineering** with a concentration in **Human-Centered Applications** at **Arizona State University**, which he began in Fall 2026. The concentration pairs large-scale data engineering coursework with human factors and systems design — a deliberate extension of the teaching and communication skills that have shaped his career.
 
 ## Professional Experience
 
