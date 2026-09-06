@@ -17,6 +17,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   and "expected December 2025". Edited `WebContent/context/bio.md` and
   regenerated `lambda/knowledge_base.json`; the authoring guide in
   `WebContent/context-build-instructions/instructions.md` was updated to match.
+- Replaced the downloadable resume PDF (`WebContent/assets/` and
+  `public/assets/`, byte-identical copies). It previously opened with
+  "Results-driven **data science student**" and listed only the ASU BS with a
+  bare "DEC 2025". Now leads with "data engineer with a BS in Data Science and a
+  Master's in progress" and carries a new ASU **MS in Data Science, Analytics
+  and Engineering** (Human-Centered Applications concentration, AUG 2026 –
+  PRESENT) entry above the BS. The PDF's `Author` metadata also read "Charles
+  Coonce (Student)" and is now "Charles Coonce".
 
 ## [2.2.1] - 2026-07-19
 
