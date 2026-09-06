@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+
+- Updated the chat agent's education context: Charles **completed** the BS in
+  Data Science (Business Analytics focus, Human Systems Engineering minor) at
+  Arizona State in December 2025, and is now pursuing an **MS in Data Science,
+  Analytics and Engineering** with a Human-Centered Applications concentration,
+  begun Fall 2026. Previously the agent still described the BS as in progress
+  and "expected December 2025". Edited `WebContent/context/bio.md` and
+  regenerated `lambda/knowledge_base.json`; the authoring guide in
+  `WebContent/context-build-instructions/instructions.md` was updated to match.
+
 ## [2.2.1] - 2026-07-19
 
 ### Changed

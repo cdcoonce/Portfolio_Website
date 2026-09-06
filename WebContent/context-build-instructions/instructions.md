@@ -74,7 +74,7 @@ A narrative summary of Charles's background, career transition, and current traj
 **What to include:**
 
 - Career transition story: electrical trade → data science (frame it as a strength, not a detour)
-- Education: Indiana University (BA Telecommunications), Google Data Analytics Certificate, Arizona State University (BS Data Science, expected Dec 2025), Dean's List Spring 2025
+- Education: Indiana University (BA Telecommunications), Google Data Analytics Certificate, Arizona State University (BS Data Science, Dec 2025; MS Data Science, Analytics and Engineering — Human-Centered Applications concentration, in progress since Fall 2026), Dean's List Spring 2025
 - Professional experience highlights: Clearway Energy Group (Analytics Engineering Intern), OneAmerica Financial (Business Analyst Intern), Montana Electrical Training Center (Assistant Training Director)
 - Teaching background and how it connects to communication skills
 - The data-driven hiring decision story from the Training Center (demonstrates analytical thinking before formal training)
