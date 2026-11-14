@@ -186,7 +186,7 @@ jobs:
       id-token: write
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment_retry.outputs.page_url || steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v5
 
@@ -234,8 +234,28 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        # The first attempt may fail without failing the job: the retry below
+        # decides the job's result. About 7 in 1000 runs fail here on GitHub's
+        # side with the build and upload green (artifact listing returns zero
+        # a second after the upload, the Pages API errors, or the deployment
+        # never reports done), and each left the snapshot stale for a cycle.
+        continue-on-error: true
         with:
           # Default is 600000 (10 min). Pages deployment lag is a recurring,
           # published incident class; wait it out rather than aborting a
           # deployment that is still in progress.
+          timeout: 1800000
+
+      # `outcome` is the result before continue-on-error is applied, so this
+      # runs only when the first attempt really failed.
+      - name: Wait before retrying the deployment
+        if: steps.deployment.outcome == 'failure'
+        run: sleep 30
+
+      # No continue-on-error here: a second failure fails the job.
+      - name: Deploy to GitHub Pages (retry)
+        id: deployment_retry
+        if: steps.deployment.outcome == 'failure'
+        uses: actions/deploy-pages@v4
+        with:
           timeout: 1800000
